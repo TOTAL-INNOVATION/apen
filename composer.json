@@ -7,6 +7,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "feature-ninja/cva": "^0.3.0",
         "gehrisandro/tailwind-merge-laravel": "^1.2",
         "laravel/framework": "^11.31",
         "laravel/tinker": "^2.9"
@@ -30,7 +31,10 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
-        }
+        },
+        "files": [
+            "helpers/cva.php"
+        ]
     },
     "scripts": {
         "post-autoload-dump": [

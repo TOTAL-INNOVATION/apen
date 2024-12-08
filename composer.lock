@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "494be82e68178fb80c9ebf0415b91d84",
+    "content-hash": "d1eefe99e2c633bf2279b78eaed3572e",
     "packages": [
         {
             "name": "brick/math",
@@ -509,6 +509,69 @@
                 }
             ],
             "time": "2023-10-06T06:47:41+00:00"
+        },
+        {
+            "name": "feature-ninja/cva",
+            "version": "0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/feature-ninja/cva.git",
+                "reference": "13de0f3a4a7ef4775894e02b3f0a817bab81210d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/feature-ninja/cva/zipball/13de0f3a4a7ef4775894e02b3f0a817bab81210d",
+                "reference": "13de0f3a4a7ef4775894e02b3f0a817bab81210d",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.21.1",
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^10.3.2"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "FeatureNinja\\Cva\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roj Vroemen",
+                    "email": "roj@feature.ninja",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Class variance authority implementation in php",
+            "homepage": "https://github.com/feature-ninja/cva",
+            "keywords": [
+                "authority",
+                "class",
+                "cva",
+                "feature-ninja",
+                "variance"
+            ],
+            "support": {
+                "issues": "https://github.com/feature-ninja/cva/issues",
+                "source": "https://github.com/feature-ninja/cva/tree/0.3.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/feature-ninja",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-09-25T12:10:01+00:00"
         },
         {
             "name": "fruitcake/php-cors",

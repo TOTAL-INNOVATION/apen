@@ -1,10 +1,10 @@
-import defaultTheme from 'tailwindcss/defaultTheme';
 import { Config } from 'tailwindcss/types/config';
 
 export default {
     content: [
         './storage/framework/views/*.php',
         './resources/**/*.blade.php',
+        './resources/**/*.ts',
         './resources/**/*.js',
         'node_modules/preline/dist/*.js',
     ],
@@ -12,22 +12,20 @@ export default {
         colors: {
             primary: "#1ba957",
             secondary: "#e42328",
-            middle: "#f7d617",
+            gold: "#f7d617",
             success: "#29ad61",
-            warning: "#f07828",
-            error: "#c61b25",
-            black: "#000000",
+            warning: "#fdcb4c",
+            error: "#f36969",
             white: "#ffffff",
-            gray: "#9ca3af",
-            slate: "#e2e8f0",  
-        },
-        extend: {
-            fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
-            },
+            bright: "#eeeeee", 
+            whisper: "#e4e4e4",
+
+            dark: "#1e1e1e", 
+            black: "#000000",
         },
     },
     plugins: [
         require('preline/plugin'),
+        require('@tailwindcss/forms'),
     ],
 } satisfies Config;
