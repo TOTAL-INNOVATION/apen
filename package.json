@@ -19,6 +19,9 @@
     },
     "dependencies": {
         "@tailwindcss/forms": "^0.5.9",
+        "embla-carousel": "^8.5.1",
+        "embla-carousel-autoplay": "^8.5.1",
+        "embla-carousel-fade": "^8.5.1",
         "preline": "^2.6.0"
     }
 }

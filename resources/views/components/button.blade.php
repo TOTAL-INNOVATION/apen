@@ -16,6 +16,8 @@
         'warning' => 'bg-warning text-dark hover:bg-opacity-90',
         'error' => 'bg-error text-white hover:bg-opacity-90',
         'outline' => 'text-dark bg-transparent border border-whisper hover:bg-bright/35',
+        'viridian' => 'bg-viridian text-white hover:bg-opacity-90',
+        'chocolate' => 'bg-chocolate text-white hover:bg-opacity-90',
         'dark' => 'bg-dark text-white hover:bg-opacity-90',
         default => 'bg-primary text-white hover:bg-opacity-90',
     };
@@ -31,7 +33,7 @@
         $sizes[$size],
         'sm' === $size ? 'font-medium' : 'font-semibold',
         $bgColor,
-        'inline-flex items-center justify-center whitespace-nowrap text-sm ring-offset-white transition-colors outline-0 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 transition-colors',
+        'inline-flex items-center justify-center whitespace-nowrap text-sm ring-offset-white transition-colors outline-0 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-70 transition-colors',
         $roundedFull ? 'rounded-full' : '',
     ];
 @endphp

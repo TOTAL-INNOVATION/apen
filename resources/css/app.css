@@ -3,8 +3,53 @@
 @tailwind utilities;
 
 
+@layer base {
+	@font-face {
+		font-family: 'Texta Black';
+		src: url('../fonts/TextaBlack.ttf');
+	}
+
+	@font-face {
+		font-family: 'Franklin Gothic Regular';
+		src: url('../fonts/FranklinGothicRegular.ttf');
+	}
+
+	@font-face {
+		font-family: 'Franklin Gothic Medium';
+		src: url('../fonts/FranklinGothicMedium.ttf');
+	}
+
+	.new_slide_link:hover .new_slide_read_more {
+		@apply ml-4;
+	}
+}
+
+@layer utilities {
+	.webkit-scrollbar-none::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+@layer components {
+	.navlink-hover-effect {
+		animation: fillPseudo 250ms 100ms ease forwards;
+	}
+
+	.slide {
+		flex: 0 0 100%;
+		@apply min-w-full;
+	}
+
+}
+
 html,
 body {
-	@apply bg-white;
-	font-family: 'Inter', Verdana, Geneva, Tahoma, sans-serif;
+	@apply bg-[#f8f8f8];
+	@apply text-dark;
+	@apply font-franklin-regular;
+}
+
+@keyframes fillPseudo {
+	from {width: 0%}
+	to {width: 100%;}
 }
