@@ -3,7 +3,7 @@ import Autoplay from "embla-carousel-autoplay";
 import Fade from "embla-carousel-fade";
 
 const newsSlideRoot = document.querySelector('.news_slides') as HTMLDivElement;
-const newsSlide = EmblaCarousel(
+EmblaCarousel(
 	newsSlideRoot, 
 	{
 		loop: true,
@@ -14,5 +14,4 @@ const newsSlide = EmblaCarousel(
 		Autoplay({delay: 10_000}),
 		Fade(),
 	]
-)
-
+);

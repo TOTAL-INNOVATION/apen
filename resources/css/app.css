@@ -19,14 +19,29 @@
 		src: url('../fonts/FranklinGothicMedium.ttf');
 	}
 
-	.new_slide_link:hover .new_slide_read_more {
-		@apply ml-4;
+	.new_slide_link:hover .arrow-move-effect, 
+	.priority_block:hover .arrow-move-effect {
+		@apply translate-x-2;
 	}
 }
 
 @layer utilities {
 	.webkit-scrollbar-none::-webkit-scrollbar {
 		display: none;
+	}
+
+	.heading-1 {
+		@apply text-3xl;
+		@apply md:text-4xl;
+		@apply lg:text-5xl;
+		@apply font-texta-black;
+	}
+
+	.heading-2 {
+		@apply text-2xl;
+		@apply sm:text-3xl;
+		@apply md:text-4xl;
+		@apply font-texta-black;
 	}
 }
 
@@ -47,6 +62,12 @@ body {
 	@apply bg-[#f8f8f8];
 	@apply text-dark;
 	@apply font-franklin-regular;
+}
+
+@media (min-width: 889px) {
+	header  nav {
+		@apply justify-center;
+	}
 }
 
 @keyframes fillPseudo {
