@@ -1,1 +1,1 @@
-<a {{ $attributes->twMerge('font-medium text-black focus:text-dark') }}>{{ $slot }}</a>
+<a {{ $attributes->twMerge('font-medium focus:text-dark') }}>{{ $slot }}</a>

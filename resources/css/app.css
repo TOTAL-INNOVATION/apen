@@ -19,8 +19,7 @@
 		src: url('../fonts/FranklinGothicMedium.ttf');
 	}
 
-	.new_slide_link:hover .arrow-move-effect, 
-	.priority_block:hover .arrow-move-effect {
+	.arrow-move-trigger:hover .arrow-move-effect {
 		@apply translate-x-2;
 	}
 }
@@ -43,6 +42,13 @@
 		@apply md:text-4xl;
 		@apply font-texta-black;
 	}
+
+	.heading-3 {
+		@apply text-2xl;
+		@apply md:text-3xl;
+		@apply font-texta-black;
+	}
+
 }
 
 @layer components {

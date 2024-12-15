@@ -6,5 +6,7 @@
 @endsection
 
 @section('content')
+    <x-header />
     {{ $slot }}
+    <x-footer />
 @endsection

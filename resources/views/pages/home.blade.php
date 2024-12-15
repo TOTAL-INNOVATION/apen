@@ -3,167 +3,140 @@
 		<x-slot:title>{{ __('Page d\'accueil') }}</x-slot:title>
 		<meta name="description" content="Homepage">
 	</x-slot:metadata>
-	<div>
-		<x-header />
-		<main class=" text-dark">
-			<div class="aspect-video md:aspect-auto md:min-h-[400px] md:h-[calc(100svh-179.617px)] max-w-screen-2xl">
-				<div class="h-full overflow-x-hidden news_slides">
-					<div class="h-full flex slides_container">
+	<main class=" text-dark">
+		<div class="sm:aspect-video md:aspect-auto md:min-h-[400px] md:h-[calc(100svh-179.617px)] max-w-screen-2xl">
+			<div class="h-full overflow-x-hidden news_slides">
+				<div class="h-full flex slides_container">
 
-						{{-- FIRST --}}
-						<div class="h-full bg-cover bg-center slide" style="background-image: url({{ asset('assets/apen_au_siao.jpeg') }})">
-							<div class="w-full h-full bg-dark/60">
-								<div class="h-full px-4 sm:px-auto container pb-4 sm:pb-6 md:pb-8 lg:pb-12 flex flex-col justify-end">
-									<div>
-										<a href="#" class="flex flex-col new_slide_link">
-											<div class="text-3xl md:text-4xl lg:text-5xl text-white font-texta-black uppercase">{{ Str::limit('Visite au SIAO 2023', 40) }}</div>
-											<div class="mt-2 sm:mt-4 md:mt-6 md:w-8/12 lg:w-6/12 text-whisper">
-												<span>
-													{{ Str::limit('L’APEN est un établissement Public de l’Etat à caractère professionnel, né de la volonté du Gouvernement et des acteurs du domaine de l’expertise à faire de l’expertise nationale un outil propulseur du développement durable du Burkina Faso.', 150) }}
-												</span>
-												<span class="inline-flex items-end">
-													<span class=" font-franklin-medium">{{ __('Lire') }}</span>
-													<x-lucide-arrow-right class="w-6 ml-1 transition-all md:arrow-move-effect" />
-												</span>
-											</div>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
+					<x-news-slide 
+						title="{{ __('Visite au SIAO 2023') }}"
+						description="{{ __('L’APEN est un établissement Public de l’Etat à caractère professionnel, né de la volonté du Gouvernement et des acteurs du domaine de l’expertise à faire de l’expertise nationale un outil propulseur du développement durable du Burkina Faso.') }}"
+						coverSrc="{{ asset('assets/apen_au_siao.jpeg') }}"
+						url="#"
+					/>
 
-						{{-- FIRST END --}}
-
-						{{-- SECOND --}}
-
-						<div class="h-full bg-cover bg-center slide" style="background-image: url({{ asset('assets/grand_assemblée.jpg') }})">
-							<div class="w-full h-full bg-dark/60">
-								<div class="h-full px-4 sm:px-auto container pb-4 sm:pb-6 md:pb-8 lg:pb-12 flex flex-col justify-end">
-									<div>
-										<a href="#" class="flex flex-col new_slide_link">
-											<div class="heading-1 text-white uppercase">{{ Str::limit('2è session ordinaire de l’Assemblée Générale des Experts agréés', 35) }}</div>
-											<div class="mt-2 sm:mt-4 md:mt-6 md:w-8/12 lg:w-6/12 text-whisper">
-												<span>
-													{{ Str::limit('L’APEN est un établissement Public de l’Etat à caractère professionnel, né de la volonté du Gouvernement et des acteurs du domaine de l’expertise à faire de l’expertise nationale un outil propulseur du développement durable du Burkina Faso.', 150) }}
-												</span>
-												<span class="inline-flex items-end">
-													<span class=" font-franklin-medium">{{ __('Lire') }}</span>
-													<x-lucide-arrow-right class="w-6 ml-1 transition-all md:arrow-move-effect" />
-												</span>
-											</div>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						{{-- SECOND END --}}
-					</div>
+					<x-news-slide 
+						title="{{ __('2è session ordinaire de l’Assemblée Générale des Experts agréés') }}"
+						description="{{ __('La deuxième Assemblée Générale des Experts s’est tenue le jeudi 23 novembre 2023 dans la salle de conférence du bâtiment R+1 du Salon International de l’Artisanat de Ouagadougou (SIAO).') }}"
+						coverSrc="{{ asset('assets/grand_assemblée.jpg') }}"
+						url="#"
+					/>
+					
 				</div>
 			</div>
+		</div>
 
-			<section class="pt-4 sm:pt-6 md:pt-8 lg:pt-12">
-				<div class="px-4 sm:px-auto container">
-					<div class="grid grid-cols-1 xl:grid-cols-7 gap-4 sm:gap-6">
-						<div class="xl:col-span-4 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-							<a href="#" class="priority_block">
-								<x-card class="border-0 flex flex-col">
-									<div>
-										<img class="w-full" src="https://placehold.co/600x400" alt="{{ __('Devenir expert') }}">
-									</div>
-									<div class="p-4 lg:p-6 border border-whisper border-t-0">
-										<x-card.title class="uppercase">{{ __('Devenir expert') }}</x-card.title>
-										<div class="mt-2 sm:mt-4 h-16 md:mt-2 md:h-20 lg:h-16 xl:h-20 lg:mt-4">
-											<p>{{ __('Conditions, procédure d\'inscription, formulaire de candidature') }}</p>
-										</div>
-										<div>
-											<span class="inline-flex items-end">
-												<span class=" font-franklin-medium">{{ __('Voir plus') }}</span>
-												<x-lucide-arrow-right class="w-6 ml-1 transition-all md:arrow-move-effect" />
-											</span>
-										</div>
-									</div>
-								</x-card>
-							</a>
+		<section class="pt-4 sm:pt-6 md:pt-8 lg:pt-12">
+			<div class="px-4 sm:px-auto container">
+				<div class="grid grid-cols-1 xl:grid-cols-7 gap-4 sm:gap-6">
+					<div class="xl:col-span-4 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+						
+						<x-priority-card
+							title="{{ __('Devenir expert') }}"
+							description="{!! __('Conditions, procédure d\'inscription, formulaire de candidature') !!}"
+							imageSrc="#"
+							path="#"
+						/>
+
+						<x-priority-card
+							title="{{ __('Placement') }}"
+							description="{!! __('Offres d\'emploi, annonces de recrutement') !!}"
+							imageSrc="#"
+							path="#"
+						/>
+
+					</div>
+
+					<div class="xl:col-span-3 flex flex-col gap-y-4 sm:gap-y-6">
+						<x-priority-card
+							variant="horizontal"
+							title="{{ __('Communiqués') }}"
+							description="{{ __('Rubriques communiqués') }}"
+							imageSrc="#"
+							path="#"
+						/>
+
+						<x-priority-card
+							variant="horizontal"
+							title="{{ __('Newsletter') }}"
+							description="{!! __('Bulletin d\'informations') !!}"
+							imageSrc="#"
+							path="#"
+						/>
+
+					</div>
+				</div>
+				
+				
+			</div>
+		</section>
+
+		<div>
+			<div class="py-4 sm:py-6 md:py-8 lg:py-12 px-4 container">
+				<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+					<section class="sm:col-span-2">
+						<h2 class="heading-2 uppercase">{{ __('Actualités') }}</h2>
+						<div class="mt-2 sm:mt-4 md:mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+							<x-news-card
+								title="{{ __('Visite au SIAO 2023') }}"
+								description="{{ __('L’APEN est un établissement Public de l’Etat à caractère professionnel, né de la volonté du Gouvernement et des acteurs du domaine de l’expertise à faire de l’expertise nationale un outil propulseur du développement durable du Burkina Faso.') }}"
+								coverSrc="{{ asset('assets/apen_au_siao.jpeg') }}"
+								url="#"
+							/>
 	
-							<a href="#" class="priority_block">
-								<x-card class="border-0 flex flex-col">
-									<div>
-										<img class="w-full" src="https://placehold.co/600x400" alt="{{ __('Placement') }}">
-									</div>
-									<div class="p-4 lg:p-6 border border-whisper border-t-0">
-										<x-card.title class="uppercase">{{ __('Placements') }}</x-card.title>
-										<div class="mt-2 sm:mt-4 h-16 md:mt-2 md:h-20 lg:h-16 xl:h-20 lg:mt-4">
-											<p>{{ __('Offres d\'emploi, annonces de recrutement') }}</p>
-										</div>
-										<div>
-											<span class="inline-flex items-end">
-												<span class=" font-franklin-medium">{{ __('Voir plus') }}</span>
-												<x-lucide-arrow-right class="w-6 ml-1 transition-all md:arrow-move-effect" />
-											</span>
-										</div>
-									</div>
-								</x-card>
-							</a>
+							<x-news-card
+								title="{{ __('Visite au SIAO 2023') }}"
+								description="{{ __('L’APEN est un établissement Public de l’Etat à caractère professionnel, né de la volonté du Gouvernement et des acteurs du domaine de l’expertise à faire de l’expertise nationale un outil propulseur du développement durable du Burkina Faso.') }}"
+								coverSrc="{{ asset('assets/apen_au_siao.jpeg') }}"
+								url="#"
+							/>
 						</div>
-
-						<div class="xl:col-span-3 flex flex-col gap-y-4 sm:gap-y-6">
-							<a href="#" class="h-36 lg:h-auto xl:h-1/2 priority_block">
-								<x-card class="h-full border-0 flex">
-									<div class="w-2/5 sm:w-1/2 aspect-video">
-										<img class="w-full h-full object-cover" src="https://placehold.co/600x400" alt="{{ __('Newsletter') }}">
-									</div>
-									<div class="w-full p-3 lg:p-6 border border-l-0 border-whisper">
-										<x-card.title class="uppercase">{{ __('Communiqués') }}</x-card.title>
-										<div class="mt-2 lg:mt-4">
-											<p class="w-16 sm:w-auto">{{ __('Rubriques communiqués') }}</p>
-											<div class="mt-1 sm:mt-8 xl:mt-12">
-												<span class="inline-flex items-end">
-													<span class=" font-franklin-medium">{{ __('Voir plus') }}</span>
-													<x-lucide-arrow-right class="w-6 ml-1 transition-all md:arrow-move-effect" />
-												</span>
-											</div>
-										</div>
-									</div>
-								</x-card>
-							</a>
-
-							<a href="#" class="h-36 lg:h-auto xl:h-1/2 priority_block">
-								<x-card class="h-full border-0 flex">
-									<div class="w-2/5 sm:w-1/2 aspect-video">
-										<img class="w-full h-full object-cover" src="https://placehold.co/600x400" alt="{{ __('Newsletter') }}">
-									</div>
-									<div class="w-full p-3 lg:p-6 border border-l-0 border-whisper">
-										<x-card.title class="uppercase">{{ __('Newsletter') }}</x-card.title>
-										<div class="mt-2 lg:mt-4">
-											<p class="w-16 sm:w-auto">{{ __('Bulletin d\'informations') }}</p>
-											<div class="mt-1 sm:mt-8 xl:mt-12">
-												<span class="inline-flex items-end">
-													<span class=" font-franklin-medium">{{ __('Voir plus') }}</span>
-													<x-lucide-arrow-right class="w-6 ml-1 transition-all md:arrow-move-effect" />
-												</span>
-											</div>
-										</div>
-									</div>
-								</x-card>
-							</a>
-
+						
+						<div class="mt-4 md:mt-6">
+							<x-button variant="outline" size="lg" component="a" href="#" class="w-full sm:w-auto arrow-move-trigger">
+								<span>{{ __('Voir toutes les actualités') }}</span>
+								<x-lucide-arrow-right class="w-5 sm:w-6 ml-1 transition-all md:arrow-move-effect" />
+							</x-button>
 						</div>
-					</div>
-					
-					
-				</div>
-			</section>
+					</section>
 
-			<section class="pt-4 sm:pt-6 md:pt-8 lg:pt-12">
-				<div class="px-2 container">
-					<h2 class="heading-2 uppercase">{{ __('Actualités') }}</h2>
-					<div class="pt-4 sm:pt-6 md:pt-8 lg:pt-12 grid grid-cols-1">
+					<aside class="sm:col-span-2 lg:col-span-1">
+						<h2 class="heading-2 uppercase">{{ __('Communiqués') }}</h2>
+						<div class="mt-2 sm:mt-4 md:mt-6">
+							<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 sm:gap-6 lg:gap-2 xl:gap-6">
+								<x-mini-release 
+									title="COMMUNIQUE PORTANT DEPOT DE PRODUITS D’EXPERTISE A L’APEN"
+									url="#"
+								/>
+	
+								<x-mini-release 
+									title="COMMUNIQUE PORTANT DEPOT DE PRODUITS D’EXPERTISE A L’APEN"
+									url="#"
+								/>
+	
+								<x-mini-release 
+									title="COMMUNIQUE PORTANT DEPOT DE PRODUITS D’EXPERTISE A L’APEN"
+									url="#"
+								/>
+	
+								<x-mini-release 
+									title="COMMUNIQUE PORTANT DEPOT DE PRODUITS D’EXPERTISE A L’APEN"
+									url="#"
+								/>
+								
+							</div>
 
-					</div>
+							<div class="mt-4 md:mt-6">
+								<x-button variant="outline" size="lg" component="a" href="#" class="w-full sm:w-auto arrow-move-trigger">
+									<span>{{ __('Voir tous les communiqués') }}</span>
+									<x-lucide-arrow-right class="w-5 sm:w-6 ml-1 transition-all md:arrow-move-effect" />
+								</x-button>
+							</div>
+						</div>
+					</aside>
 				</div>
-			</section>
-			
-		</main>
-	</div>
+			</div>
+		</div>
+		
+	</main>
 </x-app-layout>
