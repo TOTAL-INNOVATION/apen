@@ -23,7 +23,7 @@
     };
 
     $sizes = [
-        'default' => 'text-sm h-10 px-4 py-2',
+        'default' => 'text-base h-10 px-4 py-2',
         'sm' => 'text-sm h-9 px-3',
         'lg' => 'text-base h-11 px-8',
         'icon' => 'h-10 w-10',
@@ -31,7 +31,6 @@
 
     $classNames = [
         $sizes[$size],
-        'sm' === $size ? 'font-medium' : 'font-semibold',
         $bgColor,
         'inline-flex items-center justify-center whitespace-nowrap ring-offset-white transition-colors outline-0 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-70 transition-colors',
         $roundedFull ? 'rounded-full' : '',

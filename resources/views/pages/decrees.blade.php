@@ -8,12 +8,12 @@
 		<div class="px-4 sm:px-0 container">
 			<x-breadcrumb>
 				<x-breadcrumb.item
-					path="{{ route('home') }}"
+					href="{{ route('home') }}"
 					text="{{ __('Accueil') }}"
 					isHead
 				/>
 				<x-breadcrumb.item
-					path="#"
+					href="#"
 					text="{!! __('Textes réglementaires') !!}"
 					class="font-franklin-medium"
 				/>

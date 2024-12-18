@@ -34,7 +34,7 @@
             "Tests\\": "tests/"
         },
         "files": [
-            "helpers/cva.php"
+            "helpers/utilities.php"
         ]
     },
     "scripts": {

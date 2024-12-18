@@ -29,6 +29,7 @@ export default {
             chocolate: "#8e684c",
             dark: "#1a171b", 
             black: "#000000",
+            transparent: "rgba(0, 0, 0, 0)"
         },
 
         fontFamily: {

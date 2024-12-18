@@ -30,7 +30,7 @@
     <div class="hidden md:block border-b border-whisper">
         <div class="md:w-full md:webkit-scrollbar-none md:overflow-x-scroll md:mx-auto lg:w-fit">
             <x-nav class="py-0">
-                <x-nav.custom-link path="{{ route('home') }}">{{ __('Accueil') }}</x-nav.custom-link>
+                <x-nav.custom-link href="{{ route('home') }}">{{ __('Accueil') }}</x-nav.custom-link>
                 <x-dropdown class="m-0" showOnHover>
                     <x-dropdown.trigger class="px-4 py-2.5 h-full text-base text-nowrap inline-flex justify-center items-center gap-x-1 cursor-pointer border-0 after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-primary after:transition-all hover:bg-transparent hover:after:navlink-hover-effect">
                         <span>{{ __('À propos') }}</span>
@@ -52,11 +52,10 @@
                     </x-dropdown.content>
                     
                 </x-dropdown>
-                <x-nav.custom-link path="#">{{ __('Devenir expert') }}</x-nav.custom-link>
-                <x-nav.custom-link path="#">{{ __('Contacter un expert') }}</x-nav.custom-link>
-                <x-nav.custom-link path="#">{{ __('Projets et programmes') }}</x-nav.custom-link>
-                <x-nav.custom-link path="{{ route('news') }}">{{ __('Actualités') }}</x-nav.custom-link>
-                <x-nav.custom-link path="#">{{ __('Contacts') }}</x-nav.custom-link>
+                <x-nav.custom-link href="{{ route('becomeExpert.index') }}">{{ __('Devenir expert') }}</x-nav.custom-link>
+                <x-nav.custom-link href="#">{{ __('Contacter un expert') }}</x-nav.custom-link>
+                <x-nav.custom-link href="{{ route('news') }}">{{ __('Actualités') }}</x-nav.custom-link>
+                <x-nav.custom-link href="{{ route('contacts') }}">{{ __('Contacts') }}</x-nav.custom-link>
             </x-nav>
         </div>
     </div>

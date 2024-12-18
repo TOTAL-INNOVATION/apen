@@ -14,3 +14,16 @@ function cva(string|array $base, array $config): ClassVarianceAuthority
 {
     return ClassVarianceAuthority::new($base, $config);
 }
+
+
+if (!function_exists('path')) {
+    /**
+     * Return the current route path
+     */
+    function path(): string
+    {
+        return str(url()->current())->replace(
+			config('app.url'), ''
+		);
+    }
+}

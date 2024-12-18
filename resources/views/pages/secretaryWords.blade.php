@@ -1,19 +1,19 @@
 <x-app-layout>
 	<x-slot:metadata>
-		<x-slot:title>{{ __('C\'est quoi APEN?') }}</x-slot:title>
+		<x-slot:title>{{ __('Mot de la secrétaire exécutive') }}</x-slot:title>
 		<meta name="description" content="Homepage">
 	</x-slot:metadata>
 
-	<main class="py-4 sm:pb-6 lg:pb-8">
+	<main class="py-4 mb-4 sm:mb-6 lg:mb-8">
 		<div class="px-4 sm:px-0 container">
 			<x-breadcrumb>
 				<x-breadcrumb.item
-					path="{{ route('home') }}"
+					href="{{ route('home') }}"
 					text="{{ __('Accueil') }}"
 					isHead
 				/>
 				<x-breadcrumb.item
-					path="#"
+					href="#"
 					text="{!! __('Mot de la secrétaire exécutive') !!}"
 					class="font-franklin-medium"
 				/>

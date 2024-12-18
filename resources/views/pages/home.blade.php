@@ -35,14 +35,14 @@
 							title="{{ __('Devenir expert') }}"
 							description="{!! __('Conditions, procédure d\'inscription, formulaire de candidature') !!}"
 							imageSrc="#"
-							path="#"
+							href="#"
 						/>
 
 						<x-priority-card
 							title="{{ __('Placement') }}"
 							description="{!! __('Offres d\'emploi, annonces de recrutement') !!}"
 							imageSrc="#"
-							path="#"
+							href="#"
 						/>
 
 					</div>
@@ -53,7 +53,7 @@
 							title="{{ __('Communiqués') }}"
 							description="{{ __('Rubriques communiqués') }}"
 							imageSrc="#"
-							path="#"
+							href="#"
 						/>
 
 						<x-priority-card
@@ -61,7 +61,7 @@
 							title="{{ __('Newsletter') }}"
 							description="{!! __('Bulletin d\'informations') !!}"
 							imageSrc="#"
-							path="#"
+							href="#"
 						/>
 
 					</div>
