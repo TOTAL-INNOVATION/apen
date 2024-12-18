@@ -49,6 +49,11 @@
 		@apply font-texta-black;
 	}
 
+	.article-container {
+		@apply max-w-screen-md;
+		@apply mx-auto;
+	}
+
 }
 
 @layer components {

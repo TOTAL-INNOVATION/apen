@@ -1,9 +1,9 @@
 <x-app-layout>
 	<x-slot:metadata>
 		<x-slot:title>{{ __('Page d\'accueil') }}</x-slot:title>
-		<meta name="description" content="Homepage">
+		<meta name="description" content="L'APEN est un Etablissement Public de l'Etat à caractère Professionnel.">
 	</x-slot:metadata>
-	<main class=" text-dark">
+	<main>
 		<div class="sm:aspect-video md:aspect-auto md:min-h-[400px] md:h-[calc(100svh-179.617px)] max-w-screen-2xl">
 			<div class="h-full overflow-x-hidden news_slides">
 				<div class="h-full flex slides_container">

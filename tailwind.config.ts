@@ -1,4 +1,5 @@
 import { Config } from 'tailwindcss/types/config';
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 export default {
     content: [
@@ -38,6 +39,7 @@ export default {
 
         animation: {
             "text-x-scroll": "textXscroll 30s linear infinite",
+            ...defaultTheme.animation,
         },
 
         keyframes: {
