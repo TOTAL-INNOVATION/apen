@@ -22,6 +22,17 @@
 	.arrow-move-trigger:hover .arrow-move-effect {
 		@apply translate-x-2;
 	}
+
+	 .condition-row {
+		@apply border-t;
+		@apply border-whisper;
+	}
+
+	td[rowspan] {
+		@apply border-r;
+		@apply border-whisper;
+	}
+
 }
 
 @layer utilities {

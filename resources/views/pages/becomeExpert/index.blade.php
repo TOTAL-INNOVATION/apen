@@ -19,7 +19,7 @@
 				<x-priority-card
 					title="{{ __('Conditions d’obtention de l’agrément d’expert') }}"
 					imageSrc="#"
-					href="#"
+					href="{{ route('becomeExpert.conditions') }}"
 					withoutDescription
 				/>
 

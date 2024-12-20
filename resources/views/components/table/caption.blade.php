@@ -1,0 +1,3 @@
+<caption {{ $attributes }}>
+    {{ $slot }}
+</caption>

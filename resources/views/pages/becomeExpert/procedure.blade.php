@@ -1,6 +1,6 @@
 <x-app-layout>
 	<x-slot:metadata>
-		<x-slot:title>{{ __('Mot de la secrétaire exécutive') }}</x-slot:title>
+		<x-slot:title>{{ __('Procédure d\'inscription') }}</x-slot:title>
 		<meta name="description" content="Homepage">
 	</x-slot:metadata>
 
