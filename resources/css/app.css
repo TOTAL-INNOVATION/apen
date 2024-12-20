@@ -32,6 +32,10 @@
 		@apply border-r;
 		@apply border-whisper;
 	}
+  :root {
+		--radius: 0.5rem;
+
+	}
 
 }
 
