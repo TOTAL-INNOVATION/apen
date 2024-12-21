@@ -5,9 +5,9 @@ import React from "react";
 
 const App = ({children}: React.PropsWithChildren) => {
 	return (
-		<div className="flex">
+		<div className="flex text-dark">
 			<Sidebar />
-			<div className="w-full pl-[60px]">
+			<div className="w-full lg:pl-[260px]">
 				<Navbar />
 				<main className="p-4">
 					{children}

@@ -20,7 +20,7 @@ export default defineConfig({
             ],
             refresh: true,
         }),
-        tsConfigPaths(),
         react(),
+        tsConfigPaths(),
     ],
 });

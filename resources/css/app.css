@@ -69,6 +69,13 @@
 		@apply mx-auto;
 	}
 
+	.auth-card {
+		@apply mx-auto;
+		@apply max-w-md;
+		@apply sm:w-full;
+		@apply sm:max-w-xl;
+	}
+
 }
 
 @layer components {
@@ -88,6 +95,12 @@ body {
 	@apply bg-[#f8f8f8];
 	@apply text-dark;
 	@apply font-franklin-regular;
+}
+
+@media (max-width: 475px) {
+	.auth-card {
+		@apply w-11/12;
+	}
 }
 
 @media (min-width: 889px) {

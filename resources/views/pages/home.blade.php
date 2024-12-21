@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-base-layout>
 	<x-slot:metadata>
 		<x-slot:title>{{ __('Page d\'accueil') }}</x-slot:title>
 		<meta name="description" content="L'APEN est un Etablissement Public de l'Etat à caractère Professionnel.">
@@ -139,4 +139,4 @@
 		</div>
 		
 	</main>
-</x-app-layout>
+</x-base-layout>

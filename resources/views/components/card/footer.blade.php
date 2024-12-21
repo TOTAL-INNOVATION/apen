@@ -3,7 +3,7 @@
 ])
 
 <div {{ $attributes->twMerge([
-	$withoutPaddings ? '' : 'p-4 lg:p-6',
+	$withoutPaddings ? '' : 'p-4 sm:p-6',
 	'flex items-center'
 	]) }}>
     {{ $slot }}

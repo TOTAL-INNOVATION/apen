@@ -1,0 +1,2 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" <?php echo e($attributes->twMerge('hs-dropdown-open:rotate-180 size-4')); ?>><path d="m6 9 6 6 6-6"/></svg>
+<?php /**PATH /home/abubakr/Bureau/apen/resources/views/components/dropdown/icon.blade.php ENDPATH**/ ?>

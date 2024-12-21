@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-base-layout>
 	<x-slot:metadata>
 		<x-slot:title>Conditions d’obtention de l’agrément d’expert</x-slot:title>
 		<meta name="description" content="Homepage">
@@ -270,4 +270,4 @@ un formulaire d’identification de l’entreprise d’expertise individuelle de
 			</div>
 		</div>
 	</main>
-</x-app-layout>
+</x-base-layout>

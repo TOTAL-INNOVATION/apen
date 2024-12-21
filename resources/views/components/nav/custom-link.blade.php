@@ -9,7 +9,7 @@
 <x-link
     :href="$href"
     {{ $attributes->twMerge([
-		'relative px-4 py-2.5 text-nowrap inline-flex  justify-center items-center cursor-pointer after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-primary after:transition-all',
+		'relative px-4 py-2.5 text-nowrap inline-flex  justify-center items-center cursor-pointer after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-primary after:transition-all outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary',
 		$isActive ? 'after:w-full font-franklin-medium text-primary' : 'hover:after:navlink-hover-effect',
 	]) }}
     >

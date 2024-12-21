@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\URL;
 
 Route::view('/', 'pages.home')->name('home');
 Route::view('qui-sommes-nous', 'pages.whoWeAre')->name('whoWeAre');
@@ -13,4 +13,18 @@ Route::prefix('devenir-expert')->group(function() {
 	Route::view('/', 'pages.becomeExpert.index')->name('becomeExpert.index');
 	Route::view('conditions', 'pages.becomeExpert.conditions')->name('becomeExpert.conditions');
 	Route::view('procedure', 'pages.becomeExpert.procedure')->name('becomeExpert.procedure');
+});
+
+Route::middleware('guest')->group(function() {
+
+	Route::view('se-connecter', 'pages.auth.login')->name('login.view');
+
+});
+
+Route::middleware(HandleInertiaRequests::class)->group(function() {
+
+	Route::get('admin', function() {
+		return inertia()->render('home');
+	});
+
 });

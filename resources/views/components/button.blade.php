@@ -5,7 +5,8 @@
 	'href' => '#',
 	'roundedFull' => false,
 	'component' => 'button',
-	'disabled' => false
+	'disabled' => false,
+    'widthFull' => false,
 ])
 
 @php
@@ -32,7 +33,8 @@
     $classNames = [
         $sizes[$size],
         $bgColor,
-        'inline-flex items-center justify-center whitespace-nowrap ring-offset-white transition-colors outline-0 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-70 transition-colors',
+        $widthFull ? 'w-full' : '',
+        'inline-flex items-center justify-center whitespace-nowrap transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-70 transition-colors',
         $roundedFull ? 'rounded-full' : '',
     ];
 @endphp

@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-base-layout>
 	<x-slot:metadata>
 		<x-slot:title>{{ __('Mot de la secrétaire exécutive') }}</x-slot:title>
 		<meta name="description" content="Homepage">
@@ -63,4 +63,4 @@
 		</div>
 	</main>
 
-</x-app-layout>
+</x-base-layout>

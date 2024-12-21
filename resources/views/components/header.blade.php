@@ -11,7 +11,7 @@
     <div class="py-2 border-b border-whisper">
         <div class="px-4 sm:px-auto container flex items-center justify-between md:px-0 md:justify-normal">
             <div class="flex-initial">
-                <a href="#">
+                <a class="outline-none" href="#">
                     <img src="{{ asset('logo.png') }}" class="w-16 sm:w-20 md:w-24" alt="{{ config('app.name') }}">
                 </a>
             </div>
@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="flex-initial">
-                <x-button component="a">{{ __('Se connecter') }}</x-button>
+                <x-button component="a" href="{{ route('login.view') }}">{{ __('Se connecter') }}</x-button>
             </div>
         </div>
     </div>

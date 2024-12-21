@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-base-layout>
 	<x-slot:metadata>
 		<x-slot:title>{{ __('C\'est quoi APEN?') }}</x-slot:title>
 		<meta name="description" content="Homepage">
@@ -59,4 +59,4 @@
 			</div>
 		</div>
 	</main>
-</x-app-layout>
+</x-base-layout>

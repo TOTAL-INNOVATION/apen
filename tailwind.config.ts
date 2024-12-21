@@ -6,7 +6,8 @@ export default {
     content: [
         "./storage/framework/views/*.php",
         "./resources/**/*.blade.php",
-        "./resources/**/*.ts",
+        "./resources/ts/**/*.ts",
+        "./resources/**/*.tsx",
         "./resources/**/*.js",
         "node_modules/preline/dist/*.js",
     ],
