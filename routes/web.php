@@ -15,16 +15,15 @@ Route::prefix('devenir-expert')->group(function() {
 	Route::view('procedure', 'pages.becomeExpert.procedure')->name('becomeExpert.procedure');
 });
 
-Route::middleware('guest')->group(function() {
-
-	Route::view('se-connecter', 'pages.auth.login')->name('login.view');
-
-});
 
 Route::middleware(HandleInertiaRequests::class)->group(function() {
 
-	Route::get('admin', function() {
+	Route::get('panel', function() {
 		return inertia()->render('home');
-	});
+	})->name('panel');
 
 });
+
+Route::view('mail', 'mails.auth.verify');
+
+require __DIR__ . '/auth.php';
