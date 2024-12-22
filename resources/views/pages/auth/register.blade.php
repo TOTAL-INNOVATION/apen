@@ -55,7 +55,7 @@
 					/>
 
 					<div class="mt-6 md:mt-8">
-						<x-button widthFull>{{ __('M\'inscrire') }}</x-button>
+						<x-button type="submit" widthFull>{{ __('M\'inscrire') }}</x-button>
 					</div>
 				</x-card.body>
 			</x-card>

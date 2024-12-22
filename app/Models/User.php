@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\RoleEnum;
+use App\Notifications\Auth\SendVerificationEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,12 +23,19 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
     protected $fillable = [
+        'role',
         'firstname',
         'lastname',
         'email',
         'phone',
+        'avatar',
         'password',
     ];
+
+    public function getFullnameAttribute(): string
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -46,8 +55,14 @@ class User extends Authenticatable implements MustVerifyEmail
     protected function casts(): array
     {
         return [
+            'role' => RoleEnum::class,
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function sendEmailVerificationNotification(): void
+    {
+        $this->notify(new SendVerificationEmail);
     }
 }

@@ -26,7 +26,7 @@ class RegisterRequest extends FormRequest
             'firstname' => 'bail|required|string|min:5|max:50',
             'lastname' => 'bail|required|string|min:5|max:50',
             'email' => 'bail|required|string|lowercase|email|unique:users,email',
-            Password::min(8)
+            'password' => Password::min(8)
             ->max(24)
             ->letters()
             ->numbers()

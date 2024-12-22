@@ -24,6 +24,4 @@ Route::middleware(HandleInertiaRequests::class)->group(function() {
 
 });
 
-Route::view('mail', 'mails.auth.verify');
-
 require __DIR__ . '/auth.php';

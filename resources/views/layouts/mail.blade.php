@@ -263,17 +263,6 @@
 
 <body bgcolor="#F8F8F8" topmargin="0" leftmargin="0" marginheight="0" marginwidth="0">
 
-    <table class="body-wrap">
-        <tr>
-            <td></td>
-            <td>
-                <div class="w-fit mx-auto mb-2">
-                    <img src="{{ $message->embed(public_path('logo.png')) }}" class="logo" alt="APEN">
-                </div>
-            </td>
-        </tr>
-    </table>
-
 	{{ $slot }}
 
 </body>

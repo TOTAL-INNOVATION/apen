@@ -1,3 +1,5 @@
+@use('App\Models\User')
+
 <div class="w-full bg-white hidden md:flex">
     <div class="px-4 py-1.5 flex-initial bg-secondary text-sm font-franklin-medium text-white uppercase border-b border-secondary">
         {{ __('Flash info') }}
@@ -22,7 +24,42 @@
                 </div>
             </div>
             <div class="flex-initial">
-                <x-button component="a" href="{{ route('login.view') }}">{{ __('Se connecter') }}</x-button>
+                <x-dropdown class="m-0">
+                        @if ($user = user())
+                        <x-dropdown.trigger size="default" class="px-2 py-1 sm:px-3 sm:py-2 inline-flex items-center gap-x-2 border border-whisper">
+                            @if ($user->avatar === User::DEFAULT_AVATAR)
+                                <img class="inline-block size-8 sm:size-9" src="{{ asset('defaults/avatar2.svg') }}" alt="{{ $user->fullname }}">
+                            @else
+                            <img class="inline-block size-[38px]" src="{{ $user->avatar }}" alt="{{ $user->fullname }}">
+                            @endif
+
+                            <strong>{{ __('Profil') }}</strong>
+
+                            <x-dropdown.icon />
+                            
+                        </x-dropdown.trigger>
+                        
+                        <x-dropdown.content class="p-0 w-44">
+                            <div class="mb-1 py-2 sm:px-3 w-full border-b border-whisper">
+                                <strong>{{ Str::limit($user->fullname, 20) }}</strong>
+                            </div>
+
+                            <x-dropdown.item href="#">
+                                <x-lucide-user-2 class="h-5 w-5" />
+                                <strong>{{ __('Portail') }}</strong>
+                            </x-dropdown.item>
+
+                            <x-form method="POST" action="{{ route('logout') }}">
+                                <x-dropdown.item component="button" type="submit" widthFull>
+                                    <x-lucide-log-out class="h-5 w-5" />
+                                    <strong>{{ __('Me déconnecter') }}</strong>
+                                </x-dropdown.item>
+                            </x-form>
+                        </x-dropdown.content>
+                    @else
+                        <x-button component="a" href="{{ route('login.view') }}">{{ __('Se connecter') }}</x-button>
+                    @endif
+                </x-dropdown>
             </div>
         </div>
     </div>

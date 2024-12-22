@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\RoleEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
@@ -12,9 +13,10 @@ class RegisterController extends Controller
 {
     public function __invoke(RegisterRequest $request): RedirectResponse
     {
-        $user = User::create(
-            $request->validated()
-        );
+        $user = User::create([
+            ...$request->validated(),
+            'role' => RoleEnum::EXPERT,
+        ]);
         auth()->login($user);
         event(new Registered($user));
 

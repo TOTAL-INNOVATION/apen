@@ -2,6 +2,18 @@
 
     <x-slot:title>{{ __('Confirmez votre inscription') }}</x-slot:title>
 
+
+    <table class="body-wrap">
+        <tr>
+            <td></td>
+            <td>
+                <div class="w-fit mx-auto mb-2">
+                    <img src="{{ $message->embed(public_path('logo.png')) }}" class="logo" alt="APEN">
+                </div>
+            </td>
+        </tr>
+    </table>
+
     <table class="body-wrap">
         <tr>
             <td></td>

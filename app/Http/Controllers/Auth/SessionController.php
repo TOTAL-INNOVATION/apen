@@ -19,12 +19,21 @@ class SessionController extends Controller
     public function login(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        $request->session()->regenerate();
 
         if (user()->role === RoleEnum::ADMIN->value)
             return to_route('panel');
         
         return to_route('home');
+    }
+
+    public function logout(Request $request): RedirectResponse
+    {
+        auth()->logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return to_route('login.view');
     }
 }
