@@ -20,7 +20,7 @@ Route::middleware('auth')->group(function() {
 	Route::post('renvoyez-la-verification', ResendVerificationController::class)
 	->middleware('throttle:6,1')->name('verification.resend');
 });
-Route::post('verifiez-mon-mail/{id}/{hash}', VerifyController::class)
+Route::get('verifiez-mon-mail/{id}/{hash}', VerifyController::class)
 ->middleware('signed')->name('verification.verify');
 
 Route::middleware(['auth', 'verified'])->group(function() {

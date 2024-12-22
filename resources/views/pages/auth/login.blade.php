@@ -5,7 +5,12 @@
     </x-slot:metadata>
 
     <div class="auth-card">
-        <x-form>
+
+        @session('success')
+			<x-alert class="mb-4 sm:mb-6" variant="success">{{ $value }}</x-alert>
+		@endsession
+
+        <x-form method="POST" action="{{ route('login.attempt') }}">
             <x-card class="max-w-sm sm:max-w-xl mx-auto">
                 <x-card.header class="block">
                     <x-card.title class="heading-2 uppercase text-center">{{ __('Se connecter') }}</x-card.title>
@@ -18,7 +23,7 @@
                         placeholder="{{ __('Entrez votre mot de passe') }}" required />
 
                     <div class="mt-6 md:mt-8">
-                        <x-button widthFull>{{ __('Me connecter') }}</x-button>
+                        <x-button type="submit" widthFull>{{ __('Me connecter') }}</x-button>
                     </div>
                 </x-card.body>
                 <x-card.footer>
