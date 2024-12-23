@@ -28,8 +28,6 @@
                                 <p class="lead">{{ __('Bonjour :firstname!', ['firstname' => $firstname]) }}</p>
                                 <p class="lead">{{ __('Votre inscription sur la plateforme a été un succès. Pour poursuivre avec votre candidature, veuillez cliquer sur le bouton ci-dessous pour confirmer la création de votre compte.') }}</p>
                                 
-                                <!-- A Real Hero (and a real human being) -->
-                                
                                 <div class="my-6" style="display: flex; justify-content: center;">
                                     <a href="{{ $url }}" class="btn">{{ __('Activer mon compte') }}</a>
                                 </div>

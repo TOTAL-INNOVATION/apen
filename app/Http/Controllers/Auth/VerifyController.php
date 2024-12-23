@@ -17,6 +17,6 @@ class VerifyController extends Controller
         $redirect = app(SessionController::class)->logout($request);
 
         return $redirect
-        ->with('success', __('messages.verification.verified'));
+        ->with('success', 'messages.verification.verified');
     }
 }

@@ -18,7 +18,7 @@
 <div id="{{ $id }}" {{ $attributes->twMerge('p-2 w-full flex justify-between gap-x-2', $variants[$variant]) }} role="alert">
 	<div>{{ $slot }}</div>
     @if ($close)
-        <button class="h-fit bg-transparent border-transparent" data-hs-remove-element="#{{ $id }}">
+        <button class="h-fit sm:h-auto bg-transparent border-transparent" data-hs-remove-element="#{{ $id }}">
             <x-lucide-x class="w-4 h-4" />
         </button>
     @endif

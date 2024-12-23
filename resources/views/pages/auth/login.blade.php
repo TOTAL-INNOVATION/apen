@@ -7,7 +7,7 @@
     <div class="auth-card">
 
         @session('success')
-			<x-alert class="mb-4 sm:mb-6" variant="success">{{ $value }}</x-alert>
+			<x-alert class="mb-4 sm:mb-6" variant="success">{{ __($value) }}</x-alert>
 		@endsession
 
         <x-form method="POST" action="{{ route('login.attempt') }}">
@@ -23,11 +23,13 @@
                         placeholder="{{ __('Entrez votre mot de passe') }}" required />
 
                     <div class="mt-6 md:mt-8">
-                        <x-button type="submit" widthFull>{{ __('Me connecter') }}</x-button>
+                        <x-button type="submit" widthFull>
+                            <strong>{{ __('Me connecter') }}</strong>
+                        </x-button>
                     </div>
                 </x-card.body>
                 <x-card.footer>
-                    <x-link href="#" class="underline underline-offset-4">
+                    <x-link href="{{ route('password.forgot') }}" class="underline underline-offset-4">
                         <strong>{{ __('Mot de passe oublié?') }}</strong>
                     </x-link>
                 </x-card.footer>
@@ -35,7 +37,7 @@
         </x-form>
 
         <div class="my-4 sm:my-6 space-y-2">
-            <p>{{ __('Pas encore de compte') }}?
+            <p>{{ __('Pas encore de compte?') }}
                 <x-link href="{{ route('register.view') }}" class="underline underline-offset-4">
                     <strong>{{ __('Créez-en un') }}</strong>
                 </x-link>

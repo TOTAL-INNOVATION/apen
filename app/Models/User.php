@@ -3,14 +3,15 @@
 namespace App\Models;
 
 use App\Enums\RoleEnum;
+use App\Notifications\Auth\SendResetPasswordLink;
 use App\Notifications\Auth\SendVerificationEmail;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\{CanResetPassword, MustVerifyEmail};
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, HasUlids;
@@ -64,5 +65,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function sendEmailVerificationNotification(): void
     {
         $this->notify(new SendVerificationEmail);
+    }
+
+    public function sendPasswordResetNotification($token): void
+    {
+        $this->notify(new SendResetPasswordLink($token));
     }
 }
