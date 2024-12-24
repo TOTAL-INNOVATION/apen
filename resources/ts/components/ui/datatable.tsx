@@ -91,26 +91,26 @@ export const DataTable = <T extends Record<string, any>>({
                                     column.label ??
                                     str(column.name as string).ucFirst();
                                 return (
-                                    <TableHead className="text-left text-nowrap" key={generateUuid()}>
+                                    <TableHead className="text-nowrap" key={generateUuid()}>
                                         {column.sortable ? (
                                             <Button
                                                 size="sm"
                                                 variant="outline"
-                                                className="inline-flex items-center text-base mx-auto bg-transparent border-0 hover:bg-whisper"
+                                                className="inline-flex items-center text-base mx-auto bg-transparent border-0 rounded-md hover:bg-whisper"
                                                 onClick={() =>
                                                     handleSort(
                                                         column.name as string
                                                     )
                                                 }
                                             >
-                                                <span>{label}</span>
+                                                <strong>{label}</strong>
                                                 <span className="ml-1.5 flex flex-col space-y-1">
                                                     <SortArrow className="rotate-180" />
                                                     <SortArrow />
                                                 </span>
                                             </Button>
                                         ) : (
-                                            <span>{label}</span>
+                                            <strong>{label}</strong>
                                         )}
                                     </TableHead>
                                 );

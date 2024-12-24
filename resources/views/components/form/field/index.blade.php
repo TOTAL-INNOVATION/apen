@@ -14,6 +14,6 @@
 	@endif
 	<x-input :type="$type" :id="$id" :name="$name" value="{{ old($name) }}" {{ $attributes }} />
     @error($name)
-        <p class="text-danger mt-2">{{ $message }}</p>
+        <p class="text-error mt-2">{{ $message }}</p>
     @enderror
 </div>

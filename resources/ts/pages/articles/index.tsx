@@ -45,9 +45,7 @@ function Index() {
                         </BreadcrumbItem>
                         <BreadcrumbSeparator />
                         <BreadcrumbItem>
-                            <BreadcrumbLink href="#">
-								<strong>Articles</strong>
-							</BreadcrumbLink>
+                            <strong>Articles</strong>
                         </BreadcrumbItem>
                     </BreadcrumbList>
                 </Breadcrumb>
@@ -55,7 +53,7 @@ function Index() {
 
 			<div className="mt-6">
                 <div className="sm:flex sm:items-center sm:justify-between">
-                    <h1 className="text-xl font-semibold">Liste des articles</h1>
+                    <h3 className="heading-3 uppercase">Liste des articles</h3>
                     <Button className="mt-2 sm:mt-0" asChild>
                         <Link href="/articles/create">
                             <Newspaper className="w-5 h-5" />
