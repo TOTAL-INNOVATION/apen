@@ -1,4 +1,5 @@
 @use('App\Models\User')
+@use('App\Enums\RoleEnum')
 
 <div class="w-full bg-white hidden md:flex">
     <div class="px-4 py-1.5 flex-initial bg-secondary text-sm font-franklin-medium text-white uppercase border-b border-secondary">
@@ -44,10 +45,17 @@
                                 <strong>{{ Str::limit($user->fullname, 20) }}</strong>
                             </div>
 
-                            <x-dropdown.item href="#">
-                                <x-lucide-user-2 class="h-5 w-5" />
-                                <strong>{{ __('Portail') }}</strong>
-                            </x-dropdown.item>
+                            @if ($user->role === RoleEnum::ADMIN)
+                                <x-dropdown.item href="{{ route('panel') }}">
+                                    <x-lucide-layout-dashboard class="h-5 w-5" />
+                                    <strong>{{ __('Dashboard') }}</strong>
+                                </x-dropdown.item>
+                            @else
+                                <x-dropdown.item href="#">
+                                    <x-lucide-user-2 class="h-5 w-5" />
+                                    <strong>{{ __('Portail') }}</strong>
+                                </x-dropdown.item>
+                            @endif
 
                             <x-form method="POST" action="{{ route('logout') }}">
                                 <x-dropdown.item component="button" type="submit" widthFull>

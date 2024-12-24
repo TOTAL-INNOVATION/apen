@@ -1,7 +1,7 @@
 import React from "react";
 import { Nav, NavItem } from "./nav";
 import { TooltipProvider } from "./tooltip";
-import { LayoutDashboard } from "lucide-react";
+import { LayoutDashboard, Newspaper } from "lucide-react";
 
 const Sidebar = () => {
     return (
@@ -24,10 +24,15 @@ const Sidebar = () => {
                     </span>
                 </div>
                 <Nav direction="vertical">
-                    <NavItem href="/home">
-                        <LayoutDashboard className="w-6 h-6 stroke-dark/80" />
+                    <NavItem href="/panel">
+                        <LayoutDashboard className="w-6 h-6" />
                         <strong>Accueil</strong>
                     </NavItem>
+
+                    <NavItem href="/articles">
+                        <Newspaper className="w-6 h-6" />
+                        <strong>Actualités</strong>
+                    </NavItem>                    
                 </Nav>
             </aside>
         </TooltipProvider>

@@ -7,15 +7,16 @@ import {
     DropdownMenuItem,
     DropdownMenuLabel,
     DropdownMenuSeparator,
-    DropdownMenuShortcut,
 } from "./dropdown-menu";
 import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { Button } from "./button";
-import { router, usePage } from "@inertiajs/react";
-import { LogOut, Settings, User2, Users2 } from "lucide-react";
+import { Link, router, usePage } from "@inertiajs/react";
+import { LogOut, User2, Users2 } from "lucide-react";
+import { User } from "~/types";
+import axios from "axios";
 
 const Navbar = ({ className }: { className?: string }) => {
-    /* const user = (usePage().props.user as { data: User }).data; */
+    const user = (usePage().props.user as { data: User }).data;
 
     return (
         <header
@@ -33,35 +34,35 @@ const Navbar = ({ className }: { className?: string }) => {
                         <span className="p-[1px] border-2 border-whisper/75 rounded-full">
                             <img
                                 className="inline-block size-[38px] rounded-full"
-                                src="/defaults/avatar.svg"
-                                alt="John Doe"
+                                src={user.avatar}
+                                alt={user.fullname}
                             />
                         </span>
-                        <span className="font-franklin-medium">John Doe</span>
+                        <span className="font-franklin-medium">{user.fullname}</span>
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-44 mr-2">
-                    <DropdownMenuLabel>Mon compte</DropdownMenuLabel>
+                    <DropdownMenuLabel>
+                        <strong>Mon compte</strong>
+                    </DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
-                        <DropdownMenuItem>
-                            <User2 className="mr-2 h-4 w-4" />
-                            <span>Profile</span>
-                            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+                        <DropdownMenuItem asChild>
+                            <Link href="#">
+                                <User2 className="mr-2 h-5 w-5" />
+                                <strong>Profil</strong>
+                            </Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem>
-                            <Users2 className="mr-2 h-4 w-4" />
-                            <span>Équipe</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                            <Settings className="mr-2 h-4 w-4" />
-                            <span>Paramètres</span>
+                        <DropdownMenuItem asChild>
+                            <Link href="#">
+                                <Users2 className="mr-2 h-5 w-5" />
+                                <strong>Équipe</strong>
+                            </Link>
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={logout}>
-                            <LogOut className="mr-2 h-4 w-4" />
-                            <span>Déconnexion</span>
-                            <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+                            <LogOut className="mr-2 h-5 w-5" />
+                            <strong>Déconnexion</strong>
                         </DropdownMenuItem>
                     </DropdownMenuGroup>
                 </DropdownMenuContent>
@@ -70,8 +71,13 @@ const Navbar = ({ className }: { className?: string }) => {
     );
 };
 
-function logout() {
-    router.post('logout');
+async function logout() {
+    const response = await axios.post<{message: string}>('/deconnexion');
+    const {status, data} = response;
+    
+    if (status === 200 && data.message === "loggedOut") {
+        window.location.reload();
+    }
 }
 
 export default Navbar;
