@@ -46,10 +46,12 @@ function FormField<T extends FormFields>({
         id,
         placeholder,
         required,
+        onChange: handleChange
     };
-
+    
     const fields = React.useContext(FormContext).fields;
-    const error = inertiaFormHook(fields).errors[name as string];
+    const {errors, setData} = inertiaFormHook(fields);
+    const error = errors[name as string];
 
     return (
         <div className={cn("mb-2 sm:mb-4", className)}>
@@ -66,6 +68,10 @@ function FormField<T extends FormFields>({
             )}
         </div>
     );
+
+    function handleChange(event: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) {
+        setData(name as string, event.target.value);
+    }
 }
 
 function useForm<Fields extends FormFields>(fields: Fields) {
