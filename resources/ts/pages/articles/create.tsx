@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Head, Link } from "@inertiajs/react";
 import {
     Breadcrumb,
@@ -8,17 +8,29 @@ import {
     BreadcrumbSeparator,
 } from "~/components/ui/breadcrumb";
 import App from "~/layouts/app";
+import useForm from "~/components/ui/form";
+import { Editable, Slate, withReact } from "slate-react";
+import { createEditor } from "slate";
 
 function Create() {
-	
-	return (
-		<div>
-			<Head>
-				<title>Nouvel article</title>
-			</Head>
+    const { data, setData, Form, FormField } = useForm<{
+        title: string;
+        cover: File | null;
+        content: string;
+    }>({
+        title: "",
+        cover: null,
+        content: "",
+    });
 
-			<div>
-			<Breadcrumb>
+    return (
+        <div>
+            <Head>
+                <title>Nouvel article</title>
+            </Head>
+
+            <div>
+                <Breadcrumb>
                     <BreadcrumbList>
                         <BreadcrumbItem>
                             <BreadcrumbLink asChild>
@@ -28,28 +40,53 @@ function Create() {
                         <BreadcrumbSeparator />
                         <BreadcrumbItem>
                             <BreadcrumbLink asChild>
-								<Link href="/articles">Articles</Link>
-							</BreadcrumbLink>
+                                <Link href="/articles">Articles</Link>
+                            </BreadcrumbLink>
                         </BreadcrumbItem>
-						<BreadcrumbSeparator />
-						<BreadcrumbItem>
-                            <strong>Ajouter</strong>
+                        <BreadcrumbSeparator />
+                        <BreadcrumbItem>
+                            <span className="font-franklin-medium">Ajouter</span>
                         </BreadcrumbItem>
                     </BreadcrumbList>
                 </Breadcrumb>
-			</div>
+            </div>
 
-			<div>
-				
-				<form>
-					
-				</form>
-			</div>
-		</div>
-	);
+            <div className="mt-4 md:mt-6 lg:mt-8 article-container">
+                <h2 className="heading-2 uppercase">Nouvel article</h2>
+                <div className="mt-4 md:mt-6 lg:mt-8">
+                    <div className="mb-4">
+                        <p>
+                            <span className="font-franklin-medium">Note:</span>{" "}
+                            <span>Tous les champs sont obligatoires</span>
+                        </p>
+                    </div>
+                    <Form asChild>
+                        <div>
+                            <FormField
+                                label="Titre"
+                                name="title"
+                                placeholder="Entrez le titre de l'article"
+                                required
+                            />
+
+                            <FormField
+                                label="Image de couverture"
+                                name="cover"
+                                elementType="image"
+                                required
+                            />
+                            <div className="mb-2 sm:mb-4">
+                                
+                            </div>
+                        </div>
+                    </Form>
+                </div>
+            </div>
+        </div>
+    );
 }
 
 //@ts-ignore
-Create.layout = page => <App children={page} />
+Create.layout = (page) => <App children={page} />;
 
 export default Create;

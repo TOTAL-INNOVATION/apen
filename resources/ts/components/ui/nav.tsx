@@ -44,7 +44,7 @@ const NavItem = React.forwardRef<HTMLAnchorElement, NavItemProps>(
         const url = usePage().url;
 
         const classNames = clsx(
-            "w-full py-2 px-2.5 inline-flex items-center justify-start space-x-2 cursor-pointer hover:bg-bright transition-colors rounded-sm",
+            "w-full py-2 px-2.5 font-franklin-medium inline-flex items-center justify-start space-x-2 cursor-pointer hover:bg-bright transition-colors rounded-sm",
             className,
             {
                 "text-primary bg-primary/15 hover:bg-primary/15":

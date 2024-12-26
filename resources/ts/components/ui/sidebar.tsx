@@ -26,12 +26,12 @@ const Sidebar = () => {
                 <Nav direction="vertical">
                     <NavItem href="/panel">
                         <LayoutDashboard className="w-6 h-6" />
-                        <strong>Accueil</strong>
+                        <span>Accueil</span>
                     </NavItem>
 
                     <NavItem href="/articles">
                         <Newspaper className="w-6 h-6" />
-                        <strong>Actualités</strong>
+                        <span>Actualités</span>
                     </NavItem>                    
                 </Nav>
             </aside>

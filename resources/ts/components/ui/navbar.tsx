@@ -14,6 +14,7 @@ import { Link, router, usePage } from "@inertiajs/react";
 import { LogOut, User2, Users2 } from "lucide-react";
 import { User } from "~/types";
 import axios from "axios";
+import { asset } from "~/lib/utils";
 
 const Navbar = ({ className }: { className?: string }) => {
     const user = (usePage().props.user as { data: User }).data;
@@ -34,7 +35,7 @@ const Navbar = ({ className }: { className?: string }) => {
                         <span className="p-[1px] border-2 border-whisper/75 rounded-full">
                             <img
                                 className="inline-block size-[38px] rounded-full"
-                                src={user.avatar}
+                                src={asset(user.avatar)}
                                 alt={user.fullname}
                             />
                         </span>

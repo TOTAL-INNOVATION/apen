@@ -44,8 +44,9 @@
         "lucide-react": "^0.469.0",
         "next-themes": "^0.4.4",
         "preline": "^2.6.0",
-        "quill": "^2.0.3",
-        "react-quilljs": "^2.0.5",
+        "react-dropzone": "^14.3.5",
+        "slate": "^0.112.0",
+        "slate-react": "^0.112.0",
         "sonner": "^1.7.1",
         "tailwind-merge": "^2.5.5",
         "tailwindcss-animate": "^1.0.7"

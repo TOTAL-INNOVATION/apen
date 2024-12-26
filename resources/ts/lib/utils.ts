@@ -21,3 +21,9 @@ export const debounce = (fn: Function, delay = 500) => {
         timerId = setTimeout(() => fn(...args), delay);
     };
 };
+
+/**
+ * equivalent of the `asset` helper in Laravel
+ */
+//@ts-ignore
+export const asset = (assetUrl: string): string => `${import.meta.env.VITE_APP_URL}/${assetUrl}`;
