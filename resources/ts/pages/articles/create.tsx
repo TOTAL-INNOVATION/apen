@@ -11,6 +11,7 @@ import App from "~/layouts/app";
 import useForm from "~/components/ui/form";
 import { Editable, Slate, withReact } from "slate-react";
 import { createEditor } from "slate";
+import RichEditor from "~/components/ui/rich-editor";
 
 function Create() {
     const { data, setData, Form, FormField } = useForm<{
@@ -76,7 +77,7 @@ function Create() {
                                 required
                             />
                             <div className="mb-2 sm:mb-4">
-                                
+                                <RichEditor label="Contenu de l'article" />
                             </div>
                         </div>
                     </Form>

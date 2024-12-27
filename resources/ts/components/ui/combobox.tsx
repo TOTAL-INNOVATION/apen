@@ -19,8 +19,8 @@ type ComboBoxProps = {
     emptyMessage?: string;
 };
 
-type ItemProps = {
-    value: string;
+interface ItemProps <V extends string>{
+    value: V;
     label: string;
 };
 
@@ -44,7 +44,7 @@ const ComboBox = ({
     className,
 }: ComboBoxProps) => {
     const [boxOpen, setBoxOpen] = useState(open);
-    const [activeItem, setActiveItem] = useState<ItemProps>({
+    const [activeItem, setActiveItem] = useState<ItemProps<string>>({
         value: "",
         label: "",
     });
@@ -88,23 +88,23 @@ const ComboBoxContent = ({
 
 ComboBoxContent.displayName = "ComboBoxContent";
 
-const ComboBoxItem = ({
+const ComboBoxItem = <V extends string>({
     label,
     value,
     children,
     className,
     active = false,
     onSelect,
-}: ItemProps & {
+}: ItemProps<V> & {
     children?: React.ReactNode;
     className?: string;
     active?: boolean;
-    onSelect?: (currentValue: string) => void;
+    onSelect?: (currentValue: V) => void;
 }) => {
     const { activeItem, setActiveItem, open, setOpen } =
         React.useContext(ComboboxContext);
 
-    const handleSelect = (currentValue: string) => {
+    const handleSelect = (currentValue: V) => {
         setActiveItem({ label, value: currentValue });
         setOpen(!open);
 
@@ -115,7 +115,7 @@ const ComboBoxItem = ({
         <CommandItem
             key={value}
             value={value}
-            onSelect={handleSelect}
+            onSelect={handleSelect as (currentValue: string) => void}
             className={cn("flex justify-between items-center cursor-pointer hover:bg-whisper/50", className)}
             data-active={active}
         >
