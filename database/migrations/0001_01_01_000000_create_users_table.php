@@ -22,7 +22,8 @@ return new class extends Migration
             $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('avatar')->default(User::DEFAULT_AVATAR);
-            $table->string('password');
+            $table->boolean('added_by_admin')->default(false);
+            $table->string('password')->nullable();
             $table->rememberToken();
             $table->timestamps();
 

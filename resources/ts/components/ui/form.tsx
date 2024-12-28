@@ -10,6 +10,8 @@ import { Slot } from "@radix-ui/react-slot";
 
 type FormFields = Record<string, any>;
 
+type FormEvent = React.FormEvent<HTMLFormElement>;
+
 export interface FormFieldProps<T extends FormFields> {
     id?: string;
     name?: keyof T;
@@ -141,8 +143,14 @@ function FormImageField<T extends FormFields>({
                             <div className="flex flex-col items-center space-y-2">
                                 <ImageUp className="w-14 h-14 stroke-[1] stroke-rainee" />
                                 <div>
-                                    {placeholder ? <strong>{placeholder}</strong> : <strong>Sélectionner une image</strong>}
-                                    <p className="mt-1">Cliquez ou glissez déposer</p>
+                                    {placeholder ? (
+                                        <strong>{placeholder}</strong>
+                                    ) : (
+                                        <strong>Sélectionner une image</strong>
+                                    )}
+                                    <p className="mt-1">
+                                        Cliquez ou glissez déposer
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -167,18 +175,32 @@ function FormImageField<T extends FormFields>({
     }
 }
 
+function formSubmitHandler(
+    event: FormEvent,
+    callback?: (event: React.FormEvent<HTMLFormElement>) => void
+) {
+    event.preventDefault();
+    if (callback) {
+        callback(event);
+    }
+}
+
 function useForm<Fields extends FormFields>(fields: Fields) {
     return {
         ...inertiaFormHook(fields),
         FormField: FormField<Fields>,
         Form: React.forwardRef<
             HTMLFormElement,
-            React.HTMLAttributes<HTMLFormElement> & {asChild?: boolean}
-        >(({asChild = false, ...props}, ref) => {
+            React.HTMLAttributes<HTMLFormElement> & { asChild?: boolean }
+        >(({ asChild = false, onSubmit, ...props }, ref) => {
             const Comp = asChild ? Slot : "form";
             return (
                 <FormContext.Provider value={{ fields }}>
-                    <Comp {...props} ref={ref} />
+                    <Comp
+                        {...props}
+                        onSubmit={(event) => formSubmitHandler(event, onSubmit)}
+                        ref={ref}
+                    />
                 </FormContext.Provider>
             );
         }),

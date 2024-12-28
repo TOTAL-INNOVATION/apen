@@ -31,6 +31,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         'phone',
         'avatar',
         'password',
+        'added_by_admin',
     ];
 
     public function getFullnameAttribute(): string

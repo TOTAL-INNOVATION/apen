@@ -26,11 +26,15 @@ export interface PaginationData <T>{
 	meta:PaginationMeta;
 }
 
+export type Role = "Admin" | "Expert";
+
 export type User = {
+	id: string;
 	firstname: string;
 	lastname: string;
 	fullname: string;
 	email: string;
+	role: "Admin" | "Expert";
 	verified_at: string;
 	avatar: string;	
 }

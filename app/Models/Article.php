@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\SearchFilter;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
-    use HasUlids;
+    use HasUlids, SearchFilter;
 
     public const CONTENTS_FOLDER = 'articles';
 

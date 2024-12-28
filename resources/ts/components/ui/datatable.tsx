@@ -245,7 +245,7 @@ export const DataTable = <T extends Record<string, any>>({
             params.set('sort_order', 'desc');        
         
         router.get(
-            history.state.url,
+            window.location.href,
             Object.fromEntries(params.entries()),
             { preserveState: true, replace: true }
         )
@@ -254,7 +254,7 @@ export const DataTable = <T extends Record<string, any>>({
     function handleSearch(event: React.ChangeEvent<HTMLInputElement>) {
         const target = event.target;
 
-        const url = history.state.url;
+        const url = window.location.href;
 
         debounce((query: string) => {
             router.get(

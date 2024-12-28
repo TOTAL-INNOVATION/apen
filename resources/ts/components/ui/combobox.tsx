@@ -50,7 +50,7 @@ const ComboBox = ({
     });
 
     return (
-        <div className={cn(className, "w-fit")}>
+        <div className={cn(className)}>
             <ComboboxContext.Provider
                 value={{
                     open: boxOpen,
@@ -105,10 +105,9 @@ const ComboBoxItem = <V extends string>({
         React.useContext(ComboboxContext);
 
     const handleSelect = (currentValue: V) => {
+        if (onSelect) onSelect(currentValue);
         setActiveItem({ label, value: currentValue });
         setOpen(!open);
-
-        if (onSelect) onSelect(currentValue);
     };
 
     return (
@@ -156,7 +155,7 @@ const ComboBoxList = ({
             label: (label as string) || "",
             value: (value as string) || "",
         });
-    }, []);
+    }, [children, setActiveItem]);
 
     return (
         <PopoverContent className={cn("w-[200px] border-whisper p-0", className)}>
@@ -191,12 +190,12 @@ const ComboBoxTrigger = ({
                 className={cn("w-full justify-between", className)}
                 {...props}
             >
-                <strong>
+                <span className="font-franklin-medium">
 					{activeItem.value
 						? activeItem.label
 						: placeholder || "Selectionner"
 					}
-				</strong>
+				</span>
                 <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
         </PopoverTrigger>

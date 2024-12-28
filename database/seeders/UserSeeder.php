@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::forceCreate([
-            'role' => RoleEnum::ADMIN,
+            'role' => RoleEnum::SUPER_ADMIN,
             'firstname' => 'Admin',
             'lastname' => 'John',
             'email' => 'adminjohn@gmail.com',

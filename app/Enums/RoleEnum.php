@@ -11,4 +11,6 @@ enum RoleEnum: string
 
 	case ADMIN = 'Admin';
 	case EXPERT = 'Expert';
+
+	case SUPER_ADMIN = 'SuperAdmin';
 }

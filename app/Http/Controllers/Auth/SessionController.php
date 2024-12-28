@@ -22,10 +22,10 @@ class SessionController extends Controller
         $request->authenticate();
         $request->session()->regenerate();
 
-        if (user()->role === RoleEnum::ADMIN)
-            return to_route('panel');
+        if (user()->role === RoleEnum::EXPERT)
+            return to_route('home');
         
-        return to_route('home');
+        return to_route('panel');
     }
 
     public function logout(Request $request): JsonResponse|RedirectResponse
@@ -40,13 +40,13 @@ class SessionController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        if ($userRole === RoleEnum::ADMIN)
+        if ($userRole === RoleEnum::EXPERT)
         {
-            return response()->json([
-                'message' => 'loggedOut',
-            ]);
+            return to_route('login.view');
         }
-        
-        return to_route('login.view');
+
+        return response()->json([
+            'message' => 'loggedOut',
+        ]);
     }
 }

@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\User;
 
+use App\Enums\RoleEnum;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Password;
+use Illuminate\Validation\Rule;
 
-class RegisterRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return $this->user()->role !== RoleEnum::EXPERT;
     }
 
     /**
@@ -26,7 +27,7 @@ class RegisterRequest extends FormRequest
             'firstname' => 'bail|required|string|min:5|max:50',
             'lastname' => 'bail|required|string|min:5|max:50',
             'email' => 'bail|required|string|lowercase|email|unique:users,email',
-            'password' => Password::default(),
+            'role' => Rule::enum(RoleEnum::class),
         ];
     }
 }

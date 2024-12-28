@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Head, Link } from "@inertiajs/react";
 import {
     Breadcrumb,
@@ -9,8 +9,6 @@ import {
 } from "~/components/ui/breadcrumb";
 import App from "~/layouts/app";
 import useForm from "~/components/ui/form";
-import { Editable, Slate, withReact } from "slate-react";
-import { createEditor } from "slate";
 import RichEditor from "~/components/ui/rich-editor";
 
 function Create() {

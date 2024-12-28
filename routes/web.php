@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Panel\ArticleController;
+use App\Http\Controllers\Panel\UserController;
 use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,7 @@ Route::middleware(['auth', 'verified', HandleInertiaRequests::class])->group(fun
 		return inertia()->render('home');
 	})->name('panel');
 	Route::resource('articles', ArticleController::class);
+	Route::resource('utilisateurs', UserController::class);
 
 });
 
