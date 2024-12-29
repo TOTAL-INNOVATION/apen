@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Enums\RoleEnum;
 use App\Http\Requests\User\StoreRequest;
+use App\Http\Requests\User\UpdateRequest;
 use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
@@ -11,6 +12,8 @@ use Illuminate\Http\Request;
 class UserService extends BaseFilterService
 {
 	public string $model = User::class;
+
+	public array $searchAttributes = ['firstname', 'lastname', 'email'];
 
 	public array $sortByAttributes = ['firstname', 'lastname', 'email', 'role'];
 
@@ -36,6 +39,18 @@ class UserService extends BaseFilterService
 		$user->sendEmailVerificationNotification();
 
 		return $user;
+	}
+
+	public function update(UpdateRequest $request, User $user)
+	{
+		return $user->update(
+			$request->validated()
+		);
+	}
+
+	public function find(string $id): ?User
+	{
+		return User::find($id);
 	}
 
 }

@@ -10,6 +10,8 @@ class ArticleService extends BaseFilterService
 {
 	public string $model = Article::class;
 
+	public array $searchAttributes = ['title'];
+
 	public array $sortByAttributes = ['published_at', 'created_at', 'updated_at'];
 
 	public function getAll(Request $request): LengthAwarePaginator

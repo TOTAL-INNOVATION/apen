@@ -26,6 +26,18 @@ export interface PaginationData <T>{
 	meta:PaginationMeta;
 }
 
+export type FlashMessage = {
+	type: "success" | "error";
+	message: string;
+};
+
+export interface ImageFieldProps<T extends FieldValues> {
+	name: Path<T>;
+	control: Control<T, any>;
+	authorizeTypes: Record<string, string[]>;
+	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
 export type Role = "Admin" | "Expert";
 
 export type User = {

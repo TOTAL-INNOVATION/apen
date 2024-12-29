@@ -1,210 +1,176 @@
-import React, { useState } from "react";
-import { Label } from "./label";
-import { cn, generateUuid } from "~/lib/utils";
-import { Input } from "./input";
-import { Textarea } from "./textarea";
-import { useForm as inertiaFormHook } from "@inertiajs/react";
-import { useDropzone } from "react-dropzone";
-import { ImageUp } from "lucide-react";
-import { Slot } from "@radix-ui/react-slot";
+import * as React from "react"
+import * as LabelPrimitive from "@radix-ui/react-label"
+import { Slot } from "@radix-ui/react-slot"
+import {
+  Controller,
+  ControllerProps,
+  FieldPath,
+  FieldValues,
+  FormProvider,
+  useFormContext,
+} from "react-hook-form"
 
-type FormFields = Record<string, any>;
+import { cn } from "~/lib/utils"
+import { Label } from "~/components/ui/label"
 
-type FormEvent = React.FormEvent<HTMLFormElement>;
+const Form = FormProvider
 
-export interface FormFieldProps<T extends FormFields> {
-    id?: string;
-    name?: keyof T;
-    label?: string;
-    type?: React.HTMLInputTypeAttribute;
-    placeholder?: string;
-    elementType?: "input" | "textarea" | "image";
-    authorizeFileTypes?: Record<string, string[]>;
-    className?: string;
-    required?: boolean;
+type FormFieldContextValue<
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+> = {
+  name: TName
 }
 
-const FormContext = React.createContext<{ fields: FormFields }>({
-    fields: {},
-});
+const FormFieldContext = React.createContext<FormFieldContextValue>(
+  {} as FormFieldContextValue
+)
 
-function FormField<T extends FormFields>({
-    id = generateUuid(),
-    name = generateUuid(),
-    label,
-    type = "text",
-    placeholder = "",
-    elementType = "input",
-    authorizeFileTypes = {
-        "image/png": [],
-        "image/jpg": [],
-        "image/jpeg": [],
-    },
-    required = false,
-    className,
-}: FormFieldProps<T>) {
-    const props = {
-        type,
-        id,
-        placeholder,
-        required,
-        onChange: handleChange,
-    };
-
-    const fields = React.useContext(FormContext).fields;
-    const { errors, setData } = inertiaFormHook(fields);
-    const error = errors[name as string];
-    const elements = {
-        input: <Input name={name as string} {...props} />,
-        textarea: <Textarea name={name as string} {...props} />,
-        image: (
-            <FormImageField<T>
-                id={id}
-                name={name}
-                placeholder={placeholder}
-                className={className}
-                authorizeTypes={authorizeFileTypes}
-                required
-            />
-        ),
-    };
-
-    return (
-        <div className={cn("mb-2 sm:mb-4", className)}>
-            {label && <Label htmlFor={id}>{label}</Label>}
-
-            {elements[elementType]}
-
-            {error && <p className="text-error mt-2">{error}</p>}
-        </div>
-    );
-
-    function handleChange(
-        event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    ) {
-        setData(name as string, event.target.value);
-    }
+const FormField = <
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+>({
+  ...props
+}: ControllerProps<TFieldValues, TName>) => {
+  return (
+    <FormFieldContext.Provider value={{ name: props.name }}>
+      <Controller {...props} />
+    </FormFieldContext.Provider>
+  )
 }
 
-function FormImageField<T extends FormFields>({
+const useFormField = () => {
+  const fieldContext = React.useContext(FormFieldContext)
+  const itemContext = React.useContext(FormItemContext)
+  const { getFieldState, formState } = useFormContext()
+
+  const fieldState = getFieldState(fieldContext.name, formState)
+
+  if (!fieldContext) {
+    throw new Error("useFormField should be used within <FormField>")
+  }
+
+  const { id } = itemContext
+
+  return {
     id,
-    name,
-    label,
-    placeholder,
-    className,
-    required,
-    authorizeTypes,
-}: Omit<FormFieldProps<T>, "type" | "elementType"> & {
-    authorizeTypes: Record<string, string[]>;
-}) {
-    const [preview, setPreview] = useState<string | null>(null);
-    const fields = React.useContext(FormContext).fields;
-    const { setData } = inertiaFormHook(fields);
-
-    const { getRootProps, getInputProps, isDragAccept, isDragReject } =
-        useDropzone({
-            accept: authorizeTypes,
-            onDrop(acceptedFiles) {
-                if (acceptedFiles.length)
-                    setPreview(URL.createObjectURL(acceptedFiles[0]));
-            },
-        });
-
-    return (
-        <div>
-            {label && (
-                <div>
-                    <Label htmlFor={id}>{label}</Label>
-                </div>
-            )}
-            <div
-                {...getRootProps({
-                    className: cn(
-                        "p-4 w-full border border-dashed border-rainee aspect-video",
-                        {
-                            "border-danger": isDragReject,
-                        },
-                        {
-                            "border-success": isDragAccept,
-                        },
-                        className
-                    ),
-                })}
-            >
-                <div className="h-full bg-white border border-whisper">
-                    {preview ? (
-                        <img
-                            src={preview}
-                            className="w-full h-full object-cover"
-                            alt="Uploaded file"
-                        />
-                    ) : (
-                        <div className="h-full w-full flex items-center justify-center">
-                            <div className="flex flex-col items-center space-y-2">
-                                <ImageUp className="w-14 h-14 stroke-[1] stroke-rainee" />
-                                <div>
-                                    {placeholder ? (
-                                        <strong>{placeholder}</strong>
-                                    ) : (
-                                        <strong>Sélectionner une image</strong>
-                                    )}
-                                    <p className="mt-1">
-                                        Cliquez ou glissez déposer
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-                </div>
-                <input
-                    {...getInputProps({
-                        id,
-                        name: name as string,
-                        onChange: handleChange,
-                        required,
-                    })}
-                />
-            </div>
-        </div>
-    );
-
-    function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-        const files = event.target.files;
-
-        if (files && files.length) setData(name as string, files[0]);
-    }
+    name: fieldContext.name,
+    formItemId: `${id}-form-item`,
+    formDescriptionId: `${id}-form-item-description`,
+    formMessageId: `${id}-form-item-message`,
+    ...fieldState,
+  }
 }
 
-function formSubmitHandler(
-    event: FormEvent,
-    callback?: (event: React.FormEvent<HTMLFormElement>) => void
-) {
-    event.preventDefault();
-    if (callback) {
-        callback(event);
-    }
+type FormItemContextValue = {
+  id: string
 }
 
-function useForm<Fields extends FormFields>(fields: Fields) {
-    return {
-        ...inertiaFormHook(fields),
-        FormField: FormField<Fields>,
-        Form: React.forwardRef<
-            HTMLFormElement,
-            React.HTMLAttributes<HTMLFormElement> & { asChild?: boolean }
-        >(({ asChild = false, onSubmit, ...props }, ref) => {
-            const Comp = asChild ? Slot : "form";
-            return (
-                <FormContext.Provider value={{ fields }}>
-                    <Comp
-                        {...props}
-                        onSubmit={(event) => formSubmitHandler(event, onSubmit)}
-                        ref={ref}
-                    />
-                </FormContext.Provider>
-            );
-        }),
-    };
-}
+const FormItemContext = React.createContext<FormItemContextValue>(
+  {} as FormItemContextValue
+)
 
-export default useForm;
+const FormItem = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => {
+  const id = React.useId()
+
+  return (
+    <FormItemContext.Provider value={{ id }}>
+      <div ref={ref} className={cn("mb-2 sm:mb-4", className)} {...props} />
+    </FormItemContext.Provider>
+  )
+})
+FormItem.displayName = "FormItem"
+
+const FormLabel = React.forwardRef<
+  React.ComponentRef<typeof LabelPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
+>(({ className, ...props }, ref) => {
+  const { formItemId } = useFormField()
+
+  return (
+    <Label
+      ref={ref}
+      className={cn("mb-2 block font-franklin-medium cursor-pointer", className)}
+      htmlFor={formItemId}
+      {...props}
+    />
+  )
+})
+FormLabel.displayName = "FormLabel"
+
+const FormControl = React.forwardRef<
+  React.ComponentRef<typeof Slot>,
+  React.ComponentPropsWithoutRef<typeof Slot>
+>(({ ...props }, ref) => {
+  const { error, formItemId, formDescriptionId, formMessageId } = useFormField()
+
+  return (
+    <Slot
+      ref={ref}
+      id={formItemId}
+      aria-describedby={
+        !error
+          ? `${formDescriptionId}`
+          : `${formDescriptionId} ${formMessageId}`
+      }
+      aria-invalid={!!error}
+      {...props}
+    />
+  )
+})
+FormControl.displayName = "FormControl"
+
+const FormDescription = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLParagraphElement>
+>(({ className, ...props }, ref) => {
+  const { formDescriptionId } = useFormField()
+
+  return (
+    <p
+      ref={ref}
+      id={formDescriptionId}
+      className={cn("text-base", className)}
+      {...props}
+    />
+  )
+})
+FormDescription.displayName = "FormDescription"
+
+const FormMessage = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLParagraphElement>
+>(({ className, children, ...props }, ref) => {
+  const { error, formMessageId } = useFormField()
+  const body = error ? String(error?.message) : children
+
+  if (!body) {
+    return null
+  }
+
+  return (
+    <p
+      ref={ref}
+      id={formMessageId}
+      className={cn("text-base text-error mt-2", className)}
+      {...props}
+    >
+      {body}
+    </p>
+  )
+})
+FormMessage.displayName = "FormMessage"
+
+export {
+  useFormField,
+  Form,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormDescription,
+  FormMessage,
+  FormField,
+}

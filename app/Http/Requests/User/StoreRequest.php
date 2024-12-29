@@ -24,8 +24,8 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'firstname' => 'bail|required|string|min:5|max:50',
-            'lastname' => 'bail|required|string|min:5|max:50',
+            'firstname' => 'bail|required|string|min:2|max:50',
+            'lastname' => 'bail|required|string|min:2|max:50',
             'email' => 'bail|required|string|lowercase|email|unique:users,email',
             'role' => Rule::enum(RoleEnum::class),
         ];

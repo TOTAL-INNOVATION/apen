@@ -1,6 +1,3 @@
-import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { Role } from "~/types";
 import {
     Select,
     SelectContent,
@@ -9,7 +6,19 @@ import {
     SelectValue,
 } from "~/components/ui/select";
 import { Button } from "~/components/ui/button";
-import zod from "~/lib/zod";
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "~/components/ui/dialog";
+import { Role, User } from "~/types";
+import { router, usePage } from "@inertiajs/react";
+import React from "react";
+import { Pen } from "lucide-react";
+import { userFormSchema } from "~/pages/users/create";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
     Form,
@@ -19,48 +28,38 @@ import {
     FormLabel,
     FormMessage,
 } from "~/components/ui/form";
+import zod from "~/lib/zod";
 import { Input } from "~/components/ui/input";
-import { router, usePage } from "@inertiajs/react";
-import { setValidationError } from "~/lib/form";
+import { handleOverlayOpen } from "~/lib/utils";
 
-export const userFormSchema = zod.object({
-    firstname: zod.string().min(2).max(50),
-    lastname: zod.string().min(2).max(50),
-    email: zod.string().email(),
-    role: zod.enum<Role, [Role, ...Role[]]>(["Admin", "Expert"]),
-});
+function EditUser({user}: {user: User}) {
 
-function Create() {
+	const url = usePage().url;
+	const dialogStateValue = `edit=${user.id}`;
+	const form = useForm<zod.infer<typeof userFormSchema>>({
+		resolver: zodResolver(userFormSchema),
+		defaultValues: {
+			firstname: user.firstname,
+			lastname: user.lastname,
+			email: user.email,
+			role: user.role,
+		},
+	});
 
-    const form = useForm<zod.infer<typeof userFormSchema>>({
-        resolver: zodResolver(userFormSchema),
-        defaultValues: {
-            firstname: "",
-            lastname: "",
-            email: "",
-            role: "Expert",
-        },
-    });
+	return (
+		<Dialog open={url.includes(dialogStateValue)} onOpenChange={() => handleOverlayOpen(dialogStateValue)}>
+            <DialogTrigger asChild>
+                <Button size="sm" variant="outline" className="rounded-full">
+                    <Pen className="w-[18px] h-[18px] stroke-viridian" />
+                </Button>
+            </DialogTrigger>
+            <DialogContent aria-describedby={undefined}>
+                <DialogHeader>
+                    <DialogTitle>Editer l'utilisateur</DialogTitle>
+                </DialogHeader>
 
-    const errors = usePage().props.errors;
 
-    useEffect(() => {
-
-        if (Object.keys(errors).length)
-            setValidationError(form, errors);
-
-    }, [errors, form]);
-
-    return (
-        <div>
-            <div className="py-4">
-                <p>
-                    <span className="font-franklin-medium">Note:</span>Un mot de
-                    passe généré sera envoyer à l'email de l'utilisateur.
-                </p>
-            </div>
-
-            <Form {...form}>
+				<Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
                 <FormField
                     control={form.control}
@@ -148,15 +147,17 @@ function Create() {
                     </div>
                 </form>
             </Form>
-        </div>
-    );
+			</DialogContent>
+		</Dialog>
+	);
 
-    function onSubmit(formData: zod.infer<typeof userFormSchema>) {
-        router.post(
-            "/utilisateurs",
-            formData,
-        );
-    }
+	function onSubmit(formData: zod.infer<typeof userFormSchema>) {
+		
+		router.put(
+			`/utilisateurs/${user.id}`,
+			formData,
+		);
+	}
 }
 
-export default Create;
+export default EditUser

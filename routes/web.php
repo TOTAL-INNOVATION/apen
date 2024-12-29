@@ -5,6 +5,8 @@ use App\Http\Controllers\Panel\UserController;
 use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Support\Facades\Route;
 
+const EXCEPT_METHODS = ['create', 'show', 'edit'];
+
 Route::view('/', 'pages.home')->name('home');
 Route::view('qui-sommes-nous', 'pages.whoWeAre')->name('whoWeAre');
 Route::view('mot-de-la-secretaire-executive', 'pages.secretaryWords')->name('secretaryWords');
@@ -24,7 +26,7 @@ Route::middleware(['auth', 'verified', HandleInertiaRequests::class])->group(fun
 		return inertia()->render('home');
 	})->name('panel');
 	Route::resource('articles', ArticleController::class);
-	Route::resource('utilisateurs', UserController::class);
+	Route::resource('utilisateurs', UserController::class)->except(EXCEPT_METHODS);
 
 });
 

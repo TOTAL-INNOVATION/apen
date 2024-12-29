@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\RoleEnum;
 use App\Notifications\Auth\SendResetPasswordLink;
 use App\Notifications\Auth\SendVerificationEmail;
+use App\Traits\SearchFilter;
 use Illuminate\Contracts\Auth\{CanResetPassword, MustVerifyEmail};
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,8 +14,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasUlids;
+    use HasFactory, Notifiable, HasUlids, SearchFilter;
 
     public const DEFAULT_AVATAR = 'defaults/avatar.svg';
 
@@ -58,6 +58,7 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
     {
         return [
             'role' => RoleEnum::class,
+            'added_by_admin' => 'boolean',
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];

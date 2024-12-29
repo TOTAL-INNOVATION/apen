@@ -1,6 +1,6 @@
 <x-mail-layout>
 
-    <x-slot:title>{{ __('Confirmez votre inscription') }}</x-slot:title>
+    <x-slot:title>{{ __('Votre compte a été créé') }}</x-slot:title>
 
 
     <table class="body-wrap">
@@ -18,20 +18,26 @@
         <tr>
             <td></td>
             <td class="container" bgcolor="#FFFFFF">
-                
+
                 <!-- content -->
                 <div class="content">
                     <table>
                         <tr>
                             <td>
-                                <h1 class="text-center">{{ __('Confirmez votre inscription') }}</h1>
+                                <h1 class="text-center">{{ __('Votre compte a été créé') }}</h1>
                                 <p class="lead">{{ __('Bonjour :firstname!', ['firstname' => $firstname]) }}</p>
-                                <p class="lead">{{ __('Votre inscription sur la plateforme a été un succès. Pour poursuivre avec votre candidature, veuillez cliquer sur le bouton ci-dessous pour confirmer la création de votre compte.') }}</p>
-                                
+                                <p class="lead">
+                                    {{ __('Vous venez d\'être ajouté(e) par un administrateur. Vous trouverez ci-dessous votre mot de passe de connexion. Et surtout, n\'oubliez pas d\'activer votre compte en cliquant sur le bouton vert.') }}
+                                </p>
+                                <div class="my-4">
+                                    <p class="lead"><span>{{ __('Mot de passe:') }}</span>
+                                        <strong>{{ $password }}</strong></p>
+                                </div>
+
                                 <div class="my-6" style="display: flex; justify-content: center;">
                                     <a href="{{ $url }}" class="btn">{{ __('Activer mon compte') }}</a>
                                 </div>
-        
+
                             </td>
                         </tr>
                     </table>
@@ -40,7 +46,9 @@
                         <tr>
                             <td>
                                 <hr style="width: 100px; border-color: #8d8d8d;" class="mx-auto" />
-                                <p class="text-center" style="margin-top: 1.5rem; color: #8d8d8d;">{{ __('Si vous n\'êtes pas l\'auteur de cette inscription sur la plateforme, veuillez l\'ignorer. Le compte utilisant votre adresse email sera supprimé au bout de 3 jours.') }}</p>
+                                <p class="text-center" style="margin-top: 1.5rem; color: #8d8d8d;">
+                                    {{ __('Si vous oubliez d\'activer votre compte, elle sera supprimer au bout de 3 jours.') }}
+                                </p>
                             </td>
                         </tr>
                     </table>
