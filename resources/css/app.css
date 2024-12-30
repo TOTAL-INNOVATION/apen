@@ -107,6 +107,7 @@ body {
 	@apply transition-all;
 }
 
+
 @media (max-width: 475px) {
 	.auth-card {
 		@apply w-11/12;

@@ -113,12 +113,12 @@ function Create() {
                                     </FormItem>
                                 )}
                             />
-
-                            <div className="mb-2 sm:mb-4">
-                                <RichEditor label="Contenu de l'article" />
-                            </div>
                         </form>
                     </Form>
+                    
+                    <div className="mb-2 sm:mb-4">
+                        <RichEditor label="Contenu de l'article" />
+                    </div>
                 </div>
             </div>
         </div>
