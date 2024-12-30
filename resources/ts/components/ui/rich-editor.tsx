@@ -286,6 +286,7 @@ const Button = ({
     return (
         <BaseButton
             size="sm"
+            type="button"
             variant="outline"
             className={cn(
                 "h-8 px-2 inline-flex items-center text-base bg-transparent rounded-md hover:bg-whisper",

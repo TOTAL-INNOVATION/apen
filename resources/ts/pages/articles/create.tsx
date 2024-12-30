@@ -8,18 +8,36 @@ import {
     BreadcrumbSeparator,
 } from "~/components/ui/breadcrumb";
 import App from "~/layouts/app";
-import useForm from "~/components/ui/form";
 import RichEditor from "~/components/ui/rich-editor";
+import zod from "~/lib/zod";
+import zodFile from "~/lib/zod/custom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "~/components/ui/form";
+import { Input } from "~/components/ui/input";
+import ImageInput from "~/components/ui/image-input";
+
+const articleSchema = zod.object({
+    title: zod.string().min(5).max(50),
+    cover: zodFile(),
+    content: zod.string().min(5),
+});
 
 function Create() {
-    const { data, setData, Form, FormField } = useForm<{
-        title: string;
-        cover: File | null;
-        content: string;
-    }>({
-        title: "",
-        cover: null,
-        content: "",
+    const form = useForm<zod.infer<typeof articleSchema>>({
+        resolver: zodResolver(articleSchema),
+        defaultValues: {
+            title: "",
+            cover: undefined,
+            content: "",
+        },
     });
 
     return (
@@ -44,7 +62,9 @@ function Create() {
                         </BreadcrumbItem>
                         <BreadcrumbSeparator />
                         <BreadcrumbItem>
-                            <span className="font-franklin-medium">Ajouter</span>
+                            <span className="font-franklin-medium">
+                                Ajouter
+                            </span>
                         </BreadcrumbItem>
                     </BreadcrumbList>
                 </Breadcrumb>
@@ -59,30 +79,52 @@ function Create() {
                             <span>Tous les champs sont obligatoires</span>
                         </p>
                     </div>
-                    <Form asChild>
-                        <div>
+                    <Form {...form}>
+                        <form onSubmit={form.handleSubmit(onSubmit)}>
                             <FormField
-                                label="Titre"
+                                control={form.control}
                                 name="title"
-                                placeholder="Entrez le titre de l'article"
-                                required
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Titre</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                placeholder="Entrez le titre de l'article"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
                             />
 
                             <FormField
-                                label="Image de couverture"
+                                control={form.control}
                                 name="cover"
-                                elementType="image"
-                                required
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Image de couverture</FormLabel>
+                                        <FormControl>
+                                            <ImageInput
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
                             />
+
                             <div className="mb-2 sm:mb-4">
                                 <RichEditor label="Contenu de l'article" />
                             </div>
-                        </div>
+                        </form>
                     </Form>
                 </div>
             </div>
         </div>
     );
+
+    function onSubmit(formData: zod.infer<typeof articleSchema>) {}
 }
 
 //@ts-ignore
