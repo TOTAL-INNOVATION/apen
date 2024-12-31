@@ -133,7 +133,7 @@ function Create() {
                         <RichEditor
                             name="content"
                             label="Contenu de l'article"
-                            onChange={handleEditorChange}
+                            onChange={(v, _) => console.log(v)}
                         />
                     </div>
                 </div>
@@ -141,7 +141,7 @@ function Create() {
         </div>
     );
 
-    function handleEditorChange(value: Descendant[], editor: Editor) {
+    /* function handleEditorChange(value: Descendant[], editor: Editor) {
         const isAstChange = editor.operations.some(
             (op) => "set_selection" !== op.type
         );
@@ -150,7 +150,7 @@ function Create() {
             const content = JSON.stringify(value);
             localStorage.setItem("new-article", content);
         }
-    }
+    } */
 
     function onSubmit(formData: zod.infer<typeof articleSchema>) {}
 }

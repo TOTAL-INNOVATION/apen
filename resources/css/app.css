@@ -107,11 +107,6 @@ body {
 	@apply transition-all;
 }
 
-[data-slate-node="text"], [data-slate-leaf], [data-slate-zero-width] {
-	display: inline-block;
-	width: 100%;
-} 
-
 @media (max-width: 475px) {
 	.auth-card {
 		@apply w-11/12;
