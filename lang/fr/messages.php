@@ -21,5 +21,14 @@ return [
 			'failed' => 'L\'utilisateur que vous voulez rétirer n\'existe pas.',
 			'success' => 'L\'utilisateur a été rétiré avec succès.',
 		]
+	],
+
+	'article' => [
+		'image' => [
+			'storingFailed' => 'Il y\'a eu une erreur lors de l\'enrégistrement de l\'image.',
+			'stored' => 'L\'image a été sauvegardée avec succès.',
+			'deleteFailed' => 'Il y\'a eu une erreur lors de la suppression.',
+			'deleted' => 'L\'image a été supprimée avec succès.',
+		]
 	]
 ];

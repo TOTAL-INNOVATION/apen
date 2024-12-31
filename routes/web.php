@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Panel\Article\ImageController;
 use App\Http\Controllers\Panel\ArticleController;
 use App\Http\Controllers\Panel\UserController;
 use App\Http\Middleware\HandleInertiaRequests;
@@ -27,6 +28,11 @@ Route::middleware(['auth', 'verified', HandleInertiaRequests::class])->group(fun
 	})->name('panel');
 	Route::resource('articles', ArticleController::class);
 	Route::resource('utilisateurs', UserController::class)->except(EXCEPT_METHODS);
+
+	Route::prefix('article/images')->group(function() {
+		Route::post('upload', [ImageController::class, 'store']);
+		Route::post('delete', [ImageController::class, 'delete']);
+	});
 
 });
 

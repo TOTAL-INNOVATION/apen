@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Head, Link } from "@inertiajs/react";
 import {
     Breadcrumb,
@@ -23,6 +23,7 @@ import {
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import ImageInput from "~/components/ui/image-input";
+import { Descendant, Editor } from "slate";
 
 const articleSchema = zod.object({
     title: zod.string().min(5).max(50),
@@ -39,6 +40,18 @@ function Create() {
             content: "",
         },
     });
+
+    const [content, setContent] = useState([{ type: "paragraph", children: [{ text: "" }] }]);
+
+    useEffect(() => {
+        const existingArticle = localStorage.getItem("new-article");
+        if (existingArticle) {
+            form.setValue("content", existingArticle);
+            setContent(JSON.parse(existingArticle));
+            console.log(content);
+            
+        }
+    }, [form]);
 
     return (
         <div>
@@ -103,11 +116,11 @@ function Create() {
                                 name="cover"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Image de couverture</FormLabel>
+                                        <FormLabel>
+                                            Image de couverture
+                                        </FormLabel>
                                         <FormControl>
-                                            <ImageInput
-                                                {...field}
-                                            />
+                                            <ImageInput {...field} />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -115,14 +128,29 @@ function Create() {
                             />
                         </form>
                     </Form>
-                    
+
                     <div className="mb-2 sm:mb-4">
-                        <RichEditor label="Contenu de l'article" />
+                        <RichEditor
+                            name="content"
+                            label="Contenu de l'article"
+                            onChange={handleEditorChange}
+                        />
                     </div>
                 </div>
             </div>
         </div>
     );
+
+    function handleEditorChange(value: Descendant[], editor: Editor) {
+        const isAstChange = editor.operations.some(
+            (op) => "set_selection" !== op.type
+        );
+        if (isAstChange) {
+
+            const content = JSON.stringify(value);
+            localStorage.setItem("new-article", content);
+        }
+    }
 
     function onSubmit(formData: zod.infer<typeof articleSchema>) {}
 }

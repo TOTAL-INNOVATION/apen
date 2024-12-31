@@ -4,11 +4,12 @@ import {
     Descendant,
     Editor,
     Element as SlateElement,
+    Text,
     Transforms,
 } from "slate";
 import { Editable, ReactEditor, Slate, useSlate, withReact } from "slate-react";
 import { Button as BaseButton, ButtonProps } from "./button";
-import { cn, generateUuid } from "~/lib/utils";
+import { asset, cn, generateUuid } from "~/lib/utils";
 import { Label } from "./label";
 import {
     Bold,
@@ -17,6 +18,7 @@ import {
     List,
     ListOrdered,
     Quote,
+    Trash2,
     Underline,
 } from "lucide-react";
 import {
@@ -28,25 +30,25 @@ import {
 } from "./combobox";
 
 import isHotkey from "is-hotkey";
+import isUrl from "is-url";
+import imageExtensions from "image-extensions";
+import { toast } from "../toast";
+import axios, { AxiosError } from "axios";
+import { APP_URL } from "~/constants";
+import { SlateElementType } from "~/types";
 
 type RichEditorProps = {
     id?: string;
     label?: string;
+    name: string;
     value?: Descendant[];
+    onChange: ((value: Descendant[], editor: Editor) => void);
 };
 
 type RenderElementProps = {
     children: any;
     element: {
-        type:
-            | "paragraph"
-            | "block-quote"
-            | "bulleted-list"
-            | "heading-one"
-            | "heading-two"
-            | "heading-three"
-            | "list-item"
-            | "numbered-list";
+        type: SlateElementType;
         children: Descendant[];
     };
     attributes: {
@@ -72,6 +74,22 @@ type RenderLeafProps = {
     attributes: {
         "data-slate-leaf": true;
     };
+};
+
+type ImageElement = {
+    type: "image";
+    url: string;
+    children: Text[];
+};
+
+type AxiosFailedResponse = {
+    message?: string;
+    errors: Record<string, string[]>;
+};
+
+type UploadSucceedResponse = {
+    message: string;
+    path: string;
 };
 
 const HOTKEYS = {
@@ -168,13 +186,79 @@ const toggleBlock = (
     }
 };
 
+const ImageElement = ({
+    attributes,
+    children,
+    element,
+}: RenderElementProps & {
+    element: RenderElementProps["element"] & { url: string };
+}) => {
+    const editor = useSlate();
+    //@ts-ignore
+    const path = ReactEditor.findPath(editor, element);
+
+    return (
+        <div {...attributes}>
+            {children}
+            <div className="relative w-full aspect-video" contentEditable={false}>
+                <img className="w-full h-full object-cover" src={element.url} alt={element.url} />
+                <div className="absolute top-0 w-full h-full bg-black/50 flex items-center justify-center">
+                    <button
+                        type="button"
+                        onClick={handleDelete}
+                    >
+                        <Trash2 className="w-10 h-10 stroke-white" />
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+
+    async function handleDelete() {
+        const imagePath = element.url?.replace(`${APP_URL}/`, "");
+        try {
+            const formData = new FormData;
+            formData.append("path", imagePath);
+            const response = await axios.post<UploadSucceedResponse>(
+                `${APP_URL}/article/images/delete`,
+                {path: imagePath}
+            );
+
+            if (response.status === 200) {
+                Transforms.removeNodes(editor, { at: path });
+                toast({
+                    message: response.data.message
+                })
+            }
+        } catch (error) {
+            const response = (error as AxiosError<AxiosFailedResponse>).response;
+            if (!response) {
+                toast({
+                    type: "error",
+                    message:
+                        "Il y'a eu une erreur inconnu. Cela peut-être dû à une mauvaise connnexion.",
+                });
+                return;
+            }
+
+            const data = response.data as AxiosFailedResponse;
+            const message = data.message || data.errors["path"][0];
+            toast({
+                type: "error",
+                message,
+            });  
+        }
+        
+    }
+};
+
 const RenderElement = ({
     attributes,
     children,
     element,
 }: RenderElementProps) => {
     switch (element.type) {
-        case "block-quote":
+        case "quote":
             return <blockquote {...attributes}>{children}</blockquote>;
 
         case "heading-one":
@@ -206,6 +290,16 @@ const RenderElement = ({
         case "list-item":
             return <li {...attributes}>{children}</li>;
 
+        case "image":
+            return (
+                <ImageElement
+                    //@ts-ignore
+                    element={element}
+                    attributes={attributes}
+                    children={children}
+                />
+            );
+
         default:
             return <p {...attributes}>{children}</p>;
     }
@@ -234,6 +328,7 @@ function RichEditor({
     id = generateUuid(),
     label,
     value = [{ type: "paragraph", children: [{ text: "" }] }],
+    onChange
 }: RichEditorProps) {
     const renderElement = useCallback(
         (props: RenderElementProps) => <RenderElement {...props} />,
@@ -243,7 +338,7 @@ function RichEditor({
         (props: RenderLeafProps) => <RenderLeaf {...props} />,
         []
     );
-    const editor = withReact(createEditor());
+    const editor = withImages(withReact(createEditor()));
 
     return (
         <div>
@@ -253,7 +348,7 @@ function RichEditor({
                 </Label>
             )}
 
-            <Slate editor={editor} initialValue={value}>
+            <Slate editor={editor} initialValue={value} onChange={(value) => onChange(value, editor)}>
                 <Toolbar />
                 <Editable
                     id={id}
@@ -274,6 +369,61 @@ function RichEditor({
             </Slate>
         </div>
     );
+
+}
+
+const isImageUrl = (url: string) => {
+    if (!url) return false;
+    if (!isUrl(url)) return false;
+    const ext = new URL(url).pathname.split(".").pop();
+    return imageExtensions.includes(ext as string);
+};
+
+function withImages(editor: Editor): Editor {
+    const { insertData, isVoid } = editor;
+
+    editor.isVoid = (element) => {
+        //@ts-ignore
+        return element.type === "image" ? true : isVoid(element);
+    };
+
+    editor.insertData = (data) => {
+        const text = data.getData("text/plain");
+        const { files } = data;
+
+        if (files && files.length > 0) {
+            for (const file of files) {
+                const reader = new FileReader();
+                const [mime] = file.type.split("/");
+
+                if (mime === "image") {
+                    reader.addEventListener("load", () => {
+                        const url = reader.result;
+                        insertImage(editor, url as string);
+                    });
+
+                    reader.readAsDataURL(file);
+                }
+            }
+        } else if (isImageUrl(text)) {
+            insertImage(editor, text);
+        } else {
+            insertData(data);
+        }
+    };
+
+    return editor;
+}
+
+function insertImage(editor: Editor, url: string) {
+    const text = { text: "" };
+    const image: ImageElement = { type: "image", url, children: [text] };
+    //@ts-ignore
+    Transforms.insertNodes(editor, image as Node);
+    Transforms.insertNodes(editor, {
+        type: "paragraph",
+        children: [{ text: "" }],
+    });
 }
 
 const Button = ({
@@ -342,6 +492,71 @@ const BlockButton = ({
     );
 };
 
+const ImageButton = () => {
+    const id = generateUuid();
+    const editor = useSlate();
+
+    return (
+        <span>
+            <Button active={false}>
+                <Label htmlFor={id} className="mb-0">
+                    <Image className="w-4 h-4" />
+                </Label>
+            </Button>
+            <input
+                type="file"
+                id={id}
+                className="hidden"
+                accept=".png, .jpg, .jpeg, .webp"
+                onChange={handleImage}
+            />
+        </span>
+    );
+
+    async function handleImage(event: React.ChangeEvent<HTMLInputElement>) {
+        const files = event.target.files;
+        if (!files) return;
+
+        const formData = new FormData();
+        formData.append("image", files[0]);
+
+        try {
+            const response = await axios.post<UploadSucceedResponse>(
+                `${APP_URL}/article/images/upload`,
+                formData,
+            );
+
+            if (response.status === 200) {
+                const { path, message } = response.data;
+                insertImage(editor, asset(path));
+
+                toast({
+                    message: message,
+                });
+                return;
+            }
+        } catch (error) {
+            const response = (error as AxiosError<AxiosFailedResponse>)
+                .response;
+            if (!response) {
+                toast({
+                    type: "error",
+                    message:
+                        "Il y'a eu une erreur inconnu. Cela peut-être dû à une mauvaise connnexion.",
+                });
+                return;
+            }
+
+            const data = response.data as AxiosFailedResponse;
+            const message = data.message || data.errors["image"][0];
+            toast({
+                type: "error",
+                message,
+            });
+        }
+    }
+};
+
 function Toolbar() {
     const editor = useSlate();
     const comboxBoxValues: {
@@ -369,6 +584,7 @@ function Toolbar() {
                             <ComboBoxItem
                                 key={generateUuid()}
                                 onSelect={(value) => toggleBlock(editor, value)}
+                                active={isBlockActive(editor, props.value)}
                                 {...props}
                             />
                         ))}
@@ -384,7 +600,7 @@ function Toolbar() {
             <MarkButton format="underline">
                 <Underline className="w-4 h-4 stroke-[2.5]" />
             </MarkButton>
-            <BlockButton format="block-quote">
+            <BlockButton format="quote">
                 <Quote className="w-4 h-4 stroke-[2.5]" />
             </BlockButton>
             <BlockButton format="numbered-list">
@@ -393,9 +609,7 @@ function Toolbar() {
             <BlockButton format="bulleted-list">
                 <List className="w-4 h-4" />
             </BlockButton>
-            <Button active={false}>
-                <Image className="w-4 h-4" />
-            </Button>
+            <ImageButton />
         </div>
     );
 }

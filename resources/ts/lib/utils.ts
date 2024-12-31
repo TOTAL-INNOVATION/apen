@@ -3,6 +3,7 @@ import { twMerge } from "tailwind-merge"
 import Str from "./strings";
 import { router } from "@inertiajs/react";
 import PressHandler from "./pressHandler";
+import { APP_URL } from "~/constants";
 
 export const DEFAULT_ROUTER_STATE = {
   preserveState: true,
@@ -34,7 +35,7 @@ export const debounce = (fn: Function, delay = 500) => {
  * equivalent of the `asset` helper in Laravel
  */
 //@ts-ignore
-export const asset = (assetUrl: string): string => `${import.meta.env.VITE_APP_URL}/${assetUrl}`;
+export const asset = (assetUrl: string): string => `${APP_URL}/${assetUrl}`;
 
 /**
  * Toogle form open state
