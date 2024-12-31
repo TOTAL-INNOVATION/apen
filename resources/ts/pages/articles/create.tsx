@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Head, Link } from "@inertiajs/react";
 import {
     Breadcrumb,
@@ -8,7 +8,6 @@ import {
     BreadcrumbSeparator,
 } from "~/components/ui/breadcrumb";
 import App from "~/layouts/app";
-import RichEditor from "~/components/ui/rich-editor";
 import zod from "~/lib/zod";
 import zodFile from "~/lib/zod/custom";
 import { useForm } from "react-hook-form";
@@ -23,7 +22,7 @@ import {
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import ImageInput from "~/components/ui/image-input";
-import { Descendant, Editor } from "slate";
+import RichEditor from "~/components/rich-editor";
 
 const articleSchema = zod.object({
     title: zod.string().min(5).max(50),
@@ -40,18 +39,6 @@ function Create() {
             content: "",
         },
     });
-
-    const [content, setContent] = useState([{ type: "paragraph", children: [{ text: "" }] }]);
-
-    useEffect(() => {
-        const existingArticle = localStorage.getItem("new-article");
-        if (existingArticle) {
-            form.setValue("content", existingArticle);
-            setContent(JSON.parse(existingArticle));
-            console.log(content);
-            
-        }
-    }, [form]);
 
     return (
         <div>
@@ -130,27 +117,12 @@ function Create() {
                     </Form>
 
                     <div className="mb-2 sm:mb-4">
-                        <RichEditor
-                            name="content"
-                            label="Contenu de l'article"
-                            onChange={(v, _) => console.log(v)}
-                        />
+                        <RichEditor />
                     </div>
                 </div>
             </div>
         </div>
     );
-
-    /* function handleEditorChange(value: Descendant[], editor: Editor) {
-        const isAstChange = editor.operations.some(
-            (op) => "set_selection" !== op.type
-        );
-        if (isAstChange) {
-
-            const content = JSON.stringify(value);
-            localStorage.setItem("new-article", content);
-        }
-    } */
 
     function onSubmit(formData: zod.infer<typeof articleSchema>) {}
 }
