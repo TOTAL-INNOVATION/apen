@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\SearchFilter;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Article extends Model
 {
@@ -28,5 +29,28 @@ class Article extends Model
         return [
             'published_at' => 'datetime',
         ];
+    }
+
+    public function loadContent(): void
+    {
+        $this->content = Storage::disk('public')->get(
+            $this->content_path,
+        );
+    }
+
+    protected static function booted(): void
+    {
+        static::deleted(function(Article $article) {
+
+            Storage::disk('public')->delete(
+                str($article->cover)->replace(
+                    'storage/', ''
+                )
+            );
+
+            Storage::disk('public')->delete(
+                $article->content_path,
+            );
+        });
     }
 }

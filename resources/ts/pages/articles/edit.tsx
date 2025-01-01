@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Head, Link, router, usePage } from "@inertiajs/react";
 import {
     Breadcrumb,
@@ -9,7 +9,6 @@ import {
 } from "~/components/ui/breadcrumb";
 import App from "~/layouts/app";
 import zod from "~/lib/zod";
-import zodFile from "~/lib/zod/custom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -25,45 +24,51 @@ import ImageInput from "~/components/ui/image-input";
 import RichEditor from "~/components/rich-editor";
 import { Button } from "~/components/ui/button";
 import { setValidationError } from "~/lib/form";
-import { Label } from "~/components/ui/label";
-import { Switch } from "~/components/ui/switch";
+import { Article, FlashMessage } from "~/types";
 import { toast } from "~/components/toast";
-import { FlashMessage } from "~/types";
+import zodFile from "~/lib/zod/custom";
 
 const schema = zod.object({
-    title: zod.string().min(5).max(50),
-    published_at: zod.coerce.date().or(zod.string()).optional(),
-    cover: zodFile(),
-    content: zod.string().min(5),
+	title: zod.string().min(5).max(50),
+	published_at: zod.coerce.date().or(zod.string()).optional(),
+	cover: zodFile().nullable(),
+	content: zod.string().min(5),
 });
 
-function Create() {
+type PageProps = {
+	article: {data: Article};
+	flash: FlashMessage|null
+}
+
+function Edit() {
+
+	const props = usePage<PageProps>().props;
+	const { errors, flash } = props;
+	const article = props.article.data;
+	
     const form = useForm<zod.infer<typeof schema>>({
         resolver: zodResolver(schema),
         defaultValues: {
-            title: "",
-            published_at: "",
-            cover: undefined,
-            content: "",
+            title: article.title,
+            published_at: new Date(article.published_at),
+            cover: null,
+            content: article.content as string,
         },
     });
 
-    const [publishedAtStatus, setPublishedAtStatus] = useState(false);
-    const {errors, flash} = usePage<{flash: FlashMessage|null}>().props;
+	useEffect(() => {
+		if (flash) {
+			toast(flash);
+		}
+		if (Object.keys(errors).length)
+			setValidationError(form, errors);
 
-    useEffect(() => {
-        if (flash) {
-            toast(flash);
-        }
-        if (Object.keys(errors).length)
-            setValidationError(form, errors);
-
-    }, [errors, form, flash]);
+	}, [errors, form, flash]);
 
     return (
         <div>
             <Head>
-                <title>Nouvel article</title>
+                <title>Editer l'article</title>
             </Head>
 
             <div>
@@ -83,7 +88,7 @@ function Create() {
                         <BreadcrumbSeparator />
                         <BreadcrumbItem>
                             <span className="font-franklin-medium">
-                                Ajouter
+                                Editer
                             </span>
                         </BreadcrumbItem>
                     </BreadcrumbList>
@@ -91,7 +96,7 @@ function Create() {
             </div>
 
             <div className="mt-4 md:mt-6 lg:mt-8 article-container">
-                <h2 className="heading-2 uppercase">Nouvel article</h2>
+                <h2 className="heading-2 uppercase">Editer l'article</h2>
                 <div className="mt-4 md:mt-6 lg:mt-8">
                     <div className="mb-4">
                         <p>
@@ -121,28 +126,11 @@ function Create() {
                             <FormField
                                 name="published_at"
                                 render={({ field }) => (
-                                    <FormItem className="space-y-4 sm:space-y-0 sm:flex sm:items-center sm:justify-between">
-                                        <div className="flex items-center gap-x-2">
-                                            <Switch
-                                                id="published_at_status"
-                                                onCheckedChange={
-                                                    setPublishedAtStatus
-                                                }
-                                                checked={publishedAtStatus}
-                                            />
-                                            <Label
-                                                className="mb-0"
-                                                htmlFor="published_at_status"
-                                            >
-                                                Définir la date de publication
-                                            </Label>
-                                        </div>
+                                    <FormItem>
                                         <FormControl>
                                             <Input
                                                 type="date"
-                                                className="w-full sm:w-[300px]"
                                                 {...field}
-                                                disabled={!publishedAtStatus}
                                                 value={
                                                     field.value instanceof Date
                                                         ? field.value
@@ -162,7 +150,7 @@ function Create() {
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>
-                                            Image de couverture
+                                            Image de couverture(Optionelle)
                                         </FormLabel>
                                         <FormControl>
                                             <ImageInput {...field} />
@@ -206,11 +194,11 @@ function Create() {
     );
 
     function onSubmit(formData: zod.infer<typeof schema>) {
-        router.post("/articles", formData);
+        console.log(formData);	
     }
 }
 
 //@ts-ignore
-Create.layout = (page) => <App children={page} />;
+Edit.layout = (page) => <App children={page} />;
 
-export default Create;
+export default Edit;

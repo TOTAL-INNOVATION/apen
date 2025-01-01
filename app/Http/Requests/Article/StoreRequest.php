@@ -13,7 +13,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->role !== RoleEnum::EXPERT;
+        return true;
     }
 
     /**
@@ -25,6 +25,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'title' => 'bail|required|string|unique:articles,title|min:5|max:255',
+            'published_at' => 'bail|nullable|date',
             'cover' => [
                 'bail',
                 'required',

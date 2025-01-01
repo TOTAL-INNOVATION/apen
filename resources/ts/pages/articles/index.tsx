@@ -10,24 +10,27 @@ import {
 import { Button } from "~/components/ui/button";
 import { DataTable } from "~/components/ui/datatable";
 import App from "~/layouts/app";
-import { PaginationData, Article } from "~/types";
+import { PaginationData, Article, FlashMessage } from "~/types";
 import { Head, Link, usePage } from "@inertiajs/react";
 import { Newspaper } from "lucide-react";
 import React, { useEffect } from "react";
 
+type PageProps = {
+    articles: PaginationData<Article>;
+    flash: FlashMessage|null;
+};
+
 function Index() {
 
-	const tableData = usePage().props.articles as PaginationData<Article>;
-    const successMessage = usePage().props.success as null | string;
-    const { data, meta } = tableData;
-
+    const pageProps = usePage<PageProps>();
+    const { articles, flash } = pageProps.props;
+    const { data, meta } = articles;
+    
     useEffect(() => {
-        if (successMessage) {
-            toast({
-                message: successMessage,
-            });
+        if (flash) {
+            toast(flash);
         }
-    }, [successMessage]);
+    }, [flash]);
 
     return (
 		<div>
@@ -45,7 +48,7 @@ function Index() {
                         </BreadcrumbItem>
                         <BreadcrumbSeparator />
                         <BreadcrumbItem>
-                            <strong>Articles</strong>
+                            <span className="font-franklin-medium">Articles</span>
                         </BreadcrumbItem>
                     </BreadcrumbList>
                 </Breadcrumb>

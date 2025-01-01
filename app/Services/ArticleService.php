@@ -47,19 +47,51 @@ class ArticleService extends BaseFilterService
 		
 		return $article;
 	}
-	
 
 	protected function saveMarkdown(string $content, ?string $filename = null): string
 	{
 		if (!$filename)
-			$filename = Random::generate(16) . '.md';
+			$filename = $this->generateMarkdownFilename();
 		
 		Storage::disk('public')->put(
 			$filename,
 			$content
 		);
 
-		return "storage/articles/$filename";
+		return $filename;
+	}
+
+	public function delete(string $id): bool
+	{
+		$article = $this->find($id);
+		if (!$article)
+			return false;
+		
+		return $article->delete();
+	}
+
+	public function find(string $id): ?Article
+	{
+		return Article::find($id);
+	}
+
+	/**
+	 * Generate article markdown file name
+	 * @return string
+	 */
+	public function generateMarkdownFilename(): string
+	{
+		$filename = $this->generateRandomFilename();
+		while(Storage::disk('public')->exists($filename))
+			$filename = $this->generateRandomFilename();
+
+		return $filename;
+	}
+
+	public function generateRandomFilename(): string
+	{
+		$id = Random::generate(16);
+		return "articles/$id.md";
 	}
 
 }

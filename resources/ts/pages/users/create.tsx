@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Role } from "~/types";
+import { FlashMessage, Role } from "~/types";
 import {
     Select,
     SelectContent,
@@ -22,6 +22,7 @@ import {
 import { Input } from "~/components/ui/input";
 import { router, usePage } from "@inertiajs/react";
 import { setValidationError } from "~/lib/form";
+import { toast } from "~/components/toast";
 
 export const userFormSchema = zod.object({
     firstname: zod.string().min(2).max(50),
@@ -42,14 +43,16 @@ function Create() {
         },
     });
 
-    const errors = usePage().props.errors;
+    const {errors, flash} = usePage<{flash: FlashMessage|null}>().props;
 
     useEffect(() => {
-
+        if (flash) {
+            toast(flash);
+        }
         if (Object.keys(errors).length)
             setValidationError(form, errors);
 
-    }, [errors, form]);
+    }, [errors, form, flash]);
 
     return (
         <div>

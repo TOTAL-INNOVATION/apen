@@ -17,15 +17,15 @@ const DeleteArticle = ({ article }: { article: Article }) => {
         <Dialog>
             <DialogTrigger asChild>
                 <Button size="sm" variant="outline" className="rounded-full">
-                    <Trash2 className="w-[18px] h-[18px] stroke-danger" />
+                    <Trash2 className="w-[18px] h-[18px] stroke-error" />
                 </Button>
             </DialogTrigger>
             <DialogContent aria-describedby={undefined}>
                 <DialogHeader>
                     <DialogTitle>Supprimer l'article</DialogTitle>
                 </DialogHeader>
-                <div className="my-4 mx-auto p-4 border-2 border-danger rounded-full">
-                    <Trash2 className="w-8 h-8 stroke-danger" />
+                <div className="my-4 mx-auto p-4 border-2 border-error rounded-full">
+                    <Trash2 className="w-8 h-8 stroke-error" />
                 </div>
                 <div className="dark:text-info">
                     Vous êtes sur le point de supprimer l'article titré <strong>{article.title}</strong>. Après cette action, cet article ne sera plus disponible. Voudrez-vous poursuivre?

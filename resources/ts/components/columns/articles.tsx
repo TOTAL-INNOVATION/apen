@@ -10,6 +10,11 @@ const articlesColumns: Column<Article>[] = [
     {
         name: "title",
         label: "Titre",
+        format(row) {
+            return <div className="max-w-[200px] text-wrap">
+                {row.title}
+            </div>
+        },
     },
     {
         name: "published_at",
@@ -47,7 +52,7 @@ const articlesColumns: Column<Article>[] = [
                         className="rounded-full"
                         asChild
                     >
-                        <Link href={`/products/${row.id}/edit`}>
+                        <Link href={`/articles/${row.id}/edit`}>
                             <Pen className="w-4 h-4" />
                         </Link>
                     </Button>

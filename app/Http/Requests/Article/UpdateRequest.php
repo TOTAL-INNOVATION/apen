@@ -13,7 +13,7 @@ class UpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->role !== RoleEnum::EXPERT;
+        return true;
     }
 
     /**
@@ -25,9 +25,10 @@ class UpdateRequest extends FormRequest
     {
         return [
             'title' => 'bail|required|string|unique:articles,title|min:5|max:255',
+            'published_at' => 'bail|required|date',
             'cover' => [
                 'bail',
-                'required',
+                'nullable',
                 File::image()
                 ->extensions(['png', 'jpg', 'jpeg', 'webp'])
                 ->max(3072)

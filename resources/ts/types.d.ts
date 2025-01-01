@@ -69,7 +69,7 @@ export type Article = {
     slug: string;
     title: string;
     cover: string;
-    content_path: string;
+    content: ?string;
     published_at: string;
     created_at: string;
     updated_at: string;

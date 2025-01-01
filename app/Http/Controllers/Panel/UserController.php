@@ -58,7 +58,7 @@ class UserController extends Controller
                 'flash',
                 [
                     'type' => FlashEnum::SUCCESS,
-                    'message' => __('messages.users.create.succeed'),
+                    'message' => __('messages.users.create.succeeded'),
                 ]
             );
     }
@@ -91,7 +91,7 @@ class UserController extends Controller
             'flash',
             [
                 'type' => FlashEnum::SUCCESS,
-                'message' => __('messages.users.update.success'),
+                'message' => __('messages.users.update.succeeded'),
             ]
         );
 
@@ -129,7 +129,7 @@ class UserController extends Controller
 
     /**
      * Check if authenticated user is allowed to perform update/delete action
-     * on specified user
+     * on specified user mainly an admin.
      * @param \App\Models\User $user
      * @return bool
      */

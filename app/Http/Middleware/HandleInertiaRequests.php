@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\RoleEnum;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -40,5 +41,13 @@ class HandleInertiaRequests extends Middleware
             'user' => new UserResource($request->user()),
             'flash' => $request->session()->get('flash'),
         ]);
+    }
+
+    public function handle(Request $request, \Closure $next)
+    {
+        if (!$request->user()->role === RoleEnum::EXPERT)
+            abort(403);
+
+        return parent::handle($request, $next);
     }
 }
