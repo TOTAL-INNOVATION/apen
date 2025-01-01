@@ -22,7 +22,6 @@ function ImageInput({
     onChange,
     className,
     id,
-    ...props
 }: ImageInputProps) {
     const [preview, setPreview] = React.useState<string | null>(null);
 

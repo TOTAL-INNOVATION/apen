@@ -1,5 +1,5 @@
-import React from "react";
-import { Head, Link } from "@inertiajs/react";
+import React, { useEffect } from "react";
+import { Head, Link, router, usePage } from "@inertiajs/react";
 import {
     Breadcrumb,
     BreadcrumbList,
@@ -23,6 +23,8 @@ import {
 import { Input } from "~/components/ui/input";
 import ImageInput from "~/components/ui/image-input";
 import RichEditor from "~/components/rich-editor";
+import { Button } from "~/components/ui/button";
+import { setValidationError } from "~/lib/form";
 
 const articleSchema = zod.object({
     title: zod.string().min(5).max(50),
@@ -39,6 +41,15 @@ function Create() {
             content: "",
         },
     });
+
+    const errors = usePage().props.errors;
+
+    useEffect(() => {
+
+        if (Object.keys(errors).length)
+            setValidationError(form, errors);
+
+    }, [errors, form]);
 
     return (
         <div>
@@ -113,18 +124,38 @@ function Create() {
                                     </FormItem>
                                 )}
                             />
+
+                            <FormField
+                                name="content"
+                                render={(({field}) => (
+                                    <FormItem>
+                                        <FormLabel>
+                                            Contenu de l'article
+                                        </FormLabel>
+                                        <FormControl>
+                                            <RichEditor {...field} placeholder="Contenu de votre article" />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                ))}
+                            />
+
+                            <div className="mt-6 md:mt-8 text-center">
+                                <Button type="submit" className="w-full font-franklin-medium">Enrégistrer</Button>
+                            </div>
                         </form>
                     </Form>
-
-                    <div className="mb-2 sm:mb-4">
-                        <RichEditor />
-                    </div>
                 </div>
             </div>
         </div>
     );
 
-    function onSubmit(formData: zod.infer<typeof articleSchema>) {}
+    function onSubmit(formData: zod.infer<typeof articleSchema>) {
+        router.post(
+            "/articles",
+            formData,
+        );
+    }
 }
 
 //@ts-ignore

@@ -4,17 +4,16 @@ declare (strict_types = 1);
 
 namespace App\Actions;
 
-use App\Http\Requests\Article\Image\StoreRequest;
+use Illuminate\Http\UploadedFile;
 
 class StoreArticleImage
 {
-    public function handle(StoreRequest $request): string | null
+    public function handle(UploadedFile $file): string | null
     {
-        $path = $request->file('image')
-            ->store(
-                'articles',
-                ['disk' => 'public']
-            );
+        $path = $file->store(
+            'articles/images',
+            ['disk' => 'public']
+        );
 
         return $path ? "storage/$path" : null;
     }

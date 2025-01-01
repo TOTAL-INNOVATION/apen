@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Panel\Article;
+namespace App\Http\Controllers\Panel;
 
 use App\Actions\StoreArticleImage;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Article\Image\{StoreRequest};
 use App\Http\Requests\Article\Image\DeleteRequest;
+use App\Http\Requests\Article\Image\StoreRequest;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
@@ -17,7 +16,9 @@ class ImageController extends Controller
      */
     public function store(StoreRequest $request): JsonResponse
     {
-        $path = app(StoreArticleImage::class)->handle($request);
+        $path = app(StoreArticleImage::class)->handle(
+            $request->file('image')
+        );
 
         if (!$path) {
             return response()->json(

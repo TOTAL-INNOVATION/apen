@@ -12,7 +12,7 @@ export default function zodFile(
     typeMessage?: string
 ): zod.ZodType<File, zod.ZodTypeDef, File> {
     const sizeInMB = maxSize / (1024 * 1024);
-    const validation = zod.instanceof(File);
+    const validation = zod.instanceof(File, {message: "Ce champ ne prend qu'un fichier."});
 
     if (isOptional) validation.optional();
     validation
