@@ -41,7 +41,7 @@ class ArticleService extends BaseFilterService
 
 		$article->cover = $coverPath;
 		$article->content_path = $this->saveMarkdown(
-			content:  $request->input('content'),
+			$request->input('content'),
 		);
 		$article->save();
 		
@@ -49,7 +49,7 @@ class ArticleService extends BaseFilterService
 	}
 	
 
-	protected function saveMarkdown(?string $filename = null, string $content): string
+	protected function saveMarkdown(string $content, ?string $filename = null): string
 	{
 		if (!$filename)
 			$filename = Random::generate(16) . '.md';

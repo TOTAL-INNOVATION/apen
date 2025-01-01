@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Head, Link, router, usePage } from "@inertiajs/react";
 import {
     Breadcrumb,
@@ -25,9 +25,12 @@ import ImageInput from "~/components/ui/image-input";
 import RichEditor from "~/components/rich-editor";
 import { Button } from "~/components/ui/button";
 import { setValidationError } from "~/lib/form";
+import { Label } from "~/components/ui/label";
+import { Switch } from "~/components/ui/switch";
 
 const articleSchema = zod.object({
     title: zod.string().min(5).max(50),
+    published_at: zod.coerce.date().or(zod.string()).optional(),
     cover: zodFile(),
     content: zod.string().min(5),
 });
@@ -37,18 +40,17 @@ function Create() {
         resolver: zodResolver(articleSchema),
         defaultValues: {
             title: "",
+            published_at: "",
             cover: undefined,
             content: "",
         },
     });
 
     const errors = usePage().props.errors;
+    const [publishedAtStatus, setPublishedAtStatus] = useState(false);
 
     useEffect(() => {
-
-        if (Object.keys(errors).length)
-            setValidationError(form, errors);
-
+        if (Object.keys(errors).length) setValidationError(form, errors);
     }, [errors, form]);
 
     return (
@@ -110,6 +112,44 @@ function Create() {
                             />
 
                             <FormField
+                                name="published_at"
+                                render={({ field }) => (
+                                    <FormItem className="space-y-4 sm:space-y-0 sm:flex sm:items-center sm:justify-between">
+                                        <div className="flex items-center gap-x-2">
+                                            <Switch
+                                                id="published_at_status"
+                                                onCheckedChange={
+                                                    setPublishedAtStatus
+                                                }
+                                                checked={publishedAtStatus}
+                                            />
+                                            <Label
+                                                className="mb-0"
+                                                htmlFor="published_at_status"
+                                            >
+                                                Définir la date de publication
+                                            </Label>
+                                        </div>
+                                        <FormControl>
+                                            <Input
+                                                type="date"
+                                                className="w-full sm:w-[300px]"
+                                                {...field}
+                                                disabled={!publishedAtStatus}
+                                                value={
+                                                    field.value instanceof Date
+                                                        ? field.value
+                                                              .toISOString()
+                                                              .split("T")[0]
+                                                        : field.value
+                                                }
+                                            />
+                                        </FormControl>
+                                    </FormItem>
+                                )}
+                            />
+
+                            <FormField
                                 control={form.control}
                                 name="cover"
                                 render={({ field }) => (
@@ -127,21 +167,29 @@ function Create() {
 
                             <FormField
                                 name="content"
-                                render={(({field}) => (
+                                render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>
                                             Contenu de l'article
                                         </FormLabel>
                                         <FormControl>
-                                            <RichEditor {...field} placeholder="Contenu de votre article" />
+                                            <RichEditor
+                                                {...field}
+                                                placeholder="Contenu de votre article"
+                                            />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
-                                ))}
+                                )}
                             />
 
                             <div className="mt-6 md:mt-8 text-center">
-                                <Button type="submit" className="w-full font-franklin-medium">Enrégistrer</Button>
+                                <Button
+                                    type="submit"
+                                    className="w-full font-franklin-medium"
+                                >
+                                    Enrégistrer
+                                </Button>
                             </div>
                         </form>
                     </Form>
@@ -151,10 +199,7 @@ function Create() {
     );
 
     function onSubmit(formData: zod.infer<typeof articleSchema>) {
-        router.post(
-            "/articles",
-            formData,
-        );
+        router.post("/articles", formData);
     }
 }
 
