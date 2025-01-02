@@ -18,4 +18,22 @@ class NewzController extends Controller
             compact('articles'),
         );
     }
+
+    public function show(string $slug): View
+    {
+        /**
+         * @var Article
+         */
+        $article = Article::select(
+            ['title', 'cover', 'content_path', 'published_at']
+        )->where('slug', $slug)
+        ->first();
+
+        if (!$article)
+            abort(403);
+
+        $article->loadContent();
+
+        return view('pages.news.show', compact('article'));
+    }
 }

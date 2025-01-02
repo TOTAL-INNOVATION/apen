@@ -11,16 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('articles', function (Blueprint $table) {
+        Schema::create('decrees', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->string('slug')->index();
-            $table->string('title');
-            $table->string('cover');
-            $table->string('content_path');
-            $table->date('published_at');
+            $table->string('name')->unique();
+            $table->string('doc_path');
             $table->timestamps();
-
-            $table->unique(['slug', 'title']);
         });
     }
 
@@ -29,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('articles');
+        Schema::dropIfExists('decrees');
     }
 };

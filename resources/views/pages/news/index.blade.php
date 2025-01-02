@@ -28,7 +28,7 @@
 					<x-news-card
 						title="{{ $article->title }}"
 						coverSrc="{{ asset($article->cover) }}"
-						url="#"
+						url="{{ route('news.show', $article->slug) }}"
 						published_at="{{ $article->published_at }}"
 					/>
 				@empty

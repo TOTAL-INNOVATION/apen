@@ -15,7 +15,7 @@
 
     </x-card.body>
     <x-card.footer class="border border-whisper border-t-0">
-        <a href="#" class="inline-flex items-end arrow-move-trigger">
+        <a href="{{ $url }}" class="inline-flex items-end arrow-move-trigger">
             <span class=" font-franklin-medium">{{ __('Lire l\'article') }}</span>
             <x-lucide-arrow-right class="w-6 ml-1 transition-all md:arrow-move-effect" />
         </a>

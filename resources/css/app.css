@@ -123,19 +123,19 @@ body {
 	@apply md:min-h-[400px];
 }
 
-.mdxeditor-root-contenteditable h1 {
+.mdxeditor-root-contenteditable, .article h1 {
 	@apply heading-1;
 }
 
-.mdxeditor-root-contenteditable h2 {
+.mdxeditor-root-contenteditable, .article h2 {
 	@apply heading-2;
 }
 
-.mdxeditor-root-contenteditable h3 {
+.mdxeditor-root-contenteditable, .article h3 {
 	@apply heading-3;
 }
 
-.mdxeditor-root-contenteditable blockquote {
+.mdxeditor-root-contenteditable, .article blockquote {
 	@apply pl-2;
 	@apply border-l-[3px];
 	@apply border-whisper;
@@ -144,16 +144,16 @@ body {
 	@apply italic;
 }
 
+.mdxeditor-root-contenteditable [data-editor-block-type], .article img {
+	@apply w-full;
+	@apply object-cover;
+	@apply object-center;
+}
+
 .mdxeditor-root-contenteditable [data-editor-block-type] {
 	@apply w-full;
 	@apply aspect-video;
 	@apply overflow-y-hidden;
-}
-
-.mdxeditor-root-contenteditable [data-editor-block-type] img {
-	@apply w-full;
-	@apply object-cover;
-	@apply object-center;
 }
 
 @media (max-width: 475px) {

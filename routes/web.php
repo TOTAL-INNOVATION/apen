@@ -3,6 +3,7 @@
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NewzController;
 use App\Http\Controllers\Panel\ArticleController;
+use App\Http\Controllers\Panel\DecreeController;
 use App\Http\Controllers\Panel\ImageController;
 use App\Http\Controllers\Panel\UserController;
 use App\Http\Middleware\HandleInertiaRequests;
@@ -15,6 +16,7 @@ Route::view('qui-sommes-nous', 'pages.whoWeAre')->name('whoWeAre');
 Route::view('mot-de-la-secretaire-executive', 'pages.secretaryWords')->name('secretaryWords');
 Route::view('textes-reglementaires', 'pages.decrees')->name('decrees');
 Route::get('actualites', [NewzController::class, 'index'])->name('news.index');
+Route::get('actualites/{slug}', [NewzController::class, 'show'])->name('news.show');
 Route::view('nous-contacter', 'pages.contact')->name('contacts');
 Route::post('envoyer-le-message', ContactController::class)->name('contacts.send');
 Route::prefix('devenir-expert')->group(function () {
@@ -36,6 +38,9 @@ Route::middleware(['auth', 'verified', HandleInertiaRequests::class])->group(fun
         Route::post('upload', [ImageController::class, 'store']);
         Route::post('delete', [ImageController::class, 'delete']);
     });
+
+
+    Route::resource('decrets', DecreeController::class)->except(EXCEPT_METHODS);
 
 });
 

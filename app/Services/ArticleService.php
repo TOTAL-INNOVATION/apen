@@ -81,7 +81,7 @@ class ArticleService extends BaseFilterService
 		if (!$article)
 			return false;
 		
-		return $article->delete();
+		return (bool)$article->delete();
 	}
 
 	protected function saveMarkdown(string $content, ?string $filename = null): string
