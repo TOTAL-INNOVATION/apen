@@ -74,3 +74,9 @@ export type Article = {
     created_at: string;
     updated_at: string;
 };
+
+export type Decree = {
+    id: string;
+    name: string;
+    doc_path: string;
+}

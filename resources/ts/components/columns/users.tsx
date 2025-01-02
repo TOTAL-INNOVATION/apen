@@ -46,8 +46,8 @@ const userColumns: Column<User>[] = [
 		format(row) {
 			return (
 				<div className="flex items-center space-x-4">
-					<DeleteUser user={row} />
 					<EditUser user={row} />
+					<DeleteUser user={row} />
 				</div>
 			);
 		},

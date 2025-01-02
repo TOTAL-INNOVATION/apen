@@ -4,7 +4,7 @@ import { useDropzone, Accept } from "react-dropzone";
 import { cn } from "~/lib/utils";
 import { Image, Upload } from "lucide-react";
 
-interface ImageInputProps
+export interface ImageInputProps
     extends Omit<React.HTMLAttributes<HTMLInputElement>, "type"> {
     name: string;
     authorizedTypes?: Accept;

@@ -123,19 +123,19 @@ body {
 	@apply md:min-h-[400px];
 }
 
-.mdxeditor-root-contenteditable, .article h1 {
+.mdxeditor-root-contenteditable h2, .article h1 {
 	@apply heading-1;
 }
 
-.mdxeditor-root-contenteditable, .article h2 {
+.mdxeditor-root-contenteditable h2, .article h2 {
 	@apply heading-2;
 }
 
-.mdxeditor-root-contenteditable, .article h3 {
+.mdxeditor-root-contenteditable h3, .article h3 {
 	@apply heading-3;
 }
 
-.mdxeditor-root-contenteditable, .article blockquote {
+.mdxeditor-root-contenteditable blockquote, .article blockquote {
 	@apply pl-2;
 	@apply border-l-[3px];
 	@apply border-whisper;
@@ -144,7 +144,7 @@ body {
 	@apply italic;
 }
 
-.mdxeditor-root-contenteditable [data-editor-block-type], .article img {
+.mdxeditor-root-contenteditable [data-editor-block-type] img, .article img {
 	@apply w-full;
 	@apply object-cover;
 	@apply object-center;
