@@ -8,6 +8,12 @@ return [
 		'resend' => 'Un nouveau mail de vérification vous a été envoyé.',
 		'verified' => 'Votre compte a été activé, veuillez vous connecter.',
 	],
+
+	'contact' => [
+		'failed' => 'Votre message n\'a pas pu être envoyé. Veuillez reessayer.',
+		'succeeded' => 'Votre message a été pris en compte. Nous vous repondrons bientôt avec un mail en réponse.',
+	],
+
 	'users' => [
 		'create' => [
 			'failed' => 'La création du compte a échoué. Veuillez reessayer.',

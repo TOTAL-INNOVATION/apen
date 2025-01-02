@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\NewzController;
 use App\Http\Controllers\Panel\ArticleController;
 use App\Http\Controllers\Panel\ImageController;
 use App\Http\Controllers\Panel\UserController;
@@ -12,8 +14,9 @@ Route::view('/', 'pages.home')->name('home');
 Route::view('qui-sommes-nous', 'pages.whoWeAre')->name('whoWeAre');
 Route::view('mot-de-la-secretaire-executive', 'pages.secretaryWords')->name('secretaryWords');
 Route::view('textes-reglementaires', 'pages.decrees')->name('decrees');
-Route::view('toutes-les-actualites', 'pages.news')->name('news');
+Route::get('actualites', [NewzController::class, 'index'])->name('news.index');
 Route::view('nous-contacter', 'pages.contact')->name('contacts');
+Route::post('envoyer-le-message', ContactController::class)->name('contacts.send');
 Route::prefix('devenir-expert')->group(function () {
     Route::view('/', 'pages.becomeExpert.index')->name('becomeExpert.index');
     Route::view('conditions', 'pages.becomeExpert.conditions')->name('becomeExpert.conditions');

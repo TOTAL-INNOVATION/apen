@@ -41,7 +41,7 @@
                         </x-dropdown.trigger>
                         
                         <x-dropdown.content class="p-0 w-44">
-                            <div class="mb-1 py-2 sm:px-3 w-full border-b border-whisper">
+                            <div class="mb-1 py-2 px-3 w-full border-b border-whisper">
                                 <strong>{{ Str::limit($user->fullname, 20) }}</strong>
                             </div>
 
@@ -99,7 +99,7 @@
                 </x-dropdown>
                 <x-nav.custom-link href="{{ route('becomeExpert.index') }}">{{ __('Devenir expert') }}</x-nav.custom-link>
                 <x-nav.custom-link href="#">{{ __('Contacter un expert') }}</x-nav.custom-link>
-                <x-nav.custom-link href="{{ route('news') }}">{{ __('Actualités') }}</x-nav.custom-link>
+                <x-nav.custom-link href="{{ route('news.index') }}">{{ __('Actualités') }}</x-nav.custom-link>
                 <x-nav.custom-link href="{{ route('contacts') }}">{{ __('Contacts') }}</x-nav.custom-link>
             </x-nav>
         </div>

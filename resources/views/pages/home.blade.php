@@ -10,14 +10,12 @@
 
 					<x-news-slide 
 						title="{{ __('Visite au SIAO 2023') }}"
-						description="{{ __('L’APEN est un établissement Public de l’Etat à caractère professionnel, né de la volonté du Gouvernement et des acteurs du domaine de l’expertise à faire de l’expertise nationale un outil propulseur du développement durable du Burkina Faso.') }}"
 						coverSrc="{{ asset('assets/apen_au_siao.jpeg') }}"
 						url="#"
 					/>
 
 					<x-news-slide 
 						title="{{ __('2è session ordinaire de l’Assemblée Générale des Experts agréés') }}"
-						description="{{ __('La deuxième Assemblée Générale des Experts s’est tenue le jeudi 23 novembre 2023 dans la salle de conférence du bâtiment R+1 du Salon International de l’Artisanat de Ouagadougou (SIAO).') }}"
 						coverSrc="{{ asset('assets/grand_assemblée.jpg') }}"
 						url="#"
 					/>
@@ -79,14 +77,12 @@
 						<div class="mt-2 sm:mt-4 md:mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
 							<x-news-card
 								title="{{ __('Visite au SIAO 2023') }}"
-								description="{{ __('L’APEN est un établissement Public de l’Etat à caractère professionnel, né de la volonté du Gouvernement et des acteurs du domaine de l’expertise à faire de l’expertise nationale un outil propulseur du développement durable du Burkina Faso.') }}"
 								coverSrc="{{ asset('assets/apen_au_siao.jpeg') }}"
 								url="#"
 							/>
 	
 							<x-news-card
-								title="{{ __('Visite au SIAO 2023') }}"
-								description="{{ __('L’APEN est un établissement Public de l’Etat à caractère professionnel, né de la volonté du Gouvernement et des acteurs du domaine de l’expertise à faire de l’expertise nationale un outil propulseur du développement durable du Burkina Faso.') }}"
+								title="{{ __('2è session ordinaire de l’Assemblée Générale des Experts agréés') }}"
 								coverSrc="{{ asset('assets/apen_au_siao.jpeg') }}"
 								url="#"
 							/>

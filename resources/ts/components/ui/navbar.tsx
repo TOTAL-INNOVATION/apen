@@ -73,7 +73,12 @@ const Navbar = ({ className }: { className?: string }) => {
 };
 
 async function logout() {
-    const response = await axios.post<{message: string}>('/deconnexion');
+    const formData = new FormData();
+    formData.append("from_panel", "true");
+    const response = await axios.post<{message: string}>(
+        '/deconnexion',
+        formData,
+    );
     const {status, data} = response;
     
     if (status === 200 && data.message === "loggedOut") {

@@ -24,14 +24,18 @@
 			<h2 class="heading-2 uppercase">{{ __('Toutes les actualités') }}</h2>
 
 			<div class="mt-4 md:mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-				@for ($i = 0; $i < 6; $i++)
+				@forelse ($articles as $article)
 					<x-news-card
-						title="{{ __('Visite au SIAO 2023') }}"
-						description="{{ __('L’APEN est un établissement Public de l’Etat à caractère professionnel, né de la volonté du Gouvernement et des acteurs du domaine de l’expertise à faire de l’expertise nationale un outil propulseur du développement durable du Burkina Faso.') }}"
-						coverSrc="{{ asset('assets/apen_au_siao.jpeg') }}"
+						title="{{ $article->title }}"
+						coverSrc="{{ asset($article->cover) }}"
 						url="#"
+						published_at="{{ $article->published_at }}"
 					/>
-				@endfor
+				@empty
+					<div>
+						No article available
+					</div>
+				@endforelse
 			</div>
 
 			<div class="pt-6">

@@ -17,7 +17,16 @@
 
             <div class="mt-4 md:mt-6 flex flex-col-reverse md:grid md:grid-cols-3 gap-4 sm:gap-6">
                 <div class="md:col-span-2">
-                    <x-form>
+
+                    @session('success')
+                        <x-alert class="mb-4 sm:mb-6" variant="success">{{ __($value) }}</x-alert>
+                    @endsession
+
+                    @session('error')
+                        <x-alert class="mb-4 sm:mb-6" variant="error">{{ __($value) }}</x-alert>
+                    @endsession
+
+                    <x-form method="POST" action="{{ route('contacts.send') }}">
                         <x-card>
                             <x-card.body>
 								<div class="py-4">
@@ -34,7 +43,7 @@
                                         <x-form.field type="email" name="email" label="{{ __('Adresse mail') }}"
                                             placeholder="{{ __('ex: exemple@gmail.com') }}" required />
 
-                                        <x-form.field name="object" label="{{ __('Sujet') }}"
+                                        <x-form.field name="subject" label="{{ __('Sujet') }}"
                                             placeholder="{!! __('L\'objet de votre message') !!}" required />
 
                                         <x-form.field.textarea name="message" label="{{ __('Message') }}"
@@ -45,7 +54,7 @@
                             </x-card.body>
                             <x-card.footer class="justify-center">
                                 <x-button variant="primary"
-                                    class="font-franklin-medium">{{ __('Envoyer le message') }}</x-button>
+                                    class="font-franklin-medium" type="submit">{{ __('Envoyer le message') }}</x-button>
                             </x-card.footer>
                         </x-card>
                     </x-form>
