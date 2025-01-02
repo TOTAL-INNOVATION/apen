@@ -25,7 +25,8 @@ Route::middleware(['auth', 'verified', HandleInertiaRequests::class])->group(fun
     Route::get('panel', function () {
         return inertia()->render('home');
     })->name('panel');
-    Route::resource('articles', ArticleController::class)->except('show');
+    Route::resource('articles', ArticleController::class)->except(['show', 'update']);
+    Route::post('articles/{article}', [ArticleController::class, 'update']);
     Route::resource('utilisateurs', UserController::class)->except(EXCEPT_METHODS);
 
     Route::prefix('article/images')->group(function () {

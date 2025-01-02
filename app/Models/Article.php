@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\ArticleService;
 use App\Traits\SearchFilter;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
@@ -42,15 +43,12 @@ class Article extends Model
     {
         static::deleted(function(Article $article) {
 
-            Storage::disk('public')->delete(
-                str($article->cover)->replace(
-                    'storage/', ''
-                )
-            );
+            ArticleService::deleteCover($article);
 
             Storage::disk('public')->delete(
                 $article->content_path,
             );
+            
         });
     }
 }

@@ -41,7 +41,7 @@ class UserService extends BaseFilterService
 		return $user;
 	}
 
-	public function update(UpdateRequest $request, User $user)
+	public function update(UpdateRequest $request, User $user): bool
 	{
 		return $user->update(
 			$request->validated()

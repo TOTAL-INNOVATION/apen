@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Actions\StoreArticleImage;
 use App\Http\Requests\Article\StoreRequest;
+use App\Http\Requests\Article\UpdateRequest;
 use App\Models\Article;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
@@ -48,6 +49,41 @@ class ArticleService extends BaseFilterService
 		return $article;
 	}
 
+	public function update(UpdateRequest $request, Article $article): bool
+	{
+		$title = $request->input('title');
+
+		$article->forceFill([
+			'title' => $title,
+			'slug' => str($title)->slug(),
+			'published_at' => $request->input('published_at'),
+		]);
+
+		if ($file = $request->file('cover')) {
+			$path = app(StoreArticleImage::class)->handle($file);
+			if ($path) {
+				self::deleteCover($article);
+				$article->cover = $path;
+			} 
+		}
+		$article->content_path = $this->saveMarkdown(
+			$request->input('content'),
+			$article->content_path,
+		);
+
+		return $article->save();
+
+	}
+
+	public function delete(string $id): bool
+	{
+		$article = $this->find($id);
+		if (!$article)
+			return false;
+		
+		return $article->delete();
+	}
+
 	protected function saveMarkdown(string $content, ?string $filename = null): string
 	{
 		if (!$filename)
@@ -59,15 +95,6 @@ class ArticleService extends BaseFilterService
 		);
 
 		return $filename;
-	}
-
-	public function delete(string $id): bool
-	{
-		$article = $this->find($id);
-		if (!$article)
-			return false;
-		
-		return $article->delete();
 	}
 
 	public function find(string $id): ?Article
@@ -92,6 +119,15 @@ class ArticleService extends BaseFilterService
 	{
 		$id = Random::generate(16);
 		return "articles/$id.md";
+	}
+
+	public static function deleteCover(Article $article): void
+	{
+		Storage::disk('public')->delete(
+			str($article->cover)->replace(
+				'storage/', ''
+			)
+		);
 	}
 
 }

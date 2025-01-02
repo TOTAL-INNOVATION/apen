@@ -35,8 +35,13 @@ return [
 			'succeeded' => 'L\'article a été ajouté avec succès.',
 		],
 		'edit' => [
-			'notFound' => 'L\'article que vous tentez d\'éditer n\'existe pas.',
+			'notFound' => 'L\'article que vous tentez de modifier n\'existe pas.',
 		],
+		'update' => [
+			'failed' => 'Une erreur est survenu lors de l\'enrégistrement des modifications. Veuillez réessayer.',
+			'succeeded' => 'L\'article a été modifié avec succès.',
+		],
+
 		'delete' => [
 			'failed' => 'Une erreur est survenu lors de la suppression de l\'article.',
 			'succeeded' => 'L\'article a été supprimé avec succès.',

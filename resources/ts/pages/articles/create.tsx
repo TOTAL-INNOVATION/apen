@@ -119,6 +119,7 @@ function Create() {
                             />
 
                             <FormField
+                                control={form.control}
                                 name="published_at"
                                 render={({ field }) => (
                                     <FormItem className="space-y-4 sm:space-y-0 sm:flex sm:items-center sm:justify-between">
@@ -173,6 +174,7 @@ function Create() {
                             />
 
                             <FormField
+                                control={form.control}
                                 name="content"
                                 render={({ field }) => (
                                     <FormItem>

@@ -18,7 +18,7 @@ export default function zodFile(
         }, sizeMessage || `La taille de l'image ne doit pas dépasser les ${sizeInMB}MB.`)
         .refine((file) => {
             return file
-                ? Object.keys(types).includes((file as File).type)
+                ? types.includes((file as File).type)
                 : true;
         }, typeMessage || "Le fichier doit être de type .png, .jpg ou .jpeg");
 }

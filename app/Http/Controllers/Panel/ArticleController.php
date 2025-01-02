@@ -92,7 +92,28 @@ class ArticleController extends Controller
      */
     public function update(UpdateRequest $request, string $id)
     {
-        //
+        $article = $this->service->find($id);
+
+        if (!$article) {
+            return to_route('articles.index')
+            ->with('flash', [
+                'type' => FlashEnum::ERROR,
+                'message' => __('messages.article.edit.notFound'),
+            ]);
+        }
+
+        if (!$this->service->update($request, $article)) {
+            return back()->with('flash', [
+                'type' => FlashEnum::ERROR,
+                'message' => __('messages.article.update.failed'),
+            ]);
+        }
+
+        return to_route('articles.index')
+        ->with('flash', [
+            'type' => FlashEnum::SUCCESS,
+            'message' => __('messages.article.update.succeeded'),
+        ]);
     }
 
     /**

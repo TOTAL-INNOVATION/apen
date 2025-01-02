@@ -29,41 +29,38 @@ import { toast } from "~/components/toast";
 import zodFile from "~/lib/zod/custom";
 
 const schema = zod.object({
-	title: zod.string().min(5).max(50),
-	published_at: zod.coerce.date().or(zod.string()).optional(),
-	cover: zodFile().nullable(),
-	content: zod.string().min(5),
+    title: zod.string().min(5).max(50),
+    published_at: zod.coerce.date().or(zod.string()).optional(),
+    cover: zodFile().optional(),
+    content: zod.string().min(5),
 });
 
 type PageProps = {
-	article: {data: Article};
-	flash: FlashMessage|null
-}
+    article: { data: Article };
+    flash: FlashMessage | null;
+};
 
 function Edit() {
+    const props = usePage<PageProps>().props;
+    const { errors, flash } = props;
+    const article = props.article.data;
 
-	const props = usePage<PageProps>().props;
-	const { errors, flash } = props;
-	const article = props.article.data;
-	
     const form = useForm<zod.infer<typeof schema>>({
         resolver: zodResolver(schema),
         defaultValues: {
             title: article.title,
             published_at: new Date(article.published_at),
-            cover: null,
+            cover: undefined,
             content: article.content as string,
         },
     });
 
-	useEffect(() => {
-		if (flash) {
-			toast(flash);
-		}
-		if (Object.keys(errors).length)
-			setValidationError(form, errors);
-
-	}, [errors, form, flash]);
+    useEffect(() => {
+        if (flash) {
+            toast(flash);
+        }
+        if (Object.keys(errors).length) setValidationError(form, errors);
+    }, [errors, form, flash]);
 
     return (
         <div>
@@ -87,9 +84,7 @@ function Edit() {
                         </BreadcrumbItem>
                         <BreadcrumbSeparator />
                         <BreadcrumbItem>
-                            <span className="font-franklin-medium">
-                                Editer
-                            </span>
+                            <span className="font-franklin-medium">Editer</span>
                         </BreadcrumbItem>
                     </BreadcrumbList>
                 </Breadcrumb>
@@ -124,6 +119,7 @@ function Edit() {
                             />
 
                             <FormField
+                                control={form.control}
                                 name="published_at"
                                 render={({ field }) => (
                                     <FormItem>
@@ -161,6 +157,7 @@ function Edit() {
                             />
 
                             <FormField
+                                control={form.control}
                                 name="content"
                                 render={({ field }) => (
                                     <FormItem>
@@ -194,7 +191,7 @@ function Edit() {
     );
 
     function onSubmit(formData: zod.infer<typeof schema>) {
-        console.log(formData);	
+        router.post(`/articles/${article.id}`, formData);
     }
 }
 

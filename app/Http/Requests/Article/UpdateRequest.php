@@ -4,6 +4,7 @@ namespace App\Http\Requests\Article;
 
 use App\Enums\RoleEnum;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\File;
 
 class UpdateRequest extends FormRequest
@@ -24,7 +25,15 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'bail|required|string|unique:articles,title|min:5|max:255',
+            'title' => [
+                'bail',
+                'required',
+                'string',
+                Rule::unique('articles', 'title')
+                ->ignore($this->article),
+                'min:5',
+                'max:255'
+            ],
             'published_at' => 'bail|required|date',
             'cover' => [
                 'bail',
