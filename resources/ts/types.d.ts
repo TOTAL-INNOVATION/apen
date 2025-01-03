@@ -78,5 +78,7 @@ export type Article = {
 export type Decree = {
     id: string;
     name: string;
+    type: string;
+    size: number;
     doc_path: string;
 }

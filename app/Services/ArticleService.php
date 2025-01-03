@@ -108,17 +108,10 @@ class ArticleService extends BaseFilterService
 	 */
 	public function generateMarkdownFilename(): string
 	{
-		$filename = $this->generateRandomFilename();
-		while(Storage::disk('public')->exists($filename))
-			$filename = $this->generateRandomFilename();
+		$name = Random::generate(16) . '_' . now()->timestamp;
+		$filename = "articles/$name.md";
 
 		return $filename;
-	}
-
-	public function generateRandomFilename(): string
-	{
-		$id = Random::generate(16);
-		return "articles/$id.md";
 	}
 
 	public static function deleteCover(Article $article): void

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Decree;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\File;
 
 class StoreRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,8 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'bail|required|string|min:5|max:255',
+            'doc' => 'bail|required|extensions:txt,pdf,doc,docx,ppt,pptx,xls,xlsx',
         ];
     }
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { Nav, NavItem } from "./nav";
 import { TooltipProvider } from "./tooltip";
-import { File, LayoutDashboard, Newspaper, Users2 } from "lucide-react";
+import { FileText, LayoutDashboard, Newspaper, Users2 } from "lucide-react";
 
 const Sidebar = () => {
     return (
@@ -40,7 +40,7 @@ const Sidebar = () => {
                     </NavItem>
 
                     <NavItem href="/decrets">
-                        <File className="w-6 h-6" />
+                        <FileText className="w-6 h-6" />
                         <span>Décrets</span>
                     </NavItem>
 

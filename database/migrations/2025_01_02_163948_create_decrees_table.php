@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('decrees', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('name')->unique();
+            $table->string('type');
+            $table->float('size');
             $table->string('doc_path');
             $table->timestamps();
         });

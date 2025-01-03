@@ -12,13 +12,15 @@ class Decree extends Model
 
     protected $fillable = [
         'name',
+        'type',
+        'size',
         'doc_path',
     ];
 
     protected static function booted(): void
     {
-        static::deleted(fn() => (
-            DecreeService::deleteDoc($this)
+        static::deleted(fn(Decree $decree) => (
+            DecreeService::deleteDoc($decree)
         ));
     }
 }

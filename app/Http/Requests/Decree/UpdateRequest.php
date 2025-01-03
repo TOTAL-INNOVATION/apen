@@ -11,7 +11,7 @@ class UpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'bail|required|string|min:5|max:255',
+            'doc' => 'bail|nullable|extensions:txt,pdf,doc,docx,ppt,pptx,xls,xlsx',
         ];
     }
 }

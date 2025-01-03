@@ -13,11 +13,23 @@ const decreesColumns: Column<Decree>[] = [
 		sortable: true,
 	},
 	{
+		name: "type",
+		label: "Format",
+		sortable: true,
+		format: (row) => <p className="uppercase">{row.type}</p>
+	},
+	{
+		name: "size",
+		label: "Size",
+		sortable: true,
+		format: (row) => <span>{row.size} Mo</span>
+	},
+	{
 		name: "doc_path",
 		label: "Télécharger",
 		format(row) {
 			return (
-				<div className="w-fit mx-auto">
+				<div className="w-fit">
 					<Button size="sm" variant="outline" asChild>
 						<a href={row.doc_path} target="_blank">
 							<Download className="w-[18px] h-[18px] stroke-warning" />

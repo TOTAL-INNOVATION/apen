@@ -9,7 +9,7 @@ import {
     BreadcrumbSeparator,
 } from "~/components/ui/breadcrumb";
 import { Button } from "~/components/ui/button";
-import { UserRoundPlus } from "lucide-react";
+import { FilePlus2 } from "lucide-react";
 import { Decree, FlashMessage, PaginationData } from "~/types";
 import { toast } from "~/components/toast";
 import { DataTable } from "~/components/ui/datatable";
@@ -74,7 +74,7 @@ export function Index() {
                     >
                         <DialogTrigger asChild>
                             <Button className="mt-2 sm:mt-0">
-                                <UserRoundPlus className="w-5 h-5" />
+                                <FilePlus2 className="w-5 h-5" />
                                 <span className="font-franklin-medium">
                                     Nouveau décret
                                 </span>

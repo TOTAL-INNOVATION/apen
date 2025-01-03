@@ -6,6 +6,7 @@ use App\Http\Controllers\Panel\ArticleController;
 use App\Http\Controllers\Panel\DecreeController;
 use App\Http\Controllers\Panel\ImageController;
 use App\Http\Controllers\Panel\UserController;
+use App\Http\Controllers\DecreeController as GetDecreesController;
 use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Support\Facades\Route;
 
@@ -30,17 +31,17 @@ Route::middleware(['auth', 'verified', HandleInertiaRequests::class])->group(fun
     Route::get('panel', function () {
         return inertia()->render('home');
     })->name('panel');
+
     Route::resource('articles', ArticleController::class)->except(['show', 'update']);
     Route::post('articles/{article}', [ArticleController::class, 'update']);
     Route::resource('utilisateurs', UserController::class)->except(EXCEPT_METHODS);
+    Route::resource('decrets', DecreeController::class)->except([...EXCEPT_METHODS, 'update']);
+    Route::post('decrets/{decret}', [DecreeController::class, 'update']);
 
     Route::prefix('article/images')->group(function () {
         Route::post('upload', [ImageController::class, 'store']);
         Route::post('delete', [ImageController::class, 'delete']);
     });
-
-
-    Route::resource('decrets', DecreeController::class)->except(EXCEPT_METHODS);
 
 });
 

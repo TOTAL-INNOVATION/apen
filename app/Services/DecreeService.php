@@ -25,17 +25,17 @@ class DecreeService extends BaseFilterService
     public function create(StoreRequest $request): ?Decree
     {
         $name = $request->input('name');
-        $filename = $this->generateDocFilename($name);
-        $doc_path = $this->storeDoc(
-            $request->file('doc'),
-            $filename,
-        );
+        $doc = $request->file('doc');
+        $filename = $this->createDocFilename($name, $doc);
+        $docPath = $this->storeDoc($doc, $filename);
 
-        if (!$doc_path) return null;
+        if (!$docPath) return null;
 
-        return Decree::create(
-            compact('name', 'doc_path')
-        );
+        return Decree::create([
+            'name' => $name,
+            'doc_path' => $docPath,
+            ...$this->getFileMetaData($doc)
+        ]);
     }
 
     public function update(UpdateRequest $request, Decree $decree): bool
@@ -44,15 +44,22 @@ class DecreeService extends BaseFilterService
 
         if ($file = $request->file('doc')) {
 
-            $filename = $this->generateDocFilename(
+            $filename = $this->createDocFilename(
                 $request->input('name'),
+                $file
             );
 
             $path = $this->storeDoc($file, $filename);
 
             if ($path) {
                 DecreeService::deleteDoc($decree);
-                $data['doc_path'] = $path;
+                $data = array_merge(
+                    $data,
+                    [
+                        'doc_path' => $path,
+                        $this->getFileMetaData($file)
+                    ]
+                );
             }
         }
 
@@ -62,14 +69,25 @@ class DecreeService extends BaseFilterService
     public function delete(string $id): bool
     {
         $decree = $this->find($id);
-        if ($decree) return false;
+        if (!$decree) return false;
 
         return (bool)$decree->delete();
     }
 
-    public function generateDocFilename(string $name): string
+    public function getFileMetaData(UploadedFile $file): array
     {
-        return str($name)->slug() . '_' . now()->toTimeString();
+        return [
+            'type' => $file->extension(),
+            'size' => number_format($file->getSize() / (1024 * 1024), 2)
+        ];
+    }
+
+    public function createDocFilename(string $name, UploadedFile $file): string
+    {
+        $filename = str($name)->slug() . '_' . now()->timestamp;
+        $extension = $file->extension();
+
+        return "$filename.$extension";
     }
 
     public function storeDoc(UploadedFile $file, string $filename): string|null

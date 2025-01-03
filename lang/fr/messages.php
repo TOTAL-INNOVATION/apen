@@ -52,5 +52,24 @@ return [
 			'failed' => 'Une erreur est survenu lors de la suppression de l\'article.',
 			'succeeded' => 'L\'article a été supprimé avec succès.',
 		]
+	],
+
+	'decree' => [
+		'create' => [
+			'failed' => 'Une erreur est survenu lors de l\'ajout du décret.',
+			'succeeded' => 'Le décret a été ajouté avec succès.',
+		],
+		'edit' => [
+			'notFound' => 'Le décret que vous tentez de modifier n\'existe pas.',
+		],
+		'update' => [
+			'failed' => 'Une erreur est survenu lors de l\'enrégistrement des modifications. Veuillez réessayer.',
+			'succeeded' => 'Le décret a été modifié avec succès.',
+		],
+
+		'delete' => [
+			'failed' => 'Une erreur est survenu lors de la suppression du décret.',
+			'succeeded' => 'Le décret a été supprimé avec succès.',
+		]
 	]
 ];
