@@ -57,7 +57,7 @@ class DecreeService extends BaseFilterService
                     $data,
                     [
                         'doc_path' => $path,
-                        $this->getFileMetaData($file)
+                        ...$this->getFileMetaData($file)
                     ]
                 );
             }

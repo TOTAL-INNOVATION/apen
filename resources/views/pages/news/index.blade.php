@@ -32,9 +32,12 @@
 						published_at="{{ $article->published_at }}"
 					/>
 				@empty
+				<div class="sm:col-span-2 lg:col-span-3 min-h-64 flex flex-col justify-center items-center">
 					<div>
-						No article available
+						<x-lucide-inbox class="w-14 h-14 stroke-[1.5] stroke-rainee" />
 					</div>
+					<p class="mt-4 text-lg">{{ __('Aucun article disponible pour le moment') }}</p>
+				</div>
 				@endforelse
 			</div>
 

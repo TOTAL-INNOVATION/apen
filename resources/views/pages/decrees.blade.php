@@ -25,26 +25,21 @@
 				<h2 class="heading-2 uppercase">{{ __('Décrets en documents téléchargeables') }}</h2>
 
 				<div class="mt-4 md:mt-6 lg:mt-8 flex flex-col space-y-4">
-					<x-doc-card
-						name="Décret 2013-226 portant droits et obligations d’agréments"
-						url="#"
-						size="5.4"
-						extension="pdf"
-					/>
-
-					<x-doc-card
-						name="Décret 2013-226 portant droits et obligations d’agréments"
-						url="#"
-						size="5.4"
-						extension="pdf"
-					/>
-
-					<x-doc-card
-						name="Décret 2013-226 portant droits et obligations d’agréments"
-						url="#"
-						size="5.4"
-						extension="pdf"
-					/>
+					@forelse ($decrees as $decree)
+						<x-doc-card
+							name="{{ $decree->name }}"
+							url="{{ $decree->doc_path }}"
+							size="{{ $decree->size }}"
+							extension="{{ $decree->type }}"
+						/>
+					@empty
+						<div class="w-full min-h-64 flex flex-col justify-center items-center">
+							<div>
+								<x-lucide-inbox class="w-14 h-14 stroke-[1.5] stroke-rainee" />
+							</div>
+							<p class="mt-4 text-lg">{{ __('Aucun document disponible pour le moment') }}</p>
+						</div>
+					@endforelse
 				</div>
 			</div>
 		</div>

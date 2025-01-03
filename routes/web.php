@@ -15,7 +15,7 @@ const EXCEPT_METHODS = ['create', 'show', 'edit'];
 Route::view('/', 'pages.home')->name('home');
 Route::view('qui-sommes-nous', 'pages.whoWeAre')->name('whoWeAre');
 Route::view('mot-de-la-secretaire-executive', 'pages.secretaryWords')->name('secretaryWords');
-Route::view('textes-reglementaires', 'pages.decrees')->name('decrees');
+Route::get('textes-reglementaires', GetDecreesController::class)->name('decrees');
 Route::get('actualites', [NewzController::class, 'index'])->name('news.index');
 Route::get('actualites/{slug}', [NewzController::class, 'show'])->name('news.show');
 Route::view('nous-contacter', 'pages.contact')->name('contacts');

@@ -13,6 +13,8 @@ class DecreeController extends Controller
      */
     public function __invoke(Request $request): View
     {
-        
+        $decrees = Decree::select(['name', 'size', 'type', 'doc_path'])->get();
+
+        return view('pages.decrees', compact('decrees'));
     }
 }
