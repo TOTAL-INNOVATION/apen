@@ -4,7 +4,9 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NewzController;
 use App\Http\Controllers\Panel\ArticleController;
 use App\Http\Controllers\Panel\DecreeController;
+use App\Http\Controllers\Panel\FlashInfoController;
 use App\Http\Controllers\Panel\ImageController;
+use App\Http\Controllers\Panel\MessageController;
 use App\Http\Controllers\Panel\UserController;
 use App\Http\Controllers\DecreeController as GetDecreesController;
 use App\Http\Middleware\HandleInertiaRequests;
@@ -37,6 +39,8 @@ Route::middleware(['auth', 'verified', HandleInertiaRequests::class])->group(fun
     Route::resource('utilisateurs', UserController::class)->except(EXCEPT_METHODS);
     Route::resource('decrets', DecreeController::class)->except([...EXCEPT_METHODS, 'update']);
     Route::post('decrets/{decret}', [DecreeController::class, 'update']);
+    Route::resource('messages', MessageController::class)->except([...EXCEPT_METHODS, 'store']);
+    ROute::resource('flash-info', FlashInfoController::class)->except(EXCEPT_METHODS);
 
     Route::prefix('article/images')->group(function () {
         Route::post('upload', [ImageController::class, 'store']);

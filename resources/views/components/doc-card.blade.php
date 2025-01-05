@@ -5,7 +5,7 @@
     'extension' => 'pdf',
 ])
 
-<x-link :href="$url" title="{{ $name }}">
+<x-link :href="$url" title="{{ $name }}" download>
     <x-card class="hover:bg-primary/5">
         <x-card.body class="lg:p-4">
             <x-card.title class="text-lg sm:text-xl lg:text-2xl font-franklin-medium">{{ $name }}</x-card.title>

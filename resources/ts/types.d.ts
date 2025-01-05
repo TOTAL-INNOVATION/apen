@@ -62,6 +62,8 @@ export type User = {
     role: "Admin" | "Expert";
     verified_at: string;
     avatar: string;
+    created_at: string;
+    updated_at: string;
 };
 
 export type Article = {
@@ -81,4 +83,17 @@ export type Decree = {
     type: string;
     size: number;
     doc_path: string;
+    created_at: string;
+    updated_at: string;
+}
+
+export type Message = {
+    id: string;
+    firstname: string;
+    lastname: string;
+    email: string;
+    subject: string;
+    message: string;
+    marked_as_read: boolean;
+    created_at: string;
 }

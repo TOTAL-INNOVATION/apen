@@ -27,7 +27,7 @@ const DeleteArticle = ({ article }: { article: Article }) => {
                 <div className="my-4 mx-auto p-4 border-2 border-error rounded-full">
                     <Trash2 className="w-8 h-8 stroke-error" />
                 </div>
-                <div className="dark:text-info">
+                <div>
                     Vous êtes sur le point de supprimer l'article titré <strong>{article.title}</strong>. Après cette action, cet article ne sera plus disponible. Voudrez-vous poursuivre?
                 </div>
                 <DialogFooter className="mt-4 w-full flex gap-x-3">

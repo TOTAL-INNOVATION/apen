@@ -23,6 +23,8 @@ class UserResource extends JsonResource
             'verified_at' => $this->email_verified_at,
             'avatar' => $this->avatar,
             'role' => $this->role,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

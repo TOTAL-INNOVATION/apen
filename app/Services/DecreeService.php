@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Http\Requests\Decree\StoreRequest;
-use App\Http\Requests\Decree\UpdateRequest;
+use App\Http\Requests\Decree\{StoreRequest, UpdateRequest};
 use App\Models\Decree;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
+use Illuminate\Http\{Request, UploadedFile};
 use Illuminate\Support\Facades\Storage;
 
 class DecreeService extends BaseFilterService
 {
 
     public string $model = Decree::class;
+
+    public array $sortByAttributes = ['name', 'type', 'size', 'created_at', 'updated_at'];
     
     public function getAll(Request $request): LengthAwarePaginator
     {

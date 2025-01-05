@@ -7,12 +7,12 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "~/components/ui/dialog";
-import { User } from "~/types";
+import { Message } from "~/types";
 import { router } from "@inertiajs/react";
 import { Trash2 } from "lucide-react";
 import React from "react";
 
-const DeleteUser = ({ user }: { user: User }) => {
+const DeleteMessage = ({ message }: { message: Message }) => {
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -22,13 +22,13 @@ const DeleteUser = ({ user }: { user: User }) => {
             </DialogTrigger>
             <DialogContent aria-describedby={undefined}>
                 <DialogHeader>
-                    <DialogTitle>Supprimer l'utilisateur</DialogTitle>
+                    <DialogTitle>Supprimer le message</DialogTitle>
                 </DialogHeader>
                 <div className="my-4 mx-auto p-4 border-2 border-error rounded-full">
                     <Trash2 className="w-8 h-8 stroke-error" />
                 </div>
                 <div>
-                    Vous êtes sur le point de rétirer l'utilisateur <strong>{user.fullname}</strong>. Après cette action, l'utilisateur ne sera plus disponible dans la base de donnée. Voudrez-vous poursuivre?
+                    Vous êtes sur le point de supprimer le message envoyé par <strong>{`${message.firstname} ${message.lastname}`}</strong>. Après cette action, le message ne sera plus disponible dans la base de donnée. Voudrez-vous poursuivre?
                 </div>
                 <DialogFooter className="mt-4 w-full flex gap-x-3">
                     <DialogTrigger asChild>
@@ -38,8 +38,8 @@ const DeleteUser = ({ user }: { user: User }) => {
                     </DialogTrigger>
                     <form
                         className="w-full"
-                        action={`/utilisateurs/${user.id}`}
-                        onSubmit={removeUser}
+                        action={`/messages/${message.id}`}
+                        onSubmit={removeMessage}
                     >
                         <Button
                             type="submit"
@@ -55,7 +55,7 @@ const DeleteUser = ({ user }: { user: User }) => {
         </Dialog>
     );
 
-	function removeUser(event: React.FormEvent<HTMLFormElement>) {
+	function removeMessage(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		const url = (event.target as HTMLFormElement).action;
 	
@@ -63,4 +63,4 @@ const DeleteUser = ({ user }: { user: User }) => {
 	}
 };
 
-export default DeleteUser;
+export default DeleteMessage;

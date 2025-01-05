@@ -7,12 +7,12 @@ import EditUser from "./actions/editUser";
 const userColumns: Column<User>[] = [
 	{
 		label: "Nom",
-		name: "firstname",
+		name: "lastname",
 		sortable: true,
 	},
 	{
 		label: "Prénom",
-		name: "lastname",
+		name: "firstname",
 		sortable: true,
 	},
 	{
@@ -41,6 +41,22 @@ const userColumns: Column<User>[] = [
 		sortable: true,
 	},
 	{
+        name: "created_at",
+        label: "Ajouté le",
+		sortable: true,
+        format(row) {
+            return <div>{new Date(row.created_at).toLocaleDateString()}</div>;
+        },
+    },
+    {
+        name: "updated_at",
+        label: "Modifié le",
+		sortable: true,
+        format(row) {
+            return <div>{new Date(row.updated_at).toLocaleDateString()}</div>;
+        },
+    },
+	{
 		label: "Actions",
 		name: "id",
 		format(row) {
@@ -51,7 +67,7 @@ const userColumns: Column<User>[] = [
 				</div>
 			);
 		},
-	}
+	},
 ]
 
 export default userColumns;

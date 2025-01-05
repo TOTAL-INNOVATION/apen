@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class DecreeResource extends JsonResource
+class MessageResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,12 +16,13 @@ class DecreeResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'type' => $this->type,
-            'size' => $this->size,
-            'doc_path' => $this->doc_path,
+            'subject' => $this->subject,
+            'firstname' => $this->firstname,
+            'lastname' => $this->lastname,
+            'email' => $this->email,
+            'message' => $this->message,
+            'marked_as_read' => $this->marked_as_read,
             'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
         ];
     }
 }

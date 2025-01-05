@@ -71,5 +71,29 @@ return [
 			'failed' => 'Une erreur est survenu lors de la suppression du décret.',
 			'succeeded' => 'Le décret a été supprimé avec succès.',
 		]
-	]
+	],
+
+	'messages' => [
+		'markedAsRead' => [
+			'failed' => 'Le message que vous tentez de marquer comme lu est indisponible.',
+			'succeeded' => 'Le message a été marqué comme lu.',
+		],
+
+		'delete' => [
+			'failed' => 'Le message que vous tentez de supprimer n\'existe plus.',
+			'succeeded' => 'Le message a été supprimé avec succès.',
+		],
+	],
+
+	'flash_info' => [
+		'created' => 'Le flash info a été ajouté avec succès.',
+		'update' => [
+			'failed' => 'L\'info n\'est plus disponible.',
+			'succeeded' => 'L\'info a été mise à jour avec succès.'
+		],
+		'delete' => [
+			'failed' => 'L\'info n\'est plus disponible.',
+			'succeeded' => 'L\'info a été supprimée avec succès.',
+		],
+	],
 ];

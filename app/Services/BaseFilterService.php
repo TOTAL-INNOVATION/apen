@@ -18,7 +18,10 @@ class BaseFilterService
     public array $sortByAttributes = ['name'];
 
     /**
-     * where clauses
+     * where clauses.
+     * The attribute name is the key.
+     * The value is an array of two item(The first item is the operator,
+     * it can be =, <, >, <=, >=, and the second item is the condition value.)
      * @var array<string, array<string, string>>
      */
     public array $conditions = [];

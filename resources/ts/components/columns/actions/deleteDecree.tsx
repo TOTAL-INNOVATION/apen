@@ -27,7 +27,7 @@ const DeleteDecree = ({ decree }: { decree: Decree }) => {
                 <div className="my-4 mx-auto p-4 border-2 border-error rounded-full">
                     <Trash2 className="w-8 h-8 stroke-error" />
                 </div>
-                <div className="dark:text-info">
+                <div>
                     Vous êtes sur le point de rétirer le décret intitulé <strong>{decree.name}</strong>. Après cette action, l'utilisateur ne sera plus disponible dans la base de donnée. Voudrez-vous poursuivre?
                 </div>
                 <DialogFooter className="mt-4 w-full flex gap-x-3">

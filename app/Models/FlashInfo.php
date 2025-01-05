@@ -3,32 +3,29 @@
 namespace App\Models;
 
 use App\Traits\SearchFilter;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 
-class Message extends Model
+class FlashInfo extends Model
 {
     use HasUlids, SearchFilter;
 
     protected $fillable = [
-        'firstname',
-        'lastname',
-        'email',
-        'subject',
-        'message',
-        'marked_as_read',
+        'title',
+        'active',
     ];
 
     public function casts(): array
     {
         return [
-            'marked_as_read' => 'boolean',
+            'active' => 'boolean',
         ];
     }
 
-    public function markAsRead(): void
+    public function scopeActive(Builder $query): void
     {
-        $this->marked_as_read = true;
-        $this->save();
+        $query->where('active', true);
     }
+
 }
