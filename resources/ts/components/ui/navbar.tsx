@@ -49,7 +49,7 @@ const Navbar = ({ className }: { className?: string }) => {
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
                         <DropdownMenuItem asChild>
-                            <Link href="#">
+                            <Link href="/profil-admin">
                                 <User2 className="mr-2 h-5 w-5" />
                                 <strong>Profil</strong>
                             </Link>

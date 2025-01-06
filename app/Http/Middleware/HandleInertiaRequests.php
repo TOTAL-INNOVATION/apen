@@ -45,7 +45,7 @@ class HandleInertiaRequests extends Middleware
 
     public function handle(Request $request, \Closure $next)
     {
-        if (!$request->user()->role === RoleEnum::EXPERT)
+        if ($request->user()->role === RoleEnum::EXPERT && $request->route()->getName() !== 'profile.index')
             abort(403);
 
         return parent::handle($request, $next);

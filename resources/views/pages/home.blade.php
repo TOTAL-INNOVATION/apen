@@ -8,7 +8,7 @@
 			<div class="h-full overflow-x-hidden news_slides">
 				<div class="h-full flex slides_container">
 
-					<x-news-slide 
+					<x-news-slide
 						title="{{ __('Visite au SIAO 2023') }}"
 						coverSrc="{{ asset('assets/apen_au_siao.jpeg') }}"
 						url="#"
