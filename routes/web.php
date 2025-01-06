@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 const EXCEPT_METHODS = ['create', 'show', 'edit'];
 
 Route::view('/', 'pages.home')->name('home');
-Route::view('qui-sommes-nous', 'pages.whoWeAre')->name('whoWeAre');
-Route::view('mot-de-la-secretaire-executive', 'pages.secretaryWords')->name('secretaryWords');
+Route::view('qui-sommes-nous', 'pages.who-we-are')->name('whoWeAre');
+Route::view('mot-de-la-secretaire-executive', 'pages.secretary-words')->name('secretaryWords');
 Route::get('textes-reglementaires', GetDecreesController::class)->name('decrees');
 Route::get('actualites', [NewzController::class, 'index'])->name('news.index');
 Route::get('actualites/{slug}', [NewzController::class, 'show'])->name('news.show');
@@ -40,7 +40,7 @@ Route::middleware(['auth', 'verified', HandleInertiaRequests::class])->group(fun
     Route::resource('decrets', DecreeController::class)->except([...EXCEPT_METHODS, 'update']);
     Route::post('decrets/{decret}', [DecreeController::class, 'update']);
     Route::resource('messages', MessageController::class)->except([...EXCEPT_METHODS, 'store']);
-    ROute::resource('flash-info', FlashInfoController::class)->except(EXCEPT_METHODS);
+    ROute::resource('infos', FlashInfoController::class)->except(EXCEPT_METHODS);
 
     Route::prefix('article/images')->group(function () {
         Route::post('upload', [ImageController::class, 'store']);

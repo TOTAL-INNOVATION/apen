@@ -18,6 +18,8 @@ class FlashInfoResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'active' => $this->active,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

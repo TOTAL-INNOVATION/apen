@@ -7,12 +7,12 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "~/components/ui/dialog";
-import { Decree } from "~/types";
+import { FlashInfo } from "~/types";
 import { router } from "@inertiajs/react";
 import { Trash2 } from "lucide-react";
 import React from "react";
 
-const DeleteDecree = ({ decree }: { decree: Decree }) => {
+const DeleteInfo = ({ info }: { info: FlashInfo }) => {
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -22,13 +22,13 @@ const DeleteDecree = ({ decree }: { decree: Decree }) => {
             </DialogTrigger>
             <DialogContent aria-describedby={undefined}>
                 <DialogHeader>
-                    <DialogTitle>Supprimer le decret</DialogTitle>
+                    <DialogTitle>Supprimer le flash info</DialogTitle>
                 </DialogHeader>
                 <div className="my-4 mx-auto p-4 border-2 border-error rounded-full">
                     <Trash2 className="w-8 h-8 stroke-error" />
                 </div>
                 <div>
-                    Vous êtes sur le point de rétirer le décret intitulé <strong>{decree.name}</strong>. Après cette action, le décret ne sera plus disponible dans la base de donnée. Voudrez-vous poursuivre?
+                    Vous êtes sur le point de rétirer le flash info titrée <strong>{info.title}</strong>. Après cette action, le flash info ne sera plus disponible dans la base de donnée. Voudrez-vous poursuivre?
                 </div>
                 <DialogFooter className="mt-4 w-full flex gap-x-3">
                     <DialogTrigger asChild>
@@ -38,8 +38,8 @@ const DeleteDecree = ({ decree }: { decree: Decree }) => {
                     </DialogTrigger>
                     <form
                         className="w-full"
-                        action={`/decrets/${decree.id}`}
-                        onSubmit={removeDecree}
+                        action={`/infos/${info.id}`}
+                        onSubmit={removeInfo}
                     >
                         <Button
                             type="submit"
@@ -55,7 +55,7 @@ const DeleteDecree = ({ decree }: { decree: Decree }) => {
         </Dialog>
     );
 
-	function removeDecree(event: React.FormEvent<HTMLFormElement>) {
+	function removeInfo(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		const url = (event.target as HTMLFormElement).action;
 	
@@ -63,4 +63,4 @@ const DeleteDecree = ({ decree }: { decree: Decree }) => {
 	}
 };
 
-export default DeleteDecree;
+export default DeleteInfo;

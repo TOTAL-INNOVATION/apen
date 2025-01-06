@@ -53,7 +53,7 @@ function Index() {
 
 			<div className="mt-6">
                 <div className="sm:flex sm:items-center sm:justify-between">
-                    <h3 className="heading-3 uppercase">Messages disponible</h3>
+                    <h3 className="heading-3 uppercase">Messages</h3>
 				</div>
 
 				<DataTable<Message>

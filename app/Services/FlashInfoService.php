@@ -13,7 +13,9 @@ class FlashInfoService extends BaseFilterService
 {
     public array $searchAttributes = ['title'];
 
-    public array $sortByAttributes = ['title', 'active'];
+    public array $sortByAttributes = ['active', 'created_at', 'updated_at'];
+
+    public string $model = FlashInfo::class;
 
     public function getAll(Request $request): LengthAwarePaginator
     {

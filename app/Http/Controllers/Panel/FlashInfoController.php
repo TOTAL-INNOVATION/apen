@@ -32,7 +32,8 @@ class FlashInfoController extends Controller
     {
         $this->service->create($request);
         
-        return back()->with('flash', [
+        return to_route('infos.index')
+        ->with('flash', [
             'type' => FlashEnum::SUCCESS,
             'message' => __('messages.flash_info.created')
         ]);
@@ -43,7 +44,8 @@ class FlashInfoController extends Controller
         $info = $this->service->find($id);
 
         if (!$info) {
-            return back()->with('flash', [
+            return to_route('infos.index')
+            ->with('flash', [
                 'type' => FlashEnum::ERROR,
                 'message' => __('messages.flash_info.update.failed')
             ]);
@@ -51,7 +53,8 @@ class FlashInfoController extends Controller
 
         $this->service->update($request, $info);
 
-        return back()->with('flash', [
+        return to_route('infos.index')
+        ->with('flash', [
             'type' => FlashEnum::SUCCESS,
             'message' => __('messages.flash_info.update.succeeded')
         ]);

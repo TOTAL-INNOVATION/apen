@@ -1,14 +1,26 @@
 @use('App\Models\User')
 @use('App\Enums\RoleEnum')
 
-<div class="w-full bg-white hidden md:flex">
-    <div class="px-4 py-1.5 flex-initial bg-secondary text-sm font-franklin-medium text-white uppercase border-b border-secondary">
-        {{ __('Flash info') }}
+@if ($infos->count())
+    <div class="w-full bg-white hidden md:flex">
+        <div class="px-4 py-1.5 flex-initial bg-secondary text-sm font-franklin-medium text-white uppercase border-b border-secondary">
+            {{ __('Flash info') }}
+        </div>
+        <div class="py-1.5 flex-1 border-b border-whisper overflow-x-hidden">
+            <div class="w-full flex items-center space-x-2 text-nowrap animate-text-x-scroll">
+                @foreach ($infos as $k => $info)
+                    <p class="flex items-center">
+                        @if ($k > 0)
+                            <span class="mr-2">|</span>
+                        @endif
+                        <span>{{ $info->title }}</span>
+                    </p>
+                @endforeach
+            </div>
+        </div>
     </div>
-    <div class="py-1.5 flex-1 border-b border-whisper overflow-x-hidden">
-        <div class="w-full text-nowrap animate-text-x-scroll">Agence de promotion de l’expertise nationale : 1ère session de l’Assemblée Générale des Experts tenue le 09 décembre 2022</div>
-    </div>
-</div>
+@endif
+
 <header class="w-full bg-white sticky top-0 z-50">
     
     <div class="py-2 border-b border-whisper">

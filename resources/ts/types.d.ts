@@ -97,3 +97,11 @@ export type Message = {
     marked_as_read: boolean;
     created_at: string;
 }
+
+export type FlashInfo = {
+    id: string;
+    title: string;
+    active: boolean;
+    created_at: string;
+    updated_at: string;
+};

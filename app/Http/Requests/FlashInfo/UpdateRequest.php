@@ -31,7 +31,8 @@ class UpdateRequest extends FormRequest
                 'max:255',
                 Rule::unique('flash_infos', 'title')
                 ->ignore($this->info),
-            ]
+            ],
+            'active' => 'bail|required|boolean'
         ];
     }
 }

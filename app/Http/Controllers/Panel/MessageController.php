@@ -22,7 +22,7 @@ class MessageController extends Controller
         $messages = $this->service->getAll($request);
         
         return inertia()->render(
-            'messages/index',
+            'messages',
             ['messages' => MessageResource::collection($messages)],
         );
     }

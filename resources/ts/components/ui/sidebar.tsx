@@ -1,7 +1,7 @@
 import React from "react";
 import { Nav, NavItem } from "./nav";
 import { TooltipProvider } from "./tooltip";
-import { FileText, LayoutDashboard, MessageCircle, Newspaper, Users2 } from "lucide-react";
+import { FileText, LayoutDashboard, MessageCircle, Newspaper, Users2, Zap } from "lucide-react";
 
 const Sidebar = () => {
     return (
@@ -47,6 +47,11 @@ const Sidebar = () => {
                     <NavItem href="/messages">
                         <MessageCircle className="w-6 h-6" />
                         <span>Messages</span>
+                    </NavItem>
+
+                    <NavItem href="/infos">
+                        <Zap className="w-6 h-6" />
+                        <span>Flash infos</span>
                     </NavItem>
 
                 </Nav>

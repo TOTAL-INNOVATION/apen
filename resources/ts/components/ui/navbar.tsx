@@ -10,8 +10,8 @@ import {
 } from "./dropdown-menu";
 import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { Button } from "./button";
-import { Link, router, usePage } from "@inertiajs/react";
-import { LogOut, User2, Users2 } from "lucide-react";
+import { Link, usePage } from "@inertiajs/react";
+import { LogOut, User2 } from "lucide-react";
 import { User } from "~/types";
 import axios from "axios";
 import { asset } from "~/lib/utils";
@@ -54,13 +54,6 @@ const Navbar = ({ className }: { className?: string }) => {
                                 <strong>Profil</strong>
                             </Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem asChild>
-                            <Link href="#">
-                                <Users2 className="mr-2 h-5 w-5" />
-                                <strong>Équipe</strong>
-                            </Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={logout}>
                             <LogOut className="mr-2 h-5 w-5" />
                             <strong>Déconnexion</strong>
@@ -73,11 +66,14 @@ const Navbar = ({ className }: { className?: string }) => {
 };
 
 async function logout() {
-    const formData = new FormData();
-    formData.append("from_panel", "true");
     const response = await axios.post<{message: string}>(
         '/deconnexion',
-        formData,
+        undefined,
+        {
+            headers: {
+                "X-FROM-PANEL": true,
+            }
+        }
     );
     const {status, data} = response;
     

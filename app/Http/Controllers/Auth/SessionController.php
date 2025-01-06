@@ -40,7 +40,7 @@ class SessionController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        if ($userRole !== RoleEnum::EXPERT && $request->input('from_panel'))
+        if ($userRole !== RoleEnum::EXPERT && $request->header('X-FROM-PANEL'))
         {
             return response()->json([
                 'message' => 'loggedOut',

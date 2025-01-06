@@ -23,7 +23,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'title' => 'bail|required|string|min:10|max:255|unique:flash_infos,title',
-            'active' => 'bail|nullable|bool',
+            'active' => 'bail|required|boolean',
         ];
     }
 }
