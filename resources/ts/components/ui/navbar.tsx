@@ -71,7 +71,7 @@ async function logout() {
         undefined,
         {
             headers: {
-                "X-FROM-PANEL": true,
+                "X-FROM-PANEL": "true",
             }
         }
     );

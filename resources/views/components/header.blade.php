@@ -43,7 +43,7 @@
                             @if ($user->avatar === User::DEFAULT_AVATAR)
                                 <img class="inline-block size-8 sm:size-9" src="{{ asset('defaults/avatar2.svg') }}" alt="{{ $user->fullname }}">
                             @else
-                            <img class="inline-block size-[38px]" src="{{ $user->avatar }}" alt="{{ $user->fullname }}">
+                            <img class="inline-block size-[38px] rounded-full" src="{{ $user->avatar }}" alt="{{ $user->fullname }}">
                             @endif
 
                             <strong>{{ __('Profil') }}</strong>

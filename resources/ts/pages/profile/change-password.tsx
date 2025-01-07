@@ -9,9 +9,16 @@ import {
 import { Input } from "~/components/ui/input";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "~/components/ui/card";
+import {
+    Card,
+    CardContent,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "~/components/ui/card";
 import zod from "~/lib/zod";
 import { Button } from "~/components/ui/button";
+import { router } from "@inertiajs/react";
 
 const schema = zod.object({
     password: zod.string().min(8).max(50),
@@ -61,7 +68,9 @@ function ChangePassword() {
                                 name="password_confirmation"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Confirmez votre mot de passe</FormLabel>
+                                        <FormLabel>
+                                            Confirmez votre mot de passe
+                                        </FormLabel>
                                         <FormControl>
                                             <Input
                                                 type="password"
@@ -74,18 +83,24 @@ function ChangePassword() {
                             />
                         </CardContent>
 
-						<CardFooter className="justify-center">
-							<Button type="submit">Enrégistrer les modifications</Button>
-						</CardFooter>
+                        <CardFooter className="justify-center">
+                            <Button type="submit">
+                                Enrégistrer les modifications
+                            </Button>
+                        </CardFooter>
                     </Card>
                 </form>
             </Form>
         </div>
     );
 
-	function onSubmit(data: zod.infer<typeof schema>) {
-		console.log(data);
-	}
+    function onSubmit(data: zod.infer<typeof schema>) {
+        router.post("/profil/modifier-mon-mot-de-passe", data, {
+            headers: {
+                "X-FROM-PANEL": "true",
+            },
+        });
+    }
 }
 
 export default ChangePassword;

@@ -96,4 +96,19 @@ return [
 			'succeeded' => 'L\'info a été supprimée avec succès.',
 		],
 	],
+
+	'profile' => [
+		'avatar' => [
+			'failed' => 'Une erreur est survenue lors de la modification de l\'avatar.',
+			'succeeded' => 'L\'avatar a été modifié avec succès.',
+		],
+		'info' => [
+			'failed' => 'Une erreur est survenue lors de la modification des informations.',
+			'succeeded' => 'Vos informations ont été modifié.',
+		],
+		'password' => [
+			'failed' => 'Une erreur est survenue lors de la modification du mot de passe.',
+			'succeeded' => 'Le mot de passe a été modifié avec succès.',
+		],
+	]
 ];

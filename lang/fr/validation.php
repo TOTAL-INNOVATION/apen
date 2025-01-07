@@ -31,7 +31,7 @@ return [
         'array' => 'Le tableau doit avoir un nombre d\'éléments compris entre :min et :max.',
     ],
     'boolean' => 'La valeur à fournir ne doit être que vrai ou faux.',
-    'confirmed' => 'La valeur de confirmation ne correspond pas à la valeur de ce champ.',
+    'confirmed' => 'Ce champ doit être confirmer.',
     'current_password' => 'Le mot de passe est incorrect.',
     'date' => 'La valeur fournie n\'est pas une date valide.',
     'date_equals' => 'La valeur fournie n\'est pas une date égale à :date.',

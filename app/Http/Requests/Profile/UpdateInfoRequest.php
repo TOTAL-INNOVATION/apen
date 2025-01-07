@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Profile;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateInfoRequest extends FormRequest
 {
@@ -22,7 +23,18 @@ class UpdateInfoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'firstname' => 'bail|required|string|min:2|max:50',
+            'lastname' => 'bail|required|string|min:2|max:50',
+            'email' => [
+                'bail',
+                'required',
+                'string',
+                'lowercase',
+                'email',
+                Rule::unique('users', 'email')
+                ->ignore($this->user()->id),
+                'confirmed',
+            ],
         ];
     }
 }

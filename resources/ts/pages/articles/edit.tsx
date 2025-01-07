@@ -136,6 +136,7 @@ function Edit() {
                                                 }
                                             />
                                         </FormControl>
+                                        <FormMessage />
                                     </FormItem>
                                 )}
                             />
