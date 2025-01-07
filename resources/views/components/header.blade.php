@@ -58,7 +58,7 @@
                             </div>
 
                             @if ($user->role === RoleEnum::EXPERT)
-                                <x-dropdown.item href="#">
+                                <x-dropdown.item href="{{ route('profile.index') }}">
                                     <x-lucide-user-2 class="h-5 w-5" />
                                     <strong>{{ __('Portail') }}</strong>
                                 </x-dropdown.item>
