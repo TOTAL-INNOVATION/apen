@@ -9,6 +9,7 @@ use App\Traits\SearchFilter;
 use Illuminate\Contracts\Auth\{CanResetPassword, MustVerifyEmail};
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -62,6 +63,11 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function approval(): HasOne
+    {
+        return $this->hasOne(Approval::class);
     }
 
     public function sendEmailVerificationNotification(): void

@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\GenderEnum;
+use App\Enums\MaritalStatusEnum;
 use App\Enums\RoleEnum;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -24,6 +26,10 @@ return new class extends Migration
             $table->string('avatar')->default(User::DEFAULT_AVATAR);
             $table->boolean('added_by_admin')->default(false);
             $table->string('password')->nullable();
+            $table->date('birthday')->nullable();
+            $table->enum('gender', GenderEnum::values())->nullable();
+            $table->enum('marital_status', MaritalStatusEnum::values());
+            $table->string('identity_photo')->nullable(); // URL to identity photo
             $table->rememberToken();
             $table->timestamps();
 

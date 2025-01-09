@@ -23,7 +23,7 @@ class SessionController extends Controller
         $request->session()->regenerate();
 
         if (user()->role === RoleEnum::EXPERT)
-            return to_route('home');
+            return to_route('profile.index');
         
         return to_route('panel');
     }

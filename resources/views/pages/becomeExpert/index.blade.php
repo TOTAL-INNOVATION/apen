@@ -33,7 +33,7 @@
 				<x-priority-card
 					title="{!! __('Formulaire de candidature') !!}"
 					imageSrc="#"
-					href="#"
+					href="{{ route('becomeExpert.form') }}"
 					withoutDescription
 				/>
 			</div>

@@ -12,7 +12,9 @@
             </x-breadcrumb>
         </div>
 
-		
+		<div class="px-4 sm:px-0 container">
+            
+        </div>
 
 	</main>
 </x-base-layout>

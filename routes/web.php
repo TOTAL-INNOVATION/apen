@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplyForApprovalController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NewzController;
 use App\Http\Controllers\Panel\ArticleController;
@@ -26,6 +27,7 @@ Route::prefix('devenir-expert')->group(function () {
     Route::view('/', 'pages.becomeExpert.index')->name('becomeExpert.index');
     Route::view('conditions', 'pages.becomeExpert.conditions')->name('becomeExpert.conditions');
     Route::view('procedure', 'pages.becomeExpert.procedure')->name('becomeExpert.procedure');
+    Route::get('formulaire', ApplyForApprovalController::class)->name('becomeExpert.form');
 });
 
 Route::middleware(['auth', 'verified', HandleInertiaRequests::class])->group(function () {
