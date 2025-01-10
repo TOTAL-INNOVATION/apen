@@ -6,6 +6,7 @@ namespace App\Actions;
 
 use App\Models\FlashInfo;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Cache;
 
 class GetFlashInfos
 {
@@ -14,8 +15,12 @@ class GetFlashInfos
 
     public function handle(): Collection
 	{
-		return FlashInfo::active()
-		->select('title')
-		->get();
+		return Cache::remember(
+			'infos',
+			now()->addHours(4),
+			fn() => FlashInfo::active()
+			->select('title')
+			->get()	
+		);
 	}
 }

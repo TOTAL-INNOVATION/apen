@@ -1,3 +1,7 @@
+@php
+    $user = user();
+@endphp
+
 <x-base-layout>
     <x-slot:metadata>
         <x-slot:title>{{ __('Nous contacter') }}</x-slot:title>
@@ -34,14 +38,14 @@
 								</div>
                                 <div class="lg:grid lg:grid-cols-2 gap-x-6">
                                     <x-form.field name="lastname" label="{{ __('Nom') }}"
-                                        placeholder="{{ __('Entrez votre nom') }}" required />
+                                        placeholder="{{ __('Entrez votre nom') }}" value="{{ $user?->lastname }}" required />
 
                                     <x-form.field name="firstname" label="{{ __('Prénom') }}"
-                                        placeholder="{{ __('Entrez votre prénom') }}" required />
+                                        placeholder="{{ __('Entrez votre prénom') }}" value="{{ $user?->firstname }}" required />
 
                                     <div class="lg:col-span-2">
                                         <x-form.field type="email" name="email" label="{{ __('Adresse mail') }}"
-                                            placeholder="{{ __('ex: exemple@gmail.com') }}" required />
+                                            placeholder="{{ __('ex: exemple@gmail.com') }}" value="{{ $user?->email }}" required />
 
                                         <x-form.field name="subject" label="{{ __('Sujet') }}"
                                             placeholder="{!! __('L\'objet de votre message') !!}" required />

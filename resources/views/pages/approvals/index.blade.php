@@ -38,7 +38,7 @@
                         <div class="space-y-4">
                             @foreach (ApprovalTypeEnum::values() as $approval)
                                 <x-select-box label="{{ $approval }}"
-                                    description="{{ __('Agrément de :value', ['value' => $approval]) }}" name="approval"
+                                    description="{{ __('Agrément de :value', ['value' => $approval]) }}" name="type"
                                     value="{{ $approval }}" />
                             @endforeach
                         </div>

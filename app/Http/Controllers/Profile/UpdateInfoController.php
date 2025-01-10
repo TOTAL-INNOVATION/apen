@@ -16,11 +16,11 @@ class UpdateInfoController extends Controller
      */
     public function __invoke(UpdateInfoRequest $request): JsonResponse|RedirectResponse
     {
-        $xFromPanel = $request->header('X-FROM-PANEL');
+        $expectJson = $request->expectsJson();
         $changed = app(UpdateUserInfo::class)->handle($request);
 
         if (!$changed) {
-            return $xFromPanel ? response()->json([
+            return $expectJson ? response()->json([
                 'flash' => [
                     'type' => FlashEnum::ERROR,
                     'message' => __('messages.profile.info.failed'),
@@ -30,7 +30,7 @@ class UpdateInfoController extends Controller
 
         $request->user()->sendEmailVerificationNotification();
 
-        return $xFromPanel ? response()->json([
+        return $expectJson ? response()->json([
             'flash' => [
                 'type' => FlashEnum::SUCCESS,
                 'message' => __('messages.profile.info.succeeded'),

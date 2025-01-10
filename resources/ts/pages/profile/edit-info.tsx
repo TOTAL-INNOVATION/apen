@@ -152,11 +152,6 @@ function EditInfo({ user }: { user: User }) {
             const response = await axios.post(
                 "/profil/modifier-mes-infos",
                 formData,
-                {
-                    headers: {
-                        "X-FROM-PANEL": "true"
-                    }
-                }
             );
 
             if (response.status !== 200) {

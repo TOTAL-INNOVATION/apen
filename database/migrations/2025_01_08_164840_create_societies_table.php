@@ -14,15 +14,13 @@ return new class extends Migration
     {
         Schema::create('societies', function (Blueprint $table) {
             $table->ulid('id')->primary();
+            $table->foreignUlid('approval_id')->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->string('commercial_name');
             $table->year('founded_at');
             $table->string('capital'); // of the society
-            $table->string('country_of_residence');
             $table->enum('legal_status', LegalStatusEnum::values()); // SARL, SA, etc.
             $table->string('status_file'); // Legal status file
-            $table->string('email');
-            $table->string('website')->nullable();
             $table->string('staff_number');
             $table->integer('salaried_technical_staff'); // Number of
             $table->integer('salaried_administrative_staff');  // Number of

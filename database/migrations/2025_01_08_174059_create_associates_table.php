@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('associates', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->foreignIdFor(Society::class, 'society_id');
+            $table->foreignUlid('society_id')->constrained()->cascadeOnDelete();
             $table->string('firstname');
             $table->string('lastname');
             $table->string('role'); // In the society

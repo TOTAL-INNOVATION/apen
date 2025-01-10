@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('password')->nullable();
             $table->date('birthday')->nullable();
             $table->enum('gender', GenderEnum::values())->nullable();
-            $table->enum('marital_status', MaritalStatusEnum::values());
+            $table->enum('marital_status', MaritalStatusEnum::values())->nullable();
             $table->string('identity_photo')->nullable(); // URL to identity photo
             $table->rememberToken();
             $table->timestamps();

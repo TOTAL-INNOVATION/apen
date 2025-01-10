@@ -28,7 +28,28 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->configureHandlers();
+        $this->configureDefaultValidations();
+        $this->configureViewComposers();
+    }
 
+    public function configureHandlers()
+    {
+        Authenticate::redirectUsing(fn() => route('login.view'));
+        VerifyEmail::toMailUsing(fn(...$args) => VerifyEmailHandler::handle(...$args));
+        ResetPassword::toMailUsing(fn($_, string $token) => ResetPasswordHandler::handle($token));
+    }
+
+    public function configureViewComposers(): void
+    {
+        View::composer(GetFlashInfos::TARGET_VIEW, function(ViewContract $view) {
+            $infos = $this->app->make(GetFlashInfos::class)->handle();
+            $view->with('infos', $infos);
+        });
+    }
+
+    public function configureDefaultValidations(): void
+    {
         Password::defaults(static function (): Password {
             return Password::min(8)
                 ->letters()
@@ -37,15 +58,6 @@ class AppServiceProvider extends ServiceProvider
                 ->symbols()
                 ->uncompromised()
                 ->rules(['required', 'confirmed']);
-        });
-
-        Authenticate::redirectUsing(fn() => route('login.view'));
-        VerifyEmail::toMailUsing(fn(...$args) => VerifyEmailHandler::handle(...$args));
-        ResetPassword::toMailUsing(fn($_, string $token) => ResetPasswordHandler::handle($token));
-
-        View::composer(GetFlashInfos::TARGET_VIEW, function(ViewContract $view) {
-            $infos = $this->app->make(GetFlashInfos::class)->handle();
-            $view->with('infos', $infos);
         });
     }
 }

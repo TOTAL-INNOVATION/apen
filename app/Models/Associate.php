@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\QualificationEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -15,6 +16,13 @@ class Associate extends Model
         'qualification',
         'approval',
     ];
+
+    public function casts(): array
+    {
+        return [
+            'qualification' => QualificationEnum::class,
+        ];
+    }
 
     public function society(): BelongsTo
     {
