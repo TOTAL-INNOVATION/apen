@@ -54,7 +54,7 @@
                         
                         <x-dropdown.content class="p-0 w-44">
                             <div class="mb-1 py-2 px-3 w-full border-b border-whisper">
-                                <strong>{{ Str::limit($user->fullname, 20) }}</strong>
+                                <strong>{{ Str::limit($user->fullname, 17) }}</strong>
                             </div>
 
                             @if ($user->role === RoleEnum::EXPERT)

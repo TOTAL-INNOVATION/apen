@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Approval\ChoiceController;
+use App\Http\Controllers\Approval\IdentificationController;
 use App\Http\Controllers\Approval\IndexController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DecreeController as GetDecreesController;
@@ -27,7 +29,15 @@ Route::prefix('devenir-expert')->group(function () {
     Route::view('/', 'pages.becomeExpert.index')->name('becomeExpert.index');
     Route::view('conditions', 'pages.becomeExpert.conditions')->name('becomeExpert.conditions');
     Route::view('procedure', 'pages.becomeExpert.procedure')->name('becomeExpert.procedure');
+});
+
+Route::middleware(['auth', 'verified'])->group(function() {
+
     Route::get('formulaire', IndexController::class)->name('becomeExpert.form');
+    Route::post('définir-le-choix', ChoiceController::class)->name('approval.choice');
+    Route::prefix('identite')->group(function() {
+        Route::post('etape-1', [IdentificationController::class, 'firstStep'])->name('identity.first');
+    });
 });
 
 Route::middleware(['auth', 'verified', HandleInertiaRequests::class])->group(function () {

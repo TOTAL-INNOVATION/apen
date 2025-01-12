@@ -14,7 +14,7 @@
     ];
 
     $classNames = [
-        'flex h-10 w-full border border-whisper outline-transparent bg-white',
+        'flex items-center h-10 w-full border border-whisper outline-transparent bg-white',
          $sizes[$size],
          'ring-offset-white file:border-0 file:bg-transparent file:font-franklin-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:border-transparent focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 transition-all',
 	];

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\GenderEnum;
+use App\Enums\MaritalStatusEnum;
 use App\Enums\RoleEnum;
 use App\Notifications\Auth\SendResetPasswordLink;
 use App\Notifications\Auth\SendVerificationEmail;
@@ -33,6 +35,10 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         'avatar',
         'password',
         'added_by_admin',
+        'birthday',
+        'birthplace',
+        'gender',
+        'marital_status',
     ];
 
     public function getFullnameAttribute(): string
@@ -59,6 +65,8 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
     {
         return [
             'role' => RoleEnum::class,
+            'gender' => GenderEnum::class,
+            'marital_status' => MaritalStatusEnum::class,
             'added_by_admin' => 'boolean',
             'email_verified_at' => 'datetime',
             'password' => 'hashed',

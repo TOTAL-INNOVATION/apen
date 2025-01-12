@@ -10,6 +10,7 @@ export default {
         "./resources/**/*.tsx",
         "./resources/**/*.js",
         "node_modules/preline/dist/*.js",
+        "./app/Actions/CloneSelectOptions.php",
     ],
     theme: {
         container: {

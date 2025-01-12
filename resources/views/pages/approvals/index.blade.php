@@ -25,15 +25,7 @@
                 </div>
 
                 <div class="mt-4 md:mt-6">
-                    @session('success')
-                        <x-alert class="mb-4 sm:mb-6" variant="success">{{ __($value) }}</x-alert>
-                    @endsession
-
-                    @session('error')
-                        <x-alert class="mb-4 sm:mb-6" variant="error">{{ __($value) }}</x-alert>
-                    @endsession
-
-                    <x-form method="POST">
+                    <x-form action="{{ route('approval.choice') }}" method="POST">
 
                         <div class="space-y-4">
                             @foreach (ApprovalTypeEnum::values() as $approval)

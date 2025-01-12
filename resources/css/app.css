@@ -156,6 +156,24 @@ body {
 	@apply overflow-y-hidden;
 }
 
+.custom-select {
+	@apply appearance-none;
+	@apply bg-white;
+	@apply border;
+	@apply border-whisper;
+	@apply rounded-none;
+	@apply px-4;
+	@apply py-2;
+	@apply pr-8;
+	@apply text-dark;
+	@apply font-franklin-regular;
+	@apply focus:outline-none;
+	@apply focus:border-transparent;
+	@apply focus:ring-2;
+	@apply focus:ring-primary;
+	@apply transition-all;
+}
+
 @media (max-width: 475px) {
 	.auth-card {
 		@apply w-11/12;

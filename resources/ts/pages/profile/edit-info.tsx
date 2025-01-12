@@ -164,8 +164,12 @@ function EditInfo({ user }: { user: User }) {
 
             toast((response.data as {flash: FlashMessage}).flash);
 
-            if (formData.email !== user.email)
+            if (formData.email !== user.email) {
                 window.location.reload();
+                return;
+            }
+
+            router.reload();
             
         } catch (error) {
             const { response } = (error as AxiosError);

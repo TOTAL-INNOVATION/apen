@@ -19,7 +19,8 @@ class IndexController extends Controller
         $approval = $request->user()->approval;
 
         if ($approval) {
-            return view($approval->next_view);
+            return view($approval->view)
+            ->with('approval', $approval);
         }
 
         return view('pages.approvals.index');

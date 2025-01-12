@@ -27,6 +27,7 @@ return new class extends Migration
             $table->boolean('added_by_admin')->default(false);
             $table->string('password')->nullable();
             $table->date('birthday')->nullable();
+            $table->string('birthplace')->nullable();
             $table->enum('gender', GenderEnum::values())->nullable();
             $table->enum('marital_status', MaritalStatusEnum::values())->nullable();
             $table->string('identity_photo')->nullable(); // URL to identity photo
