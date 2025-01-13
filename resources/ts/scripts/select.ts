@@ -1,6 +1,6 @@
-enum NAVIGATE {
-    UP = 'moveUp',
-    DOWN = 'moveDown'
+enum MOVE {
+    UP = "moveUp",
+    DOWN = "moveDown",
 }
 
 class CustomSelect {
@@ -8,9 +8,10 @@ class CustomSelect {
     public root: HTMLElement;
     public trigger: HTMLButtonElement;
     public placeholder: HTMLSpanElement;
-    public content: HTMLDivElement;
-    public dropdown: HTMLUListElement;
+    public container: HTMLDivElement;
+    public list: HTMLUListElement;
     public options: HTMLOptionsCollection;
+    public input: HTMLInputElement|null;
 
     constructor(select: HTMLSelectElement) {
         this.select = select;
@@ -23,65 +24,123 @@ class CustomSelect {
         this.placeholder = this.trigger.querySelector(
             "span[data-placeholder]"
         ) as HTMLSpanElement;
-        this.content = this.root.querySelector(
+        this.container = this.root.querySelector(
             "[data-content]"
         ) as HTMLDivElement;
-        this.dropdown = this.content.querySelector(
-            "ul"
-        ) as HTMLUListElement;
+        this.input = this.container.querySelector<HTMLInputElement>(
+            "input[type='text']"
+        );
+        this.list = this.container.querySelector("ul") as HTMLUListElement;
 
         this.render();
     }
 
     render() {
         const selectedIndex = this.options.selectedIndex;
-        const dropdownItems = Array.from(this.options).map((option, index) => {
-            const list = document.createElement("li");
-            list.setAttribute(
+        const items = Array.from(this.options).map((option, index) => {
+            const li = document.createElement("li");
+            li.setAttribute(
                 "class",
-                "px-2 w-full h-10 flex items-center cursor-pointer hover:bg-whisper focus:bg-whisper",
+                "px-2 w-full h-10 flex items-center cursor-pointer hover:bg-whisper focus:bg-whisper outline-none"
             );
-            
-            if (option.disabled) list.setAttribute("aria-disabled", "true");
 
-            list.setAttribute("data-value", option.value);
-            list.append(...option.childNodes);
-            if (selectedIndex === index)
-            {
-                list.setAttribute("aria-selected", "true");
-                list.focus();
+            if (option.disabled) li.setAttribute("aria-disabled", "true");
+
+            li.setAttribute("data-value", option.value);
+            li.append(...option.childNodes);
+            if (selectedIndex === index) {
+                li.setAttribute("aria-selected", "true");
             }
 
-            return list;
+            return li;
         });
-        
-        this.dropdown.append(
-            ...dropdownItems
-        );
 
-        this.configureEvent();
+        this.list.append(...items);
+
+        this.configureEvents();
     }
 
-    configureEvent() {
-        this.trigger.addEventListener("click", this.toogleContent.bind(this));
+    configureEvents() {
+        this.trigger.addEventListener("click", (ev) => {
+            ev.stopImmediatePropagation();
+            this.toogleContent();
+        });
+
+        document.addEventListener("keydown", (ev) => {
+            const target = ev.target;
+            
+            if (target instanceof HTMLInputElement) {
+                return;
+            }
+
+            if (target instanceof HTMLUListElement) {
+
+                if (this.select.selectedIndex === -1) {
+                    const listFirstChild = this.list.firstElementChild as HTMLOptionElement|null;
+                    if (!listFirstChild) {
+                        this.list.focus();
+                        return;
+                    };
+    
+                    listFirstChild.tabIndex = 1;
+                    listFirstChild.focus();
+
+                    return;
+                }
+
+                const selectedItem = this.select.options[this.select.selectedIndex];
+                //
+            }
+        });
 
         document.addEventListener("click", (ev) => {
             const target = ev.target as HTMLElement;
-            if (target !== this.trigger && !this.content.contains(target)) {
-                this.content.classList.add("hidden");
+            if (target !== this.trigger && !this.container.contains(target)) {
+                this.container.classList.add("hidden");
             }
         });
     }
 
+    /**
+     * Show or hide the dropdown
+     * @returns void
+     */
     toogleContent() {
-        this.content.classList.toggle("hidden");
+        this.container.classList.toggle("hidden");
 
-        if (this.content.classList.contains("hidden")) {
-            this.content.setAttribute("aria-hidden", "true");
+        if (this.container.classList.contains("hidden")) {
+            this.container.setAttribute("aria-hidden", "true");
+            this.removeDropdownFocus();
             return;
         }
-        (this.content.querySelector('ul') as HTMLUListElement).focus();
-        this.content.setAttribute("aria-hidden", "false");
+        this.container.setAttribute("aria-hidden", "false");
+        if (this.container.checkVisibility()) {
+            this.setDropdownFocus();
+        }
+    }
+
+    setDropdownFocus() {
+        this.trigger.blur();
+
+        if (this.input) {            
+            this.input.tabIndex = 1;
+            this.input.focus();
+            return;
+        }
+        this.list.tabIndex = 1;
+        this.list.focus();
+    }
+
+    removeDropdownFocus() {
+        if (this.input && this.input.hasAttribute("tabindex")) {
+            this.input.removeAttribute("tabindex");
+            this.input.blur();
+            return;
+        }
+
+        if (this.list.hasAttribute("tabindex")) {
+            this.list.removeAttribute("tabindex");
+        }
     }
 
     static init() {

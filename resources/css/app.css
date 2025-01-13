@@ -96,6 +96,10 @@ body {
 	@apply font-franklin-regular;
 }
 
+li[aria-disabled=true] {
+	@apply text-dark/75;
+}
+
 .mdxeditor {
 	@apply bg-white;
 	@apply font-franklin-regular;

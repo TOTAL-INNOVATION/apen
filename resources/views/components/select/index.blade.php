@@ -35,11 +35,19 @@
                 <span data-placeholder="{{ $placeholder }}">{{ $placeholder }}</span>
                 <x-lucide-chevron-down id="chevron" class="w-4 h-4 text-dark/75" />
             </x-button>
-            <div class="hidden absolute top-12 w-full h-[250px] bg-white border border-whisper shadow overflow-y-scroll z-10 focus:outline-primary" aria-hidden="true"
+            <div class="hidden absolute top-12 w-full h-fit bg-white border border-whisper shadow z-10 focus:outline-primary" aria-hidden="true"
                 data-content>
-                <ul class="w-full relative">
-                    
-                </ul>
+                @if ($searchable)
+                        <div class="p-1 w-full bg-white border-b border-whisper">
+                            <x-input type="text" placeholder="Rechercher..." class="h-8" />
+                        </div>
+                    @endif
+
+                <div class="w-full h-[200px] overflow-y-scroll">
+                    <ul class="w-full">
+
+                    </ul>
+                </div>
             </div>
         </div>
     @endif
