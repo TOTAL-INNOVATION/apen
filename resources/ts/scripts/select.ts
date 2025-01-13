@@ -1,6 +1,7 @@
 enum KEYDOWN_NAME {
     UP = "ArrowUp",
     DOWN = "ArrowDown",
+    ENTER = "Enter",
 }
 
 class CustomSelect {
@@ -48,6 +49,7 @@ class CustomSelect {
             li.setAttribute("data-value", option.value);
             li.append(...option.childNodes);
             if (selectedIndex === index) {
+                this.placeholder.textContent = li.textContent;
                 li.setAttribute("aria-selected", "true");
             }
 
@@ -70,11 +72,19 @@ class CustomSelect {
         });
 
         this.list.addEventListener("click", (ev) => {
-            
+            const target = ev.target;
+            if (target instanceof HTMLLIElement) {
+                this.setSelectedOption(target);
+            }
         })
 
         document.addEventListener("keydown", (ev) => {
             const target = ev.target;
+
+            if (ev.key === KEYDOWN_NAME.ENTER && target instanceof HTMLLIElement) {
+                this.setSelectedOption(target);
+                return;
+            }
             
             if (target instanceof HTMLInputElement) {
                 return;
@@ -105,6 +115,24 @@ class CustomSelect {
         });
     }
 
+    setSelectedOption(target: HTMLLIElement) {
+        if (target instanceof HTMLLIElement) {
+            const value = target.getAttribute("data-value");
+            const selectedOption = Array.from(this.options).find((option) => option.value === value);
+            if (!selectedOption) return;
+
+            this.select.selectedIndex = selectedOption.index;
+            this.placeholder.textContent = target.textContent;
+            Array.from(this.list.querySelectorAll("li")).find((li) => {
+                return li.ariaSelected === "true";
+            })?.removeAttribute("aria-selected");
+            target.setAttribute("aria-selected", "true");
+            this.container.classList.add("hidden");
+            this.container.setAttribute("aria-hidden", "true");
+            this.removeDropdownFocus();
+        }
+    }
+
     /**
      * Show or hide the dropdown
      * @returns void
@@ -117,6 +145,7 @@ class CustomSelect {
             this.removeDropdownFocus();
             return;
         }
+        
         this.container.setAttribute("aria-hidden", "false");
         if (this.container.checkVisibility()) {
             this.setDropdownFocus();
