@@ -29,10 +29,15 @@
 						
 						<x-form.field.select 
 							label="{{ __('Pays de résidence') }}" 
-							name="country_of_residence" 
+							name="country_of_residence"
 							required>
 							@foreach ($countries as $country)
-								<x-select.option value="{{ $country['name'] }}">{{ $country['name'] }}</x-select.option>
+								<x-select.option value="{{ $country['name'] }}">
+                                    <span class="inline-flex items-center">
+                                        <span class="mr-2">{{ $country['emoji'] }}</span>
+                                        <span>{{ $country['name'] }}</span>
+                                    </span>
+                                </x-select.option>
 							@endforeach
 						</x-form.field.select>
 

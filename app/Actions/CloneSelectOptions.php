@@ -36,9 +36,9 @@ class CloneSelectOptions
         $children = $node->textContent;
 
         return <<<EOT
-            <div class="px-2 w-full h-10 flex items-center cursor-pointer hover:bg-whisper" data-item data-value="$value">
+            <li class="px-2 w-full h-10 flex items-center cursor-pointer hover:bg-whisper focus:bg-whisper" data-value="$value">
                 $children
-            </div>
+            </li>
         EOT;
     }
 }
