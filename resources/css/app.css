@@ -96,6 +96,10 @@ body {
 	@apply font-franklin-regular;
 }
 
+li[aria-selected=true] {
+	@apply bg-whisper;
+}
+
 li[aria-disabled=true] {
 	@apply text-dark/75;
 }

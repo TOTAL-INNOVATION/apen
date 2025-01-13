@@ -1,6 +1,6 @@
-enum MOVE {
-    UP = "moveUp",
-    DOWN = "moveDown",
+enum KEYDOWN_NAME {
+    UP = "ArrowUp",
+    DOWN = "ArrowDown",
 }
 
 class CustomSelect {
@@ -31,7 +31,6 @@ class CustomSelect {
             "input[type='text']"
         );
         this.list = this.container.querySelector("ul") as HTMLUListElement;
-
         this.render();
     }
 
@@ -55,7 +54,11 @@ class CustomSelect {
             return li;
         });
 
-        this.list.append(...items);
+        if (this.list.hasChildNodes()) {
+            Array.from(this.list.childNodes).forEach(child => child.remove())
+        }
+
+        this.list.append(...items)
 
         this.configureEvents();
     }
@@ -66,6 +69,10 @@ class CustomSelect {
             this.toogleContent();
         });
 
+        this.list.addEventListener("click", (ev) => {
+            
+        })
+
         document.addEventListener("keydown", (ev) => {
             const target = ev.target;
             
@@ -74,22 +81,19 @@ class CustomSelect {
             }
 
             if (target instanceof HTMLUListElement) {
+                if (this.select.selectedIndex !== -1) {
+                    const selectedOption = this.select.options[this.select.selectedIndex];
+                    const item = this.list.querySelector<HTMLLIElement>(`li[data-value="${selectedOption.value}"]`);
+                    if (!item) return;
 
-                if (this.select.selectedIndex === -1) {
-                    const listFirstChild = this.list.firstElementChild as HTMLOptionElement|null;
-                    if (!listFirstChild) {
-                        this.list.focus();
-                        return;
-                    };
-    
-                    listFirstChild.tabIndex = 1;
-                    listFirstChild.focus();
+                    this.handleListNavigate(item, ev);
 
                     return;
                 }
+            }
 
-                const selectedItem = this.select.options[this.select.selectedIndex];
-                //
+            if (target instanceof HTMLLIElement) {
+                this.handleListNavigate(target, ev);
             }
         });
 
@@ -119,6 +123,37 @@ class CustomSelect {
         }
     }
 
+    handleListNavigate(target: HTMLLIElement, ev: KeyboardEvent) {
+        if (ev.key === KEYDOWN_NAME.UP) {
+            const previousSibling = target.previousElementSibling;
+            if (!previousSibling || !(previousSibling instanceof HTMLLIElement)) return;
+
+            target.removeAttribute("tabindex");
+            ev.preventDefault();
+            previousSibling.tabIndex = 1;
+            previousSibling.focus();
+            previousSibling.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            })
+            return;
+        }
+
+        if (ev.key === KEYDOWN_NAME.DOWN) {
+            const nextSibling = target.nextElementSibling;
+            if (!nextSibling || !(nextSibling instanceof HTMLLIElement)) return;
+
+            ev.preventDefault();
+            target.removeAttribute("tabindex");
+            nextSibling.tabIndex = 1;
+            nextSibling.focus();
+            nextSibling.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            })
+        }
+    }
+
     setDropdownFocus() {
         this.trigger.blur();
 
@@ -127,6 +162,7 @@ class CustomSelect {
             this.input.focus();
             return;
         }
+        
         this.list.tabIndex = 1;
         this.list.focus();
     }

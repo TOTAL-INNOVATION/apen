@@ -3,7 +3,7 @@
     'size' => 'base',
     'placeholder' => 'Sélectionner une option',
     'isCustom' => true,
-    'searchable' => true,
+    'searchable' => false,
     'class' => '',
     'disabled' => false,
 ])
@@ -44,7 +44,7 @@
                     @endif
 
                 <div class="w-full h-[200px] overflow-y-scroll">
-                    <ul class="w-full">
+                    <ul class="w-full scroll-smooth">
 
                     </ul>
                 </div>

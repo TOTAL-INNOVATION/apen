@@ -32,12 +32,12 @@
 							name="country_of_residence"
 							required>
 							@foreach ($countries as $country)
-								<x-select.option value="{{ $country['name'] }}">
+								<option value="{{ $country['name'] }}" @selected($country['name'] === 'Burkina Faso')>
                                     <span class="inline-flex items-center">
                                         <span class="mr-2">{{ $country['emoji'] }}</span>
                                         <span>{{ $country['name'] }}</span>
                                     </span>
-                                </x-select.option>
+                                </option>
 							@endforeach
 						</x-form.field.select>
 
