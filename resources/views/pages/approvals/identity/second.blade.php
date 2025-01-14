@@ -41,8 +41,9 @@
 							@endforeach
 						</x-form.field.select>
 
-                        <x-image-field
+                        <x-form.field
                             label="{!! __('Photo d\'identité') !!}"
+                            type="file"
                             name="identity_photo"
                             required
                         />

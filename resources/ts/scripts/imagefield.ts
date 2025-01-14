@@ -22,8 +22,13 @@ class ImageField {
         new DropField({
             root: this.root,
             input: this.input,
-            accepts: ["png", "jpg", "jpeg"],
-            onChange(files, state, event) {},
+            accepts: ["image/png", "image/jpg", "image/jpeg"],
+            onChange(acceptedFiles, rejectedFiles, state, event) {
+                
+            },
+            onDragOver(acceptedFiles, rejectedFiles, state, event) {
+                
+            },
         });
     }
 
