@@ -5,14 +5,14 @@ enum KEYDOWN_NAME {
 }
 
 class CustomSelect {
-    public select: HTMLSelectElement;
-    public root: HTMLElement;
-    public trigger: HTMLButtonElement;
-    public placeholder: HTMLSpanElement;
-    public container: HTMLDivElement;
-    public list: HTMLUListElement;
-    public options: HTMLOptionsCollection;
-    public input: HTMLInputElement|null;
+    private select: HTMLSelectElement;
+    private root: HTMLElement;
+    private trigger: HTMLButtonElement;
+    private placeholder: HTMLSpanElement;
+    private container: HTMLDivElement;
+    private list: HTMLUListElement;
+    private options: HTMLOptionsCollection;
+    private input: HTMLInputElement|null;
 
     constructor(select: HTMLSelectElement) {
         this.select = select;
@@ -35,7 +35,7 @@ class CustomSelect {
         this.render();
     }
 
-    render() {
+    private render() {
         const selectedIndex = this.options.selectedIndex;
         const items = Array.from(this.options).map((option, index) => {
             const li = document.createElement("li");
@@ -65,7 +65,7 @@ class CustomSelect {
         this.configureEvents();
     }
 
-    configureEvents() {
+    private configureEvents() {
         this.trigger.addEventListener("click", (ev) => {
             ev.stopImmediatePropagation();
             this.toogleContent();
@@ -76,7 +76,7 @@ class CustomSelect {
             if (target instanceof HTMLLIElement) {
                 this.setSelectedOption(target);
             }
-        })
+        });
 
         document.addEventListener("keydown", (ev) => {
             const target = ev.target;
@@ -95,7 +95,6 @@ class CustomSelect {
                     const selectedOption = this.select.options[this.select.selectedIndex];
                     const item = this.list.querySelector<HTMLLIElement>(`li[data-value="${selectedOption.value}"]`);
                     if (!item) return;
-
                     this.handleListNavigate(item, ev);
 
                     return;
@@ -115,7 +114,7 @@ class CustomSelect {
         });
     }
 
-    setSelectedOption(target: HTMLLIElement) {
+    private setSelectedOption(target: HTMLLIElement) {
         if (target instanceof HTMLLIElement) {
             const value = target.getAttribute("data-value");
             const selectedOption = Array.from(this.options).find((option) => option.value === value);
@@ -137,7 +136,7 @@ class CustomSelect {
      * Show or hide the dropdown
      * @returns void
      */
-    toogleContent() {
+    private toogleContent() {
         this.container.classList.toggle("hidden");
 
         if (this.container.classList.contains("hidden")) {
@@ -152,7 +151,7 @@ class CustomSelect {
         }
     }
 
-    handleListNavigate(target: HTMLLIElement, ev: KeyboardEvent) {
+    private handleListNavigate(target: HTMLLIElement, ev: KeyboardEvent) {
         if (ev.key === KEYDOWN_NAME.UP) {
             const previousSibling = target.previousElementSibling;
             if (!previousSibling || !(previousSibling instanceof HTMLLIElement)) return;
@@ -183,7 +182,7 @@ class CustomSelect {
         }
     }
 
-    setDropdownFocus() {
+    private setDropdownFocus() {
         this.trigger.blur();
 
         if (this.input) {            
@@ -192,11 +191,28 @@ class CustomSelect {
             return;
         }
         
-        this.list.tabIndex = 1;
-        this.list.focus();
+        const activeListElement = Array.from(this.list.querySelectorAll("li")).find((li) => {
+            return li.ariaSelected === "true";
+        });
+
+        if (activeListElement && activeListElement.checkVisibility()) {
+            activeListElement.tabIndex = 1;
+            activeListElement.focus();
+            return;
+        }
+
+        const firstListItem = this.list.firstElementChild as HTMLLIElement|null;
+        if (!firstListItem) {
+            this.list.tabIndex = 1;
+            this.list.focus();
+            return;
+        }
+        
+        firstListItem.tabIndex = 1;
+        firstListItem.focus();
     }
 
-    removeDropdownFocus() {
+    private removeDropdownFocus() {
         if (this.input && this.input.hasAttribute("tabindex")) {
             this.input.removeAttribute("tabindex");
             this.input.blur();

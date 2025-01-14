@@ -6,7 +6,7 @@
 	'labelHidden' => false,
 ])
 
-<div class="mb-2 sm:mb-4">
+<div class="mb-4">
 	@if ($label)
 		<x-form.label :for="$id" :hidden="$labelHidden">
 			{{ $label }}

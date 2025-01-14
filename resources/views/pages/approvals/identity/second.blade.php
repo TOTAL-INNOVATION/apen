@@ -41,6 +41,12 @@
 							@endforeach
 						</x-form.field.select>
 
+                        <x-image-field
+                            label="{!! __('Photo d\'identité') !!}"
+                            name="identity_photo"
+                            required
+                        />
+
 						<div class="mt-4 md:mt-6">
                             <x-button variant="primary" class="font-franklin-medium" type="submit" widthFull>
                                 <span>{{ __('Suivant') }}</span>
