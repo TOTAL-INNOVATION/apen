@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\{ActivitySectorEnum, ApprovalTypeEnum, ExpertStatusEnum};
+use App\Enums\StatusInSectorEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -32,6 +33,7 @@ return new class extends Migration
             $table->string('association')->nullable();
             $table->enum('category', ['A', 'B', 'C'])->nullable(); // For approval of type C only
             $table->enum('activity_sector', ActivitySectorEnum::values())->nullable(); // For approval of type C only
+            $table->enum('status_in_sector', StatusInSectorEnum::values())->nullable();
             $table->string('view')->nullable(); //Next view
             $table->integer('total_steps'); // Total step to complete the form
             $table->integer('current_step')->default(1);

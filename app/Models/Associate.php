@@ -24,6 +24,11 @@ class Associate extends Model
         ];
     }
 
+    public function getFullnameAttribute(): string
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
+
     public function society(): BelongsTo
     {
         return $this->belongsTo(Society::class);

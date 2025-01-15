@@ -295,3 +295,29 @@ if (!function_exists('countriesList')) {
 		});
 	}
 }
+
+if (!function_exists('regionsOfBurkinaFaso')) {
+	function regionsOfBurkinaFaso() {
+		return [
+			'Région du Centre' => [
+
+			],
+			'Région du l\'Est' => [
+
+			],
+			'Région de l\'Ouest' => [
+
+			],
+			'Région du Nord' => [
+
+			],
+			'Région du Sud' => [
+
+			],
+			'Région du Centre-Est' => [
+
+			],
+			'Région du '
+		];
+	}
+}

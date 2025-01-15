@@ -2,10 +2,11 @@
 	'label' => null,
 	'id' => sprintf('_%s', Str::random(8)),
 	'name' => sprintf('_%s', Str::random(8)),
+	'containerClass' => '',
 	'labelHidden' => false,
 ])
 
-<div class="mb-4">
+<div class="{{ twMerge($containerClass, 'mb-4') }}">
 	@if ($label)
 		<x-form.label :for="$id" :hidden="$labelHidden">
 			{{ $label }}

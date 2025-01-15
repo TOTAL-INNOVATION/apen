@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Enums\{ActivitySectorEnum, ApprovalTypeEnum, ExpertStatusEnum};
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasOne};
+use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasOne, HasManyThrough};
 
 class Approval extends Model
 {
@@ -30,5 +30,13 @@ class Approval extends Model
     public function society(): HasOne
     {
         return $this->hasOne(Society::class);
+    }
+
+    public function associates(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            Associate::class,
+            Society::class
+        );
     }
 }
