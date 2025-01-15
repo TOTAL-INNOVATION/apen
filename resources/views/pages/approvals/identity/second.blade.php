@@ -25,7 +25,7 @@
                 <h2 class="heading-2 uppercase">{{ __('Identification - Partie 2') }}</h2>
 
 				<div class="mt-4 md:mt-6">
-					<x-form action="#" method="POST">
+					<x-form action="{{ route('identity.second') }}" method="POST" enctype="multipart/form-data">
 						
 						<x-form.field.select 
 							label="{{ __('Pays de résidence') }}" 
@@ -45,6 +45,14 @@
                             label="{!! __('Photo d\'identité') !!}"
                             type="file"
                             name="identity_photo"
+                            accept="image/png, image/jpg, image/jpeg"
+                            required
+                        />
+
+                        <x-form.field
+                            label="{{ __('Registre commercial') }}"
+                            name="commercial_register"
+                            placeholder="{{ __('RCCM ou RSCPM') }}"
                             required
                         />
 

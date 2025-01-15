@@ -11,7 +11,7 @@
 			{{ $label }}
 		</x-form.label>
 	@endif
-	<x-select {{ $attributes }} data-select>
+	<x-select name="{{ $name }}" {{ $attributes }} data-select>
 		{{ $slot }}
 	</x-select>
     @error($name)

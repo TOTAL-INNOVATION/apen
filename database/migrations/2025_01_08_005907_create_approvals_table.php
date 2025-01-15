@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('fax')->nullable();
             $table->enum('expert_status', ExpertStatusEnum::values())->nullable();
             $table->boolean('has_been_public_agent')->default(false);
-            $table->integer('total_sectors')->nullable();
+            $table->integer('total_sectors')->nullable(); // Total domains
             $table->string('association')->nullable();
             $table->enum('category', ['A', 'B', 'C'])->nullable(); // For approval of type C only
             $table->enum('activity_sector', ActivitySectorEnum::values())->nullable(); // For approval of type C only

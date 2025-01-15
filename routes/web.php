@@ -37,6 +37,8 @@ Route::middleware(['auth', 'verified'])->group(function() {
     Route::post('définir-le-choix', ChoiceController::class)->name('approval.choice');
     Route::prefix('identite')->group(function() {
         Route::post('etape-1', [IdentificationController::class, 'firstStep'])->name('identity.first');
+        Route::post('etape-2', [IdentificationController::class, 'secondStep'])->name('identity.second');
+        Route::post('etape-3', [IdentificationController::class, 'thirdStep'])->name('identity.third');
     });
 });
 

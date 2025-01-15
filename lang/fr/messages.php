@@ -110,5 +110,13 @@ return [
 			'failed' => 'Une erreur est survenue lors de la modification du mot de passe.',
 			'succeeded' => 'Le mot de passe a été modifié avec succès.',
 		],
+	],
+
+	'approval' => [
+		'identification' => [
+			'failed' => [
+				'secondStep' => 'Il y\'a eu un souci lors de l\'enregistrement de la photo.',
+			]
+		]
 	]
 ];

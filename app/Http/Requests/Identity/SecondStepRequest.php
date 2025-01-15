@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Identity;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\File;
 
 class SecondStepRequest extends FormRequest
@@ -23,6 +25,11 @@ class SecondStepRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'country_of_residence' => [
+                'bail',
+                'required',
+                Rule::in($this->countries())
+            ],
             'identity_photo' => [
                 'bail',
                 'required',
@@ -30,10 +37,17 @@ class SecondStepRequest extends FormRequest
                     ->extensions(['png', 'jpg', 'jpeg'])
                     ->max(3072),
             ],
-            'country_of_residence' => [
-                'bail',
-                'required',
-            ],
+            'commercial_register' => 'bail|required|string|min:8|max:255',
         ];
+    }
+
+    public function countries(): array
+    {
+        return Cache::rememberForever(
+            'countries_rule',
+            fn() => array_values(
+                getCountries()
+            )
+        );
     }
 }
