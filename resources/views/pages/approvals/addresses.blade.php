@@ -14,8 +14,7 @@
             <x-breadcrumb>
                 <x-breadcrumb.item href="{{ route('home') }}" text="{{ __('Accueil') }}" isHead />
                 <x-breadcrumb.item href="{{ route('becomeExpert.index') }}" text="{{ __('Devenir expert') }}" />
-                <x-breadcrumb.item href="#" text="{{ __('Adresses') }}"
-                    class="font-franklin-medium" />
+                <x-breadcrumb.item href="#" text="{{ __('Adresses') }}" class="font-franklin-medium" />
             </x-breadcrumb>
         </div>
 
@@ -25,7 +24,7 @@
 
 				<div class="mt-4 md:mt-6">
 					<x-form action="#" method="POST">
-						
+
 						<x-form.field.select 
 							label="{{ __('Adresse géographique') }}" 
 							name="geographic_region"
@@ -39,8 +38,6 @@
                                 </option>
 							@endforeach
 						</x-form.field.select>
-
-						
 
 					</x-form>
 				</div>

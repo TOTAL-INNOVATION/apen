@@ -105,3 +105,10 @@ export type FlashInfo = {
     created_at: string;
     updated_at: string;
 };
+
+export type Statement = {
+    id: string;
+    title: string;
+    content: string;
+    published_at: string;
+}

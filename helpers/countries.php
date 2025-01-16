@@ -314,10 +314,30 @@ if (!function_exists('regionsOfBurkinaFaso')) {
 			'Région du Sud' => [
 
 			],
+			'Région du Sud-Est' => [
+				
+			],
+			'Région du Sud-Ouest' => [
+
+			],
+			'Region du Centre-Nord' => [
+
+			],
 			'Région du Centre-Est' => [
 
 			],
-			'Région du '
+			'Région du Centre-Sud' => [
+
+			],
+			'Région des Cascades' => [
+
+			],
+			'Région du Sahel' => [
+
+			],
+			'Région des Hauts-Bassins' => [
+
+			],
 		];
 	}
 }
