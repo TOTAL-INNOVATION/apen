@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Approval;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Identity\FirstStepRequest;
+use App\Http\Requests\Identity\FourthStepRequest;
 use App\Http\Requests\Identity\SecondStepRequest;
 use App\Http\Requests\Identity\ThirdStepRequest;
 use App\Services\ApprovalIdentityService;
@@ -37,6 +38,13 @@ class IdentificationController extends Controller
     public function thirdStep(ThirdStepRequest $request): RedirectResponse
     {
         $this->service->saveThirdStep($request);
+
+        return back();
+    }
+
+    public function fourthStep(FourthStepRequest $request): RedirectResponse
+    {
+        $this->service->saveFourthStep($request);
 
         return back();
     }

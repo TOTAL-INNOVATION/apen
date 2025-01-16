@@ -39,6 +39,7 @@ Route::middleware(['auth', 'verified'])->group(function() {
         Route::post('etape-1', [IdentificationController::class, 'firstStep'])->name('identity.first');
         Route::post('etape-2', [IdentificationController::class, 'secondStep'])->name('identity.second');
         Route::post('etape-3', [IdentificationController::class, 'thirdStep'])->name('identity.third');
+        Route::post('etape-4', [IdentificationController::class, 'fourthStep'])->name('identity.fourth');
     });
 });
 

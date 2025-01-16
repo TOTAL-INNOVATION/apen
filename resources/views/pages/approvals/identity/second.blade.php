@@ -32,7 +32,10 @@
 							name="country_of_residence"
 							required>
 							@foreach ($countries as $country)
-								<option value="{{ $country['name'] }}" @selected($country['name'] === 'Burkina Faso')>
+								<option
+                                    value="{{ $country['name'] }}"
+                                    @selected($approval->country_of_residence===$country['name']||$country['name'] === 'Burkina Faso')
+                                    >
                                     <span class="inline-flex items-center">
                                         <span class="mr-2">{{ $country['emoji'] }}</span>
                                         <span>{{ $country['name'] }}</span>
@@ -53,6 +56,7 @@
                             label="{{ __('Registre commercial') }}"
                             name="commercial_register"
                             placeholder="{{ __('RCCM ou RSCPM') }}"
+                            value="{{ $approval->commercial_register ?? old('commercial_register') }}"
                             required
                         />
 
@@ -62,6 +66,7 @@
                                 <x-lucide-arrow-right class="w-5 h-5 ml-2" />
                             </x-button>
                         </div>
+
 					</x-form>
 				</div>
 			</div>

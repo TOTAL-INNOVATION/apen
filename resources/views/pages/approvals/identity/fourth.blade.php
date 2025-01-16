@@ -23,7 +23,7 @@
                 <h2 class="heading-2 uppercase">{{ __('Identification - Partie 4') }}</h2>
 
                 <div class="mt-4 md:mt-6">
-                    <x-form action="#" method="POST">
+                    <x-form action="{{ route('identity.fourth') }}" method="POST">
                         <x-form.field.select label="{!! __('Structure d\'activité') !!}" name="activity_sector" required>
                             @foreach (ActivitySectorEnum::cases() as $key => $sector)
                                 <option value="{{ $sector->value }}" @selected($sector === $approval->activity_sector || $key === 0)>

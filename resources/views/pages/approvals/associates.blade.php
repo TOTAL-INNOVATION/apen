@@ -4,7 +4,7 @@
 
     <x-slot:metadata>
         <x-slot:title>{{ __('Associés') }}</x-slot:title>
-        <meta name="description" content="Entrez vos informations d'identification pour continuer.">
+        <meta name="description" content="Ajouter des associés de votre société.">
     </x-slot:metadata>
 
     <main class="py-4 mb-4 sm:mb-6 lg:mb-8">

@@ -7,8 +7,10 @@ namespace App\Services;
 use App\Actions\Approval\StoreFile;
 use App\Enums\ApprovalTypeEnum;
 use App\Http\Requests\Identity\FirstStepRequest;
+use App\Http\Requests\Identity\FourthStepRequest;
 use App\Http\Requests\Identity\SecondStepRequest;
 use App\Http\Requests\Identity\ThirdStepRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ApprovalIdentityService
 {
@@ -33,6 +35,14 @@ class ApprovalIdentityService
          * @var \App\Models\Approval
          */
         $approval = $request->user()->approval;
+        if ($approval->identity_photo) {
+            Storage::disk('public')->delete(
+                str($approval->identity_photo)->replace(
+                    'storage/',
+                    ''
+                )
+            );
+        }
 
         $data = [
             ...$request->only([
@@ -61,4 +71,22 @@ class ApprovalIdentityService
         ]);
     }
     
+    /**
+     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     */
+    public function saveFourthStep(FourthStepRequest $request): void
+    {
+        /**
+         * @var \App\Models\Approval
+         */
+        $approval = $request->user()->approval;
+
+        if ($approval->type !== ApprovalTypeEnum::CATEGORY_C)
+            abort(403);
+
+        $approval->update([
+            ...$request->validated(),
+            'view' => 'pages.approvals.addresses',    
+        ]);
+    }
 }

@@ -33,7 +33,7 @@ return new class extends Migration
             $table->string('association')->nullable();
             $table->enum('category', ['A', 'B', 'C'])->nullable(); // For approval of type C only
             $table->enum('activity_sector', ActivitySectorEnum::values())->nullable(); // For approval of type C only
-            $table->enum('status_in_sector', StatusInSectorEnum::values())->nullable();
+            $table->enum('status_in_sector', StatusInSectorEnum::values())->nullable(); // For approval of type C only
             $table->string('view')->nullable(); //Next view
             $table->integer('total_steps'); // Total step to complete the form
             $table->integer('current_step')->default(1);
