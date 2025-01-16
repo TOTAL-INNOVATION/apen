@@ -11,6 +11,8 @@ use App\Http\Controllers\Panel\DecreeController;
 use App\Http\Controllers\Panel\FlashInfoController;
 use App\Http\Controllers\Panel\ImageController;
 use App\Http\Controllers\Panel\MessageController;
+use App\Http\Controllers\Panel\StatementController;
+use App\Http\Controllers\Panel\SubscriberController;
 use App\Http\Controllers\Panel\UserController;
 use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Support\Facades\Route;
@@ -55,7 +57,9 @@ Route::middleware(['auth', 'verified', HandleInertiaRequests::class])->group(fun
     Route::resource('decrets', DecreeController::class)->except([ ...EXCEPT_METHODS, 'update']);
     Route::post('decrets/{decret}', [DecreeController::class, 'update']);
     Route::resource('messages', MessageController::class)->except([ ...EXCEPT_METHODS, 'store']);
-    ROute::resource('infos', FlashInfoController::class)->except(EXCEPT_METHODS);
+    Route::resource('infos', FlashInfoController::class)->except(EXCEPT_METHODS);
+    Route::resource('communiques', StatementController::class)->except('show');
+    Route::resource('abonnes_newsletter', SubscriberController::class)->only(['index', 'destroy']);
 
     Route::prefix('article/images')->group(function () {
         Route::post('upload', [ImageController::class, 'store']);

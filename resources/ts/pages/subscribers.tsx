@@ -6,25 +6,23 @@ import {
     BreadcrumbLink,
     BreadcrumbSeparator,
 } from "~/components/ui/breadcrumb";
-import { Button } from "~/components/ui/button";
 import { DataTable } from "~/components/ui/datatable";
 import App from "~/layouts/app";
-import { PaginationData, FlashMessage, Statement } from "~/types";
+import { PaginationData, FlashMessage, Subscriber } from "~/types";
 import { Head, Link, usePage } from "@inertiajs/react";
-import { Newspaper } from "lucide-react";
 import React, { useEffect } from "react";
-import statementsColumns from "~/components/columns/statements";
+import subscribersColumns from "~/components/columns/subscribers";
 
 type PageProps = {
-    statements: PaginationData<Statement>;
+    subscribers: PaginationData<Subscriber>;
     flash: FlashMessage|null;
 };
 
 function Index() {
 
     const pageProps = usePage<PageProps>();
-    const { statements, flash } = pageProps.props;
-    const { data, meta } = statements;
+    const { subscribers, flash } = pageProps.props;
+    const { data, meta } = subscribers;
     
     useEffect(() => {
         if (flash) {
@@ -35,7 +33,7 @@ function Index() {
     return (
 		<div>
 			<Head>
-				<title>Communiqués</title>
+				<title>Newsletter</title>
 			</Head>
 
 			<div>
@@ -48,27 +46,21 @@ function Index() {
                         </BreadcrumbItem>
                         <BreadcrumbSeparator />
                         <BreadcrumbItem>
-                            <span className="font-franklin-medium">Communiqués</span>
+                            <span className="font-franklin-medium">Newsletter</span>
                         </BreadcrumbItem>
                     </BreadcrumbList>
                 </Breadcrumb>
             </div>
 
 			<div className="mt-6">
-                <div className="sm:flex sm:items-center sm:justify-between">
+                <div>
                     <h3 className="heading-3 uppercase">Liste des communiques</h3>
-                    <Button className="mt-2 sm:mt-0" asChild>
-                        <Link href="/communiques/create">
-                            <Newspaper className="w-5 h-5" />
-                            <strong>Nouveau communiqué</strong>
-                        </Link>
-                    </Button>
                 </div>
-				<DataTable<Statement>
-                    columns={statementsColumns}
+				<DataTable<Subscriber>
+                    columns={subscribersColumns}
                     data={data}
                     meta={meta}
-                    emptyMessage="Aucun communiqué disponible"
+                    emptyMessage="Aucune souscription disponible"
                 />
 			</div>
 		</div>

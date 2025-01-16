@@ -73,6 +73,21 @@ return [
 		]
 	],
 
+	'statement' => [
+		'create' => [
+			'failed' => 'Il y\'a eu une erreur lors de la création du communiqué.',
+			'succeeded' => 'Le communiqué a été créé avec succès.',
+		],
+		'update' => [
+			'failed' => 'Le communiqué que vous tentez de modifié n\'existe plus.',
+			'succeeded' => 'Le communiqué a été modifié avec succès.',
+		],
+		'delete' => [
+			'failed' => 'Le communiqué que vous tentez de supprimer n\'existe plus.',
+			'succeeded' => 'Le communiqué a été supprimé avec succès',
+		]
+	],
+
 	'messages' => [
 		'markedAsRead' => [
 			'failed' => 'Le message que vous tentez de marquer comme lu est indisponible.',
@@ -109,6 +124,18 @@ return [
 		'password' => [
 			'failed' => 'Une erreur est survenue lors de la modification du mot de passe.',
 			'succeeded' => 'Le mot de passe a été modifié avec succès.',
+		],
+	],
+
+	'subscribers' => [
+		'create' => [
+			'failed' => 'Il y\'a eu une erreur. Veuillez reéssayer.',
+			'succeeded' => 'Votre abonnement à la newsletter a été un succès.',
+		],
+
+		'delete' => [
+			'failed' => 'L\'adresse email souscrit à la newsletter n\'existe plus.',
+			'succeeded' => 'L\'adresse email souscrit a été supprimé avec succès.',
 		],
 	],
 

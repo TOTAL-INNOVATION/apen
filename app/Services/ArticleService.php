@@ -30,7 +30,7 @@ class ArticleService extends BaseFilterService
 
 		$article = (new Article)->fill([
 			'title' => $title,
-			'slug' => str($title)->slug(),
+			'slug' => str($title)->slug()->limit(255),
 			'published_at' => $request->input('published_at') ?? now(),
 		]);
 
@@ -55,7 +55,7 @@ class ArticleService extends BaseFilterService
 
 		$article->forceFill([
 			'title' => $title,
-			'slug' => str($title)->slug(),
+			'slug' => str($title)->slug()->limit(255),
 			'published_at' => $request->input('published_at'),
 		]);
 
@@ -66,7 +66,7 @@ class ArticleService extends BaseFilterService
 				$article->cover = $path;
 			} 
 		}
-		$article->content_path = $this->saveMarkdown(
+		$article->content_path = self::saveMarkdown(
 			$request->input('content'),
 			$article->content_path,
 		);
@@ -84,10 +84,10 @@ class ArticleService extends BaseFilterService
 		return (bool)$article->delete();
 	}
 
-	protected function saveMarkdown(string $content, ?string $filename = null): string
+	public static function saveMarkdown(string $content, ?string $filename = null): string
 	{
 		if (!$filename)
-			$filename = $this->generateMarkdownFilename();
+			$filename = self::generateMarkdownFilename();
 		
 		Storage::disk('public')->put(
 			$filename,
@@ -106,10 +106,10 @@ class ArticleService extends BaseFilterService
 	 * Generate article markdown file name
 	 * @return string
 	 */
-	public function generateMarkdownFilename(): string
+	public static function generateMarkdownFilename(?string $folder = 'articles'): string
 	{
 		$name = Random::generate(16) . '_' . now()->timestamp;
-		$filename = "articles/$name.md";
+		$filename = "$folder/$name.md";
 
 		return $filename;
 	}

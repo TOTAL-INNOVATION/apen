@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Statement;
 
+use App\Enums\RoleEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequest
@@ -11,7 +12,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return $this->user()->role !== RoleEnum::EXPERT;
     }
 
     /**
@@ -22,7 +23,9 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'bail|required|string|unique:articles,title|min:5|max:255',
+            'published_at' => 'bail|nullable|date',
+            'content' => 'bail|required|string|min:5',
         ];
     }
 }

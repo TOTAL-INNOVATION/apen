@@ -41,7 +41,7 @@ class Article extends Model
 
     protected static function booted(): void
     {
-        static::deleted(function(Article $article) {
+        static::deleted(function(self $article) {
 
             ArticleService::deleteCover($article);
 

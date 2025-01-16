@@ -13,6 +13,7 @@ class Statement extends Model
 
     protected $fillable = [
         'title',
+        'slug',
         'content_path',
         'published_at',
     ];
@@ -32,5 +33,14 @@ class Statement extends Model
         $this->content = Storage::disk('public')->get(
             $this->content_path,
         );
+    }
+
+    protected static function booted(): void
+    {
+        static::deleted(function(self $statement) {
+            Storage::disk('public')->delete(
+                $statement->content_path,
+            );
+        });
     }
 }
