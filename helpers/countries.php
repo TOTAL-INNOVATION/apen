@@ -299,45 +299,77 @@ if (!function_exists('countriesList')) {
 if (!function_exists('regionsOfBurkinaFaso')) {
 	function regionsOfBurkinaFaso() {
 		return [
-			'Région du Centre' => [
-
+			'Boucle du Mouhoun' => [
+				'Balé',
+				'Banwa',
+				'Kossi',
+				'Mouhoun',
+				'Nayala',
+				'Sourou',
 			],
-			'Région du l\'Est' => [
-
+			'Cascades' => [
+				'Comoé',
+				'Léraba',
 			],
-			'Région de l\'Ouest' => [
-
+			'Centre' => [
+				'Kadiogo',
 			],
-			'Région du Nord' => [
-
+			'Centre-Est' => [
+				'Boulgou',
+				'Koulpéogo',
+				'Kouritenga',
 			],
-			'Région du Sud' => [
-
+			'Centre-Nord' => [
+				'Bam',
+				'Namentenga',
+				'Sanmatenga',
 			],
-			'Région du Sud-Est' => [
-				
+			'Centre-Ouest' => [
+				'Boulkiemdé',
+				'Sanguié',
+				'Sissili',
+				'Ziro',
 			],
-			'Région du Sud-Ouest' => [
-
+			'Centre-Sud' => [
+				'Bazèga',
+				'Nahouri',
+				'Zoundwéogo',
 			],
-			'Region du Centre-Nord' => [
-
+			'Est' => [
+				'Gnagna',
+				'Gourma',
+				'Komandjoari',
+				'Kompienga',
+				'Tapoa',
 			],
-			'Région du Centre-Est' => [
-
+			'Hauts-Bassins' => [
+				'Houet',
+				'Kénédougou',
+				'Tuy',
 			],
-			'Région du Centre-Sud' => [
-
+			'Nord' => [
+				'Loroum',
+				'Passoré',
+				'Yatenga',
+				'Zondoma',
 			],
-			'Région des Cascades' => [
-
+			'Plateau Central' => [
+				'Ganzourgou',
+				'Kourwéogo',
+				'Oubritenga',
 			],
-			'Région du Sahel' => [
-
+			'Sahel' => [
+				'Oudalan',
+				'Séno',
+				'Soum',
+				'Yagha',
 			],
-			'Région des Hauts-Bassins' => [
-
-			],
+			'Sud-Ouest' => [
+				'Bougouriba',
+				'Ioba',
+				'Noumbiel',
+				'Poni',
+			]
 		];
 	}
 }
