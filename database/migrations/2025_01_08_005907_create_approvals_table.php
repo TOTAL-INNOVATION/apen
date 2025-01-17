@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('country_of_residence')->nullable();
             $table->string('single_tax_form')->nullable(); // IFU
             $table->string('geographic_region')->nullable(); // Country
+            $table->string('region')->nullable();
+            $table->string('address')->nullable(); // Required if country !== Burkina Faso
             $table->string('province')->nullable();
             $table->string('mailbox')->nullable();
             $table->string('tel')->nullable();

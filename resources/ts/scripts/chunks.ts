@@ -25,10 +25,10 @@ function initSlides() {
 }
 
 function observeFields() {
-	const selectElement = document.querySelector<HTMLSelectElement>("[data-observer-name='country']");
-	if (!selectElement) return;
-
-	new Observer(selectElement);
+	const selectElements = document.querySelectorAll<HTMLSelectElement>(
+		"select[data-observer-name]"
+	);
+	selectElements.forEach(select => new Observer(select));
 }
 
 switch (PATHNAME) {
@@ -39,7 +39,7 @@ switch (PATHNAME) {
 	case "/form":
 		observeFields();
 		break;
-		
+
 	default:
 		break;
 }

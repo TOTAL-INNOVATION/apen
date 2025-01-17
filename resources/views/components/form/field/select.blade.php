@@ -4,15 +4,16 @@
 	'name' => sprintf('_%s', Str::random(8)),
 	'containerClass' => '',
 	'labelHidden' => false,
+	'isCustom' => true
 ])
 
-<div class="{{ twMerge($containerClass, 'mb-4') }}">
+<div class="{{ twMerge(['mb-4', $containerClass]) }}">
 	@if ($label)
 		<x-form.label :for="$id" :hidden="$labelHidden">
 			{{ $label }}
 		</x-form.label>
 	@endif
-	<x-select name="{{ $name }}" {{ $attributes }} data-select>
+	<x-select name="{{ $name }}" {{ $attributes }} :isCustom="$isCustom">
 		{{ $slot }}
 	</x-select>
     @error($name)

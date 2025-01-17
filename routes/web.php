@@ -45,8 +45,6 @@ Route::middleware(['auth', 'verified'])->group(function() {
     });
 });
 
-Route::view('form', 'pages.approvals.addresses');
-
 Route::middleware(['auth', 'verified', HandleInertiaRequests::class])->group(function () {
 
     Route::get('panel', function () {

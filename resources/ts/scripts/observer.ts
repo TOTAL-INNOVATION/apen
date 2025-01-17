@@ -1,3 +1,5 @@
+import CustomSelect from "./select";
+
 type Field = HTMLInputElement | HTMLSelectElement;
 
 class Observer {
@@ -15,62 +17,92 @@ class Observer {
         );
 		
         if (!this.subscribers.length) return;
-		this.showOrHide();
 		this.watch();
     }
 
     protected watch() {
+		this.showOrHide();
+		this.setAttrAsOptions();
+
         this.target.addEventListener("change", () => {
 			this.showOrHide();
-			this.setSelectedOptionAttrAsValue();
+			this.setAttrAsOptions();
 		});
     }
 
-	protected setSelectedOptionAttrAsValue(): void {
-		if (!(this.target instanceof HTMLSelectElement)) return;
-
-		const option = this.target.options[this.target.selectedIndex];
-		const elements = Array.from(this.subscribers).filter(element => (
-			(element instanceof HTMLInputElement || element instanceof HTMLSelectElement)
-			&& element.hasAttribute("data-set-option-attr")
-		)) as Field[];
-
-		elements.forEach(element => {
-			const attribute = element.dataset.setTargetAttr as string;
-			const attributeValue = option.getAttribute(attribute);
-			if (!attributeValue) return;
-
-			if (element instanceof HTMLInputElement) {
-				element.setAttribute("value", attributeValue);
-				return;
-			}
-
-			const targetOption = Array.from(element.options).find(
-				option => option.value === attributeValue
-			);
-
-			if (targetOption) element.selectedIndex = targetOption.index;
-
-		});
-	}
-
 	protected showOrHide(): void {
 		const elements = Array.from(this.subscribers).filter(
-			element => element.hasAttribute("data-show-when"),
+			element => element.hasAttribute("data-show-when") ||
+			element.hasAttribute("data-hide-when")
 		);
-		console.log(this.getValue());
-		
-		elements.forEach(element => {
-			const desiredValue = element.dataset.showWhen as string;
 
-			if (this.getValue() !== desiredValue) {
-				if (!element.classList.contains("hidden"))
-					element.classList.add("hidden");
+		elements.forEach(element => {
+			const desiredValue = element.dataset.showWhen;
+			const unwantedValue = element.dataset.hideWhen;
+			const currentValue = this.getValue();
+
+			const hideElement = (el: HTMLElement) => {
+				if (!el.classList.contains("hidden"))
+					el.classList.add("hidden");
+			}
+
+			if (desiredValue && currentValue !== desiredValue) {
+				hideElement(element);
 				return;
 			}
+
+			if (unwantedValue && currentValue === unwantedValue) {
+				hideElement(element);
+				return;
+			}
+
 
 			if (element.classList.contains("hidden"))
 				element.classList.remove("hidden");
+		});
+	}
+
+	/**
+	 * Set selected option dataset attribute value as options
+	 * 
+	 * `Note`: This is only applicable to select element and
+	 * the attribute should contains a stringified array of item.
+	 * @returns 
+	 */
+	protected setAttrAsOptions() {
+		if (!(this.target instanceof HTMLSelectElement)) return;
+		
+		const elements = Array.from(this.subscribers).filter(
+			element => element.hasAttribute("data-set-attr-as-options"),
+		) as HTMLSelectElement[];
+		
+		const selectedOption = this.target.options[this.target.selectedIndex];
+		if (!selectedOption) return;
+		
+		elements.forEach(element => {
+			
+			const attributeName = element.dataset.setAttrAsOptions as string;
+			if (!selectedOption.getAttribute(attributeName)) return;
+				
+			const attributeValue = JSON.parse(
+				selectedOption.getAttribute(attributeName) as string
+			);
+			if (Array.isArray(attributeName)) return;
+
+			const options = (attributeValue as string[]).map(value => {
+				const option = document.createElement("option");
+				option.setAttribute("value", value);
+				option.textContent = value;
+
+				return option;
+			});
+
+			if (element.hasChildNodes())
+				Array.from(element.childNodes).forEach(child => child.remove());
+
+			element.append(
+				...options,
+			);
 		});
 	}
 
