@@ -1,9 +1,10 @@
 import axios from "axios";
 import CustomSelect from "./scripts/select";
-import "./scripts/slides";
+import "./scripts/chunks";
 
 window.axios = axios;
 window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
-window.addEventListener("load", () => {
-	CustomSelect.init();
-});
+
+// Init custom components
+
+CustomSelect.init();

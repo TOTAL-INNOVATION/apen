@@ -1,5 +1,6 @@
 @php
 	$countries = countriesList();
+    $regions = regionsOfBurkinaFaso();
 @endphp
 
 <x-base-layout>
@@ -28,6 +29,7 @@
 						<x-form.field.select 
 							label="{{ __('Adresse géographique') }}" 
 							name="geographic_region"
+                            data-observer-name="country"
 							required>
 							@foreach ($countries as $country)
 								<option
@@ -42,6 +44,18 @@
 							@endforeach
 						</x-form.field.select>
 
+                        <div data-subscribe="country" data-show-when="Burkina Faso" class="hidden">
+                            <x-form.field.select
+                                label="{{ __('Région') }}"
+                                name="region"
+                            >
+                                @foreach ($regions as $region => $provinces)
+                                    <option value="{{ $region }}" data-provinces="{{ json_encode($provinces) }}">
+                                        {{ $region }}
+                                    </option>
+                                @endforeach
+                            </x-form.field.select>
+                        </div>
 					</x-form>
 				</div>
 			</div>

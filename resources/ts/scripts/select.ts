@@ -121,6 +121,7 @@ class CustomSelect {
             if (!selectedOption) return;
 
             this.select.selectedIndex = selectedOption.index;
+            this.select.dispatchEvent(new Event("change", {bubbles: false, cancelable: true}));
             this.placeholder.textContent = target.textContent;
             Array.from(this.list.querySelectorAll("li")).find((li) => {
                 return li.ariaSelected === "true";

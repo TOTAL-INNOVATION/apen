@@ -11,10 +11,12 @@ class Observer {
             );
         }
         this.subscribers = document.querySelectorAll<HTMLElement>(
-            `[data-subscriber="${targetName}"]`
+            `[data-subscribe="${targetName}"]`
         );
 		
-        if (this.subscribers.length) this.watch();
+        if (!this.subscribers.length) return;
+		this.showOrHide();
+		this.watch();
     }
 
     protected watch() {
@@ -56,7 +58,8 @@ class Observer {
 		const elements = Array.from(this.subscribers).filter(
 			element => element.hasAttribute("data-show-when"),
 		);
-
+		console.log(this.getValue());
+		
 		elements.forEach(element => {
 			const desiredValue = element.dataset.showWhen as string;
 
