@@ -30,7 +30,10 @@
 							name="geographic_region"
 							required>
 							@foreach ($countries as $country)
-								<option value="{{ $country['name'] }}" @selected($country['name'] === 'Burkina Faso')>
+								<option
+                                    value="{{ $country['name'] }}"
+                                    data-calling-code="{{ $country['callingCode'] }}"
+                                    @selected($country['name'] === 'Burkina Faso')>
                                     <span class="inline-flex items-center">
                                         <span class="mr-2">{{ $country['emoji'] }}</span>
                                         <span>{{ $country['name'] }}</span>
