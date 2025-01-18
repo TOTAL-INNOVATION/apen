@@ -16,11 +16,7 @@ enum ApprovalTypeEnum: string
 	case CATEGORY_C = 'Catégorie C';
 
 	public static function maxDomains(self $type): int {
-		return match($type) {
-			self::CATEGORY_A => 3,
-			self::CATEGORY_B => 2,
-			default => 1
-		};
+		return $type === self::CATEGORY_A ? 3 : 2;
 	}
 
 	public static function getTotalSteps(string $type): int {

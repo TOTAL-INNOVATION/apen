@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\TrainingLevelEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,14 +12,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('certificates', function (Blueprint $table) {
+        Schema::create('trainings', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->foreignUlid('approval_id')->constrained()->cascadeOnDelete();
-            $table->string('subject');
-            $table->date('starts_at');
-            $table->date('ends_at');
-            $table->string('trainer_name'); // Institution/Structure/Trainer
-            $table->string('file');
+            $table->string('name');
+            $table->enum('level', TrainingLevelEnum::values())->nullable();
+            $table->string('level_precision')->nullable();
+            $table->year('procured_at');
+            $table->string('trainer_name');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('certificates');
+        Schema::dropIfExists('trainings');
     }
 };

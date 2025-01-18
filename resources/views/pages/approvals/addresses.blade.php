@@ -35,7 +35,7 @@
 								<option
                                     value="{{ $country['name'] }}"
                                     data-calling-code="{{ $country['callingCode'] }}"
-                                    @selected($country['name'] === 'Burkina Faso')>
+                                    @selected($approval?->geographic_region===$country['name']||$country['name'] === 'Burkina Faso')>
                                     <span class="inline-flex items-center">
                                         <span class="mr-2">{{ $country['emoji'] }}</span>
                                         <span>{{ $country['name'] }}</span>
@@ -51,7 +51,7 @@
                                 data-observer-name="region"
                             >
                                 @foreach ($regions as $region => $provinces)
-                                    <option value="{{ $region }}" data-provinces="{{ json_encode($provinces) }}">
+                                    <option value="{{ $region }}" data-provinces="{{ json_encode($provinces) }}" @selected($approval?->region===$region)>
                                         {{ $region }}
                                     </option>
                                 @endforeach
@@ -76,6 +76,7 @@
                                 name="address"
                                 label="{{ __('Adresse') }}"
                                 placeholder="Ex: Thiès, Régions de Thiès(pour Sénégal)"
+                                value="{{ $approval?->address }}"
                             />
                         </div>
 
@@ -83,6 +84,7 @@
                             name="mailbox"
                             label="{{ __('Boîte postale (Optionel)') }}"
                             placeholder="Entrez votre boite postale"
+                            value="{{ $approval?->mailbox }}"
                         />
 
                         <div class="mb-4">
@@ -146,12 +148,14 @@
                             type="url"
                             name="website"
                             placeholder="Ex: exemple.com"
+                            value="{{ $approval?->website }}"
                         />
 
                         <x-form.field
                             label="{{ __('Fax (Optionel)') }}"
                             name="fax"
                             placeholder="Entrez votre fax"
+                            value="{{ $approval?->fax }}"
                         />
 
                         <div class="mt-4 md:mt-6">
