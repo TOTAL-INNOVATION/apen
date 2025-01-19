@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Identity;
 
+use App\Enums\ApprovalTypeEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\Rule;
@@ -37,7 +38,20 @@ class SecondStepRequest extends FormRequest
                     ->extensions(['png', 'jpg', 'jpeg'])
                     ->max(3072),
             ],
-            'commercial_register' => 'bail|required|string|min:8|max:255',
+            'commercial_register' => [
+                'bail',
+                'string',
+                'min:8',
+                'max:255',
+                Rule::requiredIf(function() {
+                    /**
+                     * @var \App\Models\Approval
+                     */
+                    $approval = $this->user()->approval;
+
+                    return $approval->type === ApprovalTypeEnum::CATEGORY_A;
+                }),
+            ],
         ];
     }
 

@@ -144,6 +144,7 @@ return [
 			'failed' => [
 				'secondStep' => 'Il y\'a eu un souci lors de l\'enregistrement de la photo.',
 			]
-		]
+		],
+		'uploadFailed' => 'Il y\'a eu un problème lors de l\'envoi du fichier.',
 	]
 ];

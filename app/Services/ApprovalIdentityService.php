@@ -50,7 +50,8 @@ class ApprovalIdentityService
                 'commercial_register'
             ]),
             'identity_photo' => $path,
-            'view' => 'pages.approvals.identity.third',
+            'view' => $approval->type === ApprovalTypeEnum::CATEGORY_A ?
+            'pages.approvals.addresses' : 'pages.approvals.identity.third',
         ];
 
 

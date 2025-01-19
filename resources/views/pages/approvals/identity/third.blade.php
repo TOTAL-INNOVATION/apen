@@ -28,7 +28,7 @@
                         <x-form.field label="{!! __('Association (si membre)') !!}" name="association"
                             placeholder="{!! __('Nom d\'une association') !!}" />
 
-                        @if ($approval->type !== ApprovalTypeEnum::CATEGORY_C)
+                        {{-- @if ($approval->type !== ApprovalTypeEnum::CATEGORY_C)
                             <div class="mb-4">
                                 <x-form.label>
                                     {{ __('Nombre de domaines') }}
@@ -45,32 +45,61 @@
                                     <p class="text-error mt-2">{{ $message }}</p>
                                 @enderror
                             </div>
+                        @endif --}}
+
+                        @if ($approval->type === ApprovalTypeEnum::CATEGORY_B)
+                            <x-form.field name="commercial_register" label="{{ __('RCCM (Optionnel)') }}"
+                                placeholder="Entrez votre RCCM si disponible"
+                                value="{{ $approval->commercial_register }}" />
+                            <x-form.field name="single_tax_form" label="{{ __('RCCM (Optionnel)') }}"
+                                placeholder="Entrez votre RCCM si disponible"
+                                value="{{ $approval->single_tax_form }}" />
                         @endif
 
-						<div class="mb-4">
-							<x-form.label>
-								{!! __('Satut de l\'expert') !!}
-							</x-form.label>
-							<div class="grid grid-cols-2 gap-4">
+                        <div class="mb-4">
+                            <x-form.label>
+                                {!! __('Satut de l\'expert') !!}
+                            </x-form.label>
 
-								@foreach (ExpertStatusEnum::cases() as $key => $status)
-								<x-select-box
-									name="expert_status"
-									:label="$status->value"
-									:value="$status->value"
-									class="sm:w-5 sm:h-5"
-									:checked="$approval->expert_status===$status||$key===0"
-								/>
-								@endforeach
+                            @if ($approval->type === ApprovalTypeEnum::CATEGORY_B)
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    @foreach (ExpertStatusEnum::cases() as $key => $status)
+                                        <x-select-box name="expert_status"
+                                            description="{{ $key === 0 ? __('Travail à son propre compte') : __('Ou attaché(e) à un Bureau') }}"
+                                            :label="$status->value" :value="$status->value" class="sm:w-5 sm:h-5"
+                                            :checked="$approval->expert_status === $status || $key === 0" />
+                                    @endforeach
+                                </div>
+                            @else
+                                <div class="space-y-4">
+                                    @foreach (ExpertStatusEnum::cases() as $key => $status)
+                                        @if ($key === 0)
+                                            <x-select-box
+                                                name="expert_status"
+                                                label="{{ __('Indépendant(e)') }}"
+                                                :value="$status->value"
+                                                class="sm:w-5 sm:h-5"
+                                                :checked="$approval->expert_status === $status || $key === 0"
+                                            />
+                                        @else
+                                            <x-select-box
+                                                name="expert_status"
+                                                label="{!! __('Associé(e) à un bureau d\'Études') !!}"
+                                                :value="$status->value"
+                                                class="sm:w-5 sm:h-5"
+                                                :checked="$approval->expert_status === $status || $key === 0"
+                                            />
+                                        @endif
+                                    @endforeach
+                                </div>
+                            @endif
 
-							</div>
+                            @error('marital_status')
+                                <p class="text-error mt-2">{{ $message }}</p>
+                            @enderror
+                        </div>
 
-							@error('marital_status')
-								<p class="text-error mt-2">{{ $message }}</p>
-							@enderror
-						</div>
-
-						<div class="mt-4 md:mt-6">
+                        <div class="mt-4 md:mt-6">
                             <x-button variant="primary" class="font-franklin-medium" type="submit" widthFull>
                                 <span>{{ __('Suivant') }}</span>
                                 <x-lucide-arrow-right class="w-5 h-5 ml-2" />

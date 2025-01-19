@@ -1,3 +1,3 @@
-<ol {{ $attributes->twMerge("flex items-center whitespace-nowrap") }}>
+<ol {{ $attributes->twMerge('flex items-center text-nowrap overflow-hidden text-ellipsis') }}>
     {{ $slot }}
 </ol>

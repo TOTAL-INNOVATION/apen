@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Approval\AddressesController;
 use App\Http\Controllers\Approval\ChoiceController;
+use App\Http\Controllers\Approval\DegreeController;
 use App\Http\Controllers\Approval\IdentificationController;
 use App\Http\Controllers\Approval\IndexController;
 use App\Http\Controllers\ContactController;
@@ -43,6 +45,8 @@ Route::middleware(['auth', 'verified'])->group(function() {
         Route::post('etape-3', [IdentificationController::class, 'thirdStep'])->name('identity.third');
         Route::post('etape-4', [IdentificationController::class, 'fourthStep'])->name('identity.fourth');
     });
+    Route::post('definir-les-adresses', AddressesController::class)->name('approval.addresses');
+    Route::post('definir-les-diplomes', DegreeController::class)->name('approval.degrees');
 });
 
 Route::middleware(['auth', 'verified', HandleInertiaRequests::class])->group(function () {

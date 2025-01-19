@@ -24,7 +24,7 @@
                 <h2 class="heading-2 uppercase">{{ __('Adresses') }}</h2>
 
 				<div class="mt-4 md:mt-6">
-					<x-form action="#" method="POST">
+					<x-form action="{{ route('approval.addresses') }}" method="POST">
 
 						<x-form.field.select 
 							label="{{ __('Adresse géographique') }}" 
@@ -159,7 +159,7 @@
                         />
 
                         <div class="mt-4 md:mt-6">
-                            <x-button variant="primary" class="font-franklin-medium" component="a" href="#" widthFull>
+                            <x-button variant="primary" class="font-franklin-medium" type="submit" widthFull>
                                 <span>{{ __('Suivant') }}</span>
                                 <x-lucide-arrow-right class="w-5 h-5 ml-2" />
                             </x-button>

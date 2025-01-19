@@ -55,7 +55,7 @@
                             type="number"
                             name="capital"
                             label="{{ __('Capital de la société') }}"
-                            placeholder="{{ __('Entrez une somme') }}"
+                            placeholder="{{ __('Entrez une somme(En FCFA)') }}"
                             value="{{ $society?->capital }}"
                             required
                         />
@@ -69,6 +69,14 @@
                                 </option>
                             @endforeach
                         </x-form.field.select>
+
+                        <x-form.field
+                            name="legal_status_precision"
+                            label="{{ __('Préciser la forme juridique') }}"
+                            placeholder="{{ __('Entrez la précision') }}"
+                            value="{{ $society?->legal_status_precision }}"
+                            required
+                        />
 
                         <x-form.field
                             label="{{ __('Statut de la société') }}"

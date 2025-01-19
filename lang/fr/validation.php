@@ -40,7 +40,7 @@ return [
     'declined_if' => 'Ce champ doit être décliné si :other équivaut à :value.',
     'different' => 'La valeur de ce champ et celle du champ :other doivent être differentes.',
     'digits' => 'Le nombre de chiffre à fournir est de :digits.',
-    'digits_between' => 'Le nombre de chiffre à entré doit être compris entre :min et :max.',
+    'digits_between' => 'Le nombre de chiffres à entré doit être compris entre :min et :max.',
     'dimensions' => 'Les dimensions de l\'image chargé sont invalides.',
     'distinct' => 'Ce champ a une valeur dupliquée.',
     'email' => 'Veuillez entrer une adresse email valide.',

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->enum('level', DegreeLevelEnum::values());
             $table->string('level_precision');
             $table->integer('years_of_experience');
-            $table->year('started_at'); // Year of procurement
+            $table->date('started_at'); // Year of procurement
             $table->string('file');
             $table->timestamps();
         });

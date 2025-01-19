@@ -20,6 +20,7 @@ return new class extends Migration
             $table->year('founded_at');
             $table->string('capital'); // of the society
             $table->enum('legal_status', LegalStatusEnum::values()); // SARL, SA, etc.
+            $table->string('legal_status_precision');
             $table->string('status_file'); // Legal status file
             $table->string('staff_number');
             $table->integer('salaried_technical_staff'); // Number of

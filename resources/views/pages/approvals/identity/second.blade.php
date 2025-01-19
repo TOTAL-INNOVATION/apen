@@ -1,5 +1,6 @@
 @use('App\Enums\GenderEnum')
 @use('App\Enums\MaritalStatusEnum')
+@use('App\Enums\ApprovalTypeEnum')
 @php
 	$countries = countriesList();
 @endphp
@@ -52,13 +53,15 @@
                             required
                         />
 
-                        <x-form.field
-                            label="{{ __('Registre commercial') }}"
-                            name="commercial_register"
-                            placeholder="{{ __('RCCM ou RSCPM') }}"
-                            value="{{ $approval->commercial_register ?? old('commercial_register') }}"
-                            required
-                        />
+                        @if($approval->type === ApprovalTypeEnum::CATEGORY_A)
+                            <x-form.field
+                                label="{{ __('Registre commercial') }}"
+                                name="commercial_register"
+                                placeholder="{{ __('RCCM ou RSCPM') }}"
+                                value="{{ $approval->commercial_register ?? old('commercial_register') }}"
+                                required
+                            />
+                        @endif
 
 						<div class="mt-4 md:mt-6">
                             <x-button variant="primary" class="font-franklin-medium" type="submit" widthFull>

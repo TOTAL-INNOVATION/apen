@@ -25,7 +25,8 @@ class ThirdStepRequest extends FormRequest
     {
         return [
             'association' => 'nullable|string|min:5|max:255',
-            'total_sectors' => 'required|int|min:1|max:3',
+            'commercial_register' => 'nullable|string|min:8|max:255',
+            'single_tax_form' => 'nullable|string|min:3|max:255',
             'expert_status' => [
                 'required',
                 Rule::enum(ExpertStatusEnum::class),

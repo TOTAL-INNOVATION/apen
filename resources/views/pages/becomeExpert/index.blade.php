@@ -18,21 +18,21 @@
 			<div class="mt-4 md:mt-6 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
 				<x-priority-card
 					title="{{ __('Conditions d’obtention de l’agrément d’expert') }}"
-					imageSrc="#"
+					:imageSrc="null"
 					href="{{ route('becomeExpert.conditions') }}"
 					withoutDescription
 				/>
 
 				<x-priority-card
 					title="{!! __('Procédure d\'inscription pour un agrément') !!}"
-					imageSrc="#"
+					:imageSrc="null"
 					href="{{ route('becomeExpert.procedure') }}"
 					withoutDescription
 				/>
 
 				<x-priority-card
 					title="{!! __('Formulaire de candidature') !!}"
-					imageSrc="#"
+					:imageSrc="null"
 					href="{{ route('becomeExpert.form') }}"
 					withoutDescription
 				/>

@@ -2,7 +2,7 @@
     'variant' => 'vertical', // or 'horizontal'
     'title' => '',
     'description' => '',
-    'imageSrc' => '',
+    'imageSrc' => null,
     'href' => '#',
     'withoutDescription' => false,
 ])
@@ -11,7 +11,7 @@
     <a href="{{ $href }}" class="arrow-move-trigger">
         <x-card class="border-0 flex flex-col">
             <div>
-                <img class="w-full" src="https://placehold.co/600x400" alt="{{ $title }}">
+                <img class="w-full" src="{{ $imageSrc ?? asset('defaults/600x400.svg') }}" alt="{{ $title }}">
             </div>
             <div class="p-4 lg:p-6 border border-whisper border-t-0">
                 <x-card.title class="uppercase">{{ $title }}</x-card.title>

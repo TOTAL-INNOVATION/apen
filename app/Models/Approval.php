@@ -27,6 +27,11 @@ class Approval extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function degree(): HasOne
+    {
+        return $this->hasOne(Degree::class);
+    }
+
     public function society(): HasOne
     {
         return $this->hasOne(Society::class);
