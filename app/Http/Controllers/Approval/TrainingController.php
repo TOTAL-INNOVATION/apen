@@ -33,13 +33,16 @@ class TrainingController extends Controller
     public function destroy(string $id): RedirectResponse
     {
         $training = Training::find($id);
-        if ($training)
+        if ($training) {
             $training->delete();
+
+            return back()
+            ->with(
+                'success',
+                'messages.approval.training.deleted'
+            );
+        }
         
-        return back()
-        ->with(
-            'success',
-            'messages.approval.training.deleted'
-        );
+        return back();
     }
 }

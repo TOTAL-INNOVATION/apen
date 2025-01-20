@@ -1,4 +1,5 @@
 @use('App\Enums\TrainingLevelEnum')
+@use('App\Enums\ApprovalFormsEnum')
 
 @php
     /**
@@ -68,7 +69,7 @@
                 @endif
 
 				<div class="mt-4 md:mt-6 p-4 bg-whisper/30 border border-rainee/25">
-					<x-form action="{{ route('formation.store') }}" method="POST">
+					<x-form action="{{ route('formations.store') }}" method="POST">
 						
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4">
                             <x-form.field
@@ -120,10 +121,13 @@
 
                 @if ($trainings->count())
                     <div class="mt-8 md:mt-12">
-                        <x-button variant="primary" class="font-franklin-medium" component="a" href="{{ route('approval.goto_certificates') }}" widthFull>
-                            <span>{{ __('Suivant') }}</span>
-                            <x-lucide-arrow-right class="w-5 h-5 ml-2" />
-                        </x-button>
+                        <x-form method="POST" action="{{ route('approval.goto') }}">
+                            <x-input type="hidden" name="page" value="{{ ApprovalFormsEnum::CERTIFICATES->value }}" required />
+                            <x-button type="submit" variant="primary" class="font-franklin-medium" widthFull>
+                                <span>{{ __('Suivant') }}</span>
+                                <x-lucide-arrow-right class="w-5 h-5 ml-2" />
+                            </x-button>
+                        </x-form>
                     </div>
                 @endif
 			</div>

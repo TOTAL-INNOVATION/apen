@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Approval;
 
 use App\Enums\ApprovalFormsEnum;
@@ -7,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
-class GoToCertificateController extends Controller
+class GoToController extends Controller
 {
     /**
      * Handle the incoming request.

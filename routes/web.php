@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\Approval\AddressesController;
+use App\Http\Controllers\Approval\CertificateController;
 use App\Http\Controllers\Approval\ChoiceController;
 use App\Http\Controllers\Approval\DegreeController;
-use App\Http\Controllers\Approval\GoToCertificateController;
+use App\Http\Controllers\Approval\GoToController;
 use App\Http\Controllers\Approval\IdentificationController;
 use App\Http\Controllers\Approval\IndexController;
 use App\Http\Controllers\Approval\TrainingController;
@@ -37,11 +38,11 @@ Route::prefix('devenir-expert')->group(function () {
     Route::view('procedure', 'pages.becomeExpert.procedure')->name('becomeExpert.procedure');
 });
 
-Route::middleware(['auth', 'verified'])->group(function() {
+Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('formulaire', IndexController::class)->name('becomeExpert.form');
     Route::post('définir-le-choix', ChoiceController::class)->name('approval.choice');
-    Route::prefix('identite')->group(function() {
+    Route::prefix('identite')->group(function () {
         Route::post('etape-1', [IdentificationController::class, 'firstStep'])->name('identity.first');
         Route::post('etape-2', [IdentificationController::class, 'secondStep'])->name('identity.second');
         Route::post('etape-3', [IdentificationController::class, 'thirdStep'])->name('identity.third');
@@ -49,8 +50,9 @@ Route::middleware(['auth', 'verified'])->group(function() {
     });
     Route::post('definir-les-adresses', AddressesController::class)->name('approval.addresses');
     Route::post('definir-les-diplomes', DegreeController::class)->name('approval.degrees');
-    Route::resource('formation', TrainingController::class)->only(['store', 'destroy']);
-    Route::get('boucler-les-formations', GoToCertificateController::class)->name('approval.goto_certificates');
+    Route::resource('formations', TrainingController::class)->only(['store', 'destroy']);
+    Route::resource('certificats', CertificateController::class)->only(['store', 'destroy']);
+    Route::get('aller-a', GoToController::class)->name('approval.goto');
 });
 
 Route::middleware(['auth', 'verified', HandleInertiaRequests::class])->group(function () {

@@ -11,6 +11,7 @@ const certificateChoiceElements = document.querySelectorAll<HTMLInputElement>(
 	"input[name='has-certificate']"
 );
 const certificateZoneElement = document.querySelector<HTMLDivElement>("#certificates-zone");
+const nextButtonZoneElement = document.querySelector("#next-button") as HTMLDivElement;
 
 if (newsSlideRoot) {
 	EmblaCarousel(
@@ -34,17 +35,26 @@ if (certificateChoiceElements.length && certificateZoneElement) {
 		if (choice.value === "no" && choice.checked) {
 			if (!certificateZoneElement.classList.contains("hidden")) {
 				certificateZoneElement.classList.add("hidden");
+				if (nextButtonZoneElement.classList.contains("hidden")) {
+					nextButtonZoneElement.classList.remove("hidden");
+				} 
 			}
+		} else {
+			nextButtonZoneElement.classList.add("hidden");
 		}
 
 		choice.addEventListener("change", (ev) => {
 			const target = ev.target as HTMLInputElement;
 			if (target.value === "yes" && certificateZoneElement.classList.contains("hidden")) {
 				certificateZoneElement.classList.remove("hidden");
+				if (!nextButtonZoneElement.classList.contains("hidden")) {
+					nextButtonZoneElement.classList.add("hidden");
+				} 
 				return;
 			}
 
 			certificateZoneElement.classList.add("hidden");
+			nextButtonZoneElement.classList.remove("hidden");
 		})
 	}
 }

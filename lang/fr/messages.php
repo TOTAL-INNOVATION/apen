@@ -149,6 +149,10 @@ return [
 		'training' => [
 			'created' => 'La formation a été ajoutée avec succès.',
 			'deleted' => 'La formation a été rétirée avec succès.',
+		],
+		'certificate' => [
+			'created' => 'Le certificat a été ajouté avec succès.',
+			'deleted' => 'Le certificat a été rétiré avec succès.',
 		]
 	]
 ];

@@ -1,3 +1,5 @@
+@use('App\Enums\ApprovalFormsEnum')
+
 @php
     /**
      * @var \Illuminate\Database\Eloquent\Collection
@@ -61,6 +63,72 @@
                     @session('success')
                         <x-alert class="mt-4 sm:mt-6" variant="success">{{ __($value) }}</x-alert>
                     @endsession
+
+                    <div class="mt-4 md:mt-6 p-4 bg-whisper/30 border border-rainee/25">
+                        <x-form action="{{ route('certificats.store') }}" method="POST" enctype="multipart/form-data">
+                            
+                            <x-form.field
+                                    name="subject"
+                                    label="{{ __('Thème de la formation') }}"
+                                    placeholder="{{ __('Entrez le thème de la formation') }}"
+                                    required
+                                />
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-4">
+                                    <x-form.field
+                                        type="date"
+                                        name="start_at"
+                                        label="{{ __('Date de début') }}"
+                                        required
+                                    />
+
+                                    <x-form.field
+                                        type="date"
+                                        name="ends_at"
+                                        label="{{ __('Date de fin') }}"
+                                        required
+                                    />
+                                </div>
+
+                                <x-form.field
+                                    name="location"
+                                    label="{{ __('Lieu de formation') }}"
+                                    placeholder="{{ __('Ex: UJKZ, Batiment Belge') }}"
+                                    required
+                                />
+                                
+                                <x-form.field
+                                    name="trainer_name"
+                                    label="{{ __('Structure formatrice') }}"
+                                    placeholder="{{ __('Entrez le nom de la structure/organisme formateur(trice)') }}"
+                                    required
+                                />
+
+                                <x-form.field
+                                    type="file"
+                                    name="file"
+                                    accept="application/pdf"
+                                    label="{{ __('Fichier (Attestation/Certificat en pdf)') }}"
+                                    required
+                                />
+
+                                <div class="mt-4">
+                                    <x-button variant="primary" class="font-franklin-medium" type="submit" widthFull>
+                                        {{ __('Enrégistrer') }}
+                                    </x-button>
+                                </div>
+                        </x-form>
+                    </div>
+                </div>
+
+                <div class="mt-8 md:mt-12" id="next-button">
+                    <x-form method="POST" action="{{ route('approval.goto') }}">
+                        <x-input type="hidden" name="page" value="{{ ApprovalFormsEnum::CERTIFICATES->value }}" required />
+                        <x-button variant="primary" class="font-franklin-medium" widthFull>
+                            <span>{{ __('Suivant') }}</span>
+                            <x-lucide-arrow-right class="w-5 h-5 ml-2" />
+                        </x-button>
+                    </x-form>
                 </div>
 			</div>
         </div>
