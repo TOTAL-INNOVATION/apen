@@ -49,7 +49,7 @@
                             <x-table.body>
                                 @foreach ($trainings as $training)
                                     <x-table.row class="divide-x-0">
-                                        <x-table.cell class="px-2 md:px-4">{{ $training->name }}</x-table.cell>
+                                        <x-table.cell class="px-2 md:px-4 border-b border-whisper">{{ $training->name }}</x-table.cell>
                                         <x-table.cell class="px-2 md:px-4">{{ $training->level }}</x-table.cell>
                                         <x-table.cell class="px-2 md:px-4">{{ $training->procured_at }}</x-table.cell>
                                         <x-table.cell class="px-2 md:px-4">
