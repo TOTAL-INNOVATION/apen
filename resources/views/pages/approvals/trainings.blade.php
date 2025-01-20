@@ -1,5 +1,4 @@
 @use('App\Enums\TrainingLevelEnum')
-@use('App\Enums\ApprovalFormsEnum')
 
 @php
     /**
@@ -121,13 +120,10 @@
 
                 @if ($trainings->count())
                     <div class="mt-8 md:mt-12">
-                        <x-form method="POST" action="{{ route('approval.goto') }}">
-                            <x-input type="hidden" name="page" value="{{ ApprovalFormsEnum::CERTIFICATES->value }}" required />
-                            <x-button type="submit" variant="primary" class="font-franklin-medium" widthFull>
-                                <span>{{ __('Suivant') }}</span>
-                                <x-lucide-arrow-right class="w-5 h-5 ml-2" />
-                            </x-button>
-                        </x-form>
+                        <x-button variant="primary" class="font-franklin-medium" component="a" href="{{ route('approval.goto') }}" widthFull>
+                            <span>{{ __('Suivant') }}</span>
+                            <x-lucide-arrow-right class="w-5 h-5 ml-2" />
+                        </x-button>
                     </div>
                 @endif
 			</div>

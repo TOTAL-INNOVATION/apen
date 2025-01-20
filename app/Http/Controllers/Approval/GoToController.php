@@ -17,11 +17,7 @@ class GoToController extends Controller
          * @var \App\Models\Approval
          */
         $approval = $request->user()->approval;
-        if ($approval->trainings->count()) {
-            $approval->update([
-                'view' => ApprovalFormsEnum::CERTIFICATES,
-            ]);
-        }
+        
 
         return back();
     }

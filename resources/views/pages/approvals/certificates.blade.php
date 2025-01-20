@@ -1,5 +1,3 @@
-@use('App\Enums\ApprovalFormsEnum')
-
 @php
     /**
      * @var \Illuminate\Database\Eloquent\Collection
@@ -66,17 +64,17 @@
 
                     @if ($certificates->count())
                         <div class="mt-4 md:mt-6 text-[15px] overflow-x-scroll sm:overflow-hidden">
-                            <x-table>
+                            <x-table class="min-w-[430px] w-full">
                                 <x-table.header>
                                     <x-table.head class="border-b border-whisper">{{ __('Thème') }}</x-table.head>
-                                    <x-table.head>{{ __('Date de début') }}</x-table.head>
-                                    <x-table.head>{{ __('Date de fin') }}</x-table.head>
+                                    <x-table.head>{{ __('Début') }}</x-table.head>
+                                    <x-table.head>{{ __('Fin') }}</x-table.head>
                                     <x-table.head class="sm:text-left">{{ __('Actions') }}</x-table.head>
                                 </x-table.header>
                                 <x-table.body>
                                     @foreach ($certificates as $certificate)
                                         <x-table.row class="divide-x-0">
-                                            <x-table.cell class="px-2 md:px-4 max-w-[200px] border-b border-whisper">{{ $certificate->subject }}</x-table.cell>
+                                            <x-table.cell class="px-2 md:px-4 w-[200px] text-left border-b border-whisper">{{ $certificate->subject }}</x-table.cell>
                                             <x-table.cell class="px-2 md:px-4">{{ $certificate->starts_at->format('d/m/Y') }}</x-table.cell>
                                             <x-table.cell class="px-2 md:px-4">{{ $certificate->ends_at->format('d/m/Y') }}</x-table.cell>
                                             <x-table.cell class="px-2 md:px-4">
@@ -153,13 +151,10 @@
                 </div>
 
                 <div class="mt-8 md:mt-12" id="next-button">
-                    <x-form method="POST" action="{{ route('approval.goto') }}">
-                        <x-input type="hidden" name="page" value="{{ ApprovalFormsEnum::CERTIFICATES->value }}" required />
-                        <x-button variant="primary" class="font-franklin-medium" widthFull>
-                            <span>{{ __('Suivant') }}</span>
-                            <x-lucide-arrow-right class="w-5 h-5 ml-2" />
-                        </x-button>
-                    </x-form>
+                    <x-button variant="primary" class="font-franklin-medium" component="a" href="{{ route('approval.goto') }}" widthFull>
+                        <span>{{ __('Suivant') }}</span>
+                        <x-lucide-arrow-right class="w-5 h-5 ml-2" />
+                    </x-button>
                 </div>
 			</div>
         </div>
