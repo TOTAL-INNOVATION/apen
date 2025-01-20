@@ -44,7 +44,7 @@
 							@endforeach
 						</x-form.field.select>
 
-                        <div data-subscribe="country" data-show-when="Burkina Faso">
+                        <div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-4" data-subscribe="country" data-show-when="Burkina Faso">
                             <x-form.field.select
                                 label="{{ __('Région') }}"
                                 name="region"
@@ -143,20 +143,22 @@
                             @enderror
                         </div>
 
-                        <x-form.field
-                            label="{{ __('URL de votre site web (Optionel)') }}"
-                            type="url"
-                            name="website"
-                            placeholder="Ex: exemple.com"
-                            value="{{ $approval?->website }}"
-                        />
+                        <div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-4">
+                            <x-form.field
+                                label="{{ __('URL de votre site web (Optionel)') }}"
+                                type="url"
+                                name="website"
+                                placeholder="Ex: exemple.com"
+                                value="{{ $approval?->website }}"
+                            />
 
-                        <x-form.field
-                            label="{{ __('Fax (Optionel)') }}"
-                            name="fax"
-                            placeholder="Entrez votre fax"
-                            value="{{ $approval?->fax }}"
-                        />
+                            <x-form.field
+                                label="{{ __('Fax (Optionel)') }}"
+                                name="fax"
+                                placeholder="Entrez votre fax"
+                                value="{{ $approval?->fax }}"
+                            />
+                        </div>
 
                         <div class="mt-4 md:mt-6">
                             <x-button variant="primary" class="font-franklin-medium" type="submit" widthFull>

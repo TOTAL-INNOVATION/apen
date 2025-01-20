@@ -99,6 +99,34 @@
                             @enderror
                         </div>
 
+                        @if ($approval->type === ApprovalTypeEnum::CATEGORY_B)
+                            <div class="mb-4">
+                                <p class="mb-2 block font-franklin-medium">{{ __('Avez-vous été agent public de l’Etat ?') }}</p>
+
+                                <div class="space-y-2">
+                                    <p class="flex items-center space-x-2">
+                                        <x-radio
+                                            id="yes"
+                                            name="has_been_public_agent"
+                                            class="w-5 h-5"
+                                            value="1"
+                                            :checked="true"
+                                        />
+                                        <x-form.label class="font-franklin-regular font-medium mb-0" for="yes">{{ __('Oui') }}</x-form.label>
+                                    </p>
+                                    <p class="flex items-center space-x-2">
+                                        <x-radio
+                                            id="no"
+                                            name="has_been_public_agent"
+                                            class="w-5 h-5"
+                                            value="0"
+                                        />
+                                        <x-form.label class="font-franklin-regular font-medium mb-0" for="no">{{ __('Non') }}</x-form.label>
+                                    </p>
+                                </div>
+                            </div>
+                        @endif
+
                         <div class="mt-4 md:mt-6">
                             <x-button variant="primary" class="font-franklin-medium" type="submit" widthFull>
                                 <span>{{ __('Suivant') }}</span>

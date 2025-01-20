@@ -108,10 +108,14 @@ class Observer {
 
 	protected getValue(): string {
 		let value: string;
-		if (this.target instanceof HTMLInputElement)
-			value = this.target.value;
-		else
+		if (this.target instanceof HTMLSelectElement) {
 			value = this.target.options[this.target.selectedIndex].value;
+		} else if (this.target.type === "radio") {
+			value = this.target.checked ? "checked" : "";
+		} else {
+			value = this.target.value;
+		}
+			
 
 		return value;
 	}

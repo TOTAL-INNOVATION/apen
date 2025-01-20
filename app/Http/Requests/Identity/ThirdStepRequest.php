@@ -30,7 +30,8 @@ class ThirdStepRequest extends FormRequest
             'expert_status' => [
                 'required',
                 Rule::enum(ExpertStatusEnum::class),
-            ]
+            ],
+            'has_been_public_agent' => 'bail|required|boolean',
         ];
     }
 }

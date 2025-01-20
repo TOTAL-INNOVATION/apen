@@ -7,7 +7,7 @@
     'checked' => false,
 ])
 <label for="{{ $id }}" class="p-2 relative flex items-start bg-white border border-whisper cursor-pointer">
-    <div class="{{ twMerge('flex items-center h-5', ['mt-1' => $description !== null]) }}">
+    <div class="{{ twMerge(['flex items-center h-5', 'mt-1' => $description !== null]) }}">
       <x-radio :id="$id" :name="$name" :value="$value" :checked="$checked" {{ $attributes->twMerge('w-5 h-5 sm:w-6 sm:h-6 bg-whisper/50 border-2 border-rainee') }} />
     </div>
     <span class="ms-3">

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('subject');
             $table->date('starts_at');
             $table->date('ends_at');
+            $table->string('location');
             $table->string('trainer_name'); // Institution/Structure/Trainer
             $table->string('file');
             $table->timestamps();

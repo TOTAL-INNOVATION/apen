@@ -9,11 +9,11 @@ enum ApprovalFormsEnum: string
 
 	case IDENTITY_STEP_ONE = 'pages.approvals.identity.first';
 
-	case IDENTITY_STEP_TWO = 'pages.approvals.identity.two';
+	case IDENTITY_STEP_TWO = 'pages.approvals.identity.second';
 
-	case IDENTITY_STEP_THREE = 'pages.approvals.identity.three';
+	case IDENTITY_STEP_THREE = 'pages.approvals.identity.third';
 
-	case IDENTITY_STEP_FOUR = 'pages.approvals.identity.four';
+	case IDENTITY_STEP_FOUR = 'pages.approvals.identity.fourth';
 
 	case ADDRESSES = 'pages.approvals.addresses';
 

@@ -30,6 +30,7 @@ class Approval extends Model
             'expert_status' => ExpertStatusEnum::class,
             'activity_sector' => ActivitySectorEnum::class,
             'view' => ApprovalFormsEnum::class,
+            'has_been_public_agent' => 'boolean',
         ];
     }
 
@@ -46,6 +47,11 @@ class Approval extends Model
     public function trainings(): HasMany
     {
         return $this->hasMany(Training::class);
+    }
+
+    public function certificates(): HasMany
+    {
+        return $this->hasMany(Certificate::class);
     }
 
     public function society(): HasOne
