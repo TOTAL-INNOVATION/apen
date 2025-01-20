@@ -23,10 +23,6 @@
         <div class="px-4 mt-4 sm:px-0 sm:mt-6 md:mt-8 lg:mt-12 container">
             <div class="max-w-lg mx-auto">
                 <h2 class="heading-2 uppercase">{{ __('Diplôme') }}</h2>
-
-				@session('error')
-					<x-alert class="mt-4 sm:mt-6" variant="error">{{ __($value) }}</x-alert>
-				@endsession
                 
 				<div class="mt-4 md:mt-6">
                     <x-form method="POST" action="{{ route('approval.degrees') }}" enctype="multipart/form-data">

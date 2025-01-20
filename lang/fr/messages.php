@@ -146,5 +146,9 @@ return [
 			]
 		],
 		'uploadFailed' => 'Il y\'a eu un problème lors de l\'envoi du fichier.',
+		'training' => [
+			'created' => 'La formation a été ajoutée avec succès.',
+			'deleted' => 'La formation a été rétirée avec succès.',
+		]
 	]
 ];

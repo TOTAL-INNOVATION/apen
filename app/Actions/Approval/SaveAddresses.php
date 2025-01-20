@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Actions\Approval;
 
+use App\Enums\ApprovalFormsEnum;
 use App\Http\Requests\Approval\AddressRequest;
 
 class SaveAddresses
@@ -19,7 +20,7 @@ class SaveAddresses
 			...$request->validated(),
 			'mobile' => $request->getMobile(),
 			'tel' => $request->getTel(),
-			'view' => 'pages.approvals.degrees',
+			'view' => ApprovalFormsEnum::DEGREES,
 		]);
 	}
 }

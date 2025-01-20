@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Actions\Approval\StoreFile;
+use App\Enums\ApprovalFormsEnum;
 use App\Enums\ApprovalTypeEnum;
 use App\Http\Requests\Identity\FirstStepRequest;
 use App\Http\Requests\Identity\FourthStepRequest;
 use App\Http\Requests\Identity\SecondStepRequest;
 use App\Http\Requests\Identity\ThirdStepRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 
 class ApprovalIdentityService
 {
@@ -20,16 +22,22 @@ class ApprovalIdentityService
         $approval = $user->approval;
 
         $user->update($request->validated());
-        $approval->update(['view' => 'pages.approvals.identity.second']);
+        $approval->update([
+            'view' => ApprovalFormsEnum::IDENTITY_STEP_TWO
+        ]);
     }
 
-    public function saveSecondStep(SecondStepRequest $request): bool
+    public function saveSecondStep(SecondStepRequest $request): void
     {
         $path = app(StoreFile::class)->handle(
             $request->file('identity_photo')
         );
         
-        if (!$path) return false;
+        if (!$path) {
+            throw ValidationException::withMessages([
+                'identity_photo' => 'messages.approval.uploadFailed',
+            ]);
+        };
 
         /**
          * @var \App\Models\Approval
@@ -51,11 +59,11 @@ class ApprovalIdentityService
             ]),
             'identity_photo' => $path,
             'view' => $approval->type === ApprovalTypeEnum::CATEGORY_A ?
-            'pages.approvals.addresses' : 'pages.approvals.identity.third',
+            ApprovalFormsEnum::ADDRESSES : ApprovalFormsEnum::IDENTITY_STEP_THREE,
         ];
 
 
-        return $approval->update($data);
+        $approval->update($data);
     }
 
     public function saveThirdStep(ThirdStepRequest $request): void
@@ -68,7 +76,7 @@ class ApprovalIdentityService
         $approval->update([
             ...$request->validated(),
             'view' => $approval->type === ApprovalTypeEnum::CATEGORY_C ?
-            'pages.approvals.identity.fourth': 'pages.approvals.addresses'
+            ApprovalFormsEnum::IDENTITY_STEP_FOUR: ApprovalFormsEnum::ADDRESSES
         ]);
     }
     
@@ -87,7 +95,7 @@ class ApprovalIdentityService
 
         $approval->update([
             ...$request->validated(),
-            'view' => 'pages.approvals.addresses',    
+            'view' => ApprovalFormsEnum::ADDRESSES,    
         ]);
     }
 }

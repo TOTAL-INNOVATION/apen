@@ -4,6 +4,7 @@ declare (strict_types = 1);
 
 namespace App\Actions\Approval;
 
+use App\Enums\ApprovalFormsEnum;
 use App\Enums\ApprovalTypeEnum;
 use App\Http\Requests\Approval\ChoiceRequest;
 
@@ -20,7 +21,7 @@ class DefineChoice
 
 		$data = [
 			'type' => $type,
-			'view' => 'pages.approvals.identity.first',
+			'view' => ApprovalFormsEnum::IDENTITY_STEP_ONE,
 			'total_steps' => ApprovalTypeEnum::getTotalSteps($type)
 		];
 

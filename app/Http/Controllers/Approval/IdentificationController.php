@@ -25,12 +25,7 @@ class IdentificationController extends Controller
 
     public function secondStep(SecondStepRequest $request): RedirectResponse
     {
-        if (!$this->service->saveSecondStep($request)) {
-            return back()->with(
-                'error',
-                'messages.approval.identification.failed.secondStep',
-            );
-        }
+        $this->service->saveSecondStep($request);
 
         return back();
     }

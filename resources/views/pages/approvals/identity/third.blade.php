@@ -94,7 +94,7 @@
                                 </div>
                             @endif
 
-                            @error('marital_status')
+                            @error('expert_status')
                                 <p class="text-error mt-2">{{ $message }}</p>
                             @enderror
                         </div>

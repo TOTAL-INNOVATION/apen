@@ -3,8 +3,10 @@
 use App\Http\Controllers\Approval\AddressesController;
 use App\Http\Controllers\Approval\ChoiceController;
 use App\Http\Controllers\Approval\DegreeController;
+use App\Http\Controllers\Approval\GoToCertificateController;
 use App\Http\Controllers\Approval\IdentificationController;
 use App\Http\Controllers\Approval\IndexController;
+use App\Http\Controllers\Approval\TrainingController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DecreeController as GetDecreesController;
 use App\Http\Controllers\NewzController;
@@ -47,6 +49,8 @@ Route::middleware(['auth', 'verified'])->group(function() {
     });
     Route::post('definir-les-adresses', AddressesController::class)->name('approval.addresses');
     Route::post('definir-les-diplomes', DegreeController::class)->name('approval.degrees');
+    Route::resource('formation', TrainingController::class)->only(['store', 'destroy']);
+    Route::get('boucler-les-formations', GoToCertificateController::class)->name('approval.goto_certificates');
 });
 
 Route::middleware(['auth', 'verified', HandleInertiaRequests::class])->group(function () {

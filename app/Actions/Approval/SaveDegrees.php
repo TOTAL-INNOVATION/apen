@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Actions\Approval;
 
+use App\Enums\ApprovalFormsEnum;
 use App\Http\Requests\Approval\DegreeRequest;
+use App\Models\Degree;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 
 class SaveDegrees
@@ -27,11 +30,25 @@ class SaveDegrees
 		 */
 		$approval = $request->user()->approval;
 
+		$this->deleteFileIfDegreeExist($approval->degree);
+
 		$approval->degree()->updateOrCreate([
 			...$request->validated(),
 			'file' => $path,
 		]);
 
-		$approval->update(['view' => 'pages.approvals.training']);
+		$approval->update(['view' => ApprovalFormsEnum::TRAININGS]);
+	}
+
+	public function deleteFileIfDegreeExist(?Degree $degree): void
+	{
+		if (!$degree) return;
+
+		Storage::disk('public')->delete(
+			str($degree->file)->replace(
+				'storage/',
+				''
+			)
+		);
 	}
 }

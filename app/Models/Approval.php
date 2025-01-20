@@ -2,10 +2,20 @@
 
 namespace App\Models;
 
-use App\Enums\{ActivitySectorEnum, ApprovalTypeEnum, ExpertStatusEnum};
+use App\Enums\{
+    ActivitySectorEnum,
+    ApprovalFormsEnum,
+    ApprovalTypeEnum,
+    ExpertStatusEnum,
+};
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasOne, HasManyThrough};
+use Illuminate\Database\Eloquent\Relations\{
+    BelongsTo,
+    HasOne,
+    HasMany,
+    HasManyThrough
+};
 
 class Approval extends Model
 {
@@ -19,6 +29,7 @@ class Approval extends Model
             'type' => ApprovalTypeEnum::class,
             'expert_status' => ExpertStatusEnum::class,
             'activity_sector' => ActivitySectorEnum::class,
+            'view' => ApprovalFormsEnum::class,
         ];
     }
 
@@ -30,6 +41,11 @@ class Approval extends Model
     public function degree(): HasOne
     {
         return $this->hasOne(Degree::class);
+    }
+
+    public function trainings(): HasMany
+    {
+        return $this->hasMany(Training::class);
     }
 
     public function society(): HasOne

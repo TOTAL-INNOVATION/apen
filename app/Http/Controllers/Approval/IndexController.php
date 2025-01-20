@@ -19,7 +19,7 @@ class IndexController extends Controller
         $approval = $request->user()->approval;
 
         if ($approval) {
-            return view($approval->view)
+            return view($approval->view->value)
             ->with('approval', $approval);
         }
 
