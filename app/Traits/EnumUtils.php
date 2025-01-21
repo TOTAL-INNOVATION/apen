@@ -31,4 +31,14 @@ trait EnumUtils {
 		return $array;
 	}
 
+	public static function findFromValue(string $value): null|self
+	{
+		foreach (self::cases() as $case) {
+			if ($case->value === $value)
+				return $case;
+		}
+
+		return null;
+	}
+
 }

@@ -3,6 +3,7 @@
      * @var \Illuminate\Database\Eloquent\Collection
      */
     $certificates = $approval->certificates;
+    $count = $certificates->count();
 @endphp
 
 <x-base-layout>
@@ -25,7 +26,7 @@
             <div class="max-w-lg mx-auto">
                 <h2 class="heading-2 uppercase">{{ __('Certificats/Attestations') }}</h2>
 
-                @if (!$certificates->count())
+                @if (!$count)
                     <div class="mt-4 md:mt-6">
                         <p class="mb-2 block font-franklin-medium">{{ __('Avez-vous des Certificats/Attestations de formation?') }}</p>
                         <div class="space-y-2">
@@ -62,7 +63,7 @@
                         <x-alert class="mt-4 sm:mt-6" variant="success">{{ __($value) }}</x-alert>
                     @endsession
 
-                    @if ($certificates->count())
+                    @if ($count)
                         <div class="mt-4 md:mt-6 text-[15px] overflow-x-scroll sm:overflow-hidden">
                             <x-table class="min-w-[430px] w-full">
                                 <x-table.header>
@@ -96,7 +97,7 @@
                     <div class="mt-4 md:mt-6 p-4 bg-whisper/30 border border-rainee/25">
                         <x-form action="{{ route('certificats.store') }}" method="POST" enctype="multipart/form-data">
                             
-                            <x-form.field
+                                <x-form.field
                                     name="subject"
                                     label="{{ __('Thème de la formation') }}"
                                     placeholder="{{ __('Entrez le thème de la formation') }}"

@@ -22,7 +22,7 @@ class Approval extends Model
     use HasUlids;
     
     protected $guarded = ['id'];
-
+    
     public function casts(): array
     {
         return [
@@ -70,5 +70,22 @@ class Approval extends Model
     public function domains(): HasMany
     {
         return $this->hasMany(Domain::class);
+    }
+
+    public function attachments(): HasMany
+    {
+        return $this->hasMany(Attachment::class);
+    }
+
+    public function getCurrentDomain(): ?Domain
+    {
+        $this->load('domains');
+        $rank = match ($this->view) {
+            ApprovalFormsEnum::DOMAINS_THIRD => 3,
+            ApprovalFormsEnum::DOMAINS_SECOND => 2,
+            default => 1
+        };
+        
+        return $this->domains->where('rank', $rank)->first();
     }
 }

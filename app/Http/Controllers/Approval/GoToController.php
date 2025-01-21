@@ -17,7 +17,7 @@ class GoToController extends Controller
          * @var \App\Models\Approval
          */
         $approval = $request->user()->approval;
-        
+        ApprovalFormsEnum::goToNext($approval);
 
         return back();
     }

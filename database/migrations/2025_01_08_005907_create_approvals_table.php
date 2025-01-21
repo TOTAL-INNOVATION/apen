@@ -39,6 +39,7 @@ return new class extends Migration
             $table->string('view')->nullable(); //Next view
             $table->integer('total_steps'); // Total step to complete the form
             $table->integer('current_step')->default(1);
+            $table->string('signature')->nullable(); // Signature file path
             $table->timestamps();
         });
     }

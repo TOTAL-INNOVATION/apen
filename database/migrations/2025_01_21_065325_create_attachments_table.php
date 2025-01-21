@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('domains', function (Blueprint $table) {
+        Schema::create('attachments', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->foreignUlid('approval_id')->constrained()->cascadeOnDelete();
-            $table->string('type');
-            $table->integer('rank');
-            $table->string('first_subdomain')->nullable();
-            $table->string('second_subdomain')->nullable();
-            $table->string('third_subdomain')->nullable();
+            $table->string('nature');
+            $table->string('file');
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('domains');
+        Schema::dropIfExists('attachments');
     }
 };

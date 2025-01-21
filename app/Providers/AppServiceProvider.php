@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Actions\GetFlashInfos;
 use App\Actions\Handlers\ResetPassword as ResetPasswordHandler;
 use App\Actions\Handlers\VerifyEmail as VerifyEmailHandler;
+use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Auth\Notifications\VerifyEmail;
@@ -31,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
         $this->configureHandlers();
         $this->configureDefaultValidations();
         $this->configureViewComposers();
+        $this->configureDebugbar();
     }
 
     public function configureHandlers()
@@ -59,5 +61,12 @@ class AppServiceProvider extends ServiceProvider
                 ->uncompromised()
                 ->rules(['required', 'confirmed']);
         });
+    }
+
+    public function configureDebugbar(): void
+    {
+        if (!app()->isProduction()) {
+            Debugbar::enable();
+        }
     }
 }

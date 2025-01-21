@@ -3,9 +3,12 @@
 namespace App\Enums;
 
 use App\Models\Approval;
+use App\Traits\EnumUtils;
 
 enum ApprovalFormsEnum: string
 {
+
+	use EnumUtils;
 
 	case INDEX = 'pages.approvals.index';
 
@@ -28,6 +31,18 @@ enum ApprovalFormsEnum: string
 	case SOCIETY = 'pages.approvals.society';
 
 	case DOMAINS_INDEX = 'pages.approvals.domains.index';
+
+	case DOMAINS_FIRST = 'pages.approvals.domains.first';
+	
+	case DOMAINS_SECOND = 'pages.approvals.domains.second';
+	
+	case DOMAINS_THIRD = 'pages.approvals.domains.third';
+
+	case ATTACHMENTS = 'pages.approvals.attachments';
+
+	case SIGNATURE = 'pages.approvals.signature';
+
+	case PAYMENT = 'pages.approvals.payments';
 
 	public static function goToNext(Approval $approval): void
 	{
@@ -66,7 +81,7 @@ enum ApprovalFormsEnum: string
 			case self::TRAININGS:
 				if ($approval->trainings->count()) {
 					$approval->update([
-						'view' => ApprovalFormsEnum::CERTIFICATES,
+						'view' => self::CERTIFICATES,
 					]);
 				}
 				break;
@@ -77,6 +92,34 @@ enum ApprovalFormsEnum: string
 					self::SOCIETY : self::DOMAINS_INDEX
 				]);
 				break;
+
+			case self::DOMAINS_INDEX:
+				$approval->update([
+					'view' => self::DOMAINS_FIRST,
+				]);
+
+			case self::DOMAINS_FIRST:
+
+				$totalSectors = $approval->total_sectors;
+				$totalDomains = $approval->domains->count();
+				$view = $approval->view;
+
+				if ($totalSectors === 1 || $totalDomains === $totalSectors - 1)
+					$view = self::ATTACHMENTS;
+				else if ($totalDomains === 0)
+					$view = self::DOMAINS_SECOND;
+				else
+					$view = self::DOMAINS_THIRD;
+				
+				$approval->update(['view' => $view]);
+
+			// Todos: Domains other cases
+
+			case self::ATTACHMENTS:
+				if ($approval->attachments()->count()) {
+					$approval->update(['view' => self::SIGNATURE]);
+				}
+			
 		}
 	}
 

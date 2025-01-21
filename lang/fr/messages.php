@@ -153,6 +153,15 @@ return [
 		'certificate' => [
 			'created' => 'Le certificat a été ajouté avec succès.',
 			'deleted' => 'Le certificat a été rétiré avec succès.',
+		],
+
+		'domains' => [
+			'maxExceeded' => 'Le nombre total de domaines autorisés de :max',
+		],
+
+		'attachments' => [
+			'created' => 'La preuve a été enrégistrée avec succès.',
+			'deleted' => 'La preuve a été supprimée avec succès.',
 		]
 	]
 ];

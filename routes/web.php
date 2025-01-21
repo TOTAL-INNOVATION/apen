@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\Approval\AddressesController;
+use App\Http\Controllers\Approval\AttachmentController;
 use App\Http\Controllers\Approval\CertificateController;
 use App\Http\Controllers\Approval\ChoiceController;
 use App\Http\Controllers\Approval\DegreeController;
+use App\Http\Controllers\Approval\DomainController;
 use App\Http\Controllers\Approval\GoToController;
 use App\Http\Controllers\Approval\IdentificationController;
 use App\Http\Controllers\Approval\IndexController;
@@ -52,6 +54,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('definir-les-diplomes', DegreeController::class)->name('approval.degrees');
     Route::resource('formations', TrainingController::class)->only(['store', 'destroy']);
     Route::resource('certificats', CertificateController::class)->only(['store', 'destroy']);
+    
+    Route::prefix('domaines')->group(function() {
+        Route::post('definir-le-total', [DomainController::class, 'saveTotalSectors'])->name('domains.total');
+        Route::post('ajouter-un-domaine', [DomainController::class, 'saveSector'])->name('domains.save');
+    });
+
+    Route::resource('preuves', AttachmentController::class)->only(['store', 'destroy']);
+
     Route::get('aller-a', GoToController::class)->name('approval.goto');
 });
 

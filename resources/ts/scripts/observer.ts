@@ -91,11 +91,19 @@ class Observer {
 
 			const options = (attributeValue as string[]).map(value => {
 				const option = document.createElement("option");
+				option.setAttribute("style", "max-width: 100%; text-overflow: hidden")
 				option.setAttribute("value", value);
 				option.textContent = value;
 
 				return option;
 			});
+
+			if (element.dataset.hasEmptyOption) {
+				const emptyOption = document.createElement("option");
+				emptyOption.value = "";
+				emptyOption.textContent = "AUCUN";
+				options.unshift(emptyOption);
+			}
 
 			if (element.hasChildNodes())
 				Array.from(element.childNodes).forEach(child => child.remove());
