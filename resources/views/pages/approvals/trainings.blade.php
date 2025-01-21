@@ -52,7 +52,7 @@
                                         <x-table.cell class="px-2 md:px-4">{{ $training->level }}</x-table.cell>
                                         <x-table.cell class="px-2 md:px-4">{{ $training->procured_at }}</x-table.cell>
                                         <x-table.cell class="px-2 md:px-4">
-                                            <x-form method="POST" action="{{ route('formation.destroy', $training->id) }}" class="w-fit text-center">
+                                            <x-form method="POST" action="{{ route('formations.destroy', $training->id) }}" class="w-fit text-center">
                                                 @method('DELETE')
                                                 <x-button size="sm" class="py-1 px-2" variant="outline" type="submit">
                                                     <x-lucide-trash-2 class="w-[20px] h-[20px] stroke-[1.5] stroke-error" />

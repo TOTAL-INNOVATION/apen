@@ -23,8 +23,8 @@ return new class extends Migration
             $table->string('legal_status_precision');
             $table->string('status_file'); // Legal status file
             $table->string('staff_number');
-            $table->integer('salaried_technical_staff'); // Number of
-            $table->integer('salaried_administrative_staff');  // Number of
+            $table->string('salaried_technical_staff'); // Number of
+            $table->string('salaried_administrative_staff');  // Number of
             $table->timestamps();
         });
     }

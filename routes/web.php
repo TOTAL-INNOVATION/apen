@@ -1,14 +1,17 @@
 <?php
 
 use App\Http\Controllers\Approval\AddressesController;
+use App\Http\Controllers\Approval\AssociateController;
 use App\Http\Controllers\Approval\AttachmentController;
 use App\Http\Controllers\Approval\CertificateController;
 use App\Http\Controllers\Approval\ChoiceController;
 use App\Http\Controllers\Approval\DegreeController;
 use App\Http\Controllers\Approval\DomainController;
+use App\Http\Controllers\Approval\FinalController;
 use App\Http\Controllers\Approval\GoToController;
 use App\Http\Controllers\Approval\IdentificationController;
 use App\Http\Controllers\Approval\IndexController;
+use App\Http\Controllers\Approval\SocietyController;
 use App\Http\Controllers\Approval\TrainingController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DecreeController as GetDecreesController;
@@ -59,8 +62,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('definir-le-total', [DomainController::class, 'saveTotalSectors'])->name('domains.total');
         Route::post('ajouter-un-domaine', [DomainController::class, 'saveSector'])->name('domains.save');
     });
-
     Route::resource('preuves', AttachmentController::class)->only(['store', 'destroy']);
+    Route::post('definir-la-societe', SocietyController::class)->name('approval.society');
+    Route::resource('associes', AssociateController::class)->only(['store', 'destroy']);
+    Route::post('finaliser', FinalController::class)->name('approval.complete');
 
     Route::get('aller-a', GoToController::class)->name('approval.goto');
 });

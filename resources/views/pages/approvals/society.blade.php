@@ -25,13 +25,13 @@
                 <h2 class="heading-2 uppercase">{{ __('Information de la société') }}</h2>
 
                 <div class="mt-4 md:mt-6">
-                    <x-form method="POST" action="#">
+                    <x-form method="POST" action="{{ route('approval.society') }}" enctype="multipart/form-data">
 
                         <x-form.field
                             name="name"
                             label="{{ __('Nom de la société') }}"
                             placeholder="{{ __('Entrez le nom de la socité') }}"
-                            value="{{ $society?->name }}"
+                            value="{{ $society?->name ?? old('name') }}"
                             required
                         />
 
@@ -39,15 +39,16 @@
                             name="commercial_name"
                             label="{{ __('Nom commercial') }}"
                             placeholder="{{ __('Entrez le nom commercial') }}"
-                            value="{{ $society?->commercial_name }}"
+                            value="{{ $society?->commercial_name ?? old('commercial_name') }}"
                             required
                         />
 
                         <x-form.field
-                            type="date"
+                            type="number"
                             name="founded_at"
                             label="{{ __('Année de constitution') }}"
-                            value="{{ $society?->founded_at }}"
+                            placeholder="{{ __('Ex: 2024') }}"
+                            value="{{ $society?->founded_at ?? old('founded_at') }}"
                             required
                         />
 
@@ -56,7 +57,7 @@
                             name="capital"
                             label="{{ __('Capital de la société') }}"
                             placeholder="{{ __('Entrez une somme(En FCFA)') }}"
-                            value="{{ $society?->capital }}"
+                            value="{{ $society?->capital ?? old('capital') }}"
                             required
                         />
 
@@ -74,7 +75,7 @@
                             name="legal_status_precision"
                             label="{{ __('Préciser la forme juridique') }}"
                             placeholder="{{ __('Entrez la précision') }}"
-                            value="{{ $society?->legal_status_precision }}"
+                            value="{{ $society?->legal_status_precision ?? old('legal_status_precision') }}"
                             required
                         />
 
@@ -82,7 +83,7 @@
                             label="{{ __('Statut de la société') }}"
                             type="file"
                             name="status_file"
-                            accept="pdf, doc, docx"
+                            accept="application/pdf"
                             required
                         />
 
@@ -91,7 +92,7 @@
                             name="staff_number"
                             label="{{ __('Total du personnel') }}"
                             placeholder="{{ __('Entrez un nombre') }}"
-                            value="{{ $society?->staff_number }}"
+                            value="{{ $society?->staff_number ?? old('staff_number') }}"
                             required
                         />
 
@@ -100,7 +101,7 @@
                             name="salaried_technical_staff"
                             label="{{ __('Personel cadre technique salarié') }}"
                             placeholder="{{ __('Entrez un nombre') }}"
-                            value="{{ $society?->salaried_technical_staff }}"
+                            value="{{ $society?->salaried_technical_staff ?? old('salaried_technical_staff') }}"
                             required
                         />
 
@@ -109,7 +110,7 @@
                             name="salaried_administrative_staff"
                             label="{{ __('Personnel administratif salarié') }}"
                             placeholder="{{ __('Entrez un nombre') }}"
-                            value="{{ $society?->salaried_administrative_staff }}"
+                            value="{{ $society?->salaried_administrative_staff ?? old('salaried_administrative_staff') }}"
                             required
                         />
 

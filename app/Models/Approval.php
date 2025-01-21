@@ -63,7 +63,7 @@ class Approval extends Model
     {
         return $this->hasManyThrough(
             Associate::class,
-            Society::class
+            Society::class,
         );
     }
 
@@ -75,6 +75,13 @@ class Approval extends Model
     public function attachments(): HasMany
     {
         return $this->hasMany(Attachment::class);
+    }
+
+    public function hasAddressDefined(): bool
+    {
+        return $this->geographic_region &&
+        $this->mobile && 
+        ($this->region || $this->address);
     }
 
     public function getCurrentDomain(): ?Domain

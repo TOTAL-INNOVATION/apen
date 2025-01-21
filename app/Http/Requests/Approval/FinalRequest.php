@@ -2,11 +2,12 @@
 
 namespace App\Http\Requests\Approval;
 
-use App\Enums\TrainingLevelEnum;
+use App\Models\Approval;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\File;
 
-class TrainingRequest extends FormRequest
+class FinalRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,15 +25,25 @@ class TrainingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'bail|string|min:2|max:255',
-            'level' => [
+            'cv' => [
                 'bail',
                 'required',
-                Rule::enum(TrainingLevelEnum::class),
+                Rule::file()
+                    ->extensions('pdf')
+                    ->max(5120),
             ],
-            'level_precision' => 'bail|required|string|min:5|max:255',
-            'procured_at' => 'bail|required|string|numeric|min:1960|max:' . now()->year,
-            'trainer_name' => 'bail|required|string|min:2|max:155',
+            'signature' => [
+                'bail',
+                'required',
+                File::image()
+                    ->extensions(['png', 'jpg', 'jpeg'])
+                    ->max(3072),
+            ],
         ];
+    }
+
+    public function getApproval(): Approval
+    {
+        return $this->user()->approval;
     }
 }

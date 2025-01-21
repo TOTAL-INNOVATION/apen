@@ -162,6 +162,11 @@ return [
 		'attachments' => [
 			'created' => 'La preuve a été enrégistrée avec succès.',
 			'deleted' => 'La preuve a été supprimée avec succès.',
+		],
+
+		'associates' => [
+			'created' => 'L\'associé a été enrégistré avec succès.',
+			'deleted' => 'L\'associé a été supprimée avec succès.',
 		]
 	]
 ];

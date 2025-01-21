@@ -30,6 +30,8 @@ enum ApprovalFormsEnum: string
 
 	case SOCIETY = 'pages.approvals.society';
 
+	case ASSOCIATES = 'pages.approvals.associates';
+
 	case DOMAINS_INDEX = 'pages.approvals.domains.index';
 
 	case DOMAINS_FIRST = 'pages.approvals.domains.first';
@@ -41,8 +43,6 @@ enum ApprovalFormsEnum: string
 	case ATTACHMENTS = 'pages.approvals.attachments';
 
 	case SIGNATURE = 'pages.approvals.signature';
-
-	case PAYMENT = 'pages.approvals.payments';
 
 	public static function goToNext(Approval $approval): void
 	{
@@ -71,11 +71,19 @@ enum ApprovalFormsEnum: string
 				break;
 
 			case self::ADDRESSES:
-				$approval->update(['view' => self::DEGREES]);
+				if ($approval->hasAddressDefined()) {
+					$approval->update([
+						'view' => self::DEGREES
+					]);
+				}
 				break;
 				
 			case self::DEGREES:
-				$approval->update(['view' => self::TRAININGS]);
+				if ($approval->degree) {
+					$approval->update([
+						'view' => self::TRAININGS
+					]);
+				}
 				break;
 			
 			case self::TRAININGS:
@@ -93,10 +101,29 @@ enum ApprovalFormsEnum: string
 				]);
 				break;
 
+			case self::SOCIETY:
+				if ($approval->society) {
+					$approval->update([
+						'view' => self::ASSOCIATES,
+					]);
+				}
+				break;
+
+			case self::ASSOCIATES:
+				if ($approval->associates->count()) {
+					$approval->update([
+						'view' => self::DOMAINS_INDEX,
+					]);
+				}
+				break;
+
 			case self::DOMAINS_INDEX:
-				$approval->update([
-					'view' => self::DOMAINS_FIRST,
-				]);
+				if ($approval->total_sectors) {
+					$approval->update([
+						'view' => self::DOMAINS_FIRST,
+					]);
+				}
+				break;
 
 			case self::DOMAINS_FIRST:
 
@@ -112,6 +139,7 @@ enum ApprovalFormsEnum: string
 					$view = self::DOMAINS_THIRD;
 				
 				$approval->update(['view' => $view]);
+				break;
 
 			// Todos: Domains other cases
 
@@ -119,6 +147,7 @@ enum ApprovalFormsEnum: string
 				if ($approval->attachments()->count()) {
 					$approval->update(['view' => self::SIGNATURE]);
 				}
+				break;
 			
 		}
 	}

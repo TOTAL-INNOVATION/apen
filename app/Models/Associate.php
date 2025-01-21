@@ -3,19 +3,16 @@
 namespace App\Models;
 
 use App\Enums\QualificationEnum;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Associate extends Model
 {
-    protected $fillable = [
-        'society_id',
-        'firstname',
-        'lastname',
-        'role',
-        'qualification',
-        'approval',
-    ];
+
+    use HasUlids;
+
+    protected $guarded = ['id'];
 
     public function casts(): array
     {
