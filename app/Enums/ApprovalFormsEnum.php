@@ -27,7 +27,7 @@ enum ApprovalFormsEnum: string
 
 	case SOCIETY = 'pages.approvals.society';
 
-	case DOMAINS = 'pages.approvals.domains';
+	case DOMAINS_INDEX = 'pages.approvals.domains.index';
 
 	public static function goToNext(Approval $approval): void
 	{
@@ -70,7 +70,7 @@ enum ApprovalFormsEnum: string
 			case self::CERTIFICATES:
 				$approval->update([
 					'view' => $approval->type === ApprovalTypeEnum::CATEGORY_A ?
-					self::SOCIETY : self::DOMAINS
+					self::SOCIETY : self::DOMAINS_INDEX
 				]);
 				break;
 		}

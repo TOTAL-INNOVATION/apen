@@ -66,4 +66,9 @@ class Approval extends Model
             Society::class
         );
     }
+
+    public function domains(): HasMany
+    {
+        return $this->hasMany(Domain::class);
+    }
 }
