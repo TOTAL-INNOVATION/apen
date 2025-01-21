@@ -64,7 +64,11 @@ enum ApprovalFormsEnum: string
 				break;
 			
 			case self::TRAININGS:
-				$approval->update(['view' => self::CERTIFICATES]);
+				if ($approval->trainings->count()) {
+					$approval->update([
+						'view' => ApprovalFormsEnum::CERTIFICATES,
+					]);
+				}
 				break;
 			
 			case self::CERTIFICATES:
