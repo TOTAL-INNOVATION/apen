@@ -1,7 +1,7 @@
 <x-base-layout>
 	<x-slot:metadata>
 		<x-slot:title>{{ $article->title }}</x-slot:title>
-		<meta name="description" content="Homepage">
+		<meta name="description" content="{{ $article->title }}">
 	</x-slot:metadata>
 
 	<main class="py-4 sm:pb-6 md:pb-8 lg:pb-12">
@@ -18,7 +18,7 @@
 				/>
 				<x-breadcrumb.item
 					href="#"
-					text="{{ Str::limit($article->title, 32) }}"
+					text="{{ str($article->title)->lower()->ucFirst()->limit(20) }}"
 					class="font-franklin-medium"
 				/>
 			</x-breadcrumb>

@@ -32,7 +32,7 @@ type PageProps = {
 };
 
 const schema = zod.object({
-	title: zod.string().min(5).max(50),
+	title: zod.string().min(5).max(255),
 	published_at: zod.coerce.date().or(zod.string()),
 	content: zod.string().min(5),
 });

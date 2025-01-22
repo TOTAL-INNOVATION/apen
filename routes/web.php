@@ -15,7 +15,9 @@ use App\Http\Controllers\Approval\SocietyController;
 use App\Http\Controllers\Approval\TrainingController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DecreeController as GetDecreesController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\NewzController;
+use App\Http\Controllers\Panel\ApprovalController;
 use App\Http\Controllers\Panel\ArticleController;
 use App\Http\Controllers\Panel\DecreeController;
 use App\Http\Controllers\Panel\FlashInfoController;
@@ -24,6 +26,9 @@ use App\Http\Controllers\Panel\MessageController;
 use App\Http\Controllers\Panel\StatementController;
 use App\Http\Controllers\Panel\SubscriberController;
 use App\Http\Controllers\Panel\UserController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ReleaseController;
+use App\Http\Middleware\EnsureUserIsExpert;
 use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Support\Facades\Route;
 
@@ -42,8 +47,14 @@ Route::prefix('devenir-expert')->group(function () {
     Route::view('conditions', 'pages.becomeExpert.conditions')->name('becomeExpert.conditions');
     Route::view('procedure', 'pages.becomeExpert.procedure')->name('becomeExpert.procedure');
 });
+Route::view('annonces-et-offres', 'pages.announcements')->name('announcements');
+Route::view('newsletter', 'pages.newsletter')->name('newsletter.index');
+Route::post('souscrire-au-newsletter', NewsletterController::class)->name('newsletter.subscribe');
+Route::get('tous-les-communiques', [ReleaseController::class, 'index'])->name('releases.index');
+Route::get('tous-les-communiques/{slug}', [ReleaseController::class, 'show'])->name('releases.show');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+
+Route::middleware(['auth', 'verified', EnsureUserIsExpert::class])->group(function () {
 
     Route::get('formulaire', IndexController::class)->name('becomeExpert.form');
     Route::post('définir-le-choix', ChoiceController::class)->name('approval.choice');
@@ -66,6 +77,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('definir-la-societe', SocietyController::class)->name('approval.society');
     Route::resource('associes', AssociateController::class)->only(['store', 'destroy']);
     Route::post('finaliser', FinalController::class)->name('approval.complete');
+    Route::get('paiement', [PaymentController::class, 'index'])->name('payment.index');
 
     Route::get('aller-a', GoToController::class)->name('approval.goto');
 });
@@ -85,6 +97,7 @@ Route::middleware(['auth', 'verified', HandleInertiaRequests::class])->group(fun
     Route::resource('infos', FlashInfoController::class)->except(EXCEPT_METHODS);
     Route::resource('communiques', StatementController::class)->except('show');
     Route::resource('abonnes_newsletter', SubscriberController::class)->only(['index', 'destroy']);
+    Route::resource('demandes-d-agrement', ApprovalController::class)->only(['index', 'show', 'destroy']);
 
     Route::prefix('article/images')->group(function () {
         Route::post('upload', [ImageController::class, 'store']);

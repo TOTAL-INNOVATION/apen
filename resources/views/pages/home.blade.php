@@ -32,15 +32,15 @@
 						<x-priority-card
 							title="{{ __('Devenir expert') }}"
 							description="{!! __('Conditions, procédure d\'inscription, formulaire de candidature') !!}"
-							imageSrc="#"
-							href="#"
+							imageSrc="{{ asset('defaults/600x400.svg') }}"
+							href="{{ route('becomeExpert.index') }}"
 						/>
 
 						<x-priority-card
 							title="{{ __('Placement') }}"
 							description="{!! __('Offres d\'emploi, annonces de recrutement') !!}"
-							imageSrc="#"
-							href="#"
+							imageSrc="{{ asset('defaults/600x400.svg') }}"
+							href="{{ route('announcements') }}"
 						/>
 
 					</div>
@@ -50,16 +50,16 @@
 							variant="horizontal"
 							title="{{ __('Communiqués') }}"
 							description="{{ __('Rubriques communiqués') }}"
-							imageSrc="#"
-							href="#"
+							imageSrc="{{ asset('defaults/600x400.svg') }}"
+							href="{{ route('releases.index') }}"
 						/>
 
 						<x-priority-card
 							variant="horizontal"
 							title="{{ __('Newsletter') }}"
 							description="{!! __('Bulletin d\'informations') !!}"
-							imageSrc="#"
-							href="#"
+							imageSrc="{{ asset('defaults/600x400.svg') }}"
+							href="{{ route('newsletter.index') }}"
 						/>
 
 					</div>

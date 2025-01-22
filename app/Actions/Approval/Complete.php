@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Actions\Approval;
 
 use App\Http\Requests\Approval\FinalRequest;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Storage;
 
 class Complete
 {
@@ -17,17 +17,19 @@ class Complete
 		);
 		$signaturePath = app(StoreFile::class)->handle(
 			$request->file('signature')
-		); 
+		);
 
 		if (!$cvPath) {
+			$this->deleteFile($signaturePath);
 			throw ValidationException::withMessages([
                 'cv' => __('messages.approval.uploadFailed'),
             ]);
 		}
 
 		if (!$signaturePath) {
+			$this->deleteFile($cvPath);
 			throw ValidationException::withMessages([
-                'cv' => __('messages.approval.uploadFailed'),
+                'signature' => __('messages.approval.uploadFailed'),
             ]);
 		}
 		$approval = $request->getApproval();
@@ -35,5 +37,14 @@ class Complete
 			'cv' => $cvPath,
 			'signature' => $signaturePath
 		]);
+	}
+
+	public function deleteFile(?string $path): void
+	{
+		if (!$path) return;
+
+		Storage::disk('public')->delete(
+			str($path)->replace('storage/', '')
+		);
 	}
 }

@@ -19,7 +19,7 @@
                 <h2 class="heading-2 uppercase">{{ __('Etape final') }}</h2>
 
                 <div class="mt-4 md:mt-6">
-                    <x-form method="POST" action="#" enctype="multipart/form-data">
+                    <x-form method="POST" action="{{ route('approval.complete') }}" enctype="multipart/form-data">
 						<x-form.field
                             label="{{ __('Votre Curriculum Vitae (CV)') }}"
                             type="file"
@@ -32,7 +32,7 @@
                             label="{{ __('Signature en format image') }}"
                             type="file"
                             name="signature"
-                            accept="application/pdf"
+                            accept="image/png, image/jpeg, image/jpg"
                             required
                         />
 

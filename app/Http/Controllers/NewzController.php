@@ -11,6 +11,7 @@ class NewzController extends Controller
     {
         $articles = Article::query()
         ->select(['slug', 'title', 'cover', 'published_at'])
+        ->latest('published_at')
         ->paginate(12);
 
         return view(
@@ -30,7 +31,7 @@ class NewzController extends Controller
         ->first();
 
         if (!$article)
-            abort(403);
+            abort(404);
 
         $article->loadContent();
 

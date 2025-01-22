@@ -33,7 +33,7 @@
     <a href="{{ $href }}" class="h-36 lg:h-auto xl:h-1/2 arrow-move-trigger">
         <x-card class="h-full border-0 flex">
             <div class="w-2/5 sm:w-1/2 aspect-video">
-                <img class="w-full h-full object-cover" src="https://placehold.co/600x400" alt="{{ $title}}">
+                <img class="w-full h-full object-cover" src="{{ $imageSrc ?? asset('defaults/600x400.svg') }}" alt="{{ $title}}">
             </div>
             <div class="w-full p-3 lg:p-6 border border-l-0 border-whisper">
                 <x-card.title class="uppercase">{{ $title }}</x-card.title>

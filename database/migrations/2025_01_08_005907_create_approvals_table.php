@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\{ActivitySectorEnum, ApprovalTypeEnum, ExpertStatusEnum};
+use App\Enums\ApprovalStatusEnum;
 use App\Enums\StatusInSectorEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -40,7 +41,9 @@ return new class extends Migration
             $table->integer('total_steps'); // Total step to complete the form
             $table->integer('current_step')->default(1);
             $table->string('signature')->nullable(); // Signature file path
-            $table->string('cv');
+            $table->string('cv')->nullable();
+            $table->enum('status', ApprovalStatusEnum::values())
+            ->default(ApprovalStatusEnum::IN_PROGRESS->value);
             $table->timestamps();
         });
     }

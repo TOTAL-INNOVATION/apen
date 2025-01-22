@@ -2,7 +2,12 @@
 
 @php
 	$domain = $approval->getCurrentDomain();
-	$exceptTypes = $approval->domains->map(
+	$exceptTypes = $approval
+	->domains
+	->filter(
+		fn($sector) => $sector->id !== $domain?->id
+	)
+	->map(
 		fn($sector) => $sector->type
 	)->toArray();
 @endphp

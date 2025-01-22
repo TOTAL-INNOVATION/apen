@@ -14,6 +14,8 @@ return [
 		'succeeded' => 'Votre message a été pris en compte. Nous vous repondrons bientôt avec un mail en réponse.',
 	],
 
+	'subscibed_to_newsletter' => 'Cette adresse a été abonné au newsletter.',
+
 	'users' => [
 		'create' => [
 			'failed' => 'La création du compte a échoué. Veuillez reessayer.',

@@ -8,6 +8,7 @@ use App\Enums\{
     ApprovalTypeEnum,
     ExpertStatusEnum,
 };
+use App\Traits\SearchFilter;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\{
@@ -19,7 +20,7 @@ use Illuminate\Database\Eloquent\Relations\{
 
 class Approval extends Model
 {
-    use HasUlids;
+    use HasUlids, SearchFilter;
     
     protected $guarded = ['id'];
     

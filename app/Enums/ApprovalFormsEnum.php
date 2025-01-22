@@ -126,20 +126,39 @@ enum ApprovalFormsEnum: string
 				break;
 
 			case self::DOMAINS_FIRST:
-
 				$totalSectors = $approval->total_sectors;
 				$totalDomains = $approval->domains->count();
 				$view = $approval->view;
 
-				if ($totalSectors === 1 || $totalDomains === $totalSectors - 1)
+				if ($totalSectors === 1 && $totalDomains === 1)
 					$view = self::ATTACHMENTS;
-				else if ($totalDomains === 0)
-					$view = self::DOMAINS_SECOND;
 				else
-					$view = self::DOMAINS_THIRD;
+					$view = self::DOMAINS_SECOND;
 				
 				$approval->update(['view' => $view]);
 				break;
+
+			case self::DOMAINS_SECOND:
+				$totalSectors = $approval->total_sectors;
+				$totalDomains = $approval->domains->count();
+				$view = $approval->view;
+				
+				if ($totalSectors === 2 && $totalDomains = 2)
+					$view = self::ATTACHMENTS;
+				else
+					$view = self::DOMAINS_THIRD;
+
+				$approval->update(['view' => $view]);
+				break;
+				
+			case self::DOMAINS_THIRD:
+				if ($approval->domains->count() === 3) {
+					$approval->update([
+						'view' => self::ATTACHMENTS
+					]);
+				}
+				break;
+
 
 			// Todos: Domains other cases
 

@@ -3,7 +3,10 @@
 @php
 	$domain = $approval->getCurrentDomain();
 	$exceptTypes = $approval->domains->map(
-		fn($sector) => $sector->type
+		function($sector) use ($domain) {
+			if ($sector->type !== $domain->type)
+				return $sector->type;
+		}
 	)->toArray();
 @endphp
 

@@ -7,42 +7,39 @@ namespace App\Actions\Approval;
 use App\Enums\ApprovalFormsEnum;
 use App\Http\Requests\Approval\DomainRequest;
 use App\Models\Approval;
+use App\Models\Domain;
 
 class SaveDomain
 {
     public function handle(DomainRequest $request): void
 	{
 		$approval = $request->getApproval();
-		$approval->load('domains');
-		$nextView = $this->getNextView($approval);
-		$approval->domains()->create([
-			...$request->validated(),
-			'rank' => $approval->domains->count() + 1,
-		]);
+		$rank = $this->getCurrentDomainRank($approval);
+		$domain = $this->getCurrentDomain($rank);
 
-		$approval->update(['view' => $nextView]);
+		if (!$domain) {
+			$approval->domains()->updateOrCreate([
+				...$request->validated(),
+				'rank' => $rank,
+			]);
+		} else {
+			$domain->update($request->validated());
+		}
+
+		ApprovalFormsEnum::goToNext($approval);
 	}
 
-	/**
-	 * Get the next view to render
-	 * 
-	 * `Note:` $totalDomains equals to total domaines
-	 * before the one that is about to get stored.
-	 */
-	protected function getNextView(Approval $approval): ApprovalFormsEnum
+	public function getCurrentDomain(int $rank): ?Domain
 	{
-		$totalSectors = $approval->total_sectors;
-		$totalDomains = $approval->domains->count();
+		return Domain::where('rank', $rank)->first();
+	}
 
-		if ($totalSectors === 1 || $totalDomains === $totalSectors - 1) {
-			return ApprovalFormsEnum::ATTACHMENTS;
-		}
-
-		if ($totalDomains === 0) {
-			return ApprovalFormsEnum::DOMAINS_SECOND;
-		}
-
-		return ApprovalFormsEnum::DOMAINS_THIRD;
-		
+	protected function getCurrentDomainRank(Approval $approval): int
+	{
+		return match ($approval->view) {
+			ApprovalFormsEnum::DOMAINS_FIRST => 1,
+			ApprovalFormsEnum::DOMAINS_SECOND => 2,
+			ApprovalFormsEnum::DOMAINS_THIRD => 3,
+		};
 	}
 }

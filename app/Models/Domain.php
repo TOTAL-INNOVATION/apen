@@ -17,6 +17,7 @@ class Domain extends Model
     {
         return [
             'type' => DomainTypeEnum::class,
+            'rank' => 'integer',
         ];
     }
 
