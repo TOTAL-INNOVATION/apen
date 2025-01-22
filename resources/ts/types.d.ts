@@ -48,6 +48,12 @@ export type User = {
     lastname: string;
     fullname: string;
     email: string;
+    phone?: string;
+    birthday?: string;
+    birthplace?: string;
+    gender?: string;
+    marital_status?: string;
+    identity_photo?: string;
     role: Role;
     verified_at: string;
     avatar: string;
