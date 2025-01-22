@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignUlid('approval_id')->constrained()->cascadeOnDelete();
             $table->string('type');
             $table->integer('rank');
-            $table->string('first_subdomain')->nullable();
+            $table->string('first_subdomain');
             $table->string('second_subdomain')->nullable();
             $table->string('third_subdomain')->nullable();
             $table->timestamps();

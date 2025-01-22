@@ -13,6 +13,8 @@ class BaseFilterService
 
     public string $model;
 
+    public array $with = [];
+
     public array $searchAttributes = ['name'];
 
     public array $sortByAttributes = ['name'];
@@ -66,17 +68,19 @@ class BaseFilterService
     protected function filterAllItem(Request $request): LengthAwarePaginator
     {
         list($search, $sortBy, $sortOrder, $length) = $this->getFilterAttributes($request);
+        
+        $query = count($this->with) ? $this->model::with($this->with) : $this->model::query();
 
         if ($search) {
             return $this->applyWhereClauses(
-                $this->model::search($search, $this->searchAttributes)
+                $query->search($search, $this->searchAttributes)
             )
                 ->orderBy($sortBy, $sortOrder)
                 ->paginate($length);
         }
 
         return $this->applyWhereClauses(
-            $this->model::orderBy($sortBy, $sortOrder)
+            $query->orderBy($sortBy, $sortOrder)
         )
             ->paginate($length);
     }

@@ -11,8 +11,8 @@ const flashInfoColumns: Column<FlashInfo>[] = [
 		label: "Titre",
 		format(row) {
             return (
-                <div className="w-full max-w-48 text-wrap">
-                    {str(row.title).limit(50)}
+                <div className="w-full max-w-48 md:max-w-[300px] lg:max-w-[400px] overflow-hidden text-ellipsis">
+                    {row.title}
                 </div>
             );
         },

@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('approvals', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->foreignUlid('user_id')->constrained()->cascadeOnDelete();
-            $table->enum('type', ApprovalTypeEnum::values())->nullable();
+            $table->enum('type', ApprovalTypeEnum::values());
             $table->string('commercial_register')->nullable(); // RCCM/RSCPM
             $table->string('country_of_residence')->nullable();
             $table->string('single_tax_form')->nullable(); // IFU

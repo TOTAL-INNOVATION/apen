@@ -28,25 +28,6 @@
                         <x-form.field label="{!! __('Association (si membre)') !!}" name="association"
                             placeholder="{!! __('Nom d\'une association') !!}" />
 
-                        {{-- @if ($approval->type !== ApprovalTypeEnum::CATEGORY_C)
-                            <div class="mb-4">
-                                <x-form.label>
-                                    {{ __('Nombre de domaines') }}
-                                </x-form.label>
-                                <div
-                                    class="{{ twMerge(['grid', $approval->type === ApprovalTypeEnum::CATEGORY_A ? 'grid-cols-3' : 'grid-cols-2', 'gap-4']) }}">
-                                    @for ($i = 1; $i <= ApprovalTypeEnum::maxDomains($approval->type); $i++)
-                                        <x-select-box name="total_sectors" :label="$i===1?'1 domaine':__(':i domaines',['i'=>$i])" :value="$i"
-                                            :checked="$i === $approval->total_sectors" class="sm:w-5 sm:h-5" />
-                                    @endfor
-                                </div>
-
-                                @error('marital_status')
-                                    <p class="text-error mt-2">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        @endif --}}
-
                         @if ($approval->type === ApprovalTypeEnum::CATEGORY_B)
                             <x-form.field name="commercial_register" label="{{ __('RCCM (Optionnel)') }}"
                                 placeholder="Entrez votre RCCM si disponible"

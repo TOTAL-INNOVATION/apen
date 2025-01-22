@@ -19,5 +19,5 @@ enum LegalStatusEnum: string
 
 	case SNC = 'SNC';
 	
-	case OTHER = 'Other';
+	case OTHER = 'Autre';
 }

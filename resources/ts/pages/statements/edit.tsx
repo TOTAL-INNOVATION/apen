@@ -119,6 +119,7 @@ function Edit() {
                                 name="published_at"
                                 render={({ field }) => (
                                     <FormItem>
+                                        <FormLabel>Date de publication</FormLabel>
                                         <FormControl>
                                             <Input
                                                 type="date"
