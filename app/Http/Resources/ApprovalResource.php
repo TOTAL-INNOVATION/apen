@@ -39,10 +39,11 @@ class ApprovalResource extends JsonResource
             'signature' => $this->signature,
             'cv' => $this->cv,
             'status' => $this->status,
+            'is_paid' => $this->is_paid,
+            'user' => new UserResource($this->user),
 
             ...($request->routeIs('demandes_d_agrement.show') ? [
 
-                'user' => new UserResource($this->user),
                 'degree' => new DegreeResource($this->degree),
                 'training' => TrainingResource::collection($this->trainings),
                 'certificates' => CertificateResource::collection($this->certificates),
@@ -50,7 +51,7 @@ class ApprovalResource extends JsonResource
                 'associates' => AssociateResource::collection($this->associates),
                 'domains' => DomainResource::collection($this->domains),
                 'attachments' => AttachmentResource::collection($this->attachments),
-                
+
             ] : [])
         ];
     }

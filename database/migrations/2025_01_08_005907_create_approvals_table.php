@@ -42,6 +42,7 @@ return new class extends Migration
             $table->integer('current_step')->default(1);
             $table->string('signature')->nullable(); // Signature file path
             $table->string('cv')->nullable();
+            $table->boolean('is_paid')->default(false);
             $table->enum('status', ApprovalStatusEnum::values())
             ->default(ApprovalStatusEnum::IN_PROGRESS->value);
             $table->timestamps();

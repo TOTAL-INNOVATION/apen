@@ -13,7 +13,7 @@ class ApprovalService extends BaseFilterService
 {
 	public string $model = Approval::class;
 
-	public const DEFAULT_FILTER_FIELDS = ['type', 'status'];
+	public const DEFAULT_FILTER_FIELDS = ['type', 'status', 'geographic_region'];
 
 	public array $searchAttributes = self::DEFAULT_FILTER_FIELDS;
 
@@ -22,6 +22,8 @@ class ApprovalService extends BaseFilterService
 	public array $conditions = [
 		'status' => ['!=', ApprovalStatusEnum::IN_PROGRESS]
 	];
+
+	public array $with = ['user'];
 
     public function getAll(Request $request): LengthAwarePaginator
     {

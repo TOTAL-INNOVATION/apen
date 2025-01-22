@@ -1,7 +1,7 @@
 import React from "react";
 import { Nav, NavItem } from "./nav";
 import { TooltipProvider } from "./tooltip";
-import { FileText, LayoutDashboard, Mailbox, MegaphoneIcon, MessageCircle, Newspaper, Users2, Zap } from "lucide-react";
+import { FileText, FileUser, LayoutDashboard, Mailbox, MegaphoneIcon, MessageCircle, Newspaper, Users2, Zap } from "lucide-react";
 
 const Sidebar = () => {
     return (
@@ -24,6 +24,7 @@ const Sidebar = () => {
                     </span>
                 </div>
                 <Nav direction="vertical">
+
                     <NavItem href="/panel">
                         <LayoutDashboard className="w-6 h-6" />
                         <span>Accueil</span>
@@ -32,6 +33,11 @@ const Sidebar = () => {
                     <NavItem href="/utilisateurs">
                         <Users2 className="w-6 h-6" />
                         <span>Utilisateurs</span>
+                    </NavItem>
+
+                    <NavItem href="/demandes_d_agrement">
+                        <FileUser className="w-6 h-6" />
+                        <span>Demandes d'agrément</span>
                     </NavItem>
 
                     <NavItem href="/articles">
