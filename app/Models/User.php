@@ -75,6 +75,11 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         return $this->hasMany(Approval::class);
     }
 
+    public function expertSearches(): HasMany
+    {
+        return $this->hasMany(ExpertSearch::class);
+    }
+
     public function getApprovalAttribute(): ?Approval
     {
         return $this
@@ -89,7 +94,6 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         )
         ->first();
     }
-
 
     public function getFullnameAttribute(): string
     {

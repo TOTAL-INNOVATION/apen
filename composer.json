@@ -15,7 +15,8 @@
         "ligdicash/ligdicash": "^1.0",
         "mallardduck/blade-lucide-icons": "^1.23",
         "predis/predis": "^2.0",
-        "rinvex/countries": "^9.0"
+        "rinvex/countries": "^9.0",
+        "spatie/laravel-sitemap": "^7.3"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.14",

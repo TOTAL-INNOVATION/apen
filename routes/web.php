@@ -14,6 +14,7 @@ use App\Http\Controllers\Approval\IndexController as ApprovalIndexController;
 use App\Http\Controllers\Approval\SocietyController;
 use App\Http\Controllers\Approval\TrainingController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ContactExpertController;
 use App\Http\Controllers\DecreeController as GetDecreesController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\NewzController;
@@ -47,6 +48,14 @@ Route::prefix('devenir-expert')->group(function () {
     Route::view('conditions', 'pages.becomeExpert.conditions')->name('becomeExpert.conditions');
     Route::view('procedure', 'pages.becomeExpert.procedure')->name('becomeExpert.procedure');
 });
+
+Route::middleware(['auth', 'verified'])->group(function() {
+
+    Route::view('contacter-un-expert', 'pages.contactExpert')->name('contactExpert.index');
+    Route::post('soumettre-ma-recherche', ContactExpertController::class)->name('contactExpert.submit');
+
+});
+
 Route::view('annonces-et-offres', 'pages.announcements')->name('announcements');
 Route::view('newsletter', 'pages.newsletter')->name('newsletter.index');
 Route::post('souscrire-au-newsletter', NewsletterController::class)->name('newsletter.subscribe');

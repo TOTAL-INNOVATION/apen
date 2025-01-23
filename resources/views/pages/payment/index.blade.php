@@ -16,9 +16,12 @@
             <div class="max-w-lg mx-auto">
                 <h2 class="heading-2 uppercase">{{ __('Paiement') }}</h2>
 
+				@session('error')
+					<x-alert class="mt-4 sm:mt-6" variant="error">{{ __($value) }}</x-alert>
+				@endsession
 
 				<div class="mt-4 md:mt-6">
-					<p class="mb-4 block font-franklin-medium cursor-pointer">{{ __('Sélectionner un moyen de paiement') }}</p>
+					<p class="mb-4 block font-franklin-medium">{{ __('Sélectionner un moyen de paiement') }}</p>
 					<div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="payment-methods">
 						
 						<label for="orange-money" class="p-2 relative flex items-center space-x-3 bg-white border border-whisper cursor-pointer">

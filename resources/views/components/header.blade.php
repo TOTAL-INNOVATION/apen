@@ -110,7 +110,7 @@
                     
                 </x-dropdown>
                 <x-nav.custom-link href="{{ route('becomeExpert.index') }}">{{ __('Devenir expert') }}</x-nav.custom-link>
-                <x-nav.custom-link href="#">{{ __('Contacter un expert') }}</x-nav.custom-link>
+                <x-nav.custom-link href="{{ route('contactExpert.index') }}">{{ __('Contacter un expert') }}</x-nav.custom-link>
                 <x-nav.custom-link href="{{ route('news.index') }}">{{ __('Actualités') }}</x-nav.custom-link>
                 <x-nav.custom-link href="{{ route('contacts') }}">{{ __('Contacts') }}</x-nav.custom-link>
             </x-nav>

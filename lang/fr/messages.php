@@ -9,6 +9,8 @@ return [
 		'verified' => 'Votre compte a été activé, veuillez vous connecter.',
 	],
 
+	'expert_search_sent' => 'Votre demande de recherche d\'expert a été envoyée.',
+
 	'contact' => [
 		'failed' => 'Votre message n\'a pas pu être envoyé. Veuillez reessayer.',
 		'succeeded' => 'Votre message a été pris en compte. Nous vous repondrons bientôt avec un mail en réponse.',
