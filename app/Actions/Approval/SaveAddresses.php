@@ -9,7 +9,7 @@ use App\Http\Requests\Approval\AddressRequest;
 
 class SaveAddresses
 {
-    public function handle(AddressRequest $request)
+    public function handle(AddressRequest $request): void
 	{
 		/**
          * @var \App\Models\Approval

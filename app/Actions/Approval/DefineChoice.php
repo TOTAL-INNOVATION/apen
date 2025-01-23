@@ -7,6 +7,7 @@ namespace App\Actions\Approval;
 use App\Enums\ApprovalFormsEnum;
 use App\Enums\ApprovalTypeEnum;
 use App\Http\Requests\Approval\ChoiceRequest;
+use App\Models\Approval;
 
 class DefineChoice
 {
@@ -30,8 +31,9 @@ class DefineChoice
 			return;
 		}
 
-		$request->user()
-		->approval()
-		->create($data);
+		Approval::create([
+			...$data,
+			'user_id' => auth()->id(),
+		]);
     }
 }

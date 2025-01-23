@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ApprovalStatusEnum;
 use App\Enums\GenderEnum;
 use App\Enums\MaritalStatusEnum;
 use App\Enums\RoleEnum;
@@ -42,11 +43,6 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         'identity_photo',
     ];
 
-    public function getFullnameAttribute(): string
-    {
-        return $this->firstname . ' ' . $this->lastname;
-    }
-
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -74,9 +70,30 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         ];
     }
 
-    public function approval(): HasMany
+    public function approvals(): HasMany
     {
         return $this->hasMany(Approval::class);
+    }
+
+    public function getApprovalAttribute(): ?Approval
+    {
+        return $this
+        ->approvals()
+        ->where(
+            'status',
+            ApprovalStatusEnum::IN_PROGRESS
+        )
+        ->orWhere(
+            'status',
+            ApprovalStatusEnum::COMPLETED,
+        )
+        ->first();
+    }
+
+
+    public function getFullnameAttribute(): string
+    {
+        return $this->firstname . ' ' . $this->lastname;
     }
 
     public function sendEmailVerificationNotification(): void

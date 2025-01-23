@@ -24,5 +24,6 @@
     type="{{ $type }}"
     name="{{ $name }}"
     placeholder="{{ $placeholder }}"
+    @if($type === "number") min="0" @endif
     {{ $attributes->twMerge($classNames) }}
 />

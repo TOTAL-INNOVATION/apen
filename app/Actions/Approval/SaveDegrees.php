@@ -37,7 +37,7 @@ class SaveDegrees
 			'file' => $path,
 		]);
 
-		$approval->update(['view' => ApprovalFormsEnum::TRAININGS]);
+		ApprovalFormsEnum::goToNext($approval);
 	}
 
 	public function deleteFileIfDegreeExist(?Degree $degree): void

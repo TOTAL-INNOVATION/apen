@@ -46,7 +46,7 @@
 						</x-form.field.select>
 
                         <x-form.field
-                            label="{!! __('Photo d\'identité') !!}"
+                            label="{!! __('Photo d\'identité (Format image)') !!}"
                             type="file"
                             name="identity_photo"
                             accept="image/png, image/jpg, image/jpeg"

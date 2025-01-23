@@ -10,7 +10,7 @@
         </div>
         
         <div class="h-10 text-ellipsis">
-            <x-card.title class="lg:text-2xl uppercase">{{ Str::limit($title, 45) }}</x-card.title>
+            <h3 class="text-xl lg:text-2xl font-texta-black uppercase">{{ Str::limit($title, 45) }}</h3>
         </div>
 
     </x-card.body>

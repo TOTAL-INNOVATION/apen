@@ -4,27 +4,29 @@ declare(strict_types=1);
 
 namespace App\Actions\Approval;
 
+use App\Enums\ApprovalStatusEnum;
 use App\Http\Requests\Approval\FinalRequest;
+use App\Models\Approval;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Storage;
 
 class Complete
 {
-    public function handle(FinalRequest $request)
+    public function handle(FinalRequest $request): void
 	{
 		$cvPath = app(StoreFile::class)->handle(
 			$request->file('cv')
 		);
-		$signaturePath = app(StoreFile::class)->handle(
-			$request->file('signature')
-		);
 
 		if (!$cvPath) {
-			$this->deleteFile($signaturePath);
 			throw ValidationException::withMessages([
                 'cv' => __('messages.approval.uploadFailed'),
             ]);
 		}
+
+		$signaturePath = app(StoreFile::class)->handle(
+			$request->file('signature')
+		);
 
 		if (!$signaturePath) {
 			$this->deleteFile($cvPath);
@@ -32,10 +34,14 @@ class Complete
                 'signature' => __('messages.approval.uploadFailed'),
             ]);
 		}
+
 		$approval = $request->getApproval();
+		$this->deleteFilesIfExist($approval);
+		
 		$approval->update([
 			'cv' => $cvPath,
-			'signature' => $signaturePath
+			'signature' => $signaturePath,
+			'status' => ApprovalStatusEnum::COMPLETED,
 		]);
 	}
 
@@ -46,5 +52,14 @@ class Complete
 		Storage::disk('public')->delete(
 			str($path)->replace('storage/', '')
 		);
+	}
+
+	public function deleteFilesIfExist(Approval $approval): void
+	{
+		foreach (['cv', 'signature'] as $field) {
+			$this->deleteFile(
+				$approval->$field,
+			);
+		}
 	}
 }

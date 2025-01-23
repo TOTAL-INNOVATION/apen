@@ -11,9 +11,11 @@ enum ApprovalStatusEnum: string
 
 	case IN_PROGRESS = 'En cours';
 
-	case SUBMITTED = 'Soumise';
+	case COMPLETED = 'En attente de paiement';
 
-	case VALIDATED = 'Validée';
+	case SUBMITTED = 'En attente de validation';
+
+	case VALIDATED = 'Réçu et validée';
 
 	case REJECTED = 'Rejétée';
 

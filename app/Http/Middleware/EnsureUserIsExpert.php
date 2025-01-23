@@ -16,7 +16,7 @@ class EnsureUserIsExpert
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user()->role === RoleEnum::EXPERT)
+        if ($request->user()->role !== RoleEnum::EXPERT)
             return to_route('panel');
         
         return $next($request);

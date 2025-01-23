@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\{
     ActivitySectorEnum,
     ApprovalFormsEnum,
+    ApprovalStatusEnum,
     ApprovalTypeEnum,
     ExpertStatusEnum,
 };
@@ -32,6 +33,7 @@ class Approval extends Model
             'activity_sector' => ActivitySectorEnum::class,
             'view' => ApprovalFormsEnum::class,
             'has_been_public_agent' => 'boolean',
+            'status' => ApprovalStatusEnum::class,
         ];
     }
 

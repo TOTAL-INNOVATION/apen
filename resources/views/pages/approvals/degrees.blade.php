@@ -62,7 +62,7 @@
 						/>
 
 						<x-form.field
-                            label="{{ __('Joindre le diplôme') }}"
+                            label="{{ __('Joindre le diplôme (Format pdf)') }}"
                             type="file"
                             name="file"
                             accept="application/pdf"

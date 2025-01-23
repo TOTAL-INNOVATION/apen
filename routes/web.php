@@ -10,7 +10,7 @@ use App\Http\Controllers\Approval\DomainController;
 use App\Http\Controllers\Approval\FinalController;
 use App\Http\Controllers\Approval\GoToController;
 use App\Http\Controllers\Approval\IdentificationController;
-use App\Http\Controllers\Approval\IndexController;
+use App\Http\Controllers\Approval\IndexController as ApprovalIndexController;
 use App\Http\Controllers\Approval\SocietyController;
 use App\Http\Controllers\Approval\TrainingController;
 use App\Http\Controllers\ContactController;
@@ -26,8 +26,8 @@ use App\Http\Controllers\Panel\MessageController;
 use App\Http\Controllers\Panel\StatementController;
 use App\Http\Controllers\Panel\SubscriberController;
 use App\Http\Controllers\Panel\UserController;
-use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ReleaseController;
+use App\Http\Controllers\Transactions\IndexController as TransactionIndexController;
 use App\Http\Middleware\EnsureUserIsExpert;
 use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Support\Facades\Route;
@@ -53,10 +53,9 @@ Route::post('souscrire-au-newsletter', NewsletterController::class)->name('newsl
 Route::get('tous-les-communiques', [ReleaseController::class, 'index'])->name('releases.index');
 Route::get('tous-les-communiques/{slug}', [ReleaseController::class, 'show'])->name('releases.show');
 
-
 Route::middleware(['auth', 'verified', EnsureUserIsExpert::class])->group(function () {
 
-    Route::get('formulaire', IndexController::class)->name('becomeExpert.form');
+    Route::get('formulaire', ApprovalIndexController::class)->name('becomeExpert.form');
     Route::post('définir-le-choix', ChoiceController::class)->name('approval.choice');
     Route::prefix('identite')->group(function () {
         Route::post('etape-1', [IdentificationController::class, 'firstStep'])->name('identity.first');
@@ -68,8 +67,8 @@ Route::middleware(['auth', 'verified', EnsureUserIsExpert::class])->group(functi
     Route::post('definir-les-diplomes', DegreeController::class)->name('approval.degrees');
     Route::resource('formations', TrainingController::class)->only(['store', 'destroy']);
     Route::resource('certificats', CertificateController::class)->only(['store', 'destroy']);
-    
-    Route::prefix('domaines')->group(function() {
+
+    Route::prefix('domaines')->group(function () {
         Route::post('definir-le-total', [DomainController::class, 'saveTotalSectors'])->name('domains.total');
         Route::post('ajouter-un-domaine', [DomainController::class, 'saveSector'])->name('domains.save');
     });
@@ -77,7 +76,7 @@ Route::middleware(['auth', 'verified', EnsureUserIsExpert::class])->group(functi
     Route::post('definir-la-societe', SocietyController::class)->name('approval.society');
     Route::resource('associes', AssociateController::class)->only(['store', 'destroy']);
     Route::post('finaliser', FinalController::class)->name('approval.complete');
-    Route::get('paiement', [PaymentController::class, 'index'])->name('payment.index');
+    Route::get('paiement', TransactionIndexController::class)->name('payment');
 
     Route::get('aller-a', GoToController::class)->name('approval.goto');
 });

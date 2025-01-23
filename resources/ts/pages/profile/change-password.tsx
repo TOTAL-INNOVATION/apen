@@ -84,7 +84,7 @@ function ChangePassword() {
                         </CardContent>
 
                         <CardFooter className="justify-center">
-                            <Button type="submit">
+                            <Button type="submit" className="font-franklin-medium">
                                 Enrégistrer les modifications
                             </Button>
                         </CardFooter>
