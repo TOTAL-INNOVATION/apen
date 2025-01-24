@@ -89,13 +89,32 @@ class Approval extends Model
 
     public function getCurrentDomain(): ?Domain
     {
-        $this->load('domains');
         $rank = match ($this->view) {
             ApprovalFormsEnum::DOMAINS_THIRD => 3,
             ApprovalFormsEnum::DOMAINS_SECOND => 2,
             default => 1
         };
         
-        return $this->domains->where('rank', $rank)->first();
+        return $this
+        ->domains()
+        ->where('rank', $rank)
+        ->first();
+    }
+
+    protected static function booted(): void
+    {
+        static::onDelete(function(self $approval) {
+            //Delete relations first
+            $this->degree()->delete();
+            $this->trainings()->delete();
+            $this->certificates()->delete();
+            $this->associates()->delete();
+            $this->society()->delete();
+            $this->domains()->delete();
+            $this->attachments()->delete();
+
+            //Then delete approval
+            $approval->delete();
+        });
     }
 }

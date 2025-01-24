@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('mobile');
             $table->string('tel')->nullable();
             $table->string('expert_domain');
+            $table->boolean('marked_as_read')->default(false);
             $table->timestamps();
         });
     }

@@ -17,7 +17,7 @@ class ApprovalService extends BaseFilterService
 
 	public array $searchAttributes = self::DEFAULT_FILTER_FIELDS;
 
-	public array $sortByAttributes = self::DEFAULT_FILTER_FIELDS;
+	public array $sortByAttributes = [...self::DEFAULT_FILTER_FIELDS, 'created_at'];
 
 	public array $conditions = [
 		'status' => ['!=', ApprovalStatusEnum::IN_PROGRESS]

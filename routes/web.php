@@ -18,9 +18,11 @@ use App\Http\Controllers\ContactExpertController;
 use App\Http\Controllers\DecreeController as GetDecreesController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\NewzController;
+use App\Http\Controllers\Panel\IndexController as PanelController;
 use App\Http\Controllers\Panel\ApprovalController;
 use App\Http\Controllers\Panel\ArticleController;
 use App\Http\Controllers\Panel\DecreeController;
+use App\Http\Controllers\Panel\ExpertSearchController;
 use App\Http\Controllers\Panel\FlashInfoController;
 use App\Http\Controllers\Panel\ImageController;
 use App\Http\Controllers\Panel\MessageController;
@@ -92,9 +94,7 @@ Route::middleware(['auth', 'verified', EnsureUserIsExpert::class])->group(functi
 
 Route::middleware(['auth', 'verified', HandleInertiaRequests::class])->group(function () {
 
-    Route::get('panel', function () {
-        return inertia()->render('home');
-    })->name('panel');
+    Route::get('panel', PanelController::class)->name('panel');
 
     Route::resource('articles', ArticleController::class)->except(['show', 'update']);
     Route::post('articles/{article}', [ArticleController::class, 'update']);
@@ -106,6 +106,7 @@ Route::middleware(['auth', 'verified', HandleInertiaRequests::class])->group(fun
     Route::resource('communiques', StatementController::class)->except('show');
     Route::resource('abonnes-newsletter', SubscriberController::class)->only(['index', 'destroy']);
     Route::resource('demandes-d-agrement', ApprovalController::class)->only(['index', 'show', 'update', 'destroy']);
+    Route::resource('recherches-d-expert', ExpertSearchController::class)->only(['index', 'update', 'destroy']);
 
     Route::prefix('article/images')->group(function () {
         Route::post('upload', [ImageController::class, 'store']);

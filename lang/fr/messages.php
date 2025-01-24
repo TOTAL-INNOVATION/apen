@@ -23,6 +23,12 @@ return [
 		'updated' => 'L\'agrément a été modifié avec succès.',
 	],
 
+	'expert_searches' => [
+		'deleted' => 'La demande de recherche a été supprimé avec succès.',
+		'notFound' => 'La demande de recherche demandé n\'existe pas.',
+		'updated' => 'La demande de recherche a été modifié avec succès.',
+	],
+
 	'users' => [
 		'create' => [
 			'failed' => 'La création du compte a échoué. Veuillez reessayer.',

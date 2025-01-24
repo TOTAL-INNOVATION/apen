@@ -1,7 +1,7 @@
 import React from "react";
 import { Nav, NavItem } from "./nav";
 import { TooltipProvider } from "./tooltip";
-import { FileText, FileUser, LayoutDashboard, Mailbox, MegaphoneIcon, MessageCircle, Newspaper, Users2, Zap } from "lucide-react";
+import { FileText, FileUser, LayoutDashboard, Mailbox, MegaphoneIcon, MessageCircle, Newspaper, UserRoundSearch, Users2, Zap } from "lucide-react";
 
 const Sidebar = () => {
     return (
@@ -68,6 +68,11 @@ const Sidebar = () => {
                     <NavItem href="/abonnes-newsletter">
                         <Mailbox className="w-6 h-6" />
                         <span>Newsletter</span>
+                    </NavItem>
+
+                    <NavItem href="/recherches-d-expert">
+                        <UserRoundSearch className="w-6 h-6" />
+                        <span>Recherches d'expert</span>
                     </NavItem>
 
                 </Nav>

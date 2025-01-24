@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Panel;
 
+use App\Enums\FlashEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateApprovalStatusRequest;
 use App\Http\Resources\ApprovalResource;
@@ -66,8 +67,11 @@ class ApprovalController extends Controller
         if (!$approval) {
             return back()
             ->with(
-                'error',
-                __('messages.panel_approval.notFound')
+                'flash',
+                [
+                    'type' => FlashEnum::ERROR,
+                    'message' => __('messages.panel_approval.notFound'),
+                ]
             );
         }
 
@@ -76,8 +80,11 @@ class ApprovalController extends Controller
         );
 
         return back()->with(
-            'success',
-            __('messages.panel_approval.updated')
+            'flash',
+            [
+                'type' => FlashEnum::SUCCESS,
+                'message' => __('messages.panel_approval.updated'),
+            ]
         );
 
     }
@@ -90,8 +97,11 @@ class ApprovalController extends Controller
         $approval->delete();
 
         return back()->with(
-            'success',
-            __('messages.panel_approval.delete'),
+            'flash',
+            [
+                'type' => FlashEnum::SUCCESS,
+                'message' => __('messages.panel_approval.delete'),
+            ],
         );
     }
 }

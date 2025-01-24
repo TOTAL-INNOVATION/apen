@@ -45,7 +45,7 @@ class BaseFilterService
         }
 
         if (!$sortOrder || !in_array($sortOrder, ['asc', 'desc'])) {
-            $sortOrder = 'asc';
+            $sortOrder = 'desc';
         }
 
         if (!$length || (int) $length < 1) {

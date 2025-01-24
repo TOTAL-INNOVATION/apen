@@ -58,6 +58,14 @@ const approvalsColumns: Column<Approval>[] = [
 		sortable: true,
 	},
 	{
+		name: "created_at",
+		label: "Envoyé le",
+		sortable: true,
+        format(row) {
+            return <div>{new Date(row.created_at).toLocaleDateString()}</div>;
+        },
+	},
+	{
 		name: "id",
 		label: "Actions",
 		format(row) {

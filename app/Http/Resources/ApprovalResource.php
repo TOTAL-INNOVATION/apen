@@ -41,6 +41,7 @@ class ApprovalResource extends JsonResource
             'status' => $this->status,
             'is_paid' => $this->is_paid,
             'user' => new UserResource($this->user),
+            'created_at' => $this->created_at,
 
             ...($request->routeIs('demandes-d-agrement.show') ? [
 

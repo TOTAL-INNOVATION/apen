@@ -161,6 +161,7 @@ export type Approval = {
     signature?: string;
     cv?: string;
     status: ApprovalStatus;
+    created_at: string;
 
     //relations
 
@@ -281,3 +282,16 @@ export type Attachment = {
     nature: string;
     file: string;
 }
+
+export type ExpertSearch = {
+    id: string;
+    user: User;
+    structure: string;
+    geographic_region: string;
+    address: string;
+    mobile: string;
+    tel?: string;
+    expert_domain: string;
+    marked_as_read: boolean;
+    created_at: string;
+};
