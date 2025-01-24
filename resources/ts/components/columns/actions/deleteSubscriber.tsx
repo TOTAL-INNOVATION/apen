@@ -38,7 +38,7 @@ const DeleteSubscriber = ({ subscriber }: { subscriber: Subscriber }) => {
                     </DialogTrigger>
                     <form
                         className="w-full"
-                        action={`/abonnes_newsletter/${subscriber.id}`}
+                        action={`/abonnes-newsletter/${subscriber.id}`}
                         onSubmit={removeSubscriber}
                     >
                         <Button

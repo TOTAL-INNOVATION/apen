@@ -4,19 +4,21 @@ import { Approval, ApprovalStatus } from "~/types";
 import { cn } from "~/lib/utils";
 import DeleteApproval from "./actions/deleteApproval";
 import { Button } from "../ui/button";
-import { Link, Pen } from "lucide-react";
+import { Eye } from "lucide-react";
+import { Link } from "@inertiajs/react";
 
 
 const Status = ({value}: {value: ApprovalStatus}) => {
 	const apparences: Record<typeof value, string> = {
 		"En cours": "background-whisper/10 text-dark/75 border-rainee",
+		"En attente de paiement": "background-chocolate/15 text-chocolate border-chocolate",
+		"En attente de validation": "background-viridian/10 text-viridian border-viridian",
 		"Rejétée": "background-error/10 text-secondary border-error",
-		"Soumise": "background-viridian/10 text-viridian border-viridian",
-		"Validée": "background-success/10 text-primary/75 border-success",
+		"Réçu et validée": "background-success/10 text-primary/75 border-success",
 	};
 
 	return (
-		<div className={cn("p-2 border", apparences[value])}>
+		<div className={cn("w-fit p-1 font-semibold border-[1.5px]", apparences[value])}>
 			{value}
 		</div>
 	);
@@ -68,8 +70,8 @@ const approvalsColumns: Column<Approval>[] = [
                         className="rounded-full"
                         asChild
                     >
-                        <Link href={`/demandes_d_agrement/${row.id}/edit`}>
-                            <Pen className="w-4 h-4" />
+                        <Link href={`/demandes-d-agrement/${row.id}`}>
+                            <Eye className="w-[18px] h-[18px]" />
                         </Link>
                     </Button>
 

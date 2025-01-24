@@ -21,12 +21,12 @@
     </div>
 @endif
 
-<header class="w-full bg-white sticky top-0 z-50">
+<header class="w-full bg-white sticky top-0 z-[80]">
     
     <div class="py-2 border-b border-whisper">
         <div class="px-4 sm:px-auto container flex items-center justify-between md:px-0 md:justify-normal">
             <div class="flex-initial">
-                <a class="outline-none" href="#">
+                <a class="outline-none" href="{{ route('home') }}">
                     <img src="{{ asset('logo.png') }}" class="w-16 sm:w-20 md:w-24" alt="{{ config('app.name') }}">
                 </a>
             </div>
@@ -37,7 +37,8 @@
                 </div>
             </div>
             <div class="flex-initial">
-                <x-dropdown class="m-0">
+                <div class="flex items-center space-x-4">
+                    <x-dropdown class="m-0">
                         @if ($user = user())
                         <x-dropdown.trigger size="default" class="px-2 py-1 sm:px-3 sm:py-2 inline-flex items-center gap-x-2 border border-whisper">
                             @if ($user->avatar === User::DEFAULT_AVATAR)
@@ -52,7 +53,7 @@
                             
                         </x-dropdown.trigger>
                         
-                        <x-dropdown.content class="p-0 w-44">
+                        <x-dropdown.content class="p-0 w-44 z-[84]">
                             <div class="mb-1 py-2 px-3 w-full border-b border-whisper">
                                 <strong>{{ Str::limit($user->fullname, 17) }}</strong>
                             </div>
@@ -76,11 +77,74 @@
                                 </x-dropdown.item>
                             </x-form>
                         </x-dropdown.content>
-                    @else
-                        <x-button component="a" href="{{ route('login.view') }}">{{ __('Se connecter') }}</x-button>
-                    @endif
-                </x-dropdown>
+                        @else
+                            <x-button component="a" href="{{ route('login.view') }}">{{ __('Se connecter') }}</x-button>
+                        @endif
+                    </x-dropdown>
+
+                    <div class="md:hidden">
+                        <x-button variant="outline" class="px-2.5 py-1 sm:px-3 sm:py-2" aria-haspopup="dialog" aria-expanded="false" aria-controls="apen-offcanvas-menu" data-hs-overlay="#apen-offcanvas-menu">
+                            <x-lucide-align-left class="w-5 h-5" />
+                        </x-button>
+                            
+                        <div id="apen-offcanvas-menu" class="hs-overlay hs-overlay-open:translate-x-0 hs-overlay-backdrop-open:bg-dark/30 hidden -translate-x-full fixed top-[71px] md:top-0 start-0 transition-all duration-300 transform h-full max-w-xs w-full z-[80] bg-white border-e border-whisper overflow-y-scrollr" role="dialog" tabindex="-1">
+
+                            <x-nav direction="vertical" class="space-y-0 divide-y divide-whisper border-b border-b-whisper">
+                                <x-nav.mobile-link href="{{ route('home') }}">
+                                    <span>{{ __('Acceuil') }}</span>
+                                    <x-lucide-arrow-right class="w-5 h-5" />
+                                </x-nav.mobile-link>
+
+                                <div>
+                                    <div class="w-full px-4 py-2.5 inline-flex items-center justify-between border-b border-whisper">
+                                        <span class="uppercase">{{ __('À propos') }}</span>
+                                        <x-lucide-chevron-down class="w-5 h-5" />
+                                    </div>
+                                    <ul class="ml-4 border-l border-whisper divide-y divide-whisper">
+                                        <x-nav.mobile-link href="{{ route('whoWeAre') }}">
+                                            <span>{{ __('Qui sommes-nous?') }}</span>
+                                            <x-lucide-arrow-right class="w-5 h-5" />
+                                        </x-nav.mobile-link>
+    
+                                        <x-nav.mobile-link href="{{ route('secretaryWords') }}">
+                                            <span>{{ __('Mot de la secrétaire exécutive') }}</span>
+                                            <x-lucide-arrow-right class="w-5 h-5" />
+                                        </x-nav.mobile-link>
+    
+                                        <x-nav.mobile-link href="{{ route('decrees') }}">
+                                            <span>{{ __('Textes reglémentaires') }}</span>
+                                            <x-lucide-arrow-right class="w-5 h-5" />
+                                        </x-nav.mobile-link>
+                                    </ul>
+                                </div>
+
+                                <x-nav.mobile-link href="{{ route('becomeExpert.index') }}">
+                                    <span>{{ __('Devenir expert') }}</span>
+                                    <x-lucide-arrow-right class="w-5 h-5" />
+                                </x-nav.mobile-link>
+
+                                <x-nav.mobile-link href="{{ route('contactExpert.index') }}">
+                                    <span>{{ __('Contacter un expert') }}</span>
+                                    <x-lucide-arrow-right class="w-5 h-5" />
+                                </x-nav.mobile-link>
+
+                                <x-nav.mobile-link href="{{ route('news.index') }}">
+                                    <span>{{ __('Actualités') }}</span>
+                                    <x-lucide-arrow-right class="w-5 h-5" />
+                                </x-nav.mobile-link>
+
+                                <x-nav.mobile-link href="{{ route('contacts') }}">
+                                    <span>{{ __('Contacts') }}</span>
+                                    <x-lucide-arrow-right class="w-5 h-5" />
+                                </x-nav.mobile-link>
+                            </x-nav>
+
+                        </div>
+                        
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
 

@@ -29,4 +29,9 @@ class ApprovalService extends BaseFilterService
     {
         return $this->filterAllItem($request);
     }
+
+	public function find(string $id): ?Approval
+	{
+		return Approval::find($id);
+	}
 }

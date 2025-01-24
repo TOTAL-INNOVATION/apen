@@ -42,10 +42,10 @@ class ApprovalResource extends JsonResource
             'is_paid' => $this->is_paid,
             'user' => new UserResource($this->user),
 
-            ...($request->routeIs('demandes_d_agrement.show') ? [
+            ...($request->routeIs('demandes-d-agrement.show') ? [
 
                 'degree' => new DegreeResource($this->degree),
-                'training' => TrainingResource::collection($this->trainings),
+                'trainings' => TrainingResource::collection($this->trainings),
                 'certificates' => CertificateResource::collection($this->certificates),
                 'society' => new SocietyResource($this->society),
                 'associates' => AssociateResource::collection($this->associates),

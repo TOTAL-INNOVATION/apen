@@ -111,7 +111,7 @@
 									@endforeach
 								</x-form.field.select>
 
-								<x-input type="tel" id="mobile" name="mobile" placeholder="x x x x x x x x" />
+								<x-input type="tel" id="mobile" name="mobile" placeholder="x x x x x x x x" required />
 							</div>
 							@error('mobile')
 								<p class="text-error mt-2">{{ $message }}</p>

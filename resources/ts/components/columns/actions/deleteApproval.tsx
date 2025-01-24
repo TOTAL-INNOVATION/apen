@@ -41,7 +41,7 @@ const DeleteApproval = ({ approval }: { approval: Approval }) => {
                     </DialogTrigger>
                     <form
                         className="w-full"
-                        action={`/demandes_d_agrement/${approval.id}`}
+                        action={`/demandes-d-agrement/${approval.id}`}
                         onSubmit={removeApproval}
                     >
                         <Button

@@ -17,6 +17,11 @@ return [
 	],
 
 	'subscibed_to_newsletter' => 'Cette adresse a été abonné au newsletter.',
+	'panel_approval' => [
+		'delete' => 'L\'agrément a été supprimé avec succès.',
+		'notFound' => 'L\'agrement demandé n\'existe pas.',
+		'updated' => 'L\'agrément a été modifié avec succès.',
+	],
 
 	'users' => [
 		'create' => [

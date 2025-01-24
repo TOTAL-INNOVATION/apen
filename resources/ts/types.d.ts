@@ -118,7 +118,7 @@ export type Subscriber = {
 
 type ApprovalType = "Catégorie A" | "Catégorie B" | "Catégorie C";
 
-export type ApprovalStatus = "En cours" | "Soumise" | "Validée" | "Rejétée";
+export type ApprovalStatus = "En cours" | "En attente de paiement" | "En attente de validation" | "Réçu et validée" | "Rejétée";
 
 type ExpertStatus = "Indépendant(e)" | "Salarié(e) ou attaché(e) à un Bureau";
 

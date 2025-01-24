@@ -104,8 +104,8 @@ Route::middleware(['auth', 'verified', HandleInertiaRequests::class])->group(fun
     Route::resource('messages', MessageController::class)->except([ ...EXCEPT_METHODS, 'store']);
     Route::resource('infos', FlashInfoController::class)->except(EXCEPT_METHODS);
     Route::resource('communiques', StatementController::class)->except('show');
-    Route::resource('abonnes_newsletter', SubscriberController::class)->only(['index', 'destroy']);
-    Route::resource('demandes_d_agrement', ApprovalController::class)->only(['index', 'show', 'destroy']);
+    Route::resource('abonnes-newsletter', SubscriberController::class)->only(['index', 'destroy']);
+    Route::resource('demandes-d-agrement', ApprovalController::class)->only(['index', 'show', 'update', 'destroy']);
 
     Route::prefix('article/images')->group(function () {
         Route::post('upload', [ImageController::class, 'store']);

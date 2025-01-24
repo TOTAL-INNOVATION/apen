@@ -12,7 +12,7 @@ const buttonVariants = cva(
         primary: "bg-primary text-white hover:bg-opacity-90",
         secondary: "bg-secondary text-white hover:bg-opacity-90",
         gold: "bg-gold text-dark hover:bg-opacity-90",
-        success: "bg-success hover:bg-opacity-90",
+        success: "bg-success hover:bg-opacity-90 text-white",
         warning: "bg-warning text-dark hover:bg-opacity-90",
         error: "bg-error text-white hover:bg-opacity-90",
         outline: "text-dark bg-transparent border border-whisper hover:bg-bright/35",

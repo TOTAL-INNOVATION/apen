@@ -32,8 +32,8 @@
                             <x-form.field name="commercial_register" label="{{ __('RCCM (Optionnel)') }}"
                                 placeholder="Entrez votre RCCM si disponible"
                                 value="{{ $approval->commercial_register }}" />
-                            <x-form.field name="single_tax_form" label="{{ __('RCCM (Optionnel)') }}"
-                                placeholder="Entrez votre RCCM si disponible"
+                            <x-form.field name="single_tax_form" label="{{ __('IFU (Optionnel)') }}"
+                                placeholder="Entrez votre numéro IFU si disponible"
                                 value="{{ $approval->single_tax_form }}" />
                         @endif
 

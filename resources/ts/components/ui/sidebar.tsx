@@ -35,7 +35,7 @@ const Sidebar = () => {
                         <span>Utilisateurs</span>
                     </NavItem>
 
-                    <NavItem href="/demandes_d_agrement">
+                    <NavItem href="/demandes-d-agrement">
                         <FileUser className="w-6 h-6" />
                         <span>Demandes d'agrément</span>
                     </NavItem>
@@ -65,7 +65,7 @@ const Sidebar = () => {
                         <span>Flash infos</span>
                     </NavItem>
 
-                    <NavItem href="/abonnes_newsletter">
+                    <NavItem href="/abonnes-newsletter">
                         <Mailbox className="w-6 h-6" />
                         <span>Newsletter</span>
                     </NavItem>

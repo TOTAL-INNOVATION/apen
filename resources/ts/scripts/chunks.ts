@@ -2,6 +2,7 @@ import EmblaCarousel from "embla-carousel";
 import Autoplay from "embla-carousel-autoplay";
 import Fade from "embla-carousel-fade";
 import Observer from "./observer";
+import { HSOverlay } from "preline";
 
 const newsSlideRoot = document.querySelector<HTMLDivElement>(".news_slides");
 const selectElements = document.querySelectorAll<HTMLSelectElement>(
@@ -15,14 +16,12 @@ const certificateZoneElement =
 const nextButtonZoneElement = document.querySelector(
     "#next-button"
 ) as HTMLDivElement;
-
 const avatarInputElement = document.querySelector<HTMLInputElement>(
     "input[name='avatar']"
 );
 const submitContainer =
     document.querySelector<HTMLDivElement>("#submit-container");
 const preview = document.querySelector<HTMLImageElement>("#preview");
-
 const paymentMethodRoot =
     document.querySelector<HTMLDivElement>("#payment-methods");
 

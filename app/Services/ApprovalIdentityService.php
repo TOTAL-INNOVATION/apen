@@ -40,12 +40,17 @@ class ApprovalIdentityService
         };
 
         /**
+         * @var \App\Models\User
+         */
+        $user = $request->user();
+        /**
          * @var \App\Models\Approval
          */
-        $approval = $request->user()->approval;
-        if ($approval->identity_photo) {
+        $approval = $user->approval;
+        
+        if ($user->identity_photo) {
             Storage::disk('public')->delete(
-                str($approval->identity_photo)->replace(
+                str($user->identity_photo)->replace(
                     'storage/',
                     ''
                 )
@@ -57,7 +62,6 @@ class ApprovalIdentityService
                 'country_of_residence',
                 'commercial_register'
             ]),
-            'identity_photo' => $path,
             'view' => $approval->type === ApprovalTypeEnum::CATEGORY_A ?
             ApprovalFormsEnum::ADDRESSES : ApprovalFormsEnum::IDENTITY_STEP_THREE,
         ];
