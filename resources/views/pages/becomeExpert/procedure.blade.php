@@ -33,14 +33,14 @@
 					
 					<ul class="inline-flex flex-col space-y-2">
 						<x-custom-list-item class="cursor-pointer">
-							<x-link href="#" class="inline-flex items-center gap-x-1 text-primary underline underline-offset-4" target="__blank">
+							<x-link href="{{ route('register.view') }}" class="inline-flex items-center gap-x-1 text-primary underline underline-offset-4" target="__blank">
 								<span>{{ __('Créer un compte') }}</span>
 								<x-lucide-arrow-up-right class="w-5" />
 							</x-link>
 						</x-custom-list-item>
 
 						<x-custom-list-item class="cursor-pointer">
-							<x-link href="#" class="inline-flex items-center gap-x-1 text-primary underline underline-offset-4" target="__blank">
+							<x-link href="{{ route('becomeExpert.form') }}" class="inline-flex items-center gap-x-1 text-primary underline underline-offset-4" target="__blank">
 								<span>{{ __('Remplir le formulaire  de l\'agrément d’expert demandé') }}</span>
 								<x-lucide-arrow-up-right class="w-5" />
 							</x-link>

@@ -8,44 +8,44 @@
 					</x-link>
 				</div>
 				<x-nav class="mt-4" direction="vertical">
-					<x-link href="#">{{ __('À propos d\'APEN') }}</x-link>
-					<x-link href="#">{{ __('Dévenir expert') }}</x-link>
-					<x-link href="#">{{ __('Contacter un expert') }}</x-link>
-					<x-link href="#">{{ __('Projets et programmes') }}</x-link>
-					<x-link href="#">{{ __('Actualités') }}</x-link>
-					<x-link href="#">{{ __('Contacts') }}</x-link>
+					<x-link href="{{ route('whoWeAre') }}">{{ __('À propos d\'APEN') }}</x-link>
+					<x-link href="{{ route('becomeExpert.index') }}">{{ __('Dévenir expert') }}</x-link>
+					<x-link href="{{ route('contactExpert.index') }}">{{ __('Contacter un expert') }}</x-link>
+					<x-link href="{{ route('announcements') }}">{{ __('Communiqués') }}</x-link>
+					<x-link href="{{ route('news.index') }}">{{ __('Actualités') }}</x-link>
+					<x-link href="{{ route('contacts') }}">{{ __('Contacts') }}</x-link>
 				</x-nav>
 			</div>
 
 			<div>
 				<h3 class="heading-3 uppercase">{{ __('Liens utiles') }}</h3>
 				<x-nav class="mt-2 md:mt-4" direction="vertical">
-					<x-link class="inline-flex" href="#">
+					<x-link class="inline-flex" href="https://www.presidencedufaso.bf" target="_blank">
 						<span>{{ __('La présidence du Faso') }}</span>
 						<x-lucide-arrow-up-right class="w-4" />
 					</x-link>
 
-					<x-link class="inline-flex" href="#">
+					<x-link class="inline-flex" href="https://www.gouvernement.gov.bf" target="_blank">
 						<span>{{ __('Le Gouvernement') }}</span>
 						<x-lucide-arrow-up-right class="w-4" />
 					</x-link>
 
-					<x-link class="inline-flex" href="#">
+					<x-link class="inline-flex" href="https://www.assembleenationale.bf" target="_blank">
 						<span>{{ __('L\'Assemblée Nationale') }}</span>
 						<x-lucide-arrow-up-right class="w-4" />
 					</x-link>
 
-					<x-link class="inline-flex" href="#">
+					<x-link class="inline-flex" href="https://www.sig.gov.bf" target="_blank">
 						<span>{{ __('Le SIG') }}</span>
 						<x-lucide-arrow-up-right class="w-4" />
 					</x-link>
 
-					<x-link class="inline-flex" href="#">
+					<x-link class="inline-flex" href="https://www.pndes.gov.bf" target="_blank">
 						<span>{{ __('Le PNDES') }}</span>
 						<x-lucide-arrow-up-right class="w-4" />
 					</x-link>
 
-					<x-link class="inline-flex" href="#">
+					<x-link class="inline-flex" href="https://peb.bf" target="_blank">
 						<span>{{ __('Le Portail d\'Entrée au Burkina Faso') }}</span>
 						<x-lucide-arrow-up-right class="w-4" />
 					</x-link>

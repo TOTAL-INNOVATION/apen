@@ -87,7 +87,7 @@
                             <x-lucide-align-left class="w-5 h-5" />
                         </x-button>
                             
-                        <div id="apen-offcanvas-menu" class="hs-overlay hs-overlay-open:translate-x-0 hs-overlay-backdrop-open:bg-dark/30 hidden -translate-x-full fixed top-[71px] md:top-0 start-0 transition-all duration-300 transform h-full max-w-xs w-full z-[80] bg-white border-e border-whisper overflow-y-scrollr" role="dialog" tabindex="-1">
+                        <div id="apen-offcanvas-menu" class="hs-overlay hs-overlay-open:translate-x-0 hs-overlay-backdrop-open:bg-dark/30 hidden -translate-x-full fixed top-[71px] sm:top-[84px] md:top-0 start-0 transition-all duration-300 transform h-full max-w-xs w-full z-[80] bg-white border-e border-whisper overflow-y-scrollr" role="dialog" tabindex="-1">
 
                             <x-nav direction="vertical" class="space-y-0 divide-y divide-whisper border-b border-b-whisper">
                                 <x-nav.mobile-link href="{{ route('home') }}">

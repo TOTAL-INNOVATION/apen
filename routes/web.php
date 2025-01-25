@@ -16,6 +16,7 @@ use App\Http\Controllers\Approval\TrainingController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ContactExpertController;
 use App\Http\Controllers\DecreeController as GetDecreesController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\NewzController;
 use App\Http\Controllers\Panel\IndexController as PanelController;
@@ -37,7 +38,7 @@ use Illuminate\Support\Facades\Route;
 
 const EXCEPT_METHODS = ['create', 'show', 'edit'];
 
-Route::view('/', 'pages.home')->name('home');
+Route::get('/', HomeController::class)->name('home');
 Route::view('qui-sommes-nous', 'pages.who-we-are')->name('whoWeAre');
 Route::view('mot-de-la-secretaire-executive', 'pages.secretary-words')->name('secretaryWords');
 Route::get('textes-reglementaires', GetDecreesController::class)->name('decrees');
