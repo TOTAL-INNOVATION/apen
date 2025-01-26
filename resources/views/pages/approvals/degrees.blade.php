@@ -43,6 +43,7 @@
 							name="level_precision"
 							label="{{ __('Précisez le niveau') }}"
 							placeholder="{{ __('BAC+N (N=1,2,3,...). Ex: BAC+7 en élevage') }}"
+							value="{{ $degree?->level_precision ?? old('level_precision') }}"
 							required
 						/>
 
@@ -50,6 +51,7 @@
 							type="date"
 							name="started_at"
 							label="{{ __('Date de début') }}"
+							value="{{ $degree?->started_at ?? old('started_at') }}"
 							required
 						/>
 
@@ -58,6 +60,7 @@
 							name="years_of_experience"
 							label="{{ __('Nombre d’années de pratique professionnelle') }}"
 							placeholder="{{ __('Entrez un nombre') }}"
+							value="{{ $degree?->years_of_experience ?? old('years_of_experience') }}"
 							required
 						/>
 

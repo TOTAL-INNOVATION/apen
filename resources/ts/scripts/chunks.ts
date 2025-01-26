@@ -2,7 +2,7 @@ import EmblaCarousel from "embla-carousel";
 import Autoplay from "embla-carousel-autoplay";
 import Fade from "embla-carousel-fade";
 import Observer from "./observer";
-import { HSOverlay } from "preline";
+import axios from "axios";
 
 const newsSlideRoot = document.querySelector<HTMLDivElement>(".news_slides");
 const selectElements = document.querySelectorAll<HTMLSelectElement>(
@@ -24,6 +24,8 @@ const submitContainer =
 const preview = document.querySelector<HTMLImageElement>("#preview");
 const paymentMethodRoot =
     document.querySelector<HTMLDivElement>("#payment-methods");
+
+const shouldVerifyPaymentElement = document.querySelector<HTMLDivElement>('div[data-should-verifiy]');
 
 if (newsSlideRoot) {
     EmblaCarousel(
@@ -112,6 +114,23 @@ if (certificateChoiceElements.length && certificateZoneElement) {
             nextButtonZoneElement.classList.remove("hidden");
         });
     }
+}
+
+if (shouldVerifyPaymentElement) {
+    const interval = setInterval(async() => {
+        const response = await axios.post<{transaction_status: number}>("/paiement/ping");
+
+        if (response.status === 200) {
+            const { transaction_status } = response.data;
+            if (Number(transaction_status) !== -1) {
+                window.location.reload();
+            }
+        }
+    }, 5000);
+
+    window.addEventListener('beforeunload', () => {
+        clearInterval(interval);
+    });
 }
 
 selectElements.forEach((select) => new Observer(select));

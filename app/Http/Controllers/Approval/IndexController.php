@@ -25,7 +25,7 @@ class IndexController extends Controller
         }
 
         if ($approval->status === ApprovalStatusEnum::COMPLETED) {
-            return to_route('payment');
+            return to_route('payment.index');
         }
 
         return view($approval->view->value)

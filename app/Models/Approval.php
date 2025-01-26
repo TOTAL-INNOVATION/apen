@@ -80,6 +80,11 @@ class Approval extends Model
         return $this->hasMany(Attachment::class);
     }
 
+    public function transactions(): HasMany
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
     public function hasAddressDefined(): bool
     {
         return $this->geographic_region &&

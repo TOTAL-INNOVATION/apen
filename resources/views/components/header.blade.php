@@ -78,7 +78,7 @@
                             </x-form>
                         </x-dropdown.content>
                         @else
-                            <x-button component="a" href="{{ route('login.view') }}">{{ __('Se connecter') }}</x-button>
+                            <x-button component="a" href="{{ route('login.view') }}" class="font-semibold">{{ __('Se connecter') }}</x-button>
                         @endif
                     </x-dropdown>
 

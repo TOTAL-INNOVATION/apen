@@ -10,4 +10,5 @@ return [
 	'return_url' => env('LIGDICASH_RETURN_URL', 'http://localhost:8000/return'),
 	'callback_url' => env('LIGDICASH_CALLBACK_URL', 'http://localhost:8000/api/callback'),
 	'cancel_url' => env('LIGDICASH_CANCEL_URL', 'http://localhost:8000/cancel'),
+	'default_amount' => 15000,
 ];

@@ -16,6 +16,11 @@ return [
 		'succeeded' => 'Votre message a été pris en compte. Nous vous repondrons bientôt avec un mail en réponse.',
 	],
 
+	'payment' => [
+		'failed' => 'La transaction a échouée. Veuillez reessayer.',
+		
+	],
+
 	'subscibed_to_newsletter' => 'Cette adresse a été abonné au newsletter.',
 	'panel_approval' => [
 		'delete' => 'L\'agrément a été supprimé avec succès.',

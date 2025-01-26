@@ -25,7 +25,7 @@
 				<h2 class="heading-2 uppercase">{{ __('Mot de la secrétaire exécutive') }}</h2>
 				<div class="mt-4 md:mt-6 lg:mt-8">
 					<div class="w-full aspect-[12/8] flex items-center justify-center overflow-hidden">
-						<img class="w-full object-cover" src="{{ asset('defaults/600x400.svg') }}" alt="{{ __('Secrétaire exécutive') }}">
+						<img class="w-full object-cover" src="{{ asset('assets/secretaire.jpg') }}" alt="{{ __('Secrétaire exécutive') }}">
 					</div>
 
 					<div class="mt-4 md:mt-6 lg:mt-8 space-y-4 sm:text-lg xl:text-xl">

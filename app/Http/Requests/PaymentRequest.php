@@ -24,7 +24,7 @@ class PaymentRequest extends FormRequest
     {
         return [
             'phone' => 'bail|required|string|numeric|digits_between:11,13',
-            'otp' => 'bail|required|string|numeric',
+            'otp' => 'bail|required|string|numeric|min:0',
         ];
     }
 

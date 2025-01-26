@@ -31,7 +31,9 @@ use App\Http\Controllers\Panel\StatementController;
 use App\Http\Controllers\Panel\SubscriberController;
 use App\Http\Controllers\Panel\UserController;
 use App\Http\Controllers\ReleaseController;
+use App\Http\Controllers\Transactions\CallbackController as TransactionCallback;
 use App\Http\Controllers\Transactions\IndexController as TransactionIndexController;
+use App\Http\Controllers\Transactions\VerificationController as TransactionVerificationController;
 use App\Http\Middleware\EnsureUserIsExpert;
 use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Support\Facades\Route;
@@ -39,8 +41,8 @@ use Illuminate\Support\Facades\Route;
 const EXCEPT_METHODS = ['create', 'show', 'edit'];
 
 Route::get('/', HomeController::class)->name('home');
-Route::view('qui-sommes-nous', 'pages.who-we-are')->name('whoWeAre');
-Route::view('mot-de-la-secretaire-executive', 'pages.secretary-words')->name('secretaryWords');
+Route::view('qui-sommes-nous', 'pages.whoWeAre')->name('whoWeAre');
+Route::view('mot-de-la-secretaire-executive', 'pages.secretaryWords')->name('secretaryWords');
 Route::get('textes-reglementaires', GetDecreesController::class)->name('decrees');
 Route::get('actualites', [NewzController::class, 'index'])->name('news.index');
 Route::get('actualites/{slug}', [NewzController::class, 'show'])->name('news.show');
@@ -88,7 +90,12 @@ Route::middleware(['auth', 'verified', EnsureUserIsExpert::class])->group(functi
     Route::post('definir-la-societe', SocietyController::class)->name('approval.society');
     Route::resource('associes', AssociateController::class)->only(['store', 'destroy']);
     Route::post('finaliser', FinalController::class)->name('approval.complete');
-    Route::get('paiement', TransactionIndexController::class)->name('payment');
+    Route::prefix('paiement')->group(function() {
+        Route::get('/', TransactionIndexController::class)->name('payment.index');
+        Route::get('verification', [TransactionVerificationController::class, 'index'])->name('payment.verify');
+        Route::post('ping', [TransactionVerificationController::class, 'ping']);
+        Route::post('callback', TransactionCallback::class);
+    });
 
     Route::get('aller-a', GoToController::class)->name('approval.goto');
 });

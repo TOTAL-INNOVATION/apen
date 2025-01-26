@@ -25,7 +25,7 @@
 					<div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="payment-methods">
 						
 						<label for="orange-money" class="p-2 relative flex items-center space-x-3 bg-white border border-whisper cursor-pointer">
-							<x-radio id="orange-money" name="method" class="w-5 h-5 sm:w-6 sm:h-6 bg-whisper/50 border-2 border-rainee" value="*144*4*6*montant#" checked />
+							<x-radio id="orange-money" name="method" class="w-5 h-5 sm:w-6 sm:h-6 bg-whisper/50 border-2 border-rainee" value="*144*4*6*15000#" checked />
 							<div class="flex items-center space-x-3">
 								<img src="{{ asset('assets/orange_money.png') }}" class="w-9 h-9 border border-black rounded-xl" alt="Orange Money">
 								<span class="block font-franklin-medium text-dark">{{ __('Orange Money') }}</span>
@@ -46,7 +46,7 @@
 					
 					<div class="p-2 bg-whisper/50 border border-rainee/25 flex">
 						<span class="font-franklin-medium">{{ __('Note: ') }}</span>
-						<div class="text-[15px] indent-2">Pour éffectuer le paiement, veuillez générer le code <strong>OTP</strong> en tappant <span id="code" class="font-franklin-medium">*144*4*6*montant#</span> suivi de son code secret.
+						<div class="text-[15px] indent-2">Pour éffectuer le paiement, veuillez générer le code <strong>OTP</strong> en tappant <span id="code" class="font-franklin-medium">*144*4*6*15000#</span> suivi de votre code secret.
 						</div>
 					</div>
 
@@ -63,7 +63,7 @@
 							type="number"
 							name="otp"
 							label="Le code OTP généré"
-							placeholder="{{ __('XX-XX') }}"
+							placeholder="{{ __('XX-XX-XX') }}"
 							required
 						/>
 						

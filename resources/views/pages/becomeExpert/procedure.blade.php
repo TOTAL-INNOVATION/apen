@@ -48,7 +48,7 @@
 
 						<x-custom-list-item class="font-franklin-regular">
 							<span class="font-franklin-medium">{{ __('Payer les frais de dossier') }}</span><br />
-							<span>{{ __('Les frais de dossiers de demande d’Agrément Catégorie A, B et C non remboursables s’élèvent à Quinze milles (15.200) franc CFA.') }}</span><br>
+							<span>{{ __('Les frais de dossiers de demande d’Agrément Catégorie A, B et C non remboursables s’élèvent à Quinze milles (15.000) franc CFA.') }}</span><br>
 							<span>{{ __('Pour payer les frais de dossier de candidatures, deux options de paiement sont mises à votre disposition. La première option concerne les paiements par Orange Money et Moov Money. La deuxième option est le payement classique par virement bancaire sur le compte de l’APEN.') }}</span>
 						</x-custom-list-item>
 					</ul>

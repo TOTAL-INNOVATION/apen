@@ -57,6 +57,7 @@ Route::get('profil-admin', AdminPageController::class)
 Route::prefix('profil')->middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/', ExpertPageController::class)->name('profile.index');
+    Route::view('agrements', 'pages.profile.approvals')->name('profile.approvals');
     Route::post('modifier-la-photo', ChangeAvatarController::class)->name('profile.updateAvatar');
     Route::post('modifier-mes-infos', UpdateInfoController::class)->name('profile.updateInfo');
     Route::post('modifier-mon-mot-de-passe', ChangePasswordController::class)->name('profile.updatePassword');

@@ -25,7 +25,7 @@
 				<h2 class="heading-2 uppercase">{{ __('C\'est quoi APEN?') }}</h2>
 				<div class="mt-4 md:mt-6 lg:mt-8">
 					<div>
-						<img class="w-full object-cover object-center" src="https://placehold.co/600x300" alt="{{ __('Siège de l\'APEN') }}">
+						<img class="w-full object-cover object-center" src="{{ asset('assets/assemblee.jpg') }}" alt="{{ __('Siège de l\'APEN') }}">
 					</div>
 					<div class="mt-4 md:mt-6 lg:mt-8 space-y-4 sm:text-lg xl:text-xl">
 						<p>{{ __('L\'APEN est un Etablissement Public de l’Etat à caractère Professionnel (EPEP). Elle est dotée de la personnalité  morale et de l\'autonomie financière. Elle est placée sous la tutelle  technique  du  Ministre   de l\'Industrie, du Commerce et de l\'Artisanat et financière du Ministre de l\'Economie et des Finances.') }}</p>
