@@ -13,6 +13,17 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
 
+const RELATIONS_TO_LOAD = [
+    'user',
+    'degree',
+    'trainings',
+    'certificates',
+    'society',
+    'associates',
+    'domains',
+    'attachments',
+];
+
 class ApprovalController extends Controller
 {
     public function __construct(
@@ -35,16 +46,7 @@ class ApprovalController extends Controller
 
     public function show(string $id): RedirectResponse|Response
     {
-        $approval = Approval::with([
-            'user',
-            'degree',
-            'trainings',
-            'certificates',
-            'society',
-            'associates',
-            'domains',
-            'attachments',
-        ])->find($id);
+        $approval = Approval::with(RELATIONS_TO_LOAD)->find($id);
         
         if (!$approval) {
             return back()
@@ -92,16 +94,7 @@ class ApprovalController extends Controller
 
     public function destroy(string $id): RedirectResponse
     {
-        $approval = Approval::with([
-            'user',
-            'degree',
-            'trainings',
-            'certificates',
-            'society',
-            'associates',
-            'domains',
-            'attachments',
-        ])->find($id);
+        $approval = Approval::with(RELATIONS_TO_LOAD)->find($id);
 
         if (!$approval) return back();
 

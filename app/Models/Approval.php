@@ -131,6 +131,12 @@ class Approval extends Model
             );
         }
 
+        if ($this->user->identity_photo) {
+            $paths->push(
+                $this->user->identity_photo
+            );
+        }
+
         $this
         ->certificates
         ->each(function(Certificate $certificate) use ($paths) {
