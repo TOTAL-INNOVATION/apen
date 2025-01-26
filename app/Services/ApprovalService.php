@@ -34,4 +34,9 @@ class ApprovalService extends BaseFilterService
 	{
 		return Approval::find($id);
 	}
+
+	public function deleteFile(Approval $approval): void
+	{
+		
+	}
 }

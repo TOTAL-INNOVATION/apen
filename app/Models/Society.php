@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Actions\DeleteFile;
 use App\Enums\LegalStatusEnum;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
@@ -29,5 +30,14 @@ class Society extends Model
     public function associates(): HasMany
     {
         return $this->hasMany(Associate::class);
+    }
+
+    protected static function booted(): void
+    {
+        static::deleted(function(self $society) {
+            app(DeleteFile::class)->handle(
+                $society->status_file
+            );
+        });
     }
 }

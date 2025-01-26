@@ -21,6 +21,7 @@ import Society from "./society";
 import Certificates from "./certificates";
 import Domains from "./domains";
 import Attachments from "./attachments";
+import { cn } from "~/lib/utils";
 
 enum Status {
 	SUBMITTED = "En attente de validation",
@@ -77,7 +78,7 @@ function Show() {
 
 					<div className="mb-2 md:mb-0 text-lg font-semibold uppercase">
 						<span>Status: </span>
-						<span className="text-primary">{data.status}</span>
+						<span className={cn("text-primary", {"text-error": data.status === Status.REJECTED})}>{data.status}</span>
 					</div>
 
 					{data.status === "En attente de validation" && (
@@ -94,7 +95,7 @@ function Show() {
 					</div>
 					)}
 
-					{data.status === "Rejétée" && (
+					{data.status === Status.REJECTED || data.status === Status.VALIDATED && (
 						<div>
 							<Button variant="success" onClick={() => changeStatus(Status.SUBMITTED)}>
 								<ArchiveRestore className="w-5 h-5" />
@@ -131,7 +132,7 @@ function Show() {
 
 	function changeStatus(status: string) {
 		router.put(
-			`demandes-d-agrement/${data.id}`,
+			`/demandes-d-agrement/${data.id}`,
 			{status}
 		)
 	}

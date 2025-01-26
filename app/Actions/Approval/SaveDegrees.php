@@ -29,10 +29,19 @@ class SaveDegrees
 		 * @var \App\Models\Approval
 		 */
 		$approval = $request->user()->approval;
+		$degree = $approval->degree;
 
-		$this->deleteFileIfDegreeExist($approval->degree);
+		if ($degree) {
+			$this->deleteExistingDegreeFile($degree);
+			$degree->update([
+				...$request->validated(),
+				'file' => $path,
+			]);
 
-		$approval->degree()->updateOrCreate([
+			return;
+		}
+
+		$approval->degree()->create([
 			...$request->validated(),
 			'file' => $path,
 		]);
@@ -40,10 +49,8 @@ class SaveDegrees
 		ApprovalFormsEnum::goToNext($approval);
 	}
 
-	public function deleteFileIfDegreeExist(?Degree $degree): void
+	public function deleteExistingDegreeFile(Degree $degree): void
 	{
-		if (!$degree) return;
-
 		Storage::disk('public')->delete(
 			str($degree->file)->replace(
 				'storage/',

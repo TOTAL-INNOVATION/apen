@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Identity;
 
+use App\Enums\ApprovalTypeEnum;
 use App\Enums\ExpertStatusEnum;
+use App\Models\Approval;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -31,7 +33,21 @@ class ThirdStepRequest extends FormRequest
                 'required',
                 Rule::enum(ExpertStatusEnum::class),
             ],
-            'has_been_public_agent' => 'bail|required|boolean',
+            'has_been_public_agent' => [
+                'bail',
+                'boolean',
+                Rule::requiredIf($this->checkIfCategoryB()),
+            ],
         ];
+    }
+
+    public function checkIfCategoryB(): bool
+    {
+        return $this->getApproval()->type === ApprovalTypeEnum::CATEGORY_B;
+    }
+    
+    public function getApproval(): Approval
+    {
+        return $this->user()->approval;
     }
 }

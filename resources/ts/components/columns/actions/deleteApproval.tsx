@@ -35,7 +35,7 @@ const DeleteApproval = ({ approval }: { approval: Approval }) => {
                 </div>
                 <DialogFooter className="mt-4 w-full flex gap-x-3">
                     <DialogTrigger asChild>
-                        <Button size="sm" variant="outline" className="w-full">
+                        <Button size="sm" variant="outline" className="w-full font-semibold">
                             Abandonner
                         </Button>
                     </DialogTrigger>
@@ -48,7 +48,7 @@ const DeleteApproval = ({ approval }: { approval: Approval }) => {
                             type="submit"
                             size="sm"
                             variant="error"
-                            className="w-full"
+                            className="w-full font-semibold"
                         >
                             Poursuivre
                         </Button>

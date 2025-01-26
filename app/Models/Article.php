@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Actions\DeleteFile;
 use App\Services\ArticleService;
 use App\Traits\SearchFilter;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
@@ -44,9 +45,8 @@ class Article extends Model
         static::deleted(function(self $article) {
 
             ArticleService::deleteCover($article);
-
-            Storage::disk('public')->delete(
-                $article->content_path,
+            app(DeleteFile::class)->handle(
+                $article->content_path
             );
             
         });

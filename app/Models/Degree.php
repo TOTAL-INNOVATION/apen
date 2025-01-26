@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Actions\DeleteFile;
 use App\Enums\DegreeLevelEnum;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
@@ -29,8 +30,8 @@ class Degree extends Model
     protected static function booted(): void
     {
         static::deleted(function(self $degree) {
-            Storage::disk('public')->delete(
-                $degree->file,
+            app(DeleteFile::class)->handle(
+                $degree->file
             );
         });
     }

@@ -37,7 +37,7 @@ class FinalRequest extends FormRequest
                 'required',
                 File::image()
                     ->extensions(['png', 'jpg', 'jpeg'])
-                    ->max(3072),
+                    ->max(1024),
             ],
         ];
     }

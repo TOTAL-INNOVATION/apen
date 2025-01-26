@@ -48,7 +48,7 @@
                             <div class="space-y-4">
                                 @foreach (['A', 'B', 'C'] as $category)
                                     <x-select-box name="category" label="{{ __('Catégorie :c', ['c' => $category]) }}"
-                                        :value="$category" class="sm:w-5 sm:h-5" :checked="$approval->category === $category || $key === 0" />
+                                        :value="$category" class="sm:w-5 sm:h-5" :checked="$approval->category === $category || $category === 'A'" />
                                 @endforeach
                             </div>
                         </div>

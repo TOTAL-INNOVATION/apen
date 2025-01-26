@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Actions\DeleteFile;
 use App\Enums\{
     ActivitySectorEnum,
     ApprovalFormsEnum,
@@ -18,6 +19,7 @@ use Illuminate\Database\Eloquent\Relations\{
     HasMany,
     HasManyThrough
 };
+use Illuminate\Support\Collection;
 
 class Approval extends Model
 {
@@ -106,20 +108,57 @@ class Approval extends Model
         ->first();
     }
 
-    protected static function booted(): void
+    /**
+     * Get an array of the approval
+     * related files paths
+     * 
+     * @return Collection
+     */
+    public function getFiles(): Collection
     {
-        static::onDelete(function(self $approval) {
-            //Delete relations first
-            $this->degree()->delete();
-            $this->trainings()->delete();
-            $this->certificates()->delete();
-            $this->associates()->delete();
-            $this->society()->delete();
-            $this->domains()->delete();
-            $this->attachments()->delete();
+        $paths = collect();
 
-            //Then delete approval
-            $approval->delete();
+        if ($this->cv) $paths->push($this->cv);
+        if ($this->signature) {
+            $paths->push(
+                $this->signature
+            );
+        }
+
+        if ($this->degree) {
+            $paths->push(
+                $this->degree->file
+            );
+        }
+
+        $this
+        ->certificates
+        ->each(function(Certificate $certificate) use ($paths) {
+            $paths->push(
+                $certificate->file
+            );
         });
+
+        $this
+        ->associates
+        ->each(function(Associate $associate) use ($paths) {
+            $paths->push(
+                $associate->approval
+            );
+        });
+
+        if ($this->society) {
+            $paths->push(
+                $this->society->status_file
+            );
+        }
+
+        $this->attachments->each(function(Attachment $attachment) use($paths) {
+            $paths->push(
+                $attachment->file
+            );
+        });
+
+        return $paths;
     }
 }

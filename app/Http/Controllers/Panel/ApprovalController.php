@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Panel;
 
+use App\Actions\DeleteFile;
 use App\Enums\FlashEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateApprovalStatusRequest;
@@ -91,8 +92,25 @@ class ApprovalController extends Controller
 
     public function destroy(string $id): RedirectResponse
     {
-        $approval = $this->service->find($id);
+        $approval = Approval::with([
+            'user',
+            'degree',
+            'trainings',
+            'certificates',
+            'society',
+            'associates',
+            'domains',
+            'attachments',
+        ])->find($id);
+
         if (!$approval) return back();
+
+        $approval
+        ->getFiles()
+        ->each(function(string $path) {
+            app(DeleteFile::class)
+            ->handle($path);
+        });
 
         $approval->delete();
 

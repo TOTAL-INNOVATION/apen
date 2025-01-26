@@ -46,7 +46,7 @@ export default function Society({data}: {data: Approval}) {
 
 				<div className="px-4 py-2 text-lg">
 					<span className="font-semibold">Capital: </span>
-					<span>{society?.capital}</span>
+					<span>{`${society?.capital ?? 0} FCFA`}</span>
 				</div>
 
 				<div className="px-4 py-2 text-lg">
@@ -88,7 +88,7 @@ export default function Society({data}: {data: Approval}) {
 							<span>{associate.role}</span>
 						</div>
 
-						<div className="px-4 py-2 text-lg">
+						<div className="py-2 text-lg">
 							<FileLink name="Agrément" url={asset(associate.approval)} />
 						</div>
 					</div>	

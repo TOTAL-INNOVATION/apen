@@ -79,7 +79,7 @@ enum ApprovalFormsEnum: string
 				break;
 				
 			case self::DEGREES:
-				if ($approval->degree) {
+				if ($approval->degree()->first()) {
 					$approval->update([
 						'view' => self::TRAININGS
 					]);
@@ -87,7 +87,7 @@ enum ApprovalFormsEnum: string
 				break;
 			
 			case self::TRAININGS:
-				if ($approval->trainings->count()) {
+				if ($approval->trainings()->count()) {
 					$approval->update([
 						'view' => self::CERTIFICATES,
 					]);
@@ -110,7 +110,7 @@ enum ApprovalFormsEnum: string
 				break;
 
 			case self::ASSOCIATES:
-				if ($approval->associates->count()) {
+				if ($approval->associates()->count()) {
 					$approval->update([
 						'view' => self::DOMAINS_INDEX,
 					]);

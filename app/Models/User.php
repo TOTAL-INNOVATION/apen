@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Actions\DeleteFile;
 use App\Enums\ApprovalStatusEnum;
 use App\Enums\GenderEnum;
 use App\Enums\MaritalStatusEnum;
@@ -108,5 +109,24 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
     public function sendPasswordResetNotification($token): void
     {
         $this->notify(new SendResetPasswordLink($token));
+    }
+
+    protected static function booted(): void
+    {
+        static::deleted(function(self $user) {
+            $action = app(DeleteFile::class);
+            
+            if ($user->avatar !== self::DEFAULT_AVATAR) {
+                $action->handle(
+                    $user->avatar
+                );
+            }
+
+            if ($user->identity_photo) {
+                $action->handle(
+                    $user->identity_photo
+                );
+            }
+        });
     }
 }

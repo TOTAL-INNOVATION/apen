@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use App\Actions\DeleteFile;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Facades\Storage;
 
 class Certificate extends Model
 {
@@ -29,8 +29,8 @@ class Certificate extends Model
     protected static function booted(): void
     {
         static::deleted(function(self $certificate) {
-            Storage::disk('public')->delete(
-                $certificate->file,
+            app(DeleteFile::class)->handle(
+                $certificate->file
             );
         });
     }

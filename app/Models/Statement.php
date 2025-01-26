@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Actions\DeleteFile;
 use App\Traits\SearchFilter;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
@@ -38,8 +39,8 @@ class Statement extends Model
     protected static function booted(): void
     {
         static::deleted(function(self $statement) {
-            Storage::disk('public')->delete(
-                $statement->content_path,
+            app(DeleteFile::class)->handle(
+                $statement->content_path
             );
         });
     }
