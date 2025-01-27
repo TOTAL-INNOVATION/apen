@@ -73,6 +73,7 @@ class VerificationController extends Controller
     {
         return user()
         ->approvals()
+        ->latest()
         ->where('status', ApprovalStatusEnum::COMPLETED)
         ->orWhere('status', ApprovalStatusEnum::SUBMITTED)
         ->first();

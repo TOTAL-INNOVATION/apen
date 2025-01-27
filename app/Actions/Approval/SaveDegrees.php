@@ -37,6 +37,7 @@ class SaveDegrees
 				...$request->validated(),
 				'file' => $path,
 			]);
+			ApprovalFormsEnum::goToNext($approval);
 
 			return;
 		}

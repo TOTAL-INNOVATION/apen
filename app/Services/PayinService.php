@@ -28,7 +28,8 @@ final class PayinService
 		$invoice = $this->initInvoice();
 
 		$invoice->addItem([
-			'description' => 'Agrément de ' . $this->approval->type->value,
+			'name' => $this->approval->type->value,
+			'description' => 'Demande d\'agrément de ' . $this->approval->type->value,
 			'quantity' => 1,
     		'unit_price' => $this->amount,
 		]);

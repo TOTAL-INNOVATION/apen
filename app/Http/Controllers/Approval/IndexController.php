@@ -19,7 +19,6 @@ class IndexController extends Controller
          * @var \App\Models\Approval|null
          */
         $approval = $request->user()->approval;
-
         if (!$approval) {
             return view('pages.approvals.index');
         }

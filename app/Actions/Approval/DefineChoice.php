@@ -14,7 +14,7 @@ class DefineChoice
     public function handle(ChoiceRequest $request): void
     {
 		/**
-		 * @var \App\Models\Approval
+		 * @var \App\Models\Approval|null
 		 */
         $approval = $request->user()->approval;
 
@@ -31,9 +31,6 @@ class DefineChoice
 			return;
 		}
 
-		Approval::create([
-			...$data,
-			'user_id' => auth()->id(),
-		]);
+		$request->user()->approvals()->create($data);
     }
 }

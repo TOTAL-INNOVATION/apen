@@ -15,10 +15,10 @@ class SaveDomain
 	{
 		$approval = $request->getApproval();
 		$rank = $this->getCurrentDomainRank($approval);
-		$domain = $this->getCurrentDomain($rank);
+		$domain = $this->getCurrentDomainFor($rank, $approval);
 
 		if (!$domain) {
-			$approval->domains()->updateOrCreate([
+			$approval->domains()->create([
 				...$request->validated(),
 				'rank' => $rank,
 			]);
@@ -29,9 +29,12 @@ class SaveDomain
 		ApprovalFormsEnum::goToNext($approval);
 	}
 
-	public function getCurrentDomain(int $rank): ?Domain
+	public function getCurrentDomainFor(int $rank, Approval $approval): ?Domain
 	{
-		return Domain::where('rank', $rank)->first();
+		return $approval
+		->domains()
+		->where('rank', $rank)
+		->first();
 	}
 
 	protected function getCurrentDomainRank(Approval $approval): int

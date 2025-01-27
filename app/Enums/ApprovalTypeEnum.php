@@ -21,8 +21,8 @@ enum ApprovalTypeEnum: string
 
 	public static function getTotalSteps(string $type): int {
 		return match ($type) {
-			self::CATEGORY_A => 14,
-			self::CATEGORY_B => 10,
+			self::CATEGORY_A->value => 14,
+			self::CATEGORY_B->value => 10,
 			default => 11
 		};
 	}

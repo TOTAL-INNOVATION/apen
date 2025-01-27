@@ -13,7 +13,6 @@ class RegisterController extends Controller
 {
     public function __invoke(RegisterRequest $request): RedirectResponse
     {
-        dd($request->validated());
         $user = User::create([
             ...$request->validated(),
             'role' => RoleEnum::EXPERT,

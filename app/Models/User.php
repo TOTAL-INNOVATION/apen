@@ -83,17 +83,10 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
 
     public function getApprovalAttribute(): ?Approval
     {
-        return $this
-        ->approvals()
-        ->where(
-            'status',
-            ApprovalStatusEnum::IN_PROGRESS
-        )
-        ->orWhere(
-            'status',
-            ApprovalStatusEnum::COMPLETED,
-        )
-        ->first();
+        $statues = [ApprovalStatusEnum::IN_PROGRESS, ApprovalStatusEnum::COMPLETED];
+        $approval = $this->approvals()->latest()->first();
+
+        return !in_array($approval->status, $statues) ? null : $approval;
     }
 
     public function getFullnameAttribute(): string

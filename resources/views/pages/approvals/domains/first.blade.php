@@ -30,7 +30,7 @@
 
 		<div class="px-4 mt-4 sm:px-0 sm:mt-6 md:mt-8 lg:mt-12 container">
             <div class="max-w-lg mx-auto">
-                <h2 class="heading-2 uppercase">{{ __('Domaine n°1') }}</h2>
+                <h2 class="heading-2 uppercase">{{ $approval->total_sectors ? __('Entrez votre domaine') : __('Domaine n°1') }}</h2>
 
 				<div class="mt-4 md:mt-6">
 					<x-form action="{{ route('domains.save') }}" method="POST">

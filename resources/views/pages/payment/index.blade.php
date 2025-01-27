@@ -51,27 +51,29 @@
 					</div>
 
 					<div class="mt-4 md:mt-6">
-						<x-form.field
-							type="number"
-							name="phone"
-							label="Numéro de téléphone"
-							placeholder="{{ __('Ex: 00226-XX-XX-XX-XX') }}"
-							required
-						/>
+						<x-form method="POST" action="{{ route('payment.store') }}">
+							<x-form.field
+								type="number"
+								name="phone"
+								label="Numéro de téléphone"
+								placeholder="{{ __('Ex: 00226-XX-XX-XX-XX') }}"
+								required
+							/>
 
-						<x-form.field
-							type="number"
-							name="otp"
-							label="Le code OTP généré"
-							placeholder="{{ __('XX-XX-XX') }}"
-							required
-						/>
-						
-						<div class="mt-4 md:mt-6 flex justify-center">
-							<x-button variant="primary" type="submit" class="font-franklin-medium" widthFull>
-								{{ __('Éffectuer le paiement') }}
-							</x-button>
-						</div>
+							<x-form.field
+								type="number"
+								name="otp"
+								label="Le code OTP généré"
+								placeholder="{{ __('XX-XX-XX') }}"
+								required
+							/>
+							
+							<div class="mt-4 md:mt-6 flex justify-center">
+								<x-button variant="primary" type="submit" class="font-franklin-medium" widthFull>
+									{{ __('Éffectuer le paiement') }}
+								</x-button>
+							</div>
+						</x-form>
 					</div>
 
 				</div>

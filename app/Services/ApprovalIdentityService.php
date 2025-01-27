@@ -62,6 +62,7 @@ class ApprovalIdentityService
                 'country_of_residence',
                 'commercial_register'
             ]),
+            'identity_photo' => $path,
             'view' => $approval->type === ApprovalTypeEnum::CATEGORY_A ?
             ApprovalFormsEnum::ADDRESSES : ApprovalFormsEnum::IDENTITY_STEP_THREE,
         ];

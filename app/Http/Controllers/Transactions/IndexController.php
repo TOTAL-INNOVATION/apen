@@ -17,7 +17,7 @@ class IndexController extends Controller
         $approval = $request->user()->approval;
 
         if (! $approval || $approval->status === ApprovalStatusEnum::IN_PROGRESS) {
-            return to_route('approval.choice');
+            return to_route('becomeExpert.form');
         }
 
         if ($approval->status !== ApprovalStatusEnum::COMPLETED) {

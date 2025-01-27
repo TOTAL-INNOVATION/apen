@@ -33,6 +33,7 @@ use App\Http\Controllers\Panel\UserController;
 use App\Http\Controllers\ReleaseController;
 use App\Http\Controllers\Transactions\CallbackController as TransactionCallback;
 use App\Http\Controllers\Transactions\IndexController as TransactionIndexController;
+use App\Http\Controllers\Transactions\PaymentController;
 use App\Http\Controllers\Transactions\VerificationController as TransactionVerificationController;
 use App\Http\Middleware\EnsureUserIsExpert;
 use App\Http\Middleware\HandleInertiaRequests;
@@ -92,6 +93,7 @@ Route::middleware(['auth', 'verified', EnsureUserIsExpert::class])->group(functi
     Route::post('finaliser', FinalController::class)->name('approval.complete');
     Route::prefix('paiement')->group(function() {
         Route::get('/', TransactionIndexController::class)->name('payment.index');
+        Route::post('effectuer-le-paiement', PaymentController::class)->name('payment.store');
         Route::get('verification', [TransactionVerificationController::class, 'index'])->name('payment.verify');
         Route::post('ping', [TransactionVerificationController::class, 'ping']);
         Route::post('callback', TransactionCallback::class);

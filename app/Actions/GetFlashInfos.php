@@ -19,6 +19,7 @@ class GetFlashInfos
 			'infos',
 			now()->addHours(4),
 			fn() => FlashInfo::active()
+			->latest()
 			->select('title')
 			->get()	
 		);
