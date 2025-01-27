@@ -63,6 +63,11 @@
                                     <x-lucide-user-2 class="h-5 w-5" />
                                     <strong>{{ __('Portail') }}</strong>
                                 </x-dropdown.item>
+
+                                <x-dropdown.item href="{{ route('profile.approvals') }}">
+                                    <x-lucide-file-stack class="h-5 w-5" />
+                                    <strong>{{ __('Mes agréments') }}</strong>
+                                </x-dropdown.item>
                             @else
                                 <x-dropdown.item href="{{ route('panel') }}">
                                     <x-lucide-layout-dashboard class="h-5 w-5" />
