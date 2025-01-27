@@ -12,15 +12,9 @@ import { cn, debounce, generateUuid, str } from "~/lib/utils";
 import clsx from "clsx";
 import { PaginationLink, PaginationMeta } from "~/types";
 import { Button } from "./button";
-import {
-    ComboBox,
-    ComboBoxContent,
-    ComboBoxItem,
-    ComboBoxList,
-    ComboBoxTrigger,
-} from "./combobox";
 import { Link, router } from "@inertiajs/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./select";
 
 export interface Column<T> {
     name: keyof T;
@@ -59,11 +53,23 @@ export const DataTable = <T extends Record<string, any>>({
 }: DataTable<T>) => {
 
     const [activeLink, setActiveLink] = useState<null|PaginationLink>(null);
+    const [length, setLength] = useState<string>("15");
 
     useEffect(() => {
-        if (meta)
-            setActiveLink(meta.links.find(link => link.active) || null);
-    }, [meta]);
+        if (meta) {
+            setActiveLink(
+                meta.links.find(link => link.active) || null
+            );
+        }
+
+        if (location.search) {
+            const params = new URLSearchParams(location.search);
+            const length = params.get("length")
+            if (length) {
+                setLength(length);
+            }
+        }
+    }, [length, meta, setLength]);
 
     return (
         <div className="px-1 py-3 space-y-3">
@@ -147,27 +153,25 @@ export const DataTable = <T extends Record<string, any>>({
                 </Table>
             </div>
             <div className="px-2 flex items-end sm:items-center justify-between sm:justify-end space-x-4 md:space-x-6">
-                <div className="w-fit sm:inline-flex items-center space-y-4 sm:space-y-0 sm:space-x-2">
+                <div className="sm:inline-flex items-center space-y-4 sm:space-y-0 sm:space-x-2">
                     <p>
 						<strong>Ligne par page</strong>
 					</p>
-                    <ComboBox>
-                        <ComboBoxContent className="w-[90px]">
-                            <ComboBoxTrigger />
-                            <ComboBoxList className="w-[90px]">
-                                {[
-                                    { label: "15", value: "15", active: true },
-                                    { label: "20", value: "20" },
-                                    { label: "30", value: "30" },
-                                ].map((props) => (
-                                    <ComboBoxItem
-                                        key={generateUuid()}
-                                        {...props}
-                                    />
-                                ))}
-                            </ComboBoxList>
-                        </ComboBoxContent>
-                    </ComboBox>
+                    <Select
+                        onValueChange={handleRecordsLength}
+                        defaultValue={length}
+                        >
+                        <SelectTrigger className="w-20">
+                            <SelectValue placeholder="Sélectionner le rôle" />
+                        </SelectTrigger>
+                        <SelectContent className="min-w-20">
+                            {["10", "15", "30"].map((value) => (
+                                <SelectItem value={value} key={generateUuid()}>
+                                    {value}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
                 </div>
 
                 {meta && (
@@ -249,6 +253,16 @@ export const DataTable = <T extends Record<string, any>>({
             Object.fromEntries(params.entries()),
             { preserveState: true, replace: true }
         )
+    }
+
+    function handleRecordsLength(length: string) {
+        const params = new URLSearchParams(location.search);
+        params.set('length', length);
+        router.get(
+            window.location.href,
+            Object.fromEntries(params.entries()),
+            { preserveState: true, replace: true }
+        );
     }
 
     function handleSearch(event: React.ChangeEvent<HTMLInputElement>) {

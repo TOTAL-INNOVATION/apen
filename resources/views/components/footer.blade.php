@@ -107,5 +107,11 @@
 			<span> | APEN – Burkina Faso</span>
 			<span></span>
 		</div>
+		<div class="w-full mt-2 flex-1 justify-center">
+			<div class="w-fit mx-auto">
+				<span>{{ __('Propulsé par ') }}</span>
+				<a href="https://total-innovation.net" class="font-semibold">{{ __('TOTAL INNOVATION') }}</a>
+			</div>
+		</div>
 	</div>
 </footer>

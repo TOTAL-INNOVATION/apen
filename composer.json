@@ -14,6 +14,7 @@
         "laravel/tinker": "^2.9",
         "ligdicash/ligdicash": "^1.0",
         "mallardduck/blade-lucide-icons": "^1.23",
+        "plesk/ext-laravel-integration": "^7.0",
         "predis/predis": "^2.0",
         "rinvex/countries": "^9.0",
         "spatie/laravel-sitemap": "^7.3"
