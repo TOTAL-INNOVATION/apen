@@ -96,7 +96,6 @@ Route::middleware(['auth', 'verified', EnsureUserIsExpert::class])->group(functi
         Route::post('effectuer-le-paiement', PaymentController::class)->name('payment.store');
         Route::get('verification', [TransactionVerificationController::class, 'index'])->name('payment.verify');
         Route::post('ping', [TransactionVerificationController::class, 'ping']);
-        Route::post('callback', TransactionCallback::class);
     });
 
     Route::get('aller-a', GoToController::class)->name('approval.goto');
@@ -124,5 +123,8 @@ Route::middleware(['auth', 'verified', HandleInertiaRequests::class])->group(fun
     });
 
 });
+
+// Payment callback for the ligdicash api to hit
+Route::post('paiement/callback', TransactionCallback::class);
 
 require __DIR__ . '/auth.php';
