@@ -14,8 +14,8 @@ class HomeController extends Controller
      */
     public function __invoke(Request $request): View
     {
-        $articles = Article::latest()->take(3);
-        $statements = Statement::latest()->take(7);
+        $articles = Article::latest()->take(3)->get();
+        $statements = Statement::latest()->take(7)->get();
 
         return view(
             'pages.home',
