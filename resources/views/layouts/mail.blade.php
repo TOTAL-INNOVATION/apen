@@ -52,6 +52,7 @@
         color: #FFFFFF;
         background-color: #00a754;
         padding: 10px 16px;
+        font-size: 16px;
         font-weight: 600;
         margin: auto;
         text-align: center;

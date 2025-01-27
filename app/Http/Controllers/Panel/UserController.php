@@ -122,7 +122,7 @@ class UserController extends Controller
             'flash',
             [
                 'type' => FlashEnum::SUCCESS,
-                'message' => __('messages.users.delete.success'),
+                'message' => __('messages.users.delete.succeeded'),
             ]
         );
     }

@@ -29,7 +29,7 @@
                                 <p class="lead">{{ __('Votre inscription sur la plateforme a été un succès. Pour poursuivre avec votre candidature, veuillez cliquer sur le bouton ci-dessous pour confirmer la création de votre compte.') }}</p>
                                 
                                 <div class="my-6" style="display: flex; justify-content: center;">
-                                    <a href="{{ $url }}" class="btn">{{ __('Activer mon compte') }}</a>
+                                    <a href="{{ $url }}" class="btn" style="color: #ffffff;">{{ __('Activer mon compte') }}</a>
                                 </div>
         
                             </td>
